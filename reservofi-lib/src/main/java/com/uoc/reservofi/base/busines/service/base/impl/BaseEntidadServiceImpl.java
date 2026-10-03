@@ -1,17 +1,15 @@
-package com.uoc.reservofi.base.busines.service.impl;
+package com.uoc.reservofi.base.busines.service.base.impl;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import com.uoc.reservofi.base.busines.repository.BaseEntidadRepository;
-import com.uoc.reservofi.base.busines.service.BaseEntidadService;
+import com.uoc.reservofi.base.busines.service.base.BaseEntidadService;
 import com.uoc.reservofi.base.busines.exception.BaseException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 @RequiredArgsConstructor // Evita tener que escribir @Autowired directamente
 public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements BaseEntidadService<T> {
 

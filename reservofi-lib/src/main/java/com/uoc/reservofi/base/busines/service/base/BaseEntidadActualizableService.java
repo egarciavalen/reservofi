@@ -1,4 +1,4 @@
-package com.uoc.reservofi.base.busines.service;
+package com.uoc.reservofi.base.busines.service.base;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
 
