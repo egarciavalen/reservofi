@@ -1,11 +1,13 @@
 package com.uoc.reservofi.usuario.business.model;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import com.uoc.reservofi.rol.business.model.Rol;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,4 +34,13 @@ public class Usuario extends BaseEntidadActualizable {
 
 	@Column(name = "activo", nullable = false)
 	private Boolean activo;
+
+	// Relación n a n
+	@ManyToMany
+	@JoinTable(
+			name = "usuario_rol",
+			joinColumns = @JoinColumn(name = "id_usuario"),
+			inverseJoinColumns = @JoinColumn(name = "id_rol")
+	)
+	private Set<Rol> roles = new HashSet<>();
 }

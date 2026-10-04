@@ -1,11 +1,16 @@
 package com.uoc.reservofi.rol.business.model;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.usuario.business.model.Usuario;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,4 +23,7 @@ public class Rol extends BaseEntidadActualizable {
 	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
 
+	// Relación n a n
+	@ManyToMany(mappedBy = "roles")
+	private Set<Usuario> usuarios = new HashSet<>();
 }
