@@ -1,5 +1,6 @@
 package com.uoc.reservofi.base.busines.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class GestionEntidadDTO {
 
-    private Long id;
+	@NotEmpty(message = "entidad.id.obligatorio")
+	private Long id;
 
 }

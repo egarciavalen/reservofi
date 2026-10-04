@@ -1,6 +1,7 @@
 package com.uoc.reservofi.rol.dto;
 
 import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +9,6 @@ import lombok.Setter;
 @Setter
 public class RolDTO extends GestionEntidadActualizableDTO {
 
-    private String nombre;
+	@NotEmpty(message = "rol.nombre.obligatorio")
+	private String nombre;
 }

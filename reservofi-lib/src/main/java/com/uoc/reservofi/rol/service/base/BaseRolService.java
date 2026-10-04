@@ -5,5 +5,5 @@ import com.uoc.reservofi.rol.model.Rol;
 
 public interface BaseRolService extends BaseEntidadActualizableService<Rol> {
 
-    String BEAN_NAME = "baseRolService" ;
+    String BEAN_NAME = "baseRolService";
 }

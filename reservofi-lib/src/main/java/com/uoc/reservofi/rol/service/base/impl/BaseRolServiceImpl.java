@@ -17,6 +17,5 @@ public class BaseRolServiceImpl extends BaseEntidadActualizableServiceImpl<Rol> 
     @Override
     public BaseEntidadRepository<Rol> getRepository() {
         return rolRepository;
-
     }
 }

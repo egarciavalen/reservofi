@@ -2,55 +2,68 @@ package com.uoc.reservofi.rol.service.impl;
 
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.rol.dto.RolDTO;
+import com.uoc.reservofi.rol.mapper.RolMapper;
 import com.uoc.reservofi.rol.model.Rol;
 import com.uoc.reservofi.rol.service.GestionRolService;
+import com.uoc.reservofi.rol.service.base.BaseRolService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service(GestionRolService.BEAN_NAME)
-public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl<RolDTO, Rol> implements GestionRolService {
+@RequiredArgsConstructor
+public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl<RolDTO> implements GestionRolService {
 
-    // TODO: DETERMINAR QUE VAS A SOBREESCRIBIR Y QUE VAS A MANTENER
+	private final BaseRolService baseRolService;
+	private final RolMapper rolMapper;
 
-    @Override
-    public List<RolDTO> findByCreacionUsuario(String usuario) {
-        return List.of();
-    }
+	@Override
+	public RolDTO insert(RolDTO dto) {
+		Rol entidad = rolMapper.DTOaEntidad(dto);
+		entidad = baseRolService.insert(entidad);
+		return rolMapper.entidadADTO(entidad);
+	}
 
-    @Override
-    public List<RolDTO> findByActualizacionUsuario(String usuario) {
-        return List.of();
-    }
+	@Override
+	public RolDTO update(RolDTO dto) {
+		Rol entidad = rolMapper.DTOaEntidad(dto);
+		entidad = baseRolService.update(entidad);
+		return rolMapper.entidadADTO(entidad);
+	}
 
-    @Override
-    public RolDTO insert(RolDTO entidad) {
-        return null;
-    }
+	@Override
+	public void deleteById(Long id) {
+		baseRolService.deleteById(id);
+	}
 
-    @Override
-    public RolDTO update(RolDTO entidad) {
-        return null;
-    }
+	@Override
+	public List<RolDTO> findAll() {
+		List<Rol> entidadList = baseRolService.findAll();
+		return rolMapper.entidadADTOList(entidadList);
+	}
 
-    @Override
-    public void deleteById(Long id) {
+	@Override
+	public RolDTO findById(Long id) {
+		Rol entidad = baseRolService.findById(id);
+		return rolMapper.entidadADTO(entidad);
+	}
 
-    }
+	@Override
+	public boolean existsById(Long id) {
+		return baseRolService.existsById(id);
+	}
 
-    @Override
-    public List<RolDTO> findAll() {
-        return List.of();
-    }
+	@Override
+	public List<RolDTO> findByCreacionUsuario(String usuario) {
+		List<Rol> entidadList = baseRolService.findByCreacionUsuario(usuario);
+		return rolMapper.entidadADTOList(entidadList);
+	}
 
-    @Override
-    public Optional<RolDTO> findById(Long id) {
-        return Optional.empty();
-    }
+	@Override
+	public List<RolDTO> findByActualizacionUsuario(String usuario) {
+		List<Rol> entidadList = baseRolService.findByActualizacionUsuario(usuario);
+		return rolMapper.entidadADTOList(entidadList);
+	}
 
-    @Override
-    public boolean existsById(Long id) {
-        return false;
-    }
 }
