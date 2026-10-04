@@ -17,6 +17,8 @@ public interface GestionEntidadService<T extends GestionEntidadDTO> {
 
 	T findById(Long id);
 
+	List<T> findAllById(List<Long> ids);
+
 	boolean existsById(Long id);
 
 }

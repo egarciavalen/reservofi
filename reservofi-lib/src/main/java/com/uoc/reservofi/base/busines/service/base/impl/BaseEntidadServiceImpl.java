@@ -63,6 +63,12 @@ public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements B
 
 	@Override
 	@Transactional(readOnly = true)
+	public List<T> findAllById(List<Long> ids) {
+		return getRepository().findAllById(ids);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public boolean existsById(Long id) {
 		return getRepository().existsById(id);
 	}

@@ -14,6 +14,8 @@ public interface BaseEntidadService<T extends BaseEntidad> {
 
 	List<T> findAll();
 
+	List<T> findAllById(List<Long> ids);
+
 	T findById(Long id);
 
 	boolean existsById(Long id);

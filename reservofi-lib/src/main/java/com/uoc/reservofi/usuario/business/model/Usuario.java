@@ -44,5 +44,5 @@ public class Usuario extends BaseEntidadActualizable {
 			foreignKey = @ForeignKey(name = "fk_usuario_rol_usuario"),
 			inverseForeignKey = @ForeignKey(name = "fk_usuario_rol_rol")
 	)
-	private Set<Rol> roles = new HashSet<>();
+	private Set<Rol> roles = new HashSet<>(); // Uso de Set para mayor eficiencia
 }

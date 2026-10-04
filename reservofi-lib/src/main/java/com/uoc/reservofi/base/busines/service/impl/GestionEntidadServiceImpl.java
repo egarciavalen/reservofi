@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class GestionEntidadServiceImpl<T extends GestionEntidadDTO> implements GestionEntidadService<T> {
 
 	// Las clases hijas deciden qué metodos van a implementar
-	
+
 	@Override
 	public T insert(@Valid T entidad) {
 		throw new GestionException("Operación no implementada");
@@ -30,6 +30,11 @@ public abstract class GestionEntidadServiceImpl<T extends GestionEntidadDTO> imp
 
 	@Override
 	public List<T> findAll() {
+		throw new GestionException("Operación no implementada");
+	}
+
+	@Override
+	public List<T> findAllById(List<Long> ids) {
 		throw new GestionException("Operación no implementada");
 	}
 

@@ -51,6 +51,12 @@ public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImp
 	}
 
 	@Override
+	public List<SalaDTO> findAllById(List<Long> ids) {
+		List<Sala> entidadList = baseSalaService.findAllById(ids);
+		return salaMapper.entidadADTOList(entidadList);
+	}
+
+	@Override
 	public boolean existsById(Long id) {
 		return baseSalaService.existsById(id);
 	}

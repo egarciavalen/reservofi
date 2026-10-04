@@ -51,6 +51,12 @@ public class GestionReservaServiceImpl extends GestionEntidadActualizableService
 	}
 
 	@Override
+	public List<ReservaDTO> findAllById(List<Long> ids) {
+		List<Reserva> entidadList = baseReservaService.findAllById(ids);
+		return reservaMapper.entidadADTOList(entidadList);
+	}
+
+	@Override
 	public boolean existsById(Long id) {
 		return baseReservaService.existsById(id);
 	}

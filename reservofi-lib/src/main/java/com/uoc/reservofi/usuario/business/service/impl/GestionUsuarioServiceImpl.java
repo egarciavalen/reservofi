@@ -51,6 +51,12 @@ public class GestionUsuarioServiceImpl extends GestionEntidadActualizableService
 	}
 
 	@Override
+	public List<UsuarioDTO> findAllById(List<Long> ids) {
+		List<Usuario> entidadList = baseUsuarioService.findAllById(ids);
+		return usuarioMapper.entidadADTOList(entidadList);
+	}
+
+	@Override
 	public boolean existsById(Long id) {
 		return baseUsuarioService.existsById(id);
 	}

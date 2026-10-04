@@ -45,6 +45,12 @@ public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl
 	}
 
 	@Override
+	public List<RolDTO> findAllById(List<Long> ids) {
+		List<Rol> entidadList = baseRolService.findAllById(ids);
+		return rolMapper.entidadADTOList(entidadList);
+	}
+
+	@Override
 	public RolDTO findById(Long id) {
 		Rol entidad = baseRolService.findById(id);
 		return rolMapper.entidadADTO(entidad);

@@ -51,6 +51,12 @@ public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceI
 	}
 
 	@Override
+	public List<PuestoDTO> findAllById(List<Long> ids) {
+		List<Puesto> entidadList = basePuestoService.findAllById(ids);
+		return puestoMapper.entidadADTOList(entidadList);
+	}
+
+	@Override
 	public boolean existsById(Long id) {
 		return basePuestoService.existsById(id);
 	}
