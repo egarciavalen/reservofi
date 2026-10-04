@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 
 	// Uso de @Autowired por problemas con el constructor por defecto
-
+	
 	@Autowired
 	private UsuarioMapper mapper;
 

@@ -7,6 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
+@DecoratedWith(UsuarioMapperDecorator.class)
 public interface UsuarioMapper {
 
 	@Named("DTOAentidad")
