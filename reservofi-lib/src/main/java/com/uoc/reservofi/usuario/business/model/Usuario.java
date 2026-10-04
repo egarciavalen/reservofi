@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "Usuario", uniqueConstraints = @UniqueConstraint(
-		name = "uq_rol_correo_corporativo",
+		name = "uq_usuario_correo_corporativo",
 		columnNames = "correo_corporativo")
 )
 public class Usuario extends BaseEntidadActualizable {
