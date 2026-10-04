@@ -26,7 +26,7 @@ public class Puesto extends BaseEntidadActualizable {
 	private BigDecimal coordenadaY;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_sala", nullable = false)
+	@JoinColumn(name = "id_sala", nullable = false, foreignKey = @ForeignKey(name = "fk_puesto_sala"))
 	private Sala sala;
 
 }

@@ -40,7 +40,9 @@ public class Usuario extends BaseEntidadActualizable {
 	@JoinTable(
 			name = "usuario_rol",
 			joinColumns = @JoinColumn(name = "id_usuario"),
-			inverseJoinColumns = @JoinColumn(name = "id_rol")
+			inverseJoinColumns = @JoinColumn(name = "id_rol"),
+			foreignKey = @ForeignKey(name = "fk_usuario_rol_usuario"),
+			inverseForeignKey = @ForeignKey(name = "fk_usuario_rol_rol")
 	)
 	private Set<Rol> roles = new HashSet<>();
 }

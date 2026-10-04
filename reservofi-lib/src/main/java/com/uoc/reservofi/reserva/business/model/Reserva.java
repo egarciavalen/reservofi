@@ -1,6 +1,7 @@
 package com.uoc.reservofi.reserva.business.model;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.puesto.business.model.Puesto;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +21,11 @@ public class Reserva extends BaseEntidadActualizable {
 	public LocalDateTime fechaFin;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", nullable = false)
+	@JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "fk_reserva_usuario"))
 	private Usuario usuario;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_puesto", nullable = false, foreignKey = @ForeignKey(name = "fk_reserva_puesto"))
+	private Puesto puesto;
 
 }

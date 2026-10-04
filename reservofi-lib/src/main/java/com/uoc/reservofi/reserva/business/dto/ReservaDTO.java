@@ -14,6 +14,9 @@ public class ReservaDTO extends GestionEntidadActualizableDTO {
 	@NotEmpty(message = "reserva.usuario.obligatorio")
 	private Long idUsuario;
 
+	@NotEmpty(message = "reserva.puesto.obligatorio")
+	private Long idPuesto;
+
 	@NotEmpty(message = "reserva.fechaInicio.obligatorio")
 	private LocalDateTime fechaInicio;
 

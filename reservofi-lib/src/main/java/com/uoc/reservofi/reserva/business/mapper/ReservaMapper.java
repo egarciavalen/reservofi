@@ -20,6 +20,7 @@ public interface ReservaMapper {
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "usuario.id", target = "idUsuario")
+	@Mapping(source = "puesto.id", target = "idPuesto")
 	@Mapping(source = "fechaInicio", target = "fechaInicio")
 	@Mapping(source = "fechaFin", target = "fechaFin")
 	ReservaDTO entidadADTO(Reserva entidad);
