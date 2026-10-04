@@ -21,14 +21,14 @@ public class GestionReservaServiceImpl extends GestionEntidadActualizableService
 
 	@Override
 	public ReservaDTO insert(@Valid ReservaDTO dto) {
-		Reserva entidad = reservaMapper.DTOaEntidad(dto);
+		Reserva entidad = reservaMapper.DTOAentidad(dto);
 		entidad = baseReservaService.insert(entidad);
 		return reservaMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public ReservaDTO update(@Valid ReservaDTO dto) {
-		Reserva entidad = reservaMapper.DTOaEntidad(dto);
+		Reserva entidad = reservaMapper.DTOAentidad(dto);
 		entidad = baseReservaService.update(entidad);
 		return reservaMapper.entidadADTO(entidad);
 	}

@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "Rol", uniqueConstraints = @UniqueConstraint(
 		name = "uq_rol_nombre",
 		columnNames = "nombre")

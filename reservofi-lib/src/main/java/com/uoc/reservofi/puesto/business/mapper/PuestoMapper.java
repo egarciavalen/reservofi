@@ -6,16 +6,16 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring") // componentModel para inyección de dependencias
 @DecoratedWith(PuestoMapperDecorator.class)
 public interface PuestoMapper {
 
-	@Named("DTOaEntidad")
+	@Named("DTOAentidad")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
-	Puesto DTOaEntidad(PuestoDTO dto);
+	Puesto DTOAentidad(PuestoDTO dto);
 
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
@@ -29,6 +29,6 @@ public interface PuestoMapper {
 	List<PuestoDTO> entidadADTOList(List<Puesto> entidadList);
 
 	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Puesto> DTOaEntidadList(List<PuestoDTO> dtoList);
+	List<Puesto> DTOAEntidadList(List<PuestoDTO> dtoList);
 
 }

@@ -6,16 +6,16 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 @DecoratedWith(ReservaMapperDecorator.class)
 public interface ReservaMapper {
 
-	@Named("DTOaEntidad")
+	@Named("DTOAentidad")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "fechaInicio", target = "fechaInicio")
 	@Mapping(source = "fechaFin", target = "fechaFin")
-	Reserva DTOaEntidad(ReservaDTO dto);
+	Reserva DTOAentidad(ReservaDTO dto);
 
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
@@ -30,6 +30,6 @@ public interface ReservaMapper {
 	List<ReservaDTO> entidadADTOList(List<Reserva> entidadList);
 
 	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Reserva> DTOaEntidadList(List<ReservaDTO> dtoList);
+	List<Reserva> DTOAEntidadList(List<ReservaDTO> dtoList);
 
 }

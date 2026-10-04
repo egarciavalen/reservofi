@@ -6,10 +6,10 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
-	@Named("DTOaEntidad")
+	@Named("DTOAentidad")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
@@ -18,7 +18,7 @@ public interface UsuarioMapper {
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "contraseniaHash", target = "contraseniaHash")
 	@Mapping(source = "activo", target = "activo")
-	Usuario DTOaEntidad(UsuarioDTO dto);
+	Usuario DTOAentidad(UsuarioDTO dto);
 
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
@@ -35,6 +35,6 @@ public interface UsuarioMapper {
 	List<UsuarioDTO> entidadADTOList(List<Usuario> entidadList);
 
 	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Usuario> DTOaEntidadList(List<UsuarioDTO> dtoList);
+	List<Usuario> DTOAEntidadList(List<UsuarioDTO> dtoList);
 
 }

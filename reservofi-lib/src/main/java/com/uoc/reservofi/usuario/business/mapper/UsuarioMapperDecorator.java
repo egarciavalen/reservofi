@@ -4,23 +4,27 @@ import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.model.Usuario;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 
-	private final UsuarioMapper mapper;
+	// Uso de @Autowired por problemas con el constructor por defecto
+
+	@Autowired
+	private UsuarioMapper mapper;
 
 	// Servicios de entidades asociadas
-	private final BaseRolService baseRolService;
+	@Autowired
+	private BaseRolService baseRolService;
 
 	@Override
-	public Usuario DTOaEntidad(UsuarioDTO dto) {
-		Usuario entidad = mapper.DTOaEntidad(dto);
+	public Usuario DTOAentidad(UsuarioDTO dto) {
+		Usuario entidad = mapper.DTOAentidad(dto);
 
 		// Roles
 		if (dto.getIdsRoles() != null && !dto.getIdsRoles().isEmpty()) {

@@ -10,11 +10,13 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "Puesto", uniqueConstraints = @UniqueConstraint(
 		name = "uq_puesto_nombre",
 		columnNames = "nombre")
 )
 public class Puesto extends BaseEntidadActualizable {
+
 
 	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;

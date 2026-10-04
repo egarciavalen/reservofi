@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "Usuario", uniqueConstraints = @UniqueConstraint(
 		name = "uq_usuario_correo_corporativo",
 		columnNames = "correo_corporativo")

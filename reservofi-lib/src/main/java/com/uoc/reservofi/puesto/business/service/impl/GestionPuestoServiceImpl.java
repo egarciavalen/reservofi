@@ -21,14 +21,14 @@ public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceI
 
 	@Override
 	public PuestoDTO insert(@Valid PuestoDTO dto) {
-		Puesto entidad = puestoMapper.DTOaEntidad(dto);
+		Puesto entidad = puestoMapper.DTOAentidad(dto);
 		entidad = basePuestoService.insert(entidad);
 		return puestoMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public PuestoDTO update(@Valid PuestoDTO dto) {
-		Puesto entidad = puestoMapper.DTOaEntidad(dto);
+		Puesto entidad = puestoMapper.DTOAentidad(dto);
 		entidad = basePuestoService.update(entidad);
 		return puestoMapper.entidadADTO(entidad);
 	}

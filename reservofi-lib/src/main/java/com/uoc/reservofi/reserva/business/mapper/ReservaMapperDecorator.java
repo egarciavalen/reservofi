@@ -6,20 +6,25 @@ import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.model.Reserva;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import com.uoc.reservofi.usuario.business.service.base.BaseUsuarioService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RequiredArgsConstructor
 public abstract class ReservaMapperDecorator implements ReservaMapper {
 
-	private final ReservaMapper mapper;
+	// Uso de @Autowired por problemas con el constructor por defecto
+
+	@Autowired
+	private ReservaMapper mapper;
 
 	// Servicios de entidades asociadas
-	private final BaseUsuarioService baseUsuarioService;
-	private final BasePuestoService basePuestoService;
+	@Autowired
+	private BaseUsuarioService baseUsuarioService;
+
+	@Autowired
+	private BasePuestoService basePuestoService;
 
 	@Override
-	public Reserva DTOaEntidad(ReservaDTO dto) {
-		Reserva entidad = mapper.DTOaEntidad(dto);
+	public Reserva DTOAentidad(ReservaDTO dto) {
+		Reserva entidad = mapper.DTOAentidad(dto);
 
 		// Usuario
 		if (dto.getIdUsuario() != null) {

@@ -21,14 +21,14 @@ public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImp
 
 	@Override
 	public SalaDTO insert(@Valid SalaDTO dto) {
-		Sala entidad = salaMapper.DTOaEntidad(dto);
+		Sala entidad = salaMapper.DTOAentidad(dto);
 		entidad = baseSalaService.insert(entidad);
 		return salaMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public SalaDTO update(@Valid SalaDTO dto) {
-		Sala entidad = salaMapper.DTOaEntidad(dto);
+		Sala entidad = salaMapper.DTOAentidad(dto);
 		entidad = baseSalaService.update(entidad);
 		return salaMapper.entidadADTO(entidad);
 	}

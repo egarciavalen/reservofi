@@ -21,14 +21,14 @@ public class GestionUsuarioServiceImpl extends GestionEntidadActualizableService
 
 	@Override
 	public UsuarioDTO insert(@Valid UsuarioDTO dto) {
-		Usuario entidad = usuarioMapper.DTOaEntidad(dto);
+		Usuario entidad = usuarioMapper.DTOAentidad(dto);
 		entidad = baseUsuarioService.insert(entidad);
 		return usuarioMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public UsuarioDTO update(@Valid UsuarioDTO dto) {
-		Usuario entidad = usuarioMapper.DTOaEntidad(dto);
+		Usuario entidad = usuarioMapper.DTOAentidad(dto);
 		entidad = baseUsuarioService.update(entidad);
 		return usuarioMapper.entidadADTO(entidad);
 	}

@@ -6,14 +6,14 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RolMapper {
 
-	@Named("DTOaEntidad")
+	@Named("DTOAentidad")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
-	Rol DTOaEntidad(RolDTO dto);
+	Rol DTOAentidad(RolDTO dto);
 
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
@@ -25,6 +25,6 @@ public interface RolMapper {
 	List<RolDTO> entidadADTOList(List<Rol> entidadList);
 
 	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Rol> DTOaEntidadList(List<RolDTO> dtoList);
+	List<Rol> DTOAEntidadList(List<RolDTO> dtoList);
 
 }

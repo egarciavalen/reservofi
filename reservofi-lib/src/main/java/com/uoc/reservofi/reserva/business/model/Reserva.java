@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "Reserva")
 public class Reserva extends BaseEntidadActualizable {
 

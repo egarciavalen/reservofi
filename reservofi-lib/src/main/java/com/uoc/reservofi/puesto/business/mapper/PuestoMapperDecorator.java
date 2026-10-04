@@ -5,18 +5,23 @@ import com.uoc.reservofi.puesto.business.model.Puesto;
 import com.uoc.reservofi.sala.business.model.Sala;
 import com.uoc.reservofi.sala.business.service.base.BaseSalaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor
 public abstract class PuestoMapperDecorator implements PuestoMapper {
 
-	private final PuestoMapper mapper;
+	// Uso de @Autowired por problemas con el constructor por defecto
+
+	@Autowired
+	private PuestoMapper mapper;
 
 	// Servicios de entidades asociadas
-	private final BaseSalaService baseSalaService;
+	@Autowired
+	private BaseSalaService baseSalaService;
 
 	@Override
-	public Puesto DTOaEntidad(PuestoDTO dto) {
-		Puesto entidad = mapper.DTOaEntidad(dto);
+	public Puesto DTOAentidad(PuestoDTO dto) {
+		Puesto entidad = mapper.DTOAentidad(dto);
 
 		// Sala
 		if (dto.getIdSala() != null) {

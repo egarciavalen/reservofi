@@ -21,14 +21,14 @@ public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl
 
 	@Override
 	public RolDTO insert(@Valid RolDTO dto) {
-		Rol entidad = rolMapper.DTOaEntidad(dto);
+		Rol entidad = rolMapper.DTOAentidad(dto);
 		entidad = baseRolService.insert(entidad);
 		return rolMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public RolDTO update(@Valid RolDTO dto) {
-		Rol entidad = rolMapper.DTOaEntidad(dto);
+		Rol entidad = rolMapper.DTOAentidad(dto);
 		entidad = baseRolService.update(entidad);
 		return rolMapper.entidadADTO(entidad);
 	}
