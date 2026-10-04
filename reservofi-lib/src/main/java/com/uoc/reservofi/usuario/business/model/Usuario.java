@@ -36,7 +36,7 @@ public class Usuario extends BaseEntidadActualizable {
 	private Boolean activo;
 
 	// Relación n a n
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "usuario_rol",
 			joinColumns = @JoinColumn(name = "id_usuario"),
