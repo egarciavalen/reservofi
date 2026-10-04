@@ -1,2 +1,2 @@
 insert into ROL(nombre, creacion_usuario, creacion_fecha) values ('Administrador', 'admin', current_timestamp);
-insert into ROL(nombre, creacion_usuario, creacion_fecha) values ('Empleado', 'admin', current_timestamp);
+insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Empleado', 'admin', current_timestamp, 'admin', current_timestamp);
