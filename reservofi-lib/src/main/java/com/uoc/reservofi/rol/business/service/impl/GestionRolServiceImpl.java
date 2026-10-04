@@ -1,11 +1,11 @@
-package com.uoc.reservofi.rol.service.impl;
+package com.uoc.reservofi.rol.business.service.impl;
 
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
-import com.uoc.reservofi.rol.dto.RolDTO;
-import com.uoc.reservofi.rol.mapper.RolMapper;
-import com.uoc.reservofi.rol.model.Rol;
-import com.uoc.reservofi.rol.service.GestionRolService;
-import com.uoc.reservofi.rol.service.base.BaseRolService;
+import com.uoc.reservofi.rol.business.dto.RolDTO;
+import com.uoc.reservofi.rol.business.mapper.RolMapper;
+import com.uoc.reservofi.rol.business.model.Rol;
+import com.uoc.reservofi.rol.business.service.GestionRolService;
+import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.uoc.reservofi.rol.mapper;
+package com.uoc.reservofi.rol.business.mapper;
 
-import com.uoc.reservofi.rol.dto.RolDTO;
-import com.uoc.reservofi.rol.model.Rol;
+import com.uoc.reservofi.rol.business.dto.RolDTO;
+import com.uoc.reservofi.rol.business.model.Rol;
 import org.mapstruct.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.uoc.reservofi.rol.dto;
+package com.uoc.reservofi.rol.business.dto;
 
 import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
 import jakarta.validation.constraints.NotEmpty;

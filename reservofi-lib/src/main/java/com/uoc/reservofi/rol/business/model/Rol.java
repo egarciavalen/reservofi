@@ -1,4 +1,4 @@
-package com.uoc.reservofi.rol.model;
+package com.uoc.reservofi.rol.business.model;
 
 import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
 import jakarta.persistence.Column;
