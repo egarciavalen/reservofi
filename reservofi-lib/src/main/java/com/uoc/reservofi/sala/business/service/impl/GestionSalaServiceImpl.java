@@ -17,20 +17,20 @@ import java.util.List;
 public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImpl<SalaDTO> implements GestionSalaService {
 
 	private final BaseSalaService baseSalaService;
-	private final SalaMapper SalaMapper;
+	private final SalaMapper salaMapper;
 
 	@Override
 	public SalaDTO insert(@Valid SalaDTO dto) {
-		Sala entidad = SalaMapper.DTOaEntidad(dto);
+		Sala entidad = salaMapper.DTOaEntidad(dto);
 		entidad = baseSalaService.insert(entidad);
-		return SalaMapper.entidadADTO(entidad);
+		return salaMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public SalaDTO update(@Valid SalaDTO dto) {
-		Sala entidad = SalaMapper.DTOaEntidad(dto);
+		Sala entidad = salaMapper.DTOaEntidad(dto);
 		entidad = baseSalaService.update(entidad);
-		return SalaMapper.entidadADTO(entidad);
+		return salaMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImp
 	@Override
 	public List<SalaDTO> findAll() {
 		List<Sala> entidadList = baseSalaService.findAll();
-		return SalaMapper.entidadADTOList(entidadList);
+		return salaMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public SalaDTO findById(Long id) {
 		Sala entidad = baseSalaService.findById(id);
-		return SalaMapper.entidadADTO(entidad);
+		return salaMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImp
 	@Override
 	public List<SalaDTO> findByCreacionUsuario(String usuario) {
 		List<Sala> entidadList = baseSalaService.findByCreacionUsuario(usuario);
-		return SalaMapper.entidadADTOList(entidadList);
+		return salaMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public List<SalaDTO> findByActualizacionUsuario(String usuario) {
 		List<Sala> entidadList = baseSalaService.findByActualizacionUsuario(usuario);
-		return SalaMapper.entidadADTOList(entidadList);
+		return salaMapper.entidadADTOList(entidadList);
 	}
 
 }

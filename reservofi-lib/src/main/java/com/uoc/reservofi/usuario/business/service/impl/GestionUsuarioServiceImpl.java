@@ -17,20 +17,20 @@ import java.util.List;
 public class GestionUsuarioServiceImpl extends GestionEntidadActualizableServiceImpl<UsuarioDTO> implements GestionUsuarioService {
 
 	private final BaseUsuarioService baseUsuarioService;
-	private final UsuarioMapper UsuarioMapper;
+	private final UsuarioMapper usuarioMapper;
 
 	@Override
 	public UsuarioDTO insert(@Valid UsuarioDTO dto) {
-		Usuario entidad = UsuarioMapper.DTOaEntidad(dto);
+		Usuario entidad = usuarioMapper.DTOaEntidad(dto);
 		entidad = baseUsuarioService.insert(entidad);
-		return UsuarioMapper.entidadADTO(entidad);
+		return usuarioMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public UsuarioDTO update(@Valid UsuarioDTO dto) {
-		Usuario entidad = UsuarioMapper.DTOaEntidad(dto);
+		Usuario entidad = usuarioMapper.DTOaEntidad(dto);
 		entidad = baseUsuarioService.update(entidad);
-		return UsuarioMapper.entidadADTO(entidad);
+		return usuarioMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class GestionUsuarioServiceImpl extends GestionEntidadActualizableService
 	@Override
 	public List<UsuarioDTO> findAll() {
 		List<Usuario> entidadList = baseUsuarioService.findAll();
-		return UsuarioMapper.entidadADTOList(entidadList);
+		return usuarioMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public UsuarioDTO findById(Long id) {
 		Usuario entidad = baseUsuarioService.findById(id);
-		return UsuarioMapper.entidadADTO(entidad);
+		return usuarioMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class GestionUsuarioServiceImpl extends GestionEntidadActualizableService
 	@Override
 	public List<UsuarioDTO> findByCreacionUsuario(String usuario) {
 		List<Usuario> entidadList = baseUsuarioService.findByCreacionUsuario(usuario);
-		return UsuarioMapper.entidadADTOList(entidadList);
+		return usuarioMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public List<UsuarioDTO> findByActualizacionUsuario(String usuario) {
 		List<Usuario> entidadList = baseUsuarioService.findByActualizacionUsuario(usuario);
-		return UsuarioMapper.entidadADTOList(entidadList);
+		return usuarioMapper.entidadADTOList(entidadList);
 	}
 
 }

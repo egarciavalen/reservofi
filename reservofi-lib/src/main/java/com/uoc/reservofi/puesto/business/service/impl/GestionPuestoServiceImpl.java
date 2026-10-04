@@ -17,20 +17,20 @@ import java.util.List;
 public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceImpl<PuestoDTO> implements GestionPuestoService {
 
 	private final BasePuestoService basePuestoService;
-	private final PuestoMapper PuestoMapper;
+	private final PuestoMapper puestoMapper;
 
 	@Override
 	public PuestoDTO insert(@Valid PuestoDTO dto) {
-		Puesto entidad = PuestoMapper.DTOaEntidad(dto);
+		Puesto entidad = puestoMapper.DTOaEntidad(dto);
 		entidad = basePuestoService.insert(entidad);
-		return PuestoMapper.entidadADTO(entidad);
+		return puestoMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public PuestoDTO update(@Valid PuestoDTO dto) {
-		Puesto entidad = PuestoMapper.DTOaEntidad(dto);
+		Puesto entidad = puestoMapper.DTOaEntidad(dto);
 		entidad = basePuestoService.update(entidad);
-		return PuestoMapper.entidadADTO(entidad);
+		return puestoMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceI
 	@Override
 	public List<PuestoDTO> findAll() {
 		List<Puesto> entidadList = basePuestoService.findAll();
-		return PuestoMapper.entidadADTOList(entidadList);
+		return puestoMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public PuestoDTO findById(Long id) {
 		Puesto entidad = basePuestoService.findById(id);
-		return PuestoMapper.entidadADTO(entidad);
+		return puestoMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceI
 	@Override
 	public List<PuestoDTO> findByCreacionUsuario(String usuario) {
 		List<Puesto> entidadList = basePuestoService.findByCreacionUsuario(usuario);
-		return PuestoMapper.entidadADTOList(entidadList);
+		return puestoMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public List<PuestoDTO> findByActualizacionUsuario(String usuario) {
 		List<Puesto> entidadList = basePuestoService.findByActualizacionUsuario(usuario);
-		return PuestoMapper.entidadADTOList(entidadList);
+		return puestoMapper.entidadADTOList(entidadList);
 	}
 
 }

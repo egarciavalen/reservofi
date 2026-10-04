@@ -7,6 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 
 @Mapper
+@DecoratedWith(ReservaMapperDecorator.class)
 public interface ReservaMapper {
 
 	@Named("DTOaEntidad")

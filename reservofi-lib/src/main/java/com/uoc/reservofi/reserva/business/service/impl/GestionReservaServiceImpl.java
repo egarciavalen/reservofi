@@ -17,20 +17,20 @@ import java.util.List;
 public class GestionReservaServiceImpl extends GestionEntidadActualizableServiceImpl<ReservaDTO> implements GestionReservaService {
 
 	private final BaseReservaService baseReservaService;
-	private final ReservaMapper ReservaMapper;
+	private final ReservaMapper reservaMapper;
 
 	@Override
 	public ReservaDTO insert(@Valid ReservaDTO dto) {
-		Reserva entidad = ReservaMapper.DTOaEntidad(dto);
+		Reserva entidad = reservaMapper.DTOaEntidad(dto);
 		entidad = baseReservaService.insert(entidad);
-		return ReservaMapper.entidadADTO(entidad);
+		return reservaMapper.entidadADTO(entidad);
 	}
 
 	@Override
 	public ReservaDTO update(@Valid ReservaDTO dto) {
-		Reserva entidad = ReservaMapper.DTOaEntidad(dto);
+		Reserva entidad = reservaMapper.DTOaEntidad(dto);
 		entidad = baseReservaService.update(entidad);
-		return ReservaMapper.entidadADTO(entidad);
+		return reservaMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class GestionReservaServiceImpl extends GestionEntidadActualizableService
 	@Override
 	public List<ReservaDTO> findAll() {
 		List<Reserva> entidadList = baseReservaService.findAll();
-		return ReservaMapper.entidadADTOList(entidadList);
+		return reservaMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public ReservaDTO findById(Long id) {
 		Reserva entidad = baseReservaService.findById(id);
-		return ReservaMapper.entidadADTO(entidad);
+		return reservaMapper.entidadADTO(entidad);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class GestionReservaServiceImpl extends GestionEntidadActualizableService
 	@Override
 	public List<ReservaDTO> findByCreacionUsuario(String usuario) {
 		List<Reserva> entidadList = baseReservaService.findByCreacionUsuario(usuario);
-		return ReservaMapper.entidadADTOList(entidadList);
+		return reservaMapper.entidadADTOList(entidadList);
 	}
 
 	@Override
 	public List<ReservaDTO> findByActualizacionUsuario(String usuario) {
 		List<Reserva> entidadList = baseReservaService.findByActualizacionUsuario(usuario);
-		return ReservaMapper.entidadADTOList(entidadList);
+		return reservaMapper.entidadADTOList(entidadList);
 	}
 
 }

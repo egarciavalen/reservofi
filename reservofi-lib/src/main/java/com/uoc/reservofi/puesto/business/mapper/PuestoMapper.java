@@ -7,6 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 
 @Mapper
+@DecoratedWith(PuestoMapperDecorator.class)
 public interface PuestoMapper {
 
 	@Named("DTOaEntidad")
