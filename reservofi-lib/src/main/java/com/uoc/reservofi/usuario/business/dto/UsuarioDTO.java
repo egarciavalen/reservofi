@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 public class UsuarioDTO extends GestionEntidadActualizableDTO {
@@ -37,4 +39,7 @@ public class UsuarioDTO extends GestionEntidadActualizableDTO {
 
 	@NotEmpty(message = "usuario.activo.obligatorio")
 	private Boolean activo;
+
+	@NotEmpty(message = "usuario.roles.obligatorio")
+	private Set<Long> idsRoles;
 }
