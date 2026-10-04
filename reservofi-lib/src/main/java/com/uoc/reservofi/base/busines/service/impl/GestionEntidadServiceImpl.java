@@ -3,18 +3,23 @@ package com.uoc.reservofi.base.busines.service.impl;
 import com.uoc.reservofi.base.busines.dto.GestionEntidadDTO;
 import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.GestionEntidadService;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+@Validated // Validaciones @Valid
 public abstract class GestionEntidadServiceImpl<T extends GestionEntidadDTO> implements GestionEntidadService<T> {
 
+	// Las clases hijas deciden qué metodos van a implementar
+	
 	@Override
-	public T insert(T entidad) {
+	public T insert(@Valid T entidad) {
 		throw new GestionException("Operación no implementada");
 	}
 
 	@Override
-	public T update(T entidad) {
+	public T update(@Valid T entidad) {
 		throw new GestionException("Operación no implementada");
 	}
 

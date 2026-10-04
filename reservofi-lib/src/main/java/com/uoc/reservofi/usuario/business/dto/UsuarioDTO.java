@@ -1,0 +1,40 @@
+package com.uoc.reservofi.usuario.business.dto;
+
+import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UsuarioDTO extends GestionEntidadActualizableDTO {
+
+	@NotEmpty(message = "usuario.nombre.obligatorio")
+	@Size(min = 0, message = "usuario.nombre.tamanio.minimo")
+	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")
+	private String nombre;
+
+	@NotEmpty(message = "usuario.primerApellido.obligatorio")
+	@Size(min = 0, message = "usuario.primerApellido.tamanio.minimo")
+	@Size(max = 100, message = "usuario.primerApellido.tamanio.maximo")
+	private String primerApellido;
+
+	@NotEmpty(message = "usuario.segundoApellido.obligatorio")
+	@Size(min = 0, message = "usuario.segundoApellido.tamanio.minimo")
+	@Size(max = 100, message = "usuario.segundoApellido.tamanio.maximo")
+	private String segundoApellido;
+
+	@NotEmpty(message = "usuario.correoCorporativo.obligatorio")
+	@Size(min = 0, message = "usuario.correoCorporativo.tamanio.minimo")
+	@Size(max = 100, message = "usuario.correoCorporativo.tamanio.maximo")
+	private String correoCorporativo;
+
+	@NotEmpty(message = "usuario.contraseniaHash.obligatorio")
+	@Size(min = 0, message = "usuario.contraseniaHash.tamanio.minimo")
+	@Size(max = 100, message = "usuario.contraseniaHash.tamanio.maximo")
+	private String contraseniaHash;
+
+	@NotEmpty(message = "usuario.activo.obligatorio")
+	private Boolean activo;
+}

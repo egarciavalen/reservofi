@@ -6,6 +6,7 @@ import com.uoc.reservofi.rol.business.mapper.RolMapper;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,14 @@ public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl
 	private final RolMapper rolMapper;
 
 	@Override
-	public RolDTO insert(RolDTO dto) {
+	public RolDTO insert(@Valid RolDTO dto) {
 		Rol entidad = rolMapper.DTOaEntidad(dto);
 		entidad = baseRolService.insert(entidad);
 		return rolMapper.entidadADTO(entidad);
 	}
 
 	@Override
-	public RolDTO update(RolDTO dto) {
+	public RolDTO update(@Valid RolDTO dto) {
 		Rol entidad = rolMapper.DTOaEntidad(dto);
 		entidad = baseRolService.update(entidad);
 		return rolMapper.entidadADTO(entidad);

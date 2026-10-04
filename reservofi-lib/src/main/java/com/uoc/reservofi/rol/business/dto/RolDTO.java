@@ -2,6 +2,7 @@ package com.uoc.reservofi.rol.business.dto;
 
 import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,7 @@ import lombok.Setter;
 public class RolDTO extends GestionEntidadActualizableDTO {
 
 	@NotEmpty(message = "rol.nombre.obligatorio")
+	@Size(min = 0, message = "rol.nombre.tamanio.minimo")
+	@Size(max = 100, message = "rol.nombre.tamanio.maximo")
 	private String nombre;
 }
