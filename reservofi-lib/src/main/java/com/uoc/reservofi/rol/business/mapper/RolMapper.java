@@ -15,6 +15,9 @@ public interface RolMapper {
 	@Mapping(source = "nombre", target = "nombre")
 	Rol DTOAentidad(RolDTO dto);
 
+	@InheritConfiguration(name = "DTOAentidad")
+	Rol DTOAentidad(RolDTO dto, @MappingTarget Rol entidad);
+
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")

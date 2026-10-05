@@ -1,5 +1,6 @@
 package com.uoc.reservofi.rol.business.service.impl;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.mapper.RolMapper;
@@ -28,7 +29,18 @@ public class GestionRolServiceImpl extends GestionEntidadActualizableServiceImpl
 
 	@Override
 	public RolDTO update(@Valid RolDTO dto) {
-		Rol entidad = rolMapper.DTOAentidad(dto);
+
+		if (dto.getId() == null) {
+			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+		}
+
+		Rol entidadBD = baseRolService.findById(dto.getId());
+
+		if (entidadBD == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		Rol entidad = rolMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseRolService.update(entidad);
 		return rolMapper.entidadADTO(entidad);
 	}

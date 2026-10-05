@@ -159,8 +159,8 @@ public class BaseRolServiceTest extends BaseTest {
 		assertEquals("Administrador", rol.getNombre());
 		assertEquals("admin", rol.getCreacionUsuario());
 		assertNotNull(rol.getCreacionFecha());
-		assertNull(rol.getActualizacionUsuario());
-		assertNull(rol.getActualizacionFecha());
+		assertEquals("admin", rol.getActualizacionUsuario());
+		assertNotNull(rol.getActualizacionFecha());
 	}
 
 	@Test
@@ -174,15 +174,15 @@ public class BaseRolServiceTest extends BaseTest {
 		assertEquals("Administrador", rol1.getNombre());
 		assertEquals("admin", rol1.getCreacionUsuario());
 		assertNotNull(rol1.getCreacionFecha());
-		assertNull(rol1.getActualizacionUsuario());
-		assertNull(rol1.getActualizacionFecha());
+		assertEquals("admin", rol1.getActualizacionUsuario());
+		assertNotNull(rol1.getActualizacionFecha());
 
 		Rol rol2 = roles.get(1);
 		assertEquals(2, rol2.getId());
 		assertEquals("Empleado", rol2.getNombre());
 		assertEquals("admin", rol2.getCreacionUsuario());
 		assertNotNull(rol2.getCreacionFecha());
-		assertEquals("admin", rol2.getActualizacionUsuario());
+		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
 	}
 
@@ -201,15 +201,15 @@ public class BaseRolServiceTest extends BaseTest {
 		assertEquals("Administrador", rol1.getNombre());
 		assertEquals("admin", rol1.getCreacionUsuario());
 		assertNotNull(rol1.getCreacionFecha());
-		assertNull(rol1.getActualizacionUsuario());
-		assertNull(rol1.getActualizacionFecha());
+		assertEquals("admin", rol1.getActualizacionUsuario());
+		assertNotNull(rol1.getActualizacionFecha());
 
 		Rol rol2 = roles.get(1);
 		assertEquals(2, rol2.getId());
 		assertEquals("Empleado", rol2.getNombre());
 		assertEquals("admin", rol2.getCreacionUsuario());
 		assertNotNull(rol2.getCreacionFecha());
-		assertEquals("admin", rol2.getActualizacionUsuario());
+		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
 	}
 
@@ -233,31 +233,31 @@ public class BaseRolServiceTest extends BaseTest {
 		assertEquals("Administrador", rol1.getNombre());
 		assertEquals("admin", rol1.getCreacionUsuario());
 		assertNotNull(rol1.getCreacionFecha());
-		assertNull(rol1.getActualizacionUsuario());
-		assertNull(rol1.getActualizacionFecha());
+		assertEquals("admin", rol1.getActualizacionUsuario());
+		assertNotNull(rol1.getActualizacionFecha());
 
 		Rol rol2 = roles.get(1);
 		assertEquals(2, rol2.getId());
 		assertEquals("Empleado", rol2.getNombre());
 		assertEquals("admin", rol2.getCreacionUsuario());
 		assertNotNull(rol2.getCreacionFecha());
-		assertEquals("admin", rol2.getActualizacionUsuario());
+		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
 	}
 
 	@Test
 	void findByActualizacionUsuarioTest() {
-		List<Rol> roles = baseRolService.findByActualizacionUsuario("admin");
+		List<Rol> roles = baseRolService.findByActualizacionUsuario("admin_update");
 		assertNotNull(roles);
 		assertEquals(1, roles.size());
 
-		Rol rol = roles.getFirst();
-		assertEquals(2, rol.getId());
-		assertEquals("Empleado", rol.getNombre());
-		assertEquals("admin", rol.getCreacionUsuario());
-		assertNotNull(rol.getCreacionFecha());
-		assertEquals("admin", rol.getActualizacionUsuario());
-		assertNotNull(rol.getActualizacionFecha());
+		Rol rol2 = roles.getFirst();
+		assertEquals(2, rol2.getId());
+		assertEquals("Empleado", rol2.getNombre());
+		assertEquals("admin", rol2.getCreacionUsuario());
+		assertNotNull(rol2.getCreacionFecha());
+		assertEquals("admin_update", rol2.getActualizacionUsuario());
+		assertNotNull(rol2.getActualizacionFecha());
 	}
 
 
