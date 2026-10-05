@@ -1,24 +1,100 @@
 package com.uoc.reservofi.rol.business.base;
 
-import com.uoc.reservofi.BaseTestConfig;
+import com.uoc.reservofi.base.busines.exception.BaseException;
+import com.uoc.reservofi.base.business.BaseTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = BaseTestConfig.class)
-public class BaseRolServiceTest {
+
+public class BaseRolServiceTest extends BaseTest {
 
 	@Autowired
 	private BaseRolService baseRolService;
 
-	// TODO: INSERT, UPDATE Y DELETE
+
+	@Test
+	void insertTest() {
+		Rol rol = new Rol();
+		rol.setNombre("Rol prueba");
+
+		Rol insertado = baseRolService.insert(rol);
+		assertNotNull(insertado);
+		assertEquals("Rol prueba", rol.getNombre());
+		assertEquals("adminTest", rol.getCreacionUsuario());
+		assertNotNull(rol.getCreacionFecha());
+		assertEquals("adminTest", rol.getActualizacionUsuario());
+		assertNotNull(rol.getActualizacionFecha());
+	}
+
+	@Test
+	void insertNullTest() {
+		try {
+			baseRolService.insert(null);
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
+			assertEquals("Entidad no existente", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BaseException");
+		}
+
+	}
+
+	@Test
+	void insertIdExistenteTest() {
+		Rol rol = new Rol();
+		rol.setId(1L);
+		rol.setNombre("Rol prueba");
+
+		try {
+			baseRolService.insert(rol);
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
+			assertEquals("No puede tener identificador asociado", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BaseException");
+		}
+
+	}
+
+	@Test
+	void updateNullTest() {
+		try {
+			baseRolService.update(null);
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
+			assertEquals("Entidad no existente", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BaseException");
+		}
+	}
+
+	@Test
+	void updateRolIdNoExistenteTest() {
+		try {
+			baseRolService.update(new Rol());
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
+			assertEquals("Ha de tener un identificador asociado", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BaseException");
+		}
+	}
+
+	@Test
+	void deleteByIdTest() {
+		try {
+			baseRolService.deleteById(1L);
+		} catch (Exception e) {
+			fail("No se esperaba error");
+		}
+	}
 
 	@Test
 	void findByIdTest() {
