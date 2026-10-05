@@ -1,5 +1,6 @@
 package com.uoc.reservofi.usuario.business.service.impl;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.UsuarioMapper;
@@ -28,7 +29,18 @@ public class GestionUsuarioServiceImpl extends GestionEntidadActualizableService
 
 	@Override
 	public UsuarioDTO update(@Valid UsuarioDTO dto) {
-		Usuario entidad = usuarioMapper.DTOAentidad(dto);
+
+		if (dto.getId() == null) {
+			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+		}
+
+		Usuario entidadBD = baseUsuarioService.findById(dto.getId());
+
+		if (entidadBD == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		Usuario entidad = usuarioMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseUsuarioService.update(entidad);
 		return usuarioMapper.entidadADTO(entidad);
 	}

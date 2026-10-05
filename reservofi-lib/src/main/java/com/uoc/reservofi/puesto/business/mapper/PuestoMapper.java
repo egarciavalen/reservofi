@@ -17,6 +17,9 @@ public interface PuestoMapper {
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
 	Puesto DTOAentidad(PuestoDTO dto);
 
+	@InheritConfiguration(name = "DTOAentidad")
+	Puesto DTOAentidad(PuestoDTO dto, @MappingTarget Puesto entidad);
+
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")

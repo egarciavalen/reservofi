@@ -1,5 +1,6 @@
 package com.uoc.reservofi.puesto.business.service.impl;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
 import com.uoc.reservofi.puesto.business.mapper.PuestoMapper;
@@ -28,7 +29,18 @@ public class GestionPuestoServiceImpl extends GestionEntidadActualizableServiceI
 
 	@Override
 	public PuestoDTO update(@Valid PuestoDTO dto) {
-		Puesto entidad = puestoMapper.DTOAentidad(dto);
+
+		if (dto.getId() == null) {
+			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+		}
+
+		Puesto entidadBD = basePuestoService.findById(dto.getId());
+
+		if (entidadBD == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		Puesto entidad = puestoMapper.DTOAentidad(dto, entidadBD);
 		entidad = basePuestoService.update(entidad);
 		return puestoMapper.entidadADTO(entidad);
 	}

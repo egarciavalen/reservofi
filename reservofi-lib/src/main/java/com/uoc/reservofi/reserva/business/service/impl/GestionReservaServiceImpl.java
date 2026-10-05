@@ -1,5 +1,6 @@
 package com.uoc.reservofi.reserva.business.service.impl;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.mapper.ReservaMapper;
@@ -28,7 +29,18 @@ public class GestionReservaServiceImpl extends GestionEntidadActualizableService
 
 	@Override
 	public ReservaDTO update(@Valid ReservaDTO dto) {
-		Reserva entidad = reservaMapper.DTOAentidad(dto);
+
+		if (dto.getId() == null) {
+			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+		}
+
+		Reserva entidadBD = baseReservaService.findById(dto.getId());
+
+		if (entidadBD == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		Reserva entidad = reservaMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseReservaService.update(entidad);
 		return reservaMapper.entidadADTO(entidad);
 	}

@@ -15,6 +15,9 @@ public interface SalaMapper {
 	@Mapping(source = "nombre", target = "nombre")
 	Sala DTOAentidad(SalaDTO dto);
 
+	@InheritConfiguration(name = "DTOAentidad")
+	Sala DTOAentidad(SalaDTO dto, @MappingTarget Sala entidad);
+
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")

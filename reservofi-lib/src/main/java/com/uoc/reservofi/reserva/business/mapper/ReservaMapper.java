@@ -17,6 +17,10 @@ public interface ReservaMapper {
 	@Mapping(source = "fechaFin", target = "fechaFin")
 	Reserva DTOAentidad(ReservaDTO dto);
 
+	@InheritConfiguration(name = "DTOAentidad")
+	Reserva DTOAentidad(ReservaDTO dto, @MappingTarget Reserva entidad);
+
+
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")

@@ -1,5 +1,6 @@
 package com.uoc.reservofi.sala.business.service.impl;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.SalaMapper;
@@ -28,7 +29,18 @@ public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImp
 
 	@Override
 	public SalaDTO update(@Valid SalaDTO dto) {
-		Sala entidad = salaMapper.DTOAentidad(dto);
+
+		if (dto.getId() == null) {
+			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+		}
+
+		Sala entidadBD = baseSalaService.findById(dto.getId());
+
+		if (entidadBD == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		Sala entidad = salaMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseSalaService.update(entidad);
 		return salaMapper.entidadADTO(entidad);
 	}

@@ -18,7 +18,6 @@ public class PuestoDTO extends GestionEntidadActualizableDTO {
 	private Long idSala;
 
 	@NotEmpty(message = "puesto.nombre.obligatorio")
-	@Size(min = 0, message = "puesto.nombre.tamanio.minimo")
 	@Size(max = 100, message = "puesto.nombre.tamanio.maximo")
 	private String nombre;
 
