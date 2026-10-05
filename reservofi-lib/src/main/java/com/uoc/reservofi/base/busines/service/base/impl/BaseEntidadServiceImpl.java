@@ -41,6 +41,7 @@ public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements B
 		if (this.findById(entidad.getId()) == null) {
 			throw new BaseException("La entidad ha de existir en base de datos");
 		}
+
 		return getRepository().save(entidad);
 	}
 

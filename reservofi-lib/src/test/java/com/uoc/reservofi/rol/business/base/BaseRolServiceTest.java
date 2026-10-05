@@ -1,12 +1,14 @@
 package com.uoc.reservofi.rol.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.business.BaseTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +28,15 @@ public class BaseRolServiceTest extends BaseTest {
 
 		Rol insertado = baseRolService.insert(rol);
 		assertNotNull(insertado);
-		assertEquals("Rol prueba", rol.getNombre());
-		assertEquals("adminTest", rol.getCreacionUsuario());
-		assertNotNull(rol.getCreacionFecha());
-		assertEquals("adminTest", rol.getActualizacionUsuario());
-		assertNotNull(rol.getActualizacionFecha());
+		assertEquals("Rol prueba", insertado.getNombre());
+		assertEquals("adminTest", insertado.getCreacionUsuario());
+		assertNotNull(insertado.getCreacionFecha());
+		assertEquals("adminTest", insertado.getActualizacionUsuario());
+		assertNotNull(insertado.getActualizacionFecha());
 	}
 
 	@Test
-	void insertNullTest() {
+	void insertNotExistsTest() {
 		try {
 			baseRolService.insert(null);
 			fail("Se esperaba una excepción BaseException");
@@ -47,7 +49,7 @@ public class BaseRolServiceTest extends BaseTest {
 	}
 
 	@Test
-	void insertIdExistenteTest() {
+	void insertIdExistsTest() {
 		Rol rol = new Rol();
 		rol.setId(1L);
 		rol.setNombre("Rol prueba");
@@ -64,7 +66,29 @@ public class BaseRolServiceTest extends BaseTest {
 	}
 
 	@Test
-	void updateNullTest() {
+	void updateTest() {
+
+		Rol rol = new Rol();
+		rol.setId(1L);
+		rol.setNombre("Rol prueba");
+
+		// Para esta prueba, se va a suponer que se rellenó la información correctamente desde el servicio de gestión
+		rol.setCreacionUsuario("adminTest");
+		rol.setCreacionFecha(LocalDateTime.now());
+
+		Rol actualizado = baseRolService.update(rol);
+		assertNotNull(actualizado);
+		assertEquals("Rol prueba", actualizado.getNombre());
+		assertEquals("adminTest", actualizado.getCreacionUsuario());
+		assertNotNull(actualizado.getCreacionFecha());
+		assertEquals("adminTest", actualizado.getActualizacionUsuario());
+		assertNotNull(actualizado.getActualizacionFecha());
+	}
+
+	@Test
+	void updateCreateUserNotExistsTest() {
+		Rol rol = new Rol();
+		rol.setCreacionFecha(LocalDateTime.now());
 		try {
 			baseRolService.update(null);
 			fail("Se esperaba una excepción BaseException");
@@ -76,9 +100,40 @@ public class BaseRolServiceTest extends BaseTest {
 	}
 
 	@Test
-	void updateRolIdNoExistenteTest() {
+	void updateCreateDateNotExistsTest() {
+		Rol rol = new Rol();
+		rol.setCreacionUsuario("admin-test");
+
 		try {
-			baseRolService.update(new Rol());
+			baseRolService.update(rol);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("Datos de auditoría no registrados: fecha de creación no existente", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción GestionException");
+		}
+	}
+
+	@Test
+	void updateNotExistsTest() {
+		try {
+			baseRolService.update(null);
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
+			assertEquals("Entidad no existente", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BaseException");
+		}
+	}
+
+	@Test
+	void updateRolIdNotExistsTest() {
+		Rol rol = new Rol();
+		rol.setCreacionUsuario("adminTest");
+		rol.setCreacionFecha(LocalDateTime.now());
+
+		try {
+			baseRolService.update(rol);
 			fail("Se esperaba una excepción BaseException");
 		} catch (BaseException e) {
 			assertEquals("Ha de tener un identificador asociado", e.getMessage());
