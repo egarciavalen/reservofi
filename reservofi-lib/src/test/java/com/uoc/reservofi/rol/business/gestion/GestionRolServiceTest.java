@@ -3,6 +3,7 @@ package com.uoc.reservofi.rol.business.gestion;
 import com.uoc.reservofi.base.business.BaseTest;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +18,6 @@ public class GestionRolServiceTest extends BaseTest {
 	@Autowired
 	private GestionRolService gestionRolService;
 
-
 	@Test
 	void insertTest() {
 		RolDTO rolDTO = new RolDTO();
@@ -28,6 +28,49 @@ public class GestionRolServiceTest extends BaseTest {
 		assertNotNull(insertado.getId());
 		assertEquals("RolDTO prueba", insertado.getNombre());
 	}
+
+	@Test
+	void validateNombreTest() {
+		RolDTO rolDTO = new RolDTO();
+
+		// Nombre nulo
+		try {
+			gestionRolService.insert(rolDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: rol.nombre.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre vacío
+		rolDTO.setNombre("");
+		try {
+			gestionRolService.insert(rolDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: rol.nombre.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre tamanio maximo alcanzado
+		rolDTO.setNombre("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionRolService.insert(rolDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: rol.nombre.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+
+	}
+
 
 	@Test
 	void updateTest() {

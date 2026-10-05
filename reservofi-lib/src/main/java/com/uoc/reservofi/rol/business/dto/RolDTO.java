@@ -11,7 +11,6 @@ import lombok.Setter;
 public class RolDTO extends GestionEntidadActualizableDTO {
 
 	@NotEmpty(message = "rol.nombre.obligatorio")
-	@Size(min = 0, message = "rol.nombre.tamanio.minimo")
 	@Size(max = 100, message = "rol.nombre.tamanio.maximo")
 	private String nombre;
 }
