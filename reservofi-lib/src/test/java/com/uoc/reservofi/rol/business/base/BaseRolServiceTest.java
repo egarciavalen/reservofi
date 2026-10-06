@@ -2,11 +2,12 @@ package com.uoc.reservofi.rol.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.business.BaseTest;
+import com.uoc.reservofi.base.business.AbstractBaseTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,11 +16,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class BaseRolServiceTest extends BaseTest {
+public class BaseRolServiceTest extends AbstractBaseTest {
 
 	@Autowired
 	private BaseRolService baseRolService;
-
 
 	@Test
 	void insertTest() {
@@ -145,9 +145,22 @@ public class BaseRolServiceTest extends BaseTest {
 	@Test
 	void deleteByIdTest() {
 		try {
-			baseRolService.deleteById(1L);
+			baseRolService.deleteById(3L);
 		} catch (Exception e) {
 			fail("No se esperaba error");
+		}
+	}
+
+	@Test
+	void deleteByIdWithFKTest() {
+		// Registro asociado a la tabla USUARIO_ROL
+		try {
+			baseRolService.deleteById(1L);
+			fail("Se esperaba una excepción DataIntegrityViolationException");
+		} catch (DataIntegrityViolationException e) {
+			assertNotNull(e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción DataIntegrityViolationException");
 		}
 	}
 
@@ -167,7 +180,7 @@ public class BaseRolServiceTest extends BaseTest {
 	void findAllTest() {
 		List<Rol> roles = baseRolService.findAll();
 		assertNotNull(roles);
-		assertEquals(2, roles.size());
+		assertEquals(3, roles.size());
 
 		Rol rol1 = roles.getFirst();
 		assertEquals(1, rol1.getId());
@@ -184,6 +197,14 @@ public class BaseRolServiceTest extends BaseTest {
 		assertNotNull(rol2.getCreacionFecha());
 		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
+
+		Rol rol3 = roles.get(2);
+		assertEquals(3, rol3.getId());
+		assertEquals("Rol vacio", rol3.getNombre());
+		assertEquals("admin", rol3.getCreacionUsuario());
+		assertNotNull(rol3.getCreacionFecha());
+		assertEquals("admin", rol3.getActualizacionUsuario());
+		assertNotNull(rol1.getActualizacionFecha());
 	}
 
 	@Test
@@ -226,7 +247,7 @@ public class BaseRolServiceTest extends BaseTest {
 	void findByCreacionUsuarioTest() {
 		List<Rol> roles = baseRolService.findByCreacionUsuario("admin");
 		assertNotNull(roles);
-		assertEquals(2, roles.size());
+		assertEquals(3, roles.size());
 
 		Rol rol1 = roles.getFirst();
 		assertEquals(1, rol1.getId());
@@ -243,6 +264,14 @@ public class BaseRolServiceTest extends BaseTest {
 		assertNotNull(rol2.getCreacionFecha());
 		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
+
+		Rol rol3 = roles.get(2);
+		assertEquals(3, rol3.getId());
+		assertEquals("Rol vacio", rol3.getNombre());
+		assertEquals("admin", rol3.getCreacionUsuario());
+		assertNotNull(rol3.getCreacionFecha());
+		assertEquals("admin", rol3.getActualizacionUsuario());
+		assertNotNull(rol1.getActualizacionFecha());
 	}
 
 	@Test
@@ -259,6 +288,5 @@ public class BaseRolServiceTest extends BaseTest {
 		assertEquals("admin_update", rol2.getActualizacionUsuario());
 		assertNotNull(rol2.getActualizacionFecha());
 	}
-
 
 }

@@ -1,11 +1,12 @@
 package com.uoc.reservofi.rol.business.gestion;
 
-import com.uoc.reservofi.base.business.BaseTest;
+import com.uoc.reservofi.base.business.AbstractBaseTest;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class GestionRolServiceTest extends BaseTest {
+public class GestionRolServiceTest extends AbstractBaseTest {
 
 	@Autowired
 	private GestionRolService gestionRolService;
@@ -71,7 +72,6 @@ public class GestionRolServiceTest extends BaseTest {
 
 	}
 
-
 	@Test
 	void updateTest() {
 
@@ -88,9 +88,22 @@ public class GestionRolServiceTest extends BaseTest {
 	@Test
 	void deleteByIdTest() {
 		try {
-			gestionRolService.deleteById(1L);
+			gestionRolService.deleteById(3L);
 		} catch (Exception e) {
 			fail("No se esperaba error");
+		}
+	}
+
+	@Test
+	void deleteByIdWithFKTest() {
+		// Registro asociado a la tabla USUARIO_ROL
+		try {
+			gestionRolService.deleteById(1L);
+			fail("Se esperaba una excepción DataIntegrityViolationException");
+		} catch (DataIntegrityViolationException e) {
+			assertNotNull(e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción DataIntegrityViolationException");
 		}
 	}
 
@@ -106,7 +119,7 @@ public class GestionRolServiceTest extends BaseTest {
 	void findAllTest() {
 		List<RolDTO> rolesDTO = gestionRolService.findAll();
 		assertNotNull(rolesDTO);
-		assertEquals(2, rolesDTO.size());
+		assertEquals(3, rolesDTO.size());
 
 		RolDTO rolDTO1 = rolesDTO.getFirst();
 		assertEquals(1, rolDTO1.getId());
@@ -115,6 +128,10 @@ public class GestionRolServiceTest extends BaseTest {
 		RolDTO rolDTO2 = rolesDTO.get(1);
 		assertEquals(2, rolDTO2.getId());
 		assertEquals("Empleado", rolDTO2.getNombre());
+
+		RolDTO rolDTO3 = rolesDTO.get(2);
+		assertEquals(3, rolDTO3.getId());
+		assertEquals("Rol vacio", rolDTO3.getNombre());
 	}
 
 	@Test
@@ -149,7 +166,7 @@ public class GestionRolServiceTest extends BaseTest {
 	void findByCreacionUsuarioTest() {
 		List<RolDTO> rolesDTO = gestionRolService.findByCreacionUsuario("admin");
 		assertNotNull(rolesDTO);
-		assertEquals(2, rolesDTO.size());
+		assertEquals(3, rolesDTO.size());
 
 		RolDTO rolDTO1 = rolesDTO.getFirst();
 		assertEquals(1, rolDTO1.getId());
@@ -158,6 +175,10 @@ public class GestionRolServiceTest extends BaseTest {
 		RolDTO rolDTO2 = rolesDTO.get(1);
 		assertEquals(2, rolDTO2.getId());
 		assertEquals("Empleado", rolDTO2.getNombre());
+
+		RolDTO rolDTO3 = rolesDTO.get(2);
+		assertEquals(3, rolDTO3.getId());
+		assertEquals("Rol vacio", rolDTO3.getNombre());
 	}
 
 	@Test
