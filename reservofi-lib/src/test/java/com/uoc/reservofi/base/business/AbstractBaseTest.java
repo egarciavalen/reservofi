@@ -5,7 +5,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 // Inicializa la configuración para las pruebas
-@SpringBootTest(classes = BaseTestConfig.class)
+@SpringBootTest(classes = TestConfig.class)
 // Perfil de test para poder almacenar datos de auditoría
 @ActiveProfiles("test")
 // Limpieza de la base de datos entre pruebas

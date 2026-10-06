@@ -2,6 +2,7 @@ package com.uoc.reservofi.usuario.business.dto;
 
 import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,9 +33,8 @@ public class UsuarioDTO extends GestionEntidadActualizableDTO {
 	@Size(max = 100, message = "usuario.contraseniaHash.tamanio.maximo")
 	private String contraseniaHash;
 
-	@NotEmpty(message = "usuario.activo.obligatorio")
+	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;
 
-	@NotEmpty(message = "usuario.roles.obligatorio")
 	private List<Long> idsRoles;
 }

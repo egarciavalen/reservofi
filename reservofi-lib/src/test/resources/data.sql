@@ -12,6 +12,9 @@ values ('Admin', 'Admin primer apellido', 'Admin segundo apellido', 'admin@gmail
 insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia_hash, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
 values ('Empleado', 'Empleado primer apellido', 'Empleado segundo apellido', 'empleado@gmail.com', '456hash', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
 
+insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia_hash, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Extra', 'Extra primer apellido', 'Extra segundo apellido', 'extra@gmail.com', '789hash', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+
 
 -- USUARIO ROL
 insert into USUARIO_ROL(id_usuario, id_rol) values (1, 1);

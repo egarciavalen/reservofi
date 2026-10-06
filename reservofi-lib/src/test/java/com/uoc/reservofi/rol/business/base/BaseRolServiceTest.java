@@ -280,13 +280,13 @@ public class BaseRolServiceTest extends AbstractBaseTest {
 		assertNotNull(roles);
 		assertEquals(1, roles.size());
 
-		Rol rol2 = roles.getFirst();
-		assertEquals(2, rol2.getId());
-		assertEquals("Empleado", rol2.getNombre());
-		assertEquals("admin", rol2.getCreacionUsuario());
-		assertNotNull(rol2.getCreacionFecha());
-		assertEquals("admin_update", rol2.getActualizacionUsuario());
-		assertNotNull(rol2.getActualizacionFecha());
+		Rol rol = roles.getFirst();
+		assertEquals(2, rol.getId());
+		assertEquals("Empleado", rol.getNombre());
+		assertEquals("admin", rol.getCreacionUsuario());
+		assertNotNull(rol.getCreacionFecha());
+		assertEquals("admin_update", rol.getActualizacionUsuario());
+		assertNotNull(rol.getActualizacionFecha());
 	}
 
 }

@@ -68,8 +68,6 @@ public class GestionRolServiceTest extends AbstractBaseTest {
 		} catch (Exception e) {
 			fail("Se esperaba una ConstraintViolationException");
 		}
-
-
 	}
 
 	@Test

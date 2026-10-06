@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.uoc.reservofi") // Escaneo de servicios y otros beans asociado
 @EnableJpaRepositories("com.uoc.reservofi") // Escaneo de repositorios que extienden de JpaRepository
 @EntityScan("com.uoc.reservofi") // Escaneo de entidades
-public class BaseTestConfig {
+public class TestConfig {
 }
