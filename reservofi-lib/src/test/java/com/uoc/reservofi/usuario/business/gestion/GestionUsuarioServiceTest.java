@@ -3,6 +3,7 @@ package com.uoc.reservofi.usuario.business.gestion;
 import com.uoc.reservofi.base.business.AbstractBaseTest;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -40,6 +41,77 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals(true, insertado.getActivo());
 	}
 
+	@Test
+	void validateNombreTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Nombre nulo
+		usuarioDTO.setNombre(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: usuario.nombre.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre vacío
+		usuarioDTO.setNombre("");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: usuario.nombre.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre tamanio maximo alcanzado
+		usuarioDTO.setNombre("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombre: usuario.nombre.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validatePrimerApellidoTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Primer apellido nulo
+		usuarioDTO.setPrimerApellido(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.primerApellido: usuario.primerApellido.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// SEGUIR
+	}
 
 	@Test
 	@Transactional
