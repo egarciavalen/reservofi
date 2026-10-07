@@ -39,7 +39,4 @@ public interface UsuarioMapper {
 	@IterableMapping(qualifiedByName = "entidadADTO")
 	List<UsuarioDTO> entidadADTOList(List<Usuario> entidadList);
 
-	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Usuario> DTOAEntidadList(List<UsuarioDTO> dtoList);
-
 }

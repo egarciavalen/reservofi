@@ -2,14 +2,18 @@ package com.uoc.reservofi.usuario.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
 import com.uoc.reservofi.base.business.AbstractBaseTest;
+import com.uoc.reservofi.rol.business.model.Rol;
+import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import com.uoc.reservofi.usuario.business.service.base.BaseUsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +23,9 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 
 	@Autowired
 	private BaseUsuarioService baseUsuarioService;
+
+	@Autowired
+	private BaseRolService baseRolService;
 
 	@Test
 	void insertTest() {
@@ -42,6 +49,43 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(insertado.getCreacionFecha());
 		assertEquals("adminTest", insertado.getActualizacionUsuario());
 		assertNotNull(insertado.getActualizacionFecha());
+		assertEquals(0, insertado.getRoles().size());
+	}
+
+	@Test
+	void insertWithRoleTest() {
+		Usuario usuario = new Usuario();
+		usuario.setNombre("Usuario prueba");
+		usuario.setPrimerApellido("Prueba primer apellido");
+		usuario.setSegundoApellido("Prueba segundo apellido");
+		usuario.setCorreoCorporativo("prueba@gmail.com");
+		usuario.setContraseniaHash("789abc");
+		usuario.setActivo(true);
+
+		// Inclusión de un rol nuevo
+		List<Rol> rolesList = new ArrayList<>();
+		Rol rol = baseRolService.findById(1L);
+		rolesList.add(rol);
+		usuario.setRoles(new HashSet<>(rolesList));
+
+		Usuario insertado = baseUsuarioService.insert(usuario);
+		assertNotNull(insertado);
+		assertEquals("Usuario prueba", insertado.getNombre());
+		assertEquals("Prueba primer apellido", insertado.getPrimerApellido());
+		assertEquals("Prueba segundo apellido", insertado.getSegundoApellido());
+		assertEquals("prueba@gmail.com", insertado.getCorreoCorporativo());
+		assertEquals("789abc", insertado.getContraseniaHash());
+		assertEquals(true, insertado.getActivo());
+		assertEquals("adminTest", insertado.getCreacionUsuario());
+		assertNotNull(insertado.getCreacionFecha());
+		assertEquals("adminTest", insertado.getActualizacionUsuario());
+		assertNotNull(insertado.getActualizacionFecha());
+		assertNotNull(insertado.getRoles());
+		assertEquals(1, insertado.getRoles().size());
+
+		Rol rolInsertado = insertado.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rolInsertado);
+		assertEquals(1L, rolInsertado.getId());
 	}
 
 	@Test
@@ -89,6 +133,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		usuario.setActivo(true);
 		usuario.setCreacionUsuario("admin");
 		usuario.setCreacionFecha(LocalDateTime.now());
+		// Gestión del rol ya existente
+		List<Rol> rolesList = new ArrayList<>();
+		Rol rol = baseRolService.findById(1L);
+		rolesList.add(rol);
+		usuario.setRoles(new HashSet<>(rolesList));
 
 		Usuario actualizado = baseUsuarioService.update(usuario);
 		assertNotNull(actualizado);
@@ -102,6 +151,54 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(actualizado.getCreacionFecha());
 		assertEquals("adminTest", actualizado.getActualizacionUsuario());
 		assertNotNull(actualizado.getActualizacionFecha());
+		assertNotNull(usuario.getRoles());
+		assertEquals(1, actualizado.getRoles().size());
+
+		Rol rolInsertado = actualizado.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rolInsertado);
+		assertEquals(1L, rolInsertado.getId());
+	}
+
+
+	@Test
+	void updateWithRoleTest() {
+
+		Usuario usuario = new Usuario();
+		usuario.setId(1L);
+		usuario.setNombre("Usuario prueba"); // Cambio a realizar
+
+		// Para esta prueba, se va a suponer que se rellenó la información correctamente desde el servicio de gestión
+		usuario.setPrimerApellido("Admin primer apellido");
+		usuario.setSegundoApellido("Admin segundo apellido");
+		usuario.setCorreoCorporativo("admin@gmail.com");
+		usuario.setContraseniaHash("123hash");
+		usuario.setActivo(true);
+		usuario.setCreacionUsuario("admin");
+		usuario.setCreacionFecha(LocalDateTime.now());
+		// Gestión del rol ya existente
+		List<Rol> rolesList = new ArrayList<>();
+		Rol rol = baseRolService.findById(2L); // Cambio de rol a insertar
+		rolesList.add(rol);
+		usuario.setRoles(new HashSet<>(rolesList));
+
+		Usuario actualizado = baseUsuarioService.update(usuario);
+		assertNotNull(actualizado);
+		assertEquals("Usuario prueba", actualizado.getNombre());
+		assertEquals("Admin primer apellido", actualizado.getPrimerApellido());
+		assertEquals("Admin segundo apellido", actualizado.getSegundoApellido());
+		assertEquals("admin@gmail.com", actualizado.getCorreoCorporativo());
+		assertEquals("123hash", actualizado.getContraseniaHash());
+		assertEquals(true, actualizado.getActivo());
+		assertEquals("admin", actualizado.getCreacionUsuario());
+		assertNotNull(actualizado.getCreacionFecha());
+		assertEquals("adminTest", actualizado.getActualizacionUsuario());
+		assertNotNull(actualizado.getActualizacionFecha());
+		assertNotNull(usuario.getRoles());
+		assertEquals(1, actualizado.getRoles().size());
+
+		Rol rolInsertado = actualizado.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rolInsertado);
+		assertEquals(2L, rolInsertado.getId());
 	}
 
 	@Test
@@ -186,6 +283,7 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 	}
 
 	@Test
+	@Transactional
 	void findByIdTest() {
 		Usuario usuario = baseUsuarioService.findById(1L);
 		assertNotNull(usuario);
@@ -199,9 +297,16 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario.getCreacionFecha());
 		assertEquals("admin", usuario.getActualizacionUsuario());
 		assertNotNull(usuario.getActualizacionFecha());
+		assertNotNull(usuario.getRoles());
+		assertEquals(1, usuario.getRoles().size());
+
+		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol);
+		assertEquals(1L, rol.getId());
 	}
 
 	@Test
+	@Transactional
 	void findAllTest() {
 		List<Usuario> usuarios = baseUsuarioService.findAll();
 		assertNotNull(usuarios);
@@ -219,6 +324,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
+		assertEquals(1, usuario1.getRoles().size());
+
+		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol1);
+		assertEquals(1L, rol1.getId());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -232,6 +342,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario2.getCreacionFecha());
 		assertEquals("admin_update", usuario2.getActualizacionUsuario());
 		assertNotNull(usuario2.getActualizacionFecha());
+		assertEquals(1, usuario2.getRoles().size());
+
+		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol2);
+		assertEquals(2L, rol2.getId());
 
 		Usuario usuario3 = usuarios.get(2);
 		assertNotNull(usuario3);
@@ -245,9 +360,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario3.getCreacionFecha());
 		assertEquals("admin", usuario3.getActualizacionUsuario());
 		assertNotNull(usuario3.getActualizacionFecha());
+		assertEquals(0, usuario3.getRoles().size());
 	}
 
 	@Test
+	@Transactional
 	void findAllByIdTest() {
 		List<Long> idsList = new ArrayList<>();
 		idsList.add(1L);
@@ -269,6 +386,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
+		assertEquals(1, usuario1.getRoles().size());
+
+		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol1);
+		assertEquals(1L, rol1.getId());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -282,6 +404,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario2.getCreacionFecha());
 		assertEquals("admin_update", usuario2.getActualizacionUsuario());
 		assertNotNull(usuario2.getActualizacionFecha());
+		assertEquals(1, usuario2.getRoles().size());
+
+		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol2);
+		assertEquals(2L, rol2.getId());
 	}
 
 	@Test
@@ -294,6 +421,7 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 	}
 
 	@Test
+	@Transactional
 	void findByCreacionUsuarioTest() {
 		List<Usuario> usuarios = baseUsuarioService.findByCreacionUsuario("admin");
 		assertNotNull(usuarios);
@@ -311,6 +439,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
+		assertEquals(1, usuario1.getRoles().size());
+
+		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol1);
+		assertEquals(1L, rol1.getId());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -324,6 +457,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario2.getCreacionFecha());
 		assertEquals("admin_update", usuario2.getActualizacionUsuario());
 		assertNotNull(usuario2.getActualizacionFecha());
+		assertEquals(1, usuario2.getRoles().size());
+
+		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol2);
+		assertEquals(2L, rol2.getId());
 
 		Usuario usuario3 = usuarios.get(2);
 		assertNotNull(usuario3);
@@ -337,9 +475,11 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario3.getCreacionFecha());
 		assertEquals("admin", usuario3.getActualizacionUsuario());
 		assertNotNull(usuario3.getActualizacionFecha());
+		assertEquals(0, usuario3.getRoles().size());
 	}
 
 	@Test
+	@Transactional
 	void findByActualizacionUsuarioTest() {
 		List<Usuario> usuarios = baseUsuarioService.findByActualizacionUsuario("admin_update");
 		assertNotNull(usuarios);
@@ -357,6 +497,12 @@ public class BaseUsuarioServiceTest extends AbstractBaseTest {
 		assertNotNull(usuario.getCreacionFecha());
 		assertEquals("admin_update", usuario.getActualizacionUsuario());
 		assertNotNull(usuario.getActualizacionFecha());
+		assertNotNull(usuario.getActualizacionFecha());
+		assertEquals(1, usuario.getRoles().size());
+
+		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol);
+		assertEquals(2L, rol.getId());
 	}
 
 }

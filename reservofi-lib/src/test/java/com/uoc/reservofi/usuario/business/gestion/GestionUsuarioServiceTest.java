@@ -40,6 +40,34 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 	}
 
 	@Test
+	void insertWithRoleTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Inclusión de roles en la aplicación
+		List<Long> idsRoles = new ArrayList<>();
+		idsRoles.add(1L);
+		idsRoles.add(2L);
+		usuarioDTO.setIdsRoles(idsRoles);
+
+		UsuarioDTO insertado = gestionUsuarioService.insert(usuarioDTO);
+		assertNotNull(insertado);
+		assertEquals("UsuarioDTO prueba", insertado.getNombre());
+		assertEquals("Prueba primer apellido", insertado.getPrimerApellido());
+		assertEquals("Prueba segundo apellido", insertado.getSegundoApellido());
+		assertEquals("prueba@gmail.com", insertado.getCorreoCorporativo());
+		assertEquals("789abc", insertado.getContraseniaHash());
+		assertEquals(true, insertado.getActivo());
+		assertNotNull(insertado.getIdsRoles());
+		assertEquals(2, insertado.getIdsRoles().size()); // Dependiendo de como se ejecute el test pueden venir en un orden u otro
+	}
+
+	@Test
 	void validateNombreTest() {
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setNombre("UsuarioDTO prueba");
@@ -214,12 +242,12 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		}
 
 		// Contrasenia hash tamanio maximo alcanzado
-		usuarioDTO.setContraseniaHash("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345");
+		usuarioDTO.setContraseniaHash("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456");
 		try {
 			gestionUsuarioService.insert(usuarioDTO);
 			fail("Se esperaba una ConstraintViolationException");
 		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.contraseniaHash: entidad.contraseniaHash.tamanio.maximo", e.getMessage());
+			assertEquals("insert.entidad.contraseniaHash: usuario.contraseniaHash.tamanio.maximo", e.getMessage());
 
 		} catch (Exception e) {
 			fail("Se esperaba una ConstraintViolationException");
@@ -263,6 +291,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		usuarioDTO.setCorreoCorporativo("admin@gmail.com");
 		usuarioDTO.setContraseniaHash("123hash");
 		usuarioDTO.setActivo(true);
+		List<Long> idsRoles = new ArrayList<>();
+		idsRoles.add(1L);
+		usuarioDTO.setIdsRoles(idsRoles);
 
 		UsuarioDTO actualizado = gestionUsuarioService.update(usuarioDTO);
 		assertNotNull(actualizado);
@@ -272,6 +303,41 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("admin@gmail.com", actualizado.getCorreoCorporativo());
 		assertEquals("123hash", actualizado.getContraseniaHash());
 		assertEquals(true, actualizado.getActivo());
+		assertNotNull(actualizado.getIdsRoles());
+		assertEquals(1, actualizado.getIdsRoles().size());
+		assertEquals(1L, actualizado.getIdsRoles().getFirst());
+	}
+
+	@Test
+	@Transactional
+	void updateWithRolesTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setId(1L);
+		usuarioDTO.setNombre("UsuarioDTO prueba"); // Cambio a realizar
+
+		// Resto de campos a incluir por validaciones de DTO
+		usuarioDTO.setPrimerApellido("Admin primer apellido");
+		usuarioDTO.setSegundoApellido("Admin segundo apellido");
+		usuarioDTO.setCorreoCorporativo("admin@gmail.com");
+		usuarioDTO.setContraseniaHash("123hash");
+		usuarioDTO.setActivo(true);
+
+		// Inclusión de roles en la aplicación
+		List<Long> idsRoles = new ArrayList<>();
+		idsRoles.add(2L); // OJO: se sobreescriben los roles existentes
+		usuarioDTO.setIdsRoles(idsRoles);
+
+		UsuarioDTO actualizado = gestionUsuarioService.update(usuarioDTO);
+		assertNotNull(actualizado);
+		assertEquals("UsuarioDTO prueba", actualizado.getNombre());
+		assertEquals("Admin primer apellido", actualizado.getPrimerApellido());
+		assertEquals("Admin segundo apellido", actualizado.getSegundoApellido());
+		assertEquals("admin@gmail.com", actualizado.getCorreoCorporativo());
+		assertEquals("123hash", actualizado.getContraseniaHash());
+		assertEquals(true, actualizado.getActivo());
+		assertNotNull(actualizado.getIdsRoles());
+		assertEquals(1, actualizado.getIdsRoles().size());
+		assertEquals(2L, actualizado.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -308,9 +374,13 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("admin@gmail.com", usuarioDTO.getCorreoCorporativo());
 		assertEquals("123hash", usuarioDTO.getContraseniaHash());
 		assertEquals(true, usuarioDTO.getActivo());
+		assertNotNull(usuarioDTO.getIdsRoles());
+		assertEquals(1, usuarioDTO.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
 	}
 
 	@Test
+	@Transactional
 	void findAllTest() {
 		List<UsuarioDTO> usuariosDTO = gestionUsuarioService.findAll();
 		assertNotNull(usuariosDTO);
@@ -324,6 +394,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("admin@gmail.com", usuarioDTO1.getCorreoCorporativo());
 		assertEquals("123hash", usuarioDTO1.getContraseniaHash());
 		assertEquals(true, usuarioDTO1.getActivo());
+		assertNotNull(usuarioDTO1.getIdsRoles());
+		assertEquals(1, usuarioDTO1.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -333,6 +406,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("empleado@gmail.com", usuarioDTO2.getCorreoCorporativo());
 		assertEquals("456hash", usuarioDTO2.getContraseniaHash());
 		assertEquals(true, usuarioDTO2.getActivo());
+		assertNotNull(usuarioDTO2.getIdsRoles());
+		assertEquals(1, usuarioDTO2.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO3 = usuariosDTO.get(2);
 		assertNotNull(usuarioDTO3);
@@ -342,9 +418,12 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("extra@gmail.com", usuarioDTO3.getCorreoCorporativo());
 		assertEquals("789hash", usuarioDTO3.getContraseniaHash());
 		assertEquals(true, usuarioDTO3.getActivo());
+		assertNull(usuarioDTO3.getIdsRoles());
+
 	}
 
 	@Test
+	@Transactional
 	void findAllByIdTest() {
 		List<Long> idsList = new ArrayList<>();
 		idsList.add(1L);
@@ -362,6 +441,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("admin@gmail.com", usuarioDTO1.getCorreoCorporativo());
 		assertEquals("123hash", usuarioDTO1.getContraseniaHash());
 		assertEquals(true, usuarioDTO1.getActivo());
+		assertNotNull(usuarioDTO1.getIdsRoles());
+		assertEquals(1, usuarioDTO1.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -371,7 +453,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("empleado@gmail.com", usuarioDTO2.getCorreoCorporativo());
 		assertEquals("456hash", usuarioDTO2.getContraseniaHash());
 		assertEquals(true, usuarioDTO2.getActivo());
-
+		assertNotNull(usuarioDTO2.getIdsRoles());
+		assertEquals(1, usuarioDTO2.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -384,6 +468,7 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 	}
 
 	@Test
+	@Transactional
 	void findByCreacionUsuarioTest() {
 		List<UsuarioDTO> usuariosDTO = gestionUsuarioService.findByCreacionUsuario("admin");
 		assertNotNull(usuariosDTO);
@@ -397,6 +482,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("admin@gmail.com", usuarioDTO1.getCorreoCorporativo());
 		assertEquals("123hash", usuarioDTO1.getContraseniaHash());
 		assertEquals(true, usuarioDTO1.getActivo());
+		assertNotNull(usuarioDTO1.getIdsRoles());
+		assertEquals(1, usuarioDTO1.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -406,6 +494,9 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("empleado@gmail.com", usuarioDTO2.getCorreoCorporativo());
 		assertEquals("456hash", usuarioDTO2.getContraseniaHash());
 		assertEquals(true, usuarioDTO2.getActivo());
+		assertNotNull(usuarioDTO2.getIdsRoles());
+		assertEquals(1, usuarioDTO2.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO3 = usuariosDTO.get(2);
 		assertNotNull(usuarioDTO3);
@@ -415,9 +506,11 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("extra@gmail.com", usuarioDTO3.getCorreoCorporativo());
 		assertEquals("789hash", usuarioDTO3.getContraseniaHash());
 		assertEquals(true, usuarioDTO3.getActivo());
+		assertNull(usuarioDTO3.getIdsRoles());
 	}
 
 	@Test
+	@Transactional
 	void findByActualizacionUsuarioTest() {
 		List<UsuarioDTO> usuariosDTO = gestionUsuarioService.findByActualizacionUsuario("admin_update");
 		assertNotNull(usuariosDTO);
@@ -431,5 +524,8 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 		assertEquals("empleado@gmail.com", usuarioDTO.getCorreoCorporativo());
 		assertEquals("456hash", usuarioDTO.getContraseniaHash());
 		assertEquals(true, usuarioDTO.getActivo());
+		assertNotNull(usuarioDTO.getIdsRoles());
+		assertEquals(1, usuarioDTO.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
 	}
 }

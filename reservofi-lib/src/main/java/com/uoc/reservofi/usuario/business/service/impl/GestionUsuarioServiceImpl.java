@@ -2,6 +2,7 @@ package com.uoc.reservofi.usuario.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
+import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.UsuarioMapper;
 import com.uoc.reservofi.usuario.business.model.Usuario;
@@ -19,6 +20,8 @@ public class GestionUsuarioServiceImpl extends GestionEntidadServiceImpl<Usuario
 
 	private final BaseUsuarioService baseUsuarioService;
 	private final UsuarioMapper usuarioMapper;
+
+	private final GestionRolService gestionRolService;
 
 	@Override
 	public UsuarioDTO insert(@Valid UsuarioDTO dto) {
@@ -41,6 +44,7 @@ public class GestionUsuarioServiceImpl extends GestionEntidadServiceImpl<Usuario
 		}
 
 		Usuario entidad = usuarioMapper.DTOAentidad(dto, entidadBD);
+
 		entidad = baseUsuarioService.update(entidad);
 		return usuarioMapper.entidadADTO(entidad);
 	}

@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 
 	// Uso de @Autowired por problemas con el constructor por defecto
-	
+
 	@Autowired
 	private UsuarioMapper mapper;
 
@@ -24,14 +25,35 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 
 	@Override
 	public Usuario DTOAentidad(UsuarioDTO dto) {
-		Usuario entidad = mapper.DTOAentidad(dto);
+		return this.gestionarRelaciones(dto, null);
+	}
+
+	@Override
+	public Usuario DTOAentidad(UsuarioDTO dto, Usuario entidad) {
+		return this.gestionarRelaciones(dto, entidad);
+	}
+
+	private Usuario gestionarRelaciones(UsuarioDTO dto, Usuario entidad) {
+
+		Usuario usuarioRelacion;
+
+		if (entidad == null) {
+			usuarioRelacion = mapper.DTOAentidad(dto);
+		} else {
+			usuarioRelacion = mapper.DTOAentidad(dto, entidad);
+		}
 
 		// Roles
+		Set<Rol> rolesUsuario;
 		if (dto.getIdsRoles() != null && !dto.getIdsRoles().isEmpty()) {
 			List<Rol> roles = baseRolService.findAllById(dto.getIdsRoles());
-			entidad.setRoles(new HashSet<>(roles)); // Se almacena como Set
+			rolesUsuario = new HashSet<>(roles);
+		} else {
+			rolesUsuario = new HashSet<>();
 		}
-		return entidad;
+		usuarioRelacion.setRoles(rolesUsuario);
+
+		return usuarioRelacion;
 	}
 
 	@Override
@@ -47,5 +69,15 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 			dto.setIdsRoles(idsRoles);
 		}
 		return dto;
+	}
+
+	@Override
+	public List<UsuarioDTO> entidadADTOList(List<Usuario> entidadList) {
+		if (entidadList == null) return null;
+		List<UsuarioDTO> returnList = new ArrayList<>(entidadList.size());
+		for (Usuario usuario : entidadList) {
+			returnList.add(this.entidadADTO(usuario));
+		}
+		return returnList;
 	}
 }
