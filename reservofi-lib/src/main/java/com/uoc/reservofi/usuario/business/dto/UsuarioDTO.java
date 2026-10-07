@@ -30,7 +30,7 @@ public class UsuarioDTO extends GestionEntidadDTO {
 	private String correoCorporativo;
 
 	@NotEmpty(message = "usuario.contraseniaHash.obligatorio")
-	@Size(max = 100, message = "usuario.contraseniaHash.tamanio.maximo")
+	@Size(max = 255, message = "usuario.contraseniaHash.tamanio.maximo")
 	private String contraseniaHash;
 
 	@NotNull(message = "usuario.activo.obligatorio")

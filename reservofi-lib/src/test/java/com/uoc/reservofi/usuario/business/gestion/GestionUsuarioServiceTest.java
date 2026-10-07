@@ -16,8 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GestionUsuarioServiceTest extends AbstractBaseTest {
 
-	// TODO: TESTS DE VALIDACION DE CAMPOS + GESTIÓN DE ROLES
-
 	@Autowired
 	private GestionUsuarioService gestionUsuarioService;
 
@@ -110,7 +108,145 @@ public class GestionUsuarioServiceTest extends AbstractBaseTest {
 			fail("Se esperaba una ConstraintViolationException");
 		}
 
-		// SEGUIR
+		// Primer apellido tamanio maximo alcanzado
+		usuarioDTO.setPrimerApellido("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.primerApellido: usuario.primerApellido.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validateSegundoApellidoTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Segundo apellido nulo
+		usuarioDTO.setSegundoApellido(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.segundoApellido: usuario.segundoApellido.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Segundo apellido tamanio maximo alcanzado
+		usuarioDTO.setSegundoApellido("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.segundoApellido: usuario.segundoApellido.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validateCorreoCorporativoTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Correo corporativo nulo
+		usuarioDTO.setCorreoCorporativo(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.correoCorporativo: usuario.correoCorporativo.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Correo corporativo tamanio maximo alcanzado
+		usuarioDTO.setCorreoCorporativo("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.correoCorporativo: usuario.correoCorporativo.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validateContraseniaHashTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Contrasenia hash nulo
+		usuarioDTO.setContraseniaHash(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.contraseniaHash: usuario.contraseniaHash.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Contrasenia hash tamanio maximo alcanzado
+		usuarioDTO.setContraseniaHash("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345");
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.contraseniaHash: entidad.contraseniaHash.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validateActivoTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContraseniaHash("789abc");
+		usuarioDTO.setActivo(true);
+
+		// Activo nulo
+		usuarioDTO.setActivo(null);
+		try {
+			gestionUsuarioService.insert(usuarioDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.activo: usuario.activo.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
 	}
 
 	@Test
