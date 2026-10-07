@@ -1,6 +1,6 @@
 package com.uoc.reservofi.reserva.business.dto;
 
-import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
+import com.uoc.reservofi.base.busines.dto.GestionEntidadDTO;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class ReservaDTO extends GestionEntidadActualizableDTO {
+public class ReservaDTO extends GestionEntidadDTO {
 
 	@NotEmpty(message = "reserva.usuario.obligatorio")
 	private Long idUsuario;

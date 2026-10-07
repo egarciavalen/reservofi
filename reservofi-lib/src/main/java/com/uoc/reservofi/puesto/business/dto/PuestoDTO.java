@@ -1,6 +1,6 @@
 package com.uoc.reservofi.puesto.business.dto;
 
-import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
+import com.uoc.reservofi.base.busines.dto.GestionEntidadDTO;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class PuestoDTO extends GestionEntidadActualizableDTO {
+public class PuestoDTO extends GestionEntidadDTO {
 
 	@NotEmpty(message = "puesto.sala.obligatorio")
 	private Long idSala;

@@ -1,7 +1,7 @@
 package com.uoc.reservofi.sala.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
+import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.SalaMapper;
 import com.uoc.reservofi.sala.business.model.Sala;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(GestionSalaService.BEAN_NAME)
 @RequiredArgsConstructor
-public class GestionSalaServiceImpl extends GestionEntidadActualizableServiceImpl<SalaDTO> implements GestionSalaService {
+public class GestionSalaServiceImpl extends GestionEntidadServiceImpl<SalaDTO> implements GestionSalaService {
 
 	private final BaseSalaService baseSalaService;
 	private final SalaMapper salaMapper;

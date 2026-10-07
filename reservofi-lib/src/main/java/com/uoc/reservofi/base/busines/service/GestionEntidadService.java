@@ -21,4 +21,8 @@ public interface GestionEntidadService<T extends GestionEntidadDTO> {
 
 	boolean existsById(Long id);
 
+	List<T> findByCreacionUsuario(String usuario);
+
+	List<T> findByActualizacionUsuario (String usuario);
+
 }

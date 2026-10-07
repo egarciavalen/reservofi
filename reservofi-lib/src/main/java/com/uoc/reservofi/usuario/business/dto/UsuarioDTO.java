@@ -1,6 +1,6 @@
 package com.uoc.reservofi.usuario.business.dto;
 
-import com.uoc.reservofi.base.busines.dto.GestionEntidadActualizableDTO;
+import com.uoc.reservofi.base.busines.dto.GestionEntidadDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UsuarioDTO extends GestionEntidadActualizableDTO {
+public class UsuarioDTO extends GestionEntidadDTO {
 
 	@NotEmpty(message = "usuario.nombre.obligatorio")
 	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")

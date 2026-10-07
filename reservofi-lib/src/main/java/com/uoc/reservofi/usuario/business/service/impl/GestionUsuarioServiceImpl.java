@@ -1,7 +1,7 @@
 package com.uoc.reservofi.usuario.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.busines.service.impl.GestionEntidadActualizableServiceImpl;
+import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.UsuarioMapper;
 import com.uoc.reservofi.usuario.business.model.Usuario;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(GestionUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
-public class GestionUsuarioServiceImpl extends GestionEntidadActualizableServiceImpl<UsuarioDTO> implements GestionUsuarioService {
+public class GestionUsuarioServiceImpl extends GestionEntidadServiceImpl<UsuarioDTO> implements GestionUsuarioService {
 
 	private final BaseUsuarioService baseUsuarioService;
 	private final UsuarioMapper usuarioMapper;

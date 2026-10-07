@@ -1,7 +1,6 @@
 package com.uoc.reservofi.rol.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
-import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.business.AbstractBaseTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
@@ -88,12 +87,13 @@ public class BaseRolServiceTest extends AbstractBaseTest {
 	@Test
 	void updateCreateUserNotExistsTest() {
 		Rol rol = new Rol();
+		rol.setId(1L);
 		rol.setCreacionFecha(LocalDateTime.now());
 		try {
-			baseRolService.update(null);
+			baseRolService.update(rol);
 			fail("Se esperaba una excepción BaseException");
 		} catch (BaseException e) {
-			assertEquals("Entidad no existente", e.getMessage());
+			assertEquals("Datos de auditoría no registrados: usuario creador no existente", e.getMessage());
 		} catch (Exception e) {
 			fail("Se esperaba una excepción BaseException");
 		}
@@ -102,15 +102,16 @@ public class BaseRolServiceTest extends AbstractBaseTest {
 	@Test
 	void updateCreateDateNotExistsTest() {
 		Rol rol = new Rol();
+		rol.setId(1L);
 		rol.setCreacionUsuario("admin-test");
 
 		try {
 			baseRolService.update(rol);
-			fail("Se esperaba una excepción GestionException");
-		} catch (GestionException e) {
+			fail("Se esperaba una excepción BaseException");
+		} catch (BaseException e) {
 			assertEquals("Datos de auditoría no registrados: fecha de creación no existente", e.getMessage());
 		} catch (Exception e) {
-			fail("Se esperaba una excepción GestionException");
+			fail("Se esperaba una excepción BaseException");
 		}
 	}
 

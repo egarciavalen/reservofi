@@ -47,4 +47,15 @@ public abstract class GestionEntidadServiceImpl<T extends GestionEntidadDTO> imp
 	public boolean existsById(Long id) {
 		throw new GestionException("Operación no implementada");
 	}
+
+	@Override
+	public List<T> findByCreacionUsuario(String usuario) {
+		throw new GestionException("Operación no implementada");
+	}
+
+	@Override
+	public List<T> findByActualizacionUsuario(String usuario) {
+		throw new GestionException("Operación no implementada");
+	}
+
 }

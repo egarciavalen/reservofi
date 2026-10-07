@@ -1,6 +1,6 @@
 package com.uoc.reservofi.usuario.business.model;
 
-import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import com.uoc.reservofi.rol.business.model.Rol;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import java.util.Set;
 		name = "uq_usuario_correo_corporativo",
 		columnNames = "correo_corporativo")
 )
-public class Usuario extends BaseEntidadActualizable {
+public class Usuario extends BaseEntidad {
 
 	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
@@ -30,7 +30,7 @@ public class Usuario extends BaseEntidadActualizable {
 	@Column(name = "correo_corporativo", nullable = false, length = 100)
 	private String correoCorporativo;
 
-	@Column(name = "contrasenia_hash", nullable = false, length = 255)
+	@Column(name = "contrasenia_hash", nullable = false)
 	private String contraseniaHash;
 
 	@Column(name = "activo", nullable = false)

@@ -42,6 +42,14 @@ public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements B
 			throw new BaseException("La entidad ha de existir en base de datos");
 		}
 
+		if (entidad.getCreacionUsuario() == null) {
+			throw new BaseException("Datos de auditoría no registrados: usuario creador no existente");
+		}
+
+		if (entidad.getCreacionFecha() == null) {
+			throw new BaseException("Datos de auditoría no registrados: fecha de creación no existente");
+		}
+
 		return getRepository().save(entidad);
 	}
 
@@ -72,6 +80,18 @@ public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements B
 	@Transactional(readOnly = true)
 	public boolean existsById(Long id) {
 		return getRepository().existsById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<T> findByCreacionUsuario(String usuario) {
+		return getRepository().findByCreacionUsuario(usuario);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<T> findByActualizacionUsuario(String usuario) {
+		return getRepository().findByActualizacionUsuario(usuario);
 	}
 
 }

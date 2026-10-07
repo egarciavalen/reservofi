@@ -20,4 +20,8 @@ public interface BaseEntidadService<T extends BaseEntidad> {
 
 	boolean existsById(Long id);
 
+	List<T> findByCreacionUsuario(String usuario);
+
+	List<T> findByActualizacionUsuario(String usuario);
+
 }

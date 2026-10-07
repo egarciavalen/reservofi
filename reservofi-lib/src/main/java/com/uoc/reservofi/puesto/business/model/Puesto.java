@@ -1,6 +1,6 @@
 package com.uoc.reservofi.puesto.business.model;
 
-import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import com.uoc.reservofi.sala.business.model.Sala;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 		name = "uq_puesto_nombre",
 		columnNames = "nombre")
 )
-public class Puesto extends BaseEntidadActualizable {
+public class Puesto extends BaseEntidad {
 
 
 	@Column(name = "nombre", nullable = false, length = 100)

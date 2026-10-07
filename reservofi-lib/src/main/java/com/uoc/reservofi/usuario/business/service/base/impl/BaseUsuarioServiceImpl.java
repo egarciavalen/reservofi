@@ -1,7 +1,7 @@
 package com.uoc.reservofi.usuario.business.service.base.impl;
 
 import com.uoc.reservofi.base.busines.repository.BaseEntidadRepository;
-import com.uoc.reservofi.base.busines.service.base.impl.BaseEntidadActualizableServiceImpl;
+import com.uoc.reservofi.base.busines.service.base.impl.BaseEntidadServiceImpl;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import com.uoc.reservofi.usuario.business.repository.UsuarioRepository;
 import com.uoc.reservofi.usuario.business.service.base.BaseUsuarioService;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service(BaseUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
-public class BaseUsuarioServiceImpl extends BaseEntidadActualizableServiceImpl<Usuario> implements BaseUsuarioService {
+public class BaseUsuarioServiceImpl extends BaseEntidadServiceImpl<Usuario> implements BaseUsuarioService {
 
 	private final UsuarioRepository UsuarioRepository;
 

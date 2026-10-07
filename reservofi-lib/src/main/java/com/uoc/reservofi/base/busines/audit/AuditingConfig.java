@@ -1,6 +1,6 @@
 package com.uoc.reservofi.base.busines.audit;
 
-import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,7 +15,7 @@ public class AuditingConfig {
 
 	@Bean
 	@Profile("!test") // Para la aplicación normal
-	public AuditorAware<BaseEntidadActualizable> projectAuditorProvider() {
+	public AuditorAware<BaseEntidad> projectAuditorProvider() {
 		return new AuditorAwareImpl();
 	}
 

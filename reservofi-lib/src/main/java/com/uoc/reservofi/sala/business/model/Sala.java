@@ -1,6 +1,6 @@
 package com.uoc.reservofi.sala.business.model;
 
-import com.uoc.reservofi.base.busines.model.BaseEntidadActualizable;
+import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -15,7 +15,7 @@ import lombok.Setter;
 		name = "uq_sala_nombre",
 		columnNames = "nombre")
 )
-public class Sala extends BaseEntidadActualizable {
+public class Sala extends BaseEntidad {
 
 	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
