@@ -154,7 +154,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 
 	@Test
 	void deleteByIdWithFKTest() {
-		// Registro asociado a la tabla USUARIO_Sala
+		// Registro asociado a la tabla PUESTO
 		try {
 			baseSalaService.deleteById(1L);
 			fail("Se esperaba una excepción DataIntegrityViolationException");

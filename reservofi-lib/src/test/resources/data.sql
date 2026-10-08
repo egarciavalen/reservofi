@@ -31,7 +31,10 @@ insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario
 values ('Puesto 1', 55.55, 43.22, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Puesto 2', 32.12, 87.90, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+values ('Puesto 2', 32.12, 87.93, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+
+insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Puesto 3', 78.98, 15.32, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 
 -- RESERVA
