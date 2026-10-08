@@ -10,5 +10,5 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 // Limpieza de la base de datos entre pruebas
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public abstract class AbstractBaseTest {
+public abstract class AbstractTest {
 }

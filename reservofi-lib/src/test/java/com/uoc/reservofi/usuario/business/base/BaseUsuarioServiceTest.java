@@ -1,7 +1,7 @@
 package com.uoc.reservofi.usuario.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
-import com.uoc.reservofi.base.business.AbstractBaseTest;
+import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import com.uoc.reservofi.usuario.business.model.Usuario;
@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class BaseUsuarioServiceTest extends AbstractBaseTest {
+public class BaseUsuarioServiceTest extends AbstractTest {
 
 	@Autowired
 	private BaseUsuarioService baseUsuarioService;

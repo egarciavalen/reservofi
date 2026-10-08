@@ -1,6 +1,6 @@
 package com.uoc.reservofi.rol.business.gestion;
 
-import com.uoc.reservofi.base.business.AbstractBaseTest;
+import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
 import jakarta.validation.ConstraintViolationException;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class GestionRolServiceTest extends AbstractBaseTest {
+public class GestionRolServiceTest extends AbstractTest {
 
 	@Autowired
 	private GestionRolService gestionRolService;
@@ -185,9 +185,9 @@ public class GestionRolServiceTest extends AbstractBaseTest {
 		assertNotNull(rolesDTO);
 		assertEquals(1, rolesDTO.size());
 
-		RolDTO rolDTO2 = rolesDTO.getFirst();
-		assertEquals(2, rolDTO2.getId());
-		assertEquals("Empleado", rolDTO2.getNombre());
+		RolDTO rolDTO = rolesDTO.getFirst();
+		assertEquals(2, rolDTO.getId());
+		assertEquals("Empleado", rolDTO.getNombre());
 	}
 
 

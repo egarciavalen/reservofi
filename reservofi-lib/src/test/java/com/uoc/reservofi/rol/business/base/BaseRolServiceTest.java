@@ -1,7 +1,7 @@
 package com.uoc.reservofi.rol.business.base;
 
 import com.uoc.reservofi.base.busines.exception.BaseException;
-import com.uoc.reservofi.base.business.AbstractBaseTest;
+import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class BaseRolServiceTest extends AbstractBaseTest {
+public class BaseRolServiceTest extends AbstractTest {
 
 	@Autowired
 	private BaseRolService baseRolService;

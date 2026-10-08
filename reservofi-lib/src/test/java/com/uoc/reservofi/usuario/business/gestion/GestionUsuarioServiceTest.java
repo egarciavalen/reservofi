@@ -1,6 +1,6 @@
 package com.uoc.reservofi.usuario.business.gestion;
 
-import com.uoc.reservofi.base.business.AbstractBaseTest;
+import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import jakarta.validation.ConstraintViolationException;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GestionUsuarioServiceTest extends AbstractBaseTest {
+public class GestionUsuarioServiceTest extends AbstractTest {
 
 	@Autowired
 	private GestionUsuarioService gestionUsuarioService;
