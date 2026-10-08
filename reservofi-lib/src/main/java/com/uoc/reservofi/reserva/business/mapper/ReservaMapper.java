@@ -20,7 +20,6 @@ public interface ReservaMapper {
 	@InheritConfiguration(name = "DTOAentidad")
 	Reserva DTOAentidad(ReservaDTO dto, @MappingTarget Reserva entidad);
 
-
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
@@ -32,8 +31,5 @@ public interface ReservaMapper {
 
 	@IterableMapping(qualifiedByName = "entidadADTO")
 	List<ReservaDTO> entidadADTOList(List<Reserva> entidadList);
-
-	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Reserva> DTOAEntidadList(List<ReservaDTO> dtoList);
 
 }

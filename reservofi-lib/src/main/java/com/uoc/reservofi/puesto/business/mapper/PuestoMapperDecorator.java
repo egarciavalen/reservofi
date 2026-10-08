@@ -21,14 +21,29 @@ public abstract class PuestoMapperDecorator implements PuestoMapper {
 
 	@Override
 	public Puesto DTOAentidad(PuestoDTO dto) {
-		Puesto entidad = mapper.DTOAentidad(dto);
+		return this.gestionarRelaciones(dto, null);
+	}
+
+	@Override
+	public Puesto DTOAentidad(PuestoDTO dto, Puesto entidad) {
+		return this.gestionarRelaciones(dto, entidad);
+	}
+
+	private Puesto gestionarRelaciones(PuestoDTO dto, Puesto entidad) {
+
+		Puesto puestoRelacion;
+
+		if (entidad == null) {
+			puestoRelacion = mapper.DTOAentidad(dto);
+		} else {
+			puestoRelacion = mapper.DTOAentidad(dto, entidad);
+		}
 
 		// Sala
 		if (dto.getIdSala() != null) {
 			Sala sala = baseSalaService.findById(dto.getIdSala());
-			entidad.setSala(sala);
+			puestoRelacion.setSala(sala);
 		}
-		return entidad;
+		return puestoRelacion;
 	}
-
 }

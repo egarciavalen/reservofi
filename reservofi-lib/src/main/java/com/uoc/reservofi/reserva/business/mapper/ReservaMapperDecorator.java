@@ -24,21 +24,36 @@ public abstract class ReservaMapperDecorator implements ReservaMapper {
 
 	@Override
 	public Reserva DTOAentidad(ReservaDTO dto) {
-		Reserva entidad = mapper.DTOAentidad(dto);
+		return this.gestionarRelaciones(dto, null);
+	}
+
+	@Override
+	public Reserva DTOAentidad(ReservaDTO dto, Reserva entidad) {
+		return this.gestionarRelaciones(dto, entidad);
+	}
+
+
+	private Reserva gestionarRelaciones(ReservaDTO dto, Reserva entidad) {
+
+		Reserva reservaRelacion;
+
+		if (entidad == null) {
+			reservaRelacion = mapper.DTOAentidad(dto);
+		} else {
+			reservaRelacion = mapper.DTOAentidad(dto, entidad);
+		}
 
 		// Usuario
 		if (dto.getIdUsuario() != null) {
 			Usuario usuario = baseUsuarioService.findById(dto.getIdUsuario());
-			entidad.setUsuario(usuario);
+			reservaRelacion.setUsuario(usuario);
 		}
 
 		// Puesto
 		if (dto.getIdPuesto() != null) {
 			Puesto puesto = basePuestoService.findById(dto.getIdPuesto());
-			entidad.setPuesto(puesto);
+			reservaRelacion.setPuesto(puesto);
 		}
-
-		return entidad;
+		return reservaRelacion;
 	}
-
 }

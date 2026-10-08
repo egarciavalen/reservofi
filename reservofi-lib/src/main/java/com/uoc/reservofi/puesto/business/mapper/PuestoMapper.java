@@ -31,7 +31,4 @@ public interface PuestoMapper {
 	@IterableMapping(qualifiedByName = "entidadADTO")
 	List<PuestoDTO> entidadADTOList(List<Puesto> entidadList);
 
-	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Puesto> DTOAEntidadList(List<PuestoDTO> dtoList);
-
 }

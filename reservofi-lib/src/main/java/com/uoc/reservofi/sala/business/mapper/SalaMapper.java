@@ -26,8 +26,4 @@ public interface SalaMapper {
 
 	@IterableMapping(qualifiedByName = "entidadADTO")
 	List<SalaDTO> entidadADTOList(List<Sala> entidadList);
-
-	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Sala> DTOAEntidadList(List<SalaDTO> dtoList);
-
 }
