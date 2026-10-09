@@ -32,8 +32,8 @@ public class BaseReservaServiceTest extends AbstractTest {
 	@Test
 	void insertTest() {
 		Reserva reserva = new Reserva();
-		reserva.setFechaInicio(LocalDateTime.of(2026, 9, 10, 0, 0));
-		reserva.setFechaFin(LocalDateTime.of(2026, 9, 11, 0, 0));
+		reserva.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
+		reserva.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 
 		Puesto puesto = basePuestoService.findById(1L);
 		reserva.setPuesto(puesto);
@@ -43,8 +43,8 @@ public class BaseReservaServiceTest extends AbstractTest {
 
 		Reserva insertado = baseReservaService.insert(reserva);
 		assertNotNull(insertado);
-		assertEquals(LocalDateTime.of(2026, 9, 10, 0, 0), insertado.getFechaInicio());
-		assertEquals(LocalDateTime.of(2026, 9, 11, 0, 0), insertado.getFechaFin());
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), insertado.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), insertado.getFechaFin());
 		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
 		assertEquals("adminTest", insertado.getActualizacionUsuario());

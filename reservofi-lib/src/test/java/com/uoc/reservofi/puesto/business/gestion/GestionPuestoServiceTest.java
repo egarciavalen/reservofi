@@ -172,7 +172,6 @@ public class GestionPuestoServiceTest extends AbstractTest {
 
 	@Test
 	void updateTest() {
-
 		PuestoDTO puestoDTO = new PuestoDTO();
 		puestoDTO.setId(1L); // ID existente
 		puestoDTO.setNombre("PuestoDTO prueba");
@@ -187,8 +186,6 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(55.55), actualizado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), actualizado.getCoordenadaY());
 		assertEquals(1L, actualizado.getIdSala());
-
-
 	}
 
 	@Test
