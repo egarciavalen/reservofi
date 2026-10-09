@@ -193,7 +193,7 @@ public class ReservaControllerTest {
 	@Test
 	void findByIdNotFoundTest() throws Exception {
 		// Parámetro de entrada
-		Long idTest = 99L;
+		Long idTest = 99999L;
 
 		// Mock del servicio de gestión
 		when(gestionReservaService.findById(idTest)).thenReturn(null);
