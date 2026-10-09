@@ -24,7 +24,6 @@ public interface UsuarioMapper {
 	@InheritConfiguration(name = "DTOAentidad")
 	Usuario DTOAentidad(UsuarioDTO dto, @MappingTarget Usuario entidad);
 
-
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
