@@ -41,24 +41,23 @@ public class SalaControllerTest {
 
 	@Test
 	void insertTest() throws Exception {
-
 		// DTO de entrada
 		RestSalaDTO restInsertDTO = new RestSalaDTO();
 		restInsertDTO.setNombre("Sala prueba");
-
-		// DTO que devuelve el servicio de gestión
-		SalaDTO mockReturnDTO = new SalaDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setNombre("Sala prueba");
-
-		// DTO con el que se invoca al servicio de gestión
-		SalaDTO insertDTO = new SalaDTO();
-		insertDTO.setNombre("Sala prueba");
 
 		// DTO que se espera obtener al final
 		RestSalaDTO restReturnDTO = new RestSalaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Sala prueba");
+
+		// DTO con el que se invoca al servicio de gestión
+		SalaDTO insertDTO = new SalaDTO();
+		insertDTO.setNombre("Sala prueba");
+
+		// DTO que devuelve el servicio de gestión
+		SalaDTO mockReturnDTO = new SalaDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Sala prueba");
 
 		// Mock del servicio de gestión
 		when(gestionSalaService.insert(any(SalaDTO.class))).thenReturn(mockReturnDTO);
@@ -83,20 +82,20 @@ public class SalaControllerTest {
 		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Sala prueba");
 
-		// DTO que devuelve el servicio de gestión
-		SalaDTO mockReturnDTO = new SalaDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setNombre("Sala prueba");
+		// DTO que se espera obtener al final
+		RestSalaDTO restReturnDTO = new RestSalaDTO();
+		restReturnDTO.setId(1L);
+		restReturnDTO.setNombre("Sala prueba");
 
 		// DTO con el que se invoca al servicio de gestión
 		SalaDTO updateDTO = new SalaDTO();
 		updateDTO.setId(1L);
 		updateDTO.setNombre("Sala prueba");
 
-		// DTO que se espera obtener al final
-		RestSalaDTO restReturnDTO = new RestSalaDTO();
-		restReturnDTO.setId(1L);
-		restReturnDTO.setNombre("Sala prueba");
+		// DTO que devuelve el servicio de gestión
+		SalaDTO mockReturnDTO = new SalaDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Sala prueba");
 
 		// Mock del servicio de gestión
 		when(gestionSalaService.update(any(SalaDTO.class))).thenReturn(mockReturnDTO);

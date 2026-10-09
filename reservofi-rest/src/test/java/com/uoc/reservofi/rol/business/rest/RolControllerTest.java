@@ -43,24 +43,23 @@ public class RolControllerTest {
 
 	@Test
 	void insertTest() throws Exception {
-
 		// DTO de entrada
 		RestRolDTO restInsertDTO = new RestRolDTO();
 		restInsertDTO.setNombre("Rol prueba");
-
-		// DTO que devuelve el servicio de gestión
-		RolDTO mockReturnDTO = new RolDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setNombre("Rol prueba");
-
-		// DTO con el que se invoca al servicio de gestión
-		RolDTO insertDTO = new RolDTO();
-		insertDTO.setNombre("Rol prueba");
 
 		// DTO que se espera obtener al final
 		RestRolDTO restReturnDTO = new RestRolDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Rol prueba");
+
+		// DTO con el que se invoca al servicio de gestión
+		RolDTO insertDTO = new RolDTO();
+		insertDTO.setNombre("Rol prueba");
+
+		// DTO que devuelve el servicio de gestión
+		RolDTO mockReturnDTO = new RolDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Rol prueba");
 
 		// Mock del servicio de gestión
 		when(gestionRolService.insert(any(RolDTO.class))).thenReturn(mockReturnDTO);
@@ -87,20 +86,20 @@ public class RolControllerTest {
 		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Rol prueba");
 
-		// DTO que devuelve el servicio de gestión
-		RolDTO mockReturnDTO = new RolDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setNombre("Rol prueba");
+		// DTO que se espera obtener al final
+		RestRolDTO restReturnDTO = new RestRolDTO();
+		restReturnDTO.setId(1L);
+		restReturnDTO.setNombre("Rol prueba");
 
 		// DTO con el que se invoca al servicio de gestión
 		RolDTO updateDTO = new RolDTO();
 		updateDTO.setId(1L);
 		updateDTO.setNombre("Rol prueba");
 
-		// DTO que se espera obtener al final
-		RestRolDTO restReturnDTO = new RestRolDTO();
-		restReturnDTO.setId(1L);
-		restReturnDTO.setNombre("Rol prueba");
+		// DTO que devuelve el servicio de gestión
+		RolDTO mockReturnDTO = new RolDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Rol prueba");
 
 		// Mock del servicio de gestión
 		when(gestionRolService.update(any(RolDTO.class))).thenReturn(mockReturnDTO);
