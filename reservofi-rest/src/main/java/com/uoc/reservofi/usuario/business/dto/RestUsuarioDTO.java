@@ -29,10 +29,6 @@ public class RestUsuarioDTO extends RestEntidadDTO {
 	@Size(max = 100, message = "usuario.correoCorporativo.tamanio.maximo")
 	private String correoCorporativo;
 
-	@NotEmpty(message = "usuario.contrasenia.obligatorio")
-	@Size(max = 255, message = "usuario.contrasenia.tamanio.maximo")
-	private String contrasenia;
-
 	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;
 

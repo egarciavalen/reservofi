@@ -17,7 +17,6 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "primerApellido", target = "primerApellido")
 	@Mapping(source = "segundoApellido", target = "segundoApellido")
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
-	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
 	@Mapping(source = "idsRoles", target = "idsRoles")
 	UsuarioDTO restDTOADTO(RestUsuarioDTO restDTO);
@@ -30,7 +29,6 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "primerApellido", target = "primerApellido")
 	@Mapping(source = "segundoApellido", target = "segundoApellido")
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
-	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
 	@Mapping(source = "idsRoles", target = "idsRoles")
 	RestUsuarioDTO DTOArestDTO(UsuarioDTO dto);

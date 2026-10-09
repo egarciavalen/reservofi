@@ -49,7 +49,6 @@ public class UsuarioControllerTest {
 		restInsertDTO.setPrimerApellido("Prueba primer apellido");
 		restInsertDTO.setSegundoApellido("Prueba segundo apellido");
 		restInsertDTO.setCorreoCorporativo("prueba@gmail.com");
-		restInsertDTO.setContrasenia("pass12345");
 		restInsertDTO.setActivo(true);
 		restInsertDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -60,7 +59,6 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -115,7 +113,6 @@ public class UsuarioControllerTest {
 		restUpdateDTO.setPrimerApellido("Prueba primer apellido");
 		restUpdateDTO.setSegundoApellido("Prueba segundo apellido");
 		restUpdateDTO.setCorreoCorporativo("prueba@gmail.com");
-		restUpdateDTO.setContrasenia("pass12345");
 		restUpdateDTO.setActivo(true);
 		restUpdateDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -126,7 +123,6 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -209,7 +205,6 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 
