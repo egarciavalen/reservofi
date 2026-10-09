@@ -53,7 +53,7 @@ public class RolControllerTest {
 		mockReturnDTO.setId(1L);
 		mockReturnDTO.setNombre("Rol prueba");
 
-		// DTO con el que se invoca el método de gestión
+		// DTO con el que se invoca al servicio de gestión
 		RolDTO insertDTO = new RolDTO();
 		insertDTO.setNombre("Rol prueba");
 
@@ -71,10 +71,10 @@ public class RolControllerTest {
 		mockMvc.perform(post("/api/rol").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restInsertDTO)))
 				.andExpect(status().isCreated()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
-		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		// Se verifica que se haya llamado al servicio de gestión 1 vez
 		verify(gestionRolService).insert(rolCaptor.capture());
 
-		// Aquí se verifica que lo que se manda al método de gestión coincide con lo esperado
+		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
 		RolDTO capturedDTO = rolCaptor.getValue();
 		assertEquals(insertDTO.getId(), capturedDTO.getId());
 		assertEquals(insertDTO.getNombre(), capturedDTO.getNombre());
@@ -92,7 +92,7 @@ public class RolControllerTest {
 		mockReturnDTO.setId(1L);
 		mockReturnDTO.setNombre("Rol prueba");
 
-		// DTO con el que se invoca el método de gestión
+		// DTO con el que se invoca al servicio de gestión
 		RolDTO updateDTO = new RolDTO();
 		updateDTO.setId(1L);
 		updateDTO.setNombre("Rol prueba");
@@ -108,10 +108,10 @@ public class RolControllerTest {
 		mockMvc.perform(put("/api/rol").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restUpdateDTO)))
 				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
-		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		// Se verifica que se haya llamado al servicio de gestión 1 vez
 		verify(gestionRolService).update(rolCaptor.capture());
 
-		// Aquí se verifica que lo que se manda al método de gestión coincide con lo esperado
+		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
 		RolDTO capturedDTO = rolCaptor.getValue();
 		assertEquals(updateDTO.getId(), capturedDTO.getId());
 		assertEquals(updateDTO.getNombre(), capturedDTO.getNombre());
