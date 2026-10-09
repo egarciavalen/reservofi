@@ -21,15 +21,15 @@ public abstract class PuestoMapperDecorator implements PuestoMapper {
 
 	@Override
 	public Puesto DTOAentidad(PuestoDTO dto) {
-		return this.gestionarRelaciones(dto, null);
+		return this.gestionLogicaAdicional(dto, null);
 	}
 
 	@Override
 	public Puesto DTOAentidad(PuestoDTO dto, Puesto entidad) {
-		return this.gestionarRelaciones(dto, entidad);
+		return this.gestionLogicaAdicional(dto, entidad);
 	}
 
-	private Puesto gestionarRelaciones(PuestoDTO dto, Puesto entidad) {
+	private Puesto gestionLogicaAdicional(PuestoDTO dto, Puesto entidad) {
 
 		Puesto puestoRelacion;
 

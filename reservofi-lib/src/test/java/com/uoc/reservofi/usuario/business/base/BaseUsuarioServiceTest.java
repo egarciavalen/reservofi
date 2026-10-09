@@ -34,7 +34,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		usuario.setPrimerApellido("Prueba primer apellido");
 		usuario.setSegundoApellido("Prueba segundo apellido");
 		usuario.setCorreoCorporativo("prueba@gmail.com");
-		usuario.setContraseniaHash("789abc");
+		usuario.setContrasenia("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV4XS77Ty");
 		usuario.setActivo(true);
 
 		Usuario insertado = baseUsuarioService.insert(usuario);
@@ -43,7 +43,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Prueba primer apellido", insertado.getPrimerApellido());
 		assertEquals("Prueba segundo apellido", insertado.getSegundoApellido());
 		assertEquals("prueba@gmail.com", insertado.getCorreoCorporativo());
-		assertEquals("789abc", insertado.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV4XS77Ty", insertado.getContrasenia());
 		assertEquals(true, insertado.getActivo());
 		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
@@ -59,7 +59,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		usuario.setPrimerApellido("Prueba primer apellido");
 		usuario.setSegundoApellido("Prueba segundo apellido");
 		usuario.setCorreoCorporativo("prueba@gmail.com");
-		usuario.setContraseniaHash("789abc");
+		usuario.setContrasenia("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV4XS77Ty");
 		usuario.setActivo(true);
 
 		// Inclusión de un rol nuevo
@@ -74,7 +74,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Prueba primer apellido", insertado.getPrimerApellido());
 		assertEquals("Prueba segundo apellido", insertado.getSegundoApellido());
 		assertEquals("prueba@gmail.com", insertado.getCorreoCorporativo());
-		assertEquals("789abc", insertado.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV4XS77Ty", insertado.getContrasenia());
 		assertEquals(true, insertado.getActivo());
 		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
@@ -129,7 +129,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		usuario.setPrimerApellido("Admin primer apellido");
 		usuario.setSegundoApellido("Admin segundo apellido");
 		usuario.setCorreoCorporativo("admin@gmail.com");
-		usuario.setContraseniaHash("123hash");
+		usuario.setContrasenia("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD");
 		usuario.setActivo(true);
 		usuario.setCreacionUsuario("admin");
 		usuario.setCreacionFecha(LocalDateTime.now());
@@ -145,7 +145,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", actualizado.getPrimerApellido());
 		assertEquals("Admin segundo apellido", actualizado.getSegundoApellido());
 		assertEquals("admin@gmail.com", actualizado.getCorreoCorporativo());
-		assertEquals("123hash", actualizado.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", actualizado.getContrasenia());
 		assertEquals(true, actualizado.getActivo());
 		assertEquals("admin", actualizado.getCreacionUsuario());
 		assertNotNull(actualizado.getCreacionFecha());
@@ -171,7 +171,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		usuario.setPrimerApellido("Admin primer apellido");
 		usuario.setSegundoApellido("Admin segundo apellido");
 		usuario.setCorreoCorporativo("admin@gmail.com");
-		usuario.setContraseniaHash("123hash");
+		usuario.setContrasenia("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD");
 		usuario.setActivo(true);
 		usuario.setCreacionUsuario("admin");
 		usuario.setCreacionFecha(LocalDateTime.now());
@@ -187,7 +187,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", actualizado.getPrimerApellido());
 		assertEquals("Admin segundo apellido", actualizado.getSegundoApellido());
 		assertEquals("admin@gmail.com", actualizado.getCorreoCorporativo());
-		assertEquals("123hash", actualizado.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", actualizado.getContrasenia());
 		assertEquals(true, actualizado.getActivo());
 		assertEquals("admin", actualizado.getCreacionUsuario());
 		assertNotNull(actualizado.getCreacionFecha());
@@ -291,7 +291,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", usuario.getPrimerApellido());
 		assertEquals("Admin segundo apellido", usuario.getSegundoApellido());
 		assertEquals("admin@gmail.com", usuario.getCorreoCorporativo());
-		assertEquals("123hash", usuario.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario.getContrasenia());
 		assertEquals(true, usuario.getActivo());
 		assertEquals("admin", usuario.getCreacionUsuario());
 		assertNotNull(usuario.getCreacionFecha());
@@ -318,7 +318,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", usuario1.getPrimerApellido());
 		assertEquals("Admin segundo apellido", usuario1.getSegundoApellido());
 		assertEquals("admin@gmail.com", usuario1.getCorreoCorporativo());
-		assertEquals("123hash", usuario1.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario1.getContrasenia());
 		assertEquals(true, usuario1.getActivo());
 		assertEquals("admin", usuario1.getCreacionUsuario());
 		assertNotNull(usuario1.getCreacionFecha());
@@ -336,7 +336,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Empleado primer apellido", usuario2.getPrimerApellido());
 		assertEquals("Empleado segundo apellido", usuario2.getSegundoApellido());
 		assertEquals("empleado@gmail.com", usuario2.getCorreoCorporativo());
-		assertEquals("456hash", usuario2.getContraseniaHash());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario2.getContrasenia());
 		assertEquals(true, usuario2.getActivo());
 		assertEquals("admin", usuario2.getCreacionUsuario());
 		assertNotNull(usuario2.getCreacionFecha());
@@ -354,7 +354,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Extra primer apellido", usuario3.getPrimerApellido());
 		assertEquals("Extra segundo apellido", usuario3.getSegundoApellido());
 		assertEquals("extra@gmail.com", usuario3.getCorreoCorporativo());
-		assertEquals("789hash", usuario3.getContraseniaHash());
+		assertEquals("$2a$10$572WYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario3.getContrasenia());
 		assertEquals(true, usuario3.getActivo());
 		assertEquals("admin", usuario3.getCreacionUsuario());
 		assertNotNull(usuario3.getCreacionFecha());
@@ -380,7 +380,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", usuario1.getPrimerApellido());
 		assertEquals("Admin segundo apellido", usuario1.getSegundoApellido());
 		assertEquals("admin@gmail.com", usuario1.getCorreoCorporativo());
-		assertEquals("123hash", usuario1.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario1.getContrasenia());
 		assertEquals(true, usuario1.getActivo());
 		assertEquals("admin", usuario1.getCreacionUsuario());
 		assertNotNull(usuario1.getCreacionFecha());
@@ -398,7 +398,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Empleado primer apellido", usuario2.getPrimerApellido());
 		assertEquals("Empleado segundo apellido", usuario2.getSegundoApellido());
 		assertEquals("empleado@gmail.com", usuario2.getCorreoCorporativo());
-		assertEquals("456hash", usuario2.getContraseniaHash());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario2.getContrasenia());
 		assertEquals(true, usuario2.getActivo());
 		assertEquals("admin", usuario2.getCreacionUsuario());
 		assertNotNull(usuario2.getCreacionFecha());
@@ -433,7 +433,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Admin primer apellido", usuario1.getPrimerApellido());
 		assertEquals("Admin segundo apellido", usuario1.getSegundoApellido());
 		assertEquals("admin@gmail.com", usuario1.getCorreoCorporativo());
-		assertEquals("123hash", usuario1.getContraseniaHash());
+		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario1.getContrasenia());
 		assertEquals(true, usuario1.getActivo());
 		assertEquals("admin", usuario1.getCreacionUsuario());
 		assertNotNull(usuario1.getCreacionFecha());
@@ -451,7 +451,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Empleado primer apellido", usuario2.getPrimerApellido());
 		assertEquals("Empleado segundo apellido", usuario2.getSegundoApellido());
 		assertEquals("empleado@gmail.com", usuario2.getCorreoCorporativo());
-		assertEquals("456hash", usuario2.getContraseniaHash());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario2.getContrasenia());
 		assertEquals(true, usuario2.getActivo());
 		assertEquals("admin", usuario2.getCreacionUsuario());
 		assertNotNull(usuario2.getCreacionFecha());
@@ -469,7 +469,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Extra primer apellido", usuario3.getPrimerApellido());
 		assertEquals("Extra segundo apellido", usuario3.getSegundoApellido());
 		assertEquals("extra@gmail.com", usuario3.getCorreoCorporativo());
-		assertEquals("789hash", usuario3.getContraseniaHash());
+		assertEquals("$2a$10$572WYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario3.getContrasenia());
 		assertEquals(true, usuario3.getActivo());
 		assertEquals("admin", usuario3.getCreacionUsuario());
 		assertNotNull(usuario3.getCreacionFecha());
@@ -491,7 +491,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("Empleado primer apellido", usuario.getPrimerApellido());
 		assertEquals("Empleado segundo apellido", usuario.getSegundoApellido());
 		assertEquals("empleado@gmail.com", usuario.getCorreoCorporativo());
-		assertEquals("456hash", usuario.getContraseniaHash());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario.getContrasenia());
 		assertEquals(true, usuario.getActivo());
 		assertEquals("admin", usuario.getCreacionUsuario());
 		assertNotNull(usuario.getCreacionFecha());

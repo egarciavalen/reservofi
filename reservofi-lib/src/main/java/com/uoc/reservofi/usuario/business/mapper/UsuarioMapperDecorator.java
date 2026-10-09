@@ -5,6 +5,7 @@ import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,17 +24,20 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 	@Autowired
 	private BaseRolService baseRolService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public Usuario DTOAentidad(UsuarioDTO dto) {
-		return this.gestionarRelaciones(dto, null);
+		return this.gestionLogicaAdicional(dto, null);
 	}
 
 	@Override
 	public Usuario DTOAentidad(UsuarioDTO dto, Usuario entidad) {
-		return this.gestionarRelaciones(dto, entidad);
+		return this.gestionLogicaAdicional(dto, entidad);
 	}
 
-	private Usuario gestionarRelaciones(UsuarioDTO dto, Usuario entidad) {
+	private Usuario gestionLogicaAdicional(UsuarioDTO dto, Usuario entidad) {
 
 		Usuario usuarioRelacion;
 
@@ -42,6 +46,9 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 		} else {
 			usuarioRelacion = mapper.DTOAentidad(dto, entidad);
 		}
+
+		// Hash de la contrasenia
+		usuarioRelacion.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
 
 		// Roles
 		Set<Rol> rolesUsuario;

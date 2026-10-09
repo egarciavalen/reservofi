@@ -30,8 +30,8 @@ public class Usuario extends BaseEntidad {
 	@Column(name = "correo_corporativo", nullable = false, length = 100)
 	private String correoCorporativo;
 
-	@Column(name = "contrasenia_hash", nullable = false)
-	private String contraseniaHash;
+	@Column(name = "contrasenia", nullable = false)
+	private String contrasenia;
 
 	@Column(name = "activo", nullable = false)
 	private Boolean activo;

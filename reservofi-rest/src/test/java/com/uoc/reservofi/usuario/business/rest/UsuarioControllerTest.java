@@ -49,7 +49,7 @@ public class UsuarioControllerTest {
 		restInsertDTO.setPrimerApellido("Prueba primer apellido");
 		restInsertDTO.setSegundoApellido("Prueba segundo apellido");
 		restInsertDTO.setCorreoCorporativo("prueba@gmail.com");
-		restInsertDTO.setContraseniaHash("789abc");
+		restInsertDTO.setContrasenia("pass12345");
 		restInsertDTO.setActivo(true);
 		restInsertDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -60,7 +60,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContraseniaHash("789abc");
+		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -70,7 +70,7 @@ public class UsuarioControllerTest {
 		insertDTO.setPrimerApellido("Prueba primer apellido");
 		insertDTO.setSegundoApellido("Prueba segundo apellido");
 		insertDTO.setCorreoCorporativo("prueba@gmail.com");
-		insertDTO.setContraseniaHash("789abc");
+		insertDTO.setContrasenia("pass12345");
 		insertDTO.setActivo(true);
 		insertDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -81,7 +81,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
 		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		mockReturnDTO.setContraseniaHash("789abc");
+		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
 		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -102,7 +102,7 @@ public class UsuarioControllerTest {
 		assertEquals(insertDTO.getPrimerApellido(), capturedDTO.getPrimerApellido());
 		assertEquals(insertDTO.getSegundoApellido(), capturedDTO.getSegundoApellido());
 		assertEquals(insertDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
-		assertEquals(insertDTO.getContraseniaHash(), capturedDTO.getContraseniaHash());
+		assertEquals(insertDTO.getContrasenia(), capturedDTO.getContrasenia());
 		assertEquals(insertDTO.getIdsRoles(), capturedDTO.getIdsRoles());
 	}
 
@@ -115,7 +115,7 @@ public class UsuarioControllerTest {
 		restUpdateDTO.setPrimerApellido("Prueba primer apellido");
 		restUpdateDTO.setSegundoApellido("Prueba segundo apellido");
 		restUpdateDTO.setCorreoCorporativo("prueba@gmail.com");
-		restUpdateDTO.setContraseniaHash("789abc");
+		restUpdateDTO.setContrasenia("pass12345");
 		restUpdateDTO.setActivo(true);
 		restUpdateDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -126,7 +126,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContraseniaHash("789abc");
+		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -137,7 +137,7 @@ public class UsuarioControllerTest {
 		updateDTO.setPrimerApellido("Prueba primer apellido");
 		updateDTO.setSegundoApellido("Prueba segundo apellido");
 		updateDTO.setCorreoCorporativo("prueba@gmail.com");
-		updateDTO.setContraseniaHash("789abc");
+		updateDTO.setContrasenia("pass12345");
 		updateDTO.setActivo(true);
 		updateDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -148,7 +148,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
 		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		mockReturnDTO.setContraseniaHash("789abc");
+		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
 		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -168,7 +168,7 @@ public class UsuarioControllerTest {
 		assertEquals(updateDTO.getPrimerApellido(), capturedDTO.getPrimerApellido());
 		assertEquals(updateDTO.getSegundoApellido(), capturedDTO.getSegundoApellido());
 		assertEquals(updateDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
-		assertEquals(updateDTO.getContraseniaHash(), capturedDTO.getContraseniaHash());
+		assertEquals(updateDTO.getContrasenia(), capturedDTO.getContrasenia());
 		assertEquals(updateDTO.getIdsRoles(), capturedDTO.getIdsRoles());
 	}
 
@@ -198,7 +198,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
 		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		mockReturnDTO.setContraseniaHash("789abc");
+		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
 		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
 
@@ -209,7 +209,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setContraseniaHash("789abc");
+		restReturnDTO.setContrasenia("pass12345");
 		restReturnDTO.setActivo(true);
 		restReturnDTO.setIdsRoles(List.of(1L, 2L));
 

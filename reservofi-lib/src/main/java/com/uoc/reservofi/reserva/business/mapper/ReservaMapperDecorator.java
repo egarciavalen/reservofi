@@ -24,16 +24,16 @@ public abstract class ReservaMapperDecorator implements ReservaMapper {
 
 	@Override
 	public Reserva DTOAentidad(ReservaDTO dto) {
-		return this.gestionarRelaciones(dto, null);
+		return this.gestionLogicaAdicional(dto, null);
 	}
 
 	@Override
 	public Reserva DTOAentidad(ReservaDTO dto, Reserva entidad) {
-		return this.gestionarRelaciones(dto, entidad);
+		return this.gestionLogicaAdicional(dto, entidad);
 	}
 
 
-	private Reserva gestionarRelaciones(ReservaDTO dto, Reserva entidad) {
+	private Reserva gestionLogicaAdicional(ReservaDTO dto, Reserva entidad) {
 
 		Reserva reservaRelacion;
 

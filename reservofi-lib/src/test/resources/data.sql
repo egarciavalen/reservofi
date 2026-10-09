@@ -6,14 +6,14 @@ insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario,
 insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Rol vacio', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 -- USUARIO
-insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia_hash, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Admin', 'Admin primer apellido', 'Admin segundo apellido', 'admin@gmail.com', '123hash', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Admin', 'Admin primer apellido', 'Admin segundo apellido', 'admin@gmail.com', '$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
-insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia_hash, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Empleado', 'Empleado primer apellido', 'Empleado segundo apellido', 'empleado@gmail.com', '456hash', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Empleado', 'Empleado primer apellido', 'Empleado segundo apellido', 'empleado@gmail.com', '$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
 
-insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia_hash, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Extra', 'Extra primer apellido', 'Extra segundo apellido', 'extra@gmail.com', '789hash', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into USUARIO(nombre, primer_apellido, segundo_apellido, correo_corporativo, contrasenia, activo, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Extra', 'Extra primer apellido', 'Extra segundo apellido', 'extra@gmail.com', '$2a$10$572WYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD', true, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 
 -- USUARIO ROL
