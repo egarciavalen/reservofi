@@ -13,6 +13,7 @@ public interface PuestoMapper {
 	@Named("DTOAentidad")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
+	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
 	Puesto DTOAentidad(PuestoDTO dto);
@@ -23,6 +24,7 @@ public interface PuestoMapper {
 	@Named("entidadADTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
+	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "sala.id", target = "idSala")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")

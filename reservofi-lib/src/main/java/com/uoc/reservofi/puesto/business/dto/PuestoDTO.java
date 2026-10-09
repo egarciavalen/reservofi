@@ -2,8 +2,8 @@ package com.uoc.reservofi.puesto.business.dto;
 
 import com.uoc.reservofi.base.busines.dto.GestionEntidadDTO;
 import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,21 +14,19 @@ import java.math.BigDecimal;
 @Setter
 public class PuestoDTO extends GestionEntidadDTO {
 
-	@NotEmpty(message = "puesto.sala.obligatorio")
+	@NotNull(message = "puesto.sala.obligatorio")
 	private Long idSala;
 
 	@NotEmpty(message = "puesto.nombre.obligatorio")
 	@Size(max = 100, message = "puesto.nombre.tamanio.maximo")
 	private String nombre;
 
-	@NotEmpty(message = "puesto.coordenadaX.obligatorio")
-	@DecimalMin(value = "0.00", message = "puesto.coordenadaX.tamanio.minimo")
-	@DecimalMax(value = "99999.99", message = "puesto.coordenadaX.tamanio.minimo")
+	@NotNull(message = "puesto.coordenadaX.obligatorio")
+	@DecimalMax(value = "99999.99", message = "puesto.coordenadaX.tamanio.maximo")
 	private BigDecimal coordenadaX;
 
-	@NotEmpty(message = "puesto.coordenadaY.obligatorio")
-	@DecimalMin(value = "0.00", message = "puesto.coordenadaY.tamanio.minimo")
-	@DecimalMax(value = "99999.99", message = "puesto.coordenadaY.tamanio.minimo")
+	@NotNull(message = "puesto.coordenadaY.obligatorio")
+	@DecimalMax(value = "99999.99", message = "puesto.coordenadaY.tamanio.maximo")
 	private BigDecimal coordenadaY;
 
 }
