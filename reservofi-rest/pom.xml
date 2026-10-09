@@ -34,6 +34,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Configuración del swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <!-- Dependencia módulo lib -->
         <dependency>
             <groupId>com.uoc.reservofi</groupId>
