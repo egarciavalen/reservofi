@@ -1,7 +1,7 @@
 package com.uoc.reservofi.rol.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
+import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.mapper.RolMapper;
 import com.uoc.reservofi.rol.business.model.Rol;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(GestionRolService.BEAN_NAME)
 @RequiredArgsConstructor
-public class GestionRolServiceImpl extends GestionEntidadServiceImpl<RolDTO> implements GestionRolService {
+public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<RolDTO> implements GestionRolService {
 
 	private final BaseRolService baseRolService;
 	private final RolMapper rolMapper;

@@ -9,9 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import java.util.List;
 
 @Validated // Validaciones @Valid
-public abstract class GestionEntidadServiceImpl<T extends GestionEntidadDTO> implements GestionEntidadService<T> {
+public abstract class AbstractGestionEntidadServiceImpl<T extends GestionEntidadDTO> implements GestionEntidadService<T> {
 
-	// Las clases hijas deciden qué metodos van a implementar
+	// Las clases hijas deciden qué métodos van a implementar
 
 	@Override
 	public T insert(@Valid T entidad) {

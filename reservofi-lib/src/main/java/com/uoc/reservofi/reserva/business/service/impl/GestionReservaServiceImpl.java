@@ -1,7 +1,7 @@
 package com.uoc.reservofi.reserva.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
+import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.mapper.ReservaMapper;
 import com.uoc.reservofi.reserva.business.model.Reserva;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(GestionReservaService.BEAN_NAME)
 @RequiredArgsConstructor
-public class GestionReservaServiceImpl extends GestionEntidadServiceImpl<ReservaDTO> implements GestionReservaService {
+public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl<ReservaDTO> implements GestionReservaService {
 
 	private final BaseReservaService baseReservaService;
 	private final ReservaMapper reservaMapper;

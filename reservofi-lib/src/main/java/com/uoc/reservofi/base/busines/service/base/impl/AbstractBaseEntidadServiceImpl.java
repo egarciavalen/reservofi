@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor // Evita tener que escribir @Autowired directamente
-public abstract class BaseEntidadServiceImpl<T extends BaseEntidad> implements BaseEntidadService<T> {
+public abstract class AbstractBaseEntidadServiceImpl<T extends BaseEntidad> implements BaseEntidadService<T> {
 
 	// Si fuera necesario indicar más métodos comunes a todas las entidades, indicarlos aquí
 

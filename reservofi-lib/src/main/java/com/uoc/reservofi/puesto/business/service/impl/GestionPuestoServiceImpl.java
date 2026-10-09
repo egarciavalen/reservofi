@@ -1,7 +1,7 @@
 package com.uoc.reservofi.puesto.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
-import com.uoc.reservofi.base.busines.service.impl.GestionEntidadServiceImpl;
+import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
 import com.uoc.reservofi.puesto.business.mapper.PuestoMapper;
 import com.uoc.reservofi.puesto.business.model.Puesto;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(GestionPuestoService.BEAN_NAME)
 @RequiredArgsConstructor
-public class GestionPuestoServiceImpl extends GestionEntidadServiceImpl<PuestoDTO> implements GestionPuestoService {
+public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<PuestoDTO> implements GestionPuestoService {
 
 	private final BasePuestoService basePuestoService;
 	private final PuestoMapper puestoMapper;
