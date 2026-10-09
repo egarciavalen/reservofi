@@ -4,25 +4,30 @@ import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.rol.business.dto.RestRolDTO;
 import com.uoc.reservofi.rol.business.service.RestRolService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class RolController {
 
 	private final RestRolService restRolService;
 
 	@PostMapping("/rol")
+	@ResponseStatus(HttpStatus.CREATED)
 	RestRolDTO insert(@RequestBody RestRolDTO restDTO) {
 		return restRolService.insert(restDTO);
 	}
 
 	@PutMapping("/rol")
+	@ResponseStatus(HttpStatus.OK)
 	RestRolDTO update(@RequestBody RestRolDTO restDTO) {
 		return restRolService.update(restDTO);
 	}
 
 	@GetMapping("/rol/{id}")
+	@ResponseStatus(HttpStatus.OK)
 	RestRolDTO findById(@PathVariable Long id) {
 		RestRolDTO restRolDTO = restRolService.findById(id);
 		if (restRolDTO == null) {
@@ -32,6 +37,7 @@ public class RolController {
 	}
 
 	@DeleteMapping("/rol/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Long id) {
 		restRolService.deleteById(id);
 	}

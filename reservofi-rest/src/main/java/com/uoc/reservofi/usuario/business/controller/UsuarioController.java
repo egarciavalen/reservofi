@@ -1,4 +1,4 @@
-package com.uoc.reservofi.usuario.business.contUsuarioler;
+package com.uoc.reservofi.usuario.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioDTO;
@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UsuarioController {
 
