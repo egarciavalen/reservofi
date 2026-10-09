@@ -6,4 +6,6 @@ import com.uoc.reservofi.usuario.business.model.Usuario;
 public interface BaseUsuarioService extends BaseEntidadService<Usuario> {
 
 	String BEAN_NAME = "baseUsuarioService";
+
+	Usuario findByCorreoCorporativo(String correoCorporativo);
 }

@@ -1,7 +1,8 @@
 package com.uoc.reservofi.usuario.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioActualizacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,22 +15,18 @@ public class UsuarioController {
 
 	private final RestUsuarioService restUsuarioService;
 
-	@PostMapping("/usuario")
-	@ResponseStatus(HttpStatus.CREATED)
-	RestUsuarioDTO insert(@RequestBody RestUsuarioDTO restDTO) {
-		return restUsuarioService.insert(restDTO);
-	}
+	// ¿Insert? -> Controlador de autenticación
 
 	@PutMapping("/usuario")
 	@ResponseStatus(HttpStatus.OK)
-	RestUsuarioDTO update(@RequestBody RestUsuarioDTO restDTO) {
+	RestUsuarioConsultaDTO update(@RequestBody RestUsuarioActualizacionDTO restDTO) {
 		return restUsuarioService.update(restDTO);
 	}
 
 	@GetMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestUsuarioDTO findById(@PathVariable Long id) {
-		RestUsuarioDTO restUsuarioDTO = restUsuarioService.findById(id);
+	RestUsuarioConsultaDTO findById(@PathVariable Long id) {
+		RestUsuarioConsultaDTO restUsuarioDTO = restUsuarioService.findById(id);
 		if (restUsuarioDTO == null) {
 			throw new RestException("Entidad no encontrada");
 		}

@@ -1,7 +1,8 @@
 package com.uoc.reservofi.usuario.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioActualizacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.RestUsuarioMapper;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
@@ -12,20 +13,15 @@ import org.springframework.stereotype.Service;
 
 @Service(RestUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestUsuarioDTO> implements RestUsuarioService {
+public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestUsuarioConsultaDTO> implements RestUsuarioService {
 
 	private final GestionUsuarioService gestionUsuarioService;
 	private final RestUsuarioMapper restUsuarioMapper;
 
-	@Override
-	public RestUsuarioDTO insert(@Valid RestUsuarioDTO restDTO) {
-		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);
-		dto = gestionUsuarioService.insert(dto);
-		return restUsuarioMapper.DTOArestDTO(dto);
-	}
+	// NO se usa el update de AbstractRestEntidadServiceImpl
 
 	@Override
-	public RestUsuarioDTO update(@Valid RestUsuarioDTO restDTO) {
+	public RestUsuarioConsultaDTO update(@Valid RestUsuarioActualizacionDTO restDTO) {
 		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);
 		dto = gestionUsuarioService.update(dto);
 		return restUsuarioMapper.DTOArestDTO(dto);
@@ -37,7 +33,7 @@ public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestU
 	}
 
 	@Override
-	public RestUsuarioDTO findById(Long id) {
+	public RestUsuarioConsultaDTO findById(Long id) {
 		UsuarioDTO dto = gestionUsuarioService.findById(id);
 		return restUsuarioMapper.DTOArestDTO(dto);
 	}

@@ -505,4 +505,27 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals(2L, rol.getId());
 	}
 
+	@Test
+	@Transactional
+	void findByCorreoCorporativoTest() {
+		Usuario usuario = baseUsuarioService.findByCorreoCorporativo("empleado@gmail.com");
+
+		assertNotNull(usuario);
+		assertEquals("Empleado", usuario.getNombre());
+		assertEquals("Empleado primer apellido", usuario.getPrimerApellido());
+		assertEquals("Empleado segundo apellido", usuario.getSegundoApellido());
+		assertEquals("empleado@gmail.com", usuario.getCorreoCorporativo());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuario.getContrasenia());
+		assertEquals(true, usuario.getActivo());
+		assertEquals("admin", usuario.getCreacionUsuario());
+		assertNotNull(usuario.getCreacionFecha());
+		assertEquals("admin_update", usuario.getActualizacionUsuario());
+		assertNotNull(usuario.getActualizacionFecha());
+		assertNotNull(usuario.getActualizacionFecha());
+		assertEquals(1, usuario.getRoles().size());
+
+		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol);
+		assertEquals(2L, rol.getId());
+	}
 }

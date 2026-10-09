@@ -2,7 +2,8 @@ package com.uoc.reservofi.usuario.business.rest;
 
 import com.uoc.reservofi.base.business.controller.RestControllerAdvice;
 import com.uoc.reservofi.usuario.business.controller.UsuarioController;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioActualizacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.RestUsuarioMapperImpl;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
@@ -42,82 +43,20 @@ public class UsuarioControllerTest {
 	private GestionUsuarioService gestionUsuarioService;
 
 	@Test
-	void insertTest() throws Exception {
-		// DTO de entrada
-		RestUsuarioDTO restInsertDTO = new RestUsuarioDTO();
-		restInsertDTO.setNombre("Usuario prueba");
-		restInsertDTO.setPrimerApellido("Prueba primer apellido");
-		restInsertDTO.setSegundoApellido("Prueba segundo apellido");
-		restInsertDTO.setCorreoCorporativo("prueba@gmail.com");
-		restInsertDTO.setActivo(true);
-		restInsertDTO.setIdsRoles(List.of(1L, 2L));
-
-		// DTO que se espera obtener al final
-		RestUsuarioDTO restReturnDTO = new RestUsuarioDTO();
-		restReturnDTO.setId(1L);
-		restReturnDTO.setNombre("Usuario prueba");
-		restReturnDTO.setPrimerApellido("Prueba primer apellido");
-		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
-		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L, 2L));
-
-		// DTO con el que se invoca al servicio de gestión
-		UsuarioDTO insertDTO = new UsuarioDTO();
-		insertDTO.setNombre("Usuario prueba");
-		insertDTO.setPrimerApellido("Prueba primer apellido");
-		insertDTO.setSegundoApellido("Prueba segundo apellido");
-		insertDTO.setCorreoCorporativo("prueba@gmail.com");
-		insertDTO.setContrasenia("pass12345");
-		insertDTO.setActivo(true);
-		insertDTO.setIdsRoles(List.of(1L, 2L));
-
-		// DTO que devuelve el servicio de gestión
-		UsuarioDTO mockReturnDTO = new UsuarioDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setNombre("Usuario prueba");
-		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
-		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
-		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
-		mockReturnDTO.setContrasenia("pass12345");
-		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
-
-		// Mock del servicio de gestión
-		when(gestionUsuarioService.insert(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
-
-		// Llamada a realizar
-		mockMvc.perform(post("/api/usuario").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restInsertDTO)))
-				.andExpect(status().isCreated()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
-
-		// Se verifica que se haya llamado al servicio de gestión 1 vez
-		verify(gestionUsuarioService).insert(UsuarioCaptor.capture());
-
-		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
-		UsuarioDTO capturedDTO = UsuarioCaptor.getValue();
-		assertEquals(insertDTO.getId(), capturedDTO.getId());
-		assertEquals(insertDTO.getNombre(), capturedDTO.getNombre());
-		assertEquals(insertDTO.getPrimerApellido(), capturedDTO.getPrimerApellido());
-		assertEquals(insertDTO.getSegundoApellido(), capturedDTO.getSegundoApellido());
-		assertEquals(insertDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
-		assertEquals(insertDTO.getContrasenia(), capturedDTO.getContrasenia());
-		assertEquals(insertDTO.getIdsRoles(), capturedDTO.getIdsRoles());
-	}
-
-	@Test
 	void updateTest() throws Exception {
 		// DTO de entrada
-		RestUsuarioDTO restUpdateDTO = new RestUsuarioDTO();
+		RestUsuarioActualizacionDTO restUpdateDTO = new RestUsuarioActualizacionDTO();
 		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Usuario prueba");
 		restUpdateDTO.setPrimerApellido("Prueba primer apellido");
 		restUpdateDTO.setSegundoApellido("Prueba segundo apellido");
 		restUpdateDTO.setCorreoCorporativo("prueba@gmail.com");
+		restUpdateDTO.setContrasenia("pass12345");
 		restUpdateDTO.setActivo(true);
 		restUpdateDTO.setIdsRoles(List.of(1L, 2L));
 
 		// DTO que se espera obtener al final
-		RestUsuarioDTO restReturnDTO = new RestUsuarioDTO();
+		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Usuario prueba");
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
@@ -199,7 +138,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
 
 		// DTO que se espera obtener al final
-		RestUsuarioDTO restReturnDTO = new RestUsuarioDTO();
+		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Usuario prueba");
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");

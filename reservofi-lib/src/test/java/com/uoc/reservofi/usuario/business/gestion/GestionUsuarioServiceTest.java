@@ -528,4 +528,21 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(1, usuarioDTO.getIdsRoles().size());
 		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
 	}
+
+	@Test
+	@Transactional
+	void findByCorreoCorporativoTest() {
+		UsuarioDTO usuarioDTO = gestionUsuarioService.findByCorreoCorporativo("empleado@gmail.com");
+
+		assertNotNull(usuarioDTO);
+		assertEquals("Empleado", usuarioDTO.getNombre());
+		assertEquals("Empleado primer apellido", usuarioDTO.getPrimerApellido());
+		assertEquals("Empleado segundo apellido", usuarioDTO.getSegundoApellido());
+		assertEquals("empleado@gmail.com", usuarioDTO.getCorreoCorporativo());
+		assertEquals("$2a$10$78lGYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO.getContrasenia());
+		assertEquals(true, usuarioDTO.getActivo());
+		assertNotNull(usuarioDTO.getIdsRoles());
+		assertEquals(1, usuarioDTO.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+	}
 }

@@ -12,10 +12,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BaseUsuarioServiceImpl extends AbstractBaseEntidadServiceImpl<Usuario> implements BaseUsuarioService {
 
-	private final UsuarioRepository UsuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
 	@Override
 	public BaseEntidadRepository<Usuario> getRepository() {
-		return UsuarioRepository;
+		return usuarioRepository;
+	}
+
+	@Override
+	public Usuario findByCorreoCorporativo(String correoCorporativo) {
+		return ((UsuarioRepository) getRepository()).findByCorreoCorporativo(correoCorporativo);
 	}
 }

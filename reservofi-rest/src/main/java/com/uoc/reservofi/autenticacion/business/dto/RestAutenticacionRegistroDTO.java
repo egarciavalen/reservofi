@@ -1,4 +1,4 @@
-package com.uoc.reservofi.usuario.business.dto;
+package com.uoc.reservofi.autenticacion.business.dto;
 
 import com.uoc.reservofi.base.business.dto.RestEntidadDTO;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RestUsuarioDTO extends RestEntidadDTO {
+public class RestAutenticacionRegistroDTO extends RestEntidadDTO {
 
 	@NotEmpty(message = "usuario.nombre.obligatorio")
 	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")
@@ -28,6 +28,10 @@ public class RestUsuarioDTO extends RestEntidadDTO {
 	@NotEmpty(message = "usuario.correoCorporativo.obligatorio")
 	@Size(max = 100, message = "usuario.correoCorporativo.tamanio.maximo")
 	private String correoCorporativo;
+
+	@NotEmpty(message = "usuario.contrasenia.obligatorio")
+	@Size(max = 255, message = "usuario.contrasenia.tamanio.maximo")
+	private String contrasenia;
 
 	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;

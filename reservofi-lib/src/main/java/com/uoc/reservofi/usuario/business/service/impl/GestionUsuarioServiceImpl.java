@@ -86,4 +86,9 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		return usuarioMapper.entidadADTOList(entidadList);
 	}
 
+	@Override
+	public UsuarioDTO findByCorreoCorporativo(String correoCorporativo) {
+		Usuario entidad = baseUsuarioService.findByCorreoCorporativo(correoCorporativo);
+		return usuarioMapper.entidadADTO(entidad);
+	}
 }
