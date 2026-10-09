@@ -41,6 +41,7 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto prueba", insertado.getNombre());
 		assertEquals(BigDecimal.valueOf(11.14), insertado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(22.25), insertado.getCoordenadaY());
+		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
 		assertEquals("adminTest", insertado.getActualizacionUsuario());
 		assertNotNull(insertado.getActualizacionFecha());
