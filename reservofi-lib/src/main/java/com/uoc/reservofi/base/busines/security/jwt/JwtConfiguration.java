@@ -39,7 +39,7 @@ public class JwtConfiguration {
 		http.csrf(AbstractHttpConfigurer::disable)
 				.cors(Customizer.withDefaults()) // Acepta el bean corsConfigurationSource
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/auth/**").permitAll() // Los endpoints de autenticación NO requieren token
+						.requestMatchers("/api/auth/**").permitAll() // Los endpoints de autenticación NO requieren token
 						.anyRequest().authenticated()) // El resto SI los requiere
 				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Cada petición lleva su token
 				.authenticationProvider(authenticationProvider) // Proveedor de autenticación (UserDetailsService y encoder)

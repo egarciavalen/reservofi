@@ -1,24 +1,19 @@
 package com.uoc.reservofi.base.busines.audit;
 
-import com.uoc.reservofi.base.busines.model.BaseEntidad;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
-public class AuditorAwareImpl implements AuditorAware<BaseEntidad> {
+public class AuditorAwareImpl implements AuditorAware<String> {
 
 	@Override
 	@NullMarked
-	public Optional<BaseEntidad> getCurrentAuditor() {
-		// Devuelve el usuario autenticado para guardar en base de datos
-		return Optional.of(SecurityContextHolder.getContext())
-				.map(SecurityContext::getAuthentication)
-				.filter(Authentication::isAuthenticated)
-				.map(Authentication::getPrincipal)
-				.map(BaseEntidad.class::cast);
+	public Optional<String> getCurrentAuditor() {
+		// Devuelve el nombre del usuario autenticado (anonymousUser si no está autenticado)
+		return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+				.map(Authentication::getName);
 	}
 }

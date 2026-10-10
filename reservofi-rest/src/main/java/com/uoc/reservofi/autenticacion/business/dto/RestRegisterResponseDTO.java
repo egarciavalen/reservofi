@@ -15,9 +15,7 @@ public class RestRegisterResponseDTO extends RestEntidadDTO {
 	private String primerApellido;
 
 	private String segundoApellido;
-
-	private String contrasenia;
-
+	
 	private String correoCorporativo;
 
 	private Boolean activo;
