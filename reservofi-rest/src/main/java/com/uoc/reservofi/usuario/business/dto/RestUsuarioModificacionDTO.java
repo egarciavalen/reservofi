@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RestUsuarioActualizacionDTO extends RestEntidadDTO {
+public class RestUsuarioModificacionDTO extends RestEntidadDTO {
 
 	@NotEmpty(message = "usuario.nombre.obligatorio")
 	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")

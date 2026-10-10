@@ -1,9 +1,7 @@
 package com.uoc.reservofi.autenticacion.business.service.impl;
 
 import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionLoginDTO;
-import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionRegistroDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionResponseDTO;
-import com.uoc.reservofi.autenticacion.business.mapper.RestAutenticacionMapper;
 import com.uoc.reservofi.autenticacion.business.service.RestAutenticacionService;
 import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
@@ -18,21 +16,7 @@ public class RestAutenticacionServiceImpl implements RestAutenticacionService {
 
 	private final GestionUsuarioService gestionUsuarioService;
 
-	private final RestAutenticacionMapper restAutenticacionMapper;
-
 	private final PasswordEncoder passwordEncoder;
-
-	@Override
-	public RestAutenticacionResponseDTO register(RestAutenticacionRegistroDTO restDTO) {
-
-		UsuarioDTO dto = restAutenticacionMapper.restDTOADTO(restDTO);
-
-		// Registro del usuario
-		gestionUsuarioService.insert(dto);
-
-		// TODO: CAMBIAR POR TOKEN JWT
-		return new RestAutenticacionResponseDTO();
-	}
 
 	@Override
 	public RestAutenticacionResponseDTO login(RestAutenticacionLoginDTO restDTO) {

@@ -1,7 +1,7 @@
 package com.uoc.reservofi.usuario.business.mapper;
 
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioActualizacionDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -21,7 +21,7 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
 	@Mapping(source = "idsRoles", target = "idsRoles")
-	UsuarioDTO restDTOADTO(RestUsuarioActualizacionDTO restDTO);
+	UsuarioDTO restDTOADTO(RestUsuarioModificacionDTO restDTO);
 
 	@Named("DTOArestDTO")
 	@BeanMapping(ignoreByDefault = true)

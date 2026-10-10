@@ -1,8 +1,8 @@
 package com.uoc.reservofi.usuario.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioActualizacionDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,15 @@ public class UsuarioController {
 
 	// ¿Insert? -> Controlador de autenticación
 
+	@PostMapping("/usuario")
+	@ResponseStatus(HttpStatus.CREATED)
+	RestUsuarioConsultaDTO register(@RequestBody RestUsuarioModificacionDTO restDTO) {
+		return restUsuarioService.insert(restDTO);
+	}
+
 	@PutMapping("/usuario")
 	@ResponseStatus(HttpStatus.OK)
-	RestUsuarioConsultaDTO update(@RequestBody RestUsuarioActualizacionDTO restDTO) {
+	RestUsuarioConsultaDTO update(@RequestBody RestUsuarioModificacionDTO restDTO) {
 		return restUsuarioService.update(restDTO);
 	}
 
