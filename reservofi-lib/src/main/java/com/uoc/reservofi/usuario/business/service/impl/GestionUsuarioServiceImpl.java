@@ -1,14 +1,19 @@
 package com.uoc.reservofi.usuario.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
+import com.uoc.reservofi.base.busines.security.jwt.JwtService;
 import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioLoginResponseDTO;
 import com.uoc.reservofi.usuario.business.mapper.UsuarioMapper;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import com.uoc.reservofi.usuario.business.service.base.BaseUsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +24,10 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 	private final BaseUsuarioService baseUsuarioService;
 	private final UsuarioMapper usuarioMapper;
+
+	// Gestión de token JWT
+	private final AuthenticationManager authenticationManager;
+	private final JwtService jwtService;
 
 	@Override
 	public UsuarioDTO insert(@Valid UsuarioDTO dto) {
@@ -90,5 +99,31 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	public UsuarioDTO findByCorreoCorporativo(String correoCorporativo) {
 		Usuario entidad = baseUsuarioService.findByCorreoCorporativo(correoCorporativo);
 		return usuarioMapper.entidadADTO(entidad);
+	}
+
+	@Override
+	public UsuarioLoginResponseDTO login(@Valid UsuarioLoginRequestDTO requestDTO) {
+
+		// Paso 1: se comprueba que las credenciales sean válidas
+		// En caso de que NO lo sean, lanzaría una excepción aquí (ver ReservofiSecurityConfiguration)
+		authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(
+						requestDTO.getCorreoCorporativo(),
+						requestDTO.getContrasenia()
+				)
+		);
+
+		// Paso 2: se extrae el usuario de base de datos (previamente se ha revisado que existiera)
+		Usuario entidad = baseUsuarioService.findByCorreoCorporativo(requestDTO.getCorreoCorporativo());
+
+		// Paso 3: se genera el token
+		String jwtToken = jwtService.generateToken(entidad);
+
+		// Paso 4: se construye la respuesta de vuelta
+		UsuarioLoginResponseDTO responseDTO = new UsuarioLoginResponseDTO();
+		responseDTO.setToken(jwtToken);
+		responseDTO.setExpiresIn(jwtService.getExpirationTime());
+
+		return responseDTO;
 	}
 }

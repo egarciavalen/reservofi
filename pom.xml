@@ -68,6 +68,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Dependencias webmc -->
+        <!-- Se tiene que incluir aquí porque hay configuraciones de seguridad webmvc que afectan al lib también -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <!-- Configuración a la hora de compilar/empaquetar -->

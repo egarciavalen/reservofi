@@ -48,6 +48,7 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 		}
 
 		// Hash de la contrasenia
+		// Esto es esencial, puesto que a) no hay que guardar contrasenias en plano y b) si no se hace, la autenticación fallará
 		usuarioRelacion.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
 
 		// Roles

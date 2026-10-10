@@ -1,7 +1,7 @@
 package com.uoc.reservofi.autenticacion.business.controller;
 
-import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionLoginDTO;
-import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionResponseDTO;
+import com.uoc.reservofi.autenticacion.business.dto.RestLoginRequestDTO;
+import com.uoc.reservofi.autenticacion.business.dto.RestLoginResponseDTO;
 import com.uoc.reservofi.autenticacion.business.service.RestAutenticacionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class AutenticacionController {
 
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.OK)
-	RestAutenticacionResponseDTO login(@RequestBody RestAutenticacionLoginDTO restDTO) {
+	RestLoginResponseDTO login(@RequestBody RestLoginRequestDTO restDTO) {
 		return restAutenticacionService.login(restDTO);
 
 	}
