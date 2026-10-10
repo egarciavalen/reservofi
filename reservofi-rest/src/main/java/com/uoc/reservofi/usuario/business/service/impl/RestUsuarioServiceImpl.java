@@ -18,15 +18,6 @@ public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestU
 	private final GestionUsuarioService gestionUsuarioService;
 	private final RestUsuarioMapper restUsuarioMapper;
 
-
-	// El insert/update de la abstracción NO se usan al trabajar con diferentes DTO
-	@Override
-	public RestUsuarioConsultaDTO insert(RestUsuarioModificacionDTO restDTO) {
-		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);
-		dto = gestionUsuarioService.insert(dto);
-		return restUsuarioMapper.DTOArestDTO(dto);
-	}
-
 	@Override
 	public RestUsuarioConsultaDTO update(@Valid RestUsuarioModificacionDTO restDTO) {
 		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);

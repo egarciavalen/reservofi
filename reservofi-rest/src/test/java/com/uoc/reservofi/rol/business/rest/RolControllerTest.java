@@ -1,6 +1,6 @@
 package com.uoc.reservofi.rol.business.rest;
 
-import com.uoc.reservofi.base.business.controller.RestControllerAdvice;
+import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.rol.business.controller.RolController;
 import com.uoc.reservofi.rol.business.dto.RestRolDTO;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // Anotación de springboot para las pruebas con controladores (autoconfiguración de MVC y ejecución más rápida)
 @WebMvcTest()
 // Indica la configuración a levantar en la ejecución de la prueba
-@ContextConfiguration(classes = {RolController.class, RestRolMapperImpl.class, RestRolServiceImpl.class, RestControllerAdvice.class})
+@ContextConfiguration(classes = {RolController.class, RestRolMapperImpl.class, RestRolServiceImpl.class, RestExceptionHandler.class})
 public class RolControllerTest {
 
 	@Captor // Captura de los argumentos

@@ -1,6 +1,6 @@
 package com.uoc.reservofi.reserva.business.rest;
 
-import com.uoc.reservofi.base.business.controller.RestControllerAdvice;
+import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.reserva.business.controller.ReservaController;
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.dto.RestReservaDTO;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest()
-@ContextConfiguration(classes = {ReservaController.class, RestReservaMapperImpl.class, RestReservaServiceImpl.class, RestControllerAdvice.class})
+@ContextConfiguration(classes = {ReservaController.class, RestReservaMapperImpl.class, RestReservaServiceImpl.class, RestExceptionHandler.class})
 public class ReservaControllerTest {
 
 	@Captor

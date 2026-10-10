@@ -2,11 +2,13 @@ package com.uoc.reservofi.usuario.business.gestion;
 
 import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -544,5 +546,22 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuarioDTO.getIdsRoles());
 		assertEquals(1, usuarioDTO.getIdsRoles().size());
 		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+	}
+
+	@Test
+	void loginNotExistsTest() {
+		UsuarioLoginRequestDTO usuarioRequestDTO = new UsuarioLoginRequestDTO();
+		usuarioRequestDTO.setCorreoCorporativo("notExists@gmail.com");
+		usuarioRequestDTO.setContrasenia("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD");
+
+		try {
+			gestionUsuarioService.login(usuarioRequestDTO);
+			fail("Se esperaba una excepción BadCredentialsException");
+		} catch (BadCredentialsException e) {
+			assertEquals("Bad credentials", e.getMessage());
+		} catch (Exception e) {
+			fail("Se esperaba una excepción BadCredentialsException");
+
+		}
 	}
 }

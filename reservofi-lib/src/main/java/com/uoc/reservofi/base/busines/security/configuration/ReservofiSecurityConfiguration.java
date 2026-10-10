@@ -43,6 +43,7 @@ public class ReservofiSecurityConfiguration {
 		return username -> {
 			Usuario usuario = usuarioRepository.findByCorreoCorporativo(username);
 			if (usuario == null) {
+				// Esto se terminará traduciendo en un BadCredentialsException
 				throw new UsernameNotFoundException("No se ha encontrado al usuario");
 			}
 			return usuario;

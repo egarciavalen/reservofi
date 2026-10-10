@@ -11,7 +11,5 @@ public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsul
 
 	// Consulta propia al trabajar con diferentes DTOs
 
-	RestUsuarioConsultaDTO insert(@Valid RestUsuarioModificacionDTO restDTO);
-
 	RestUsuarioConsultaDTO update(@Valid RestUsuarioModificacionDTO restDTO);
 }

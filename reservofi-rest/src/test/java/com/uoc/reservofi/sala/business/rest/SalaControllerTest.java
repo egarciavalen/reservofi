@@ -1,6 +1,6 @@
 package com.uoc.reservofi.sala.business.rest;
 
-import com.uoc.reservofi.base.business.controller.RestControllerAdvice;
+import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.sala.business.controller.SalaController;
 import com.uoc.reservofi.sala.business.dto.RestSalaDTO;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest()
-@ContextConfiguration(classes = {SalaController.class, RestSalaMapperImpl.class, RestSalaServiceImpl.class, RestControllerAdvice.class})
+@ContextConfiguration(classes = {SalaController.class, RestSalaMapperImpl.class, RestSalaServiceImpl.class, RestExceptionHandler.class})
 public class SalaControllerTest {
 
 	@Captor

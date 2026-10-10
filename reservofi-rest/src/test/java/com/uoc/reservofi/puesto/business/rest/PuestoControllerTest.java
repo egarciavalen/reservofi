@@ -1,6 +1,6 @@
 package com.uoc.reservofi.puesto.business.rest;
 
-import com.uoc.reservofi.base.business.controller.RestControllerAdvice;
+import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.puesto.business.controller.PuestoController;
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest()
-@ContextConfiguration(classes = {PuestoController.class, RestPuestoMapperImpl.class, RestPuestoServiceImpl.class, RestControllerAdvice.class})
+@ContextConfiguration(classes = {PuestoController.class, RestPuestoMapperImpl.class, RestPuestoServiceImpl.class, RestExceptionHandler.class})
 public class PuestoControllerTest {
 
 	@Captor

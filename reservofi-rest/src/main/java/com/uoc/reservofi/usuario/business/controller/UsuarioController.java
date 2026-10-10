@@ -17,12 +17,6 @@ public class UsuarioController {
 
 	// ¿Insert? -> Controlador de autenticación
 
-	@PostMapping("/usuario")
-	@ResponseStatus(HttpStatus.CREATED)
-	RestUsuarioConsultaDTO register(@RequestBody RestUsuarioModificacionDTO restDTO) {
-		return restUsuarioService.insert(restDTO);
-	}
-
 	@PutMapping("/usuario")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO update(@RequestBody RestUsuarioModificacionDTO restDTO) {

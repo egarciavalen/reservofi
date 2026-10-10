@@ -1,11 +1,10 @@
 package com.uoc.reservofi.autenticacion.business.mapper;
 
-import com.uoc.reservofi.autenticacion.business.dto.RestAutenticacionRegistroDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestLoginRequestDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestLoginResponseDTO;
-import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
-import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
-import com.uoc.reservofi.usuario.business.dto.UsuarioLoginResponseDTO;
+import com.uoc.reservofi.autenticacion.business.dto.RestRegisterRequestDTO;
+import com.uoc.reservofi.autenticacion.business.dto.RestRegisterResponseDTO;
+import com.uoc.reservofi.usuario.business.dto.*;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -24,18 +23,30 @@ public interface RestAutenticacionMapper {
 	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
 	@Mapping(source = "idsRoles", target = "idsRoles")
-	UsuarioDTO restDTOADTO(RestAutenticacionRegistroDTO restDTO);
+	UsuarioDTO registerRestRequestDTOARequestDTO(RestRegisterRequestDTO restDTO);
 
-	@Named("restRequestLoginDTOALoginDTO")
+	@Named("responseDTOARestResponseDTO")
+	@BeanMapping(ignoreByDefault = true)
+	@Mapping(source = "id", target = "id")
+	@Mapping(source = "nombre", target = "nombre")
+	@Mapping(source = "primerApellido", target = "primerApellido")
+	@Mapping(source = "segundoApellido", target = "segundoApellido")
+	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
+	@Mapping(source = "activo", target = "activo")
+	@Mapping(source = "idsRoles", target = "idsRoles")
+	RestRegisterResponseDTO registerResponseDTOARestResponseDTO(UsuarioDTO dto);
+
+
+	@Named("loginRequestDTOARestRequestDTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "contrasenia", target = "contrasenia")
-	UsuarioLoginRequestDTO restRequestLoginDTOALoginDTO(RestLoginRequestDTO restDTO);
+	UsuarioLoginRequestDTO loginRestequestDTORequestDTO(RestLoginRequestDTO restDTO);
 
 
-	@Named("loginDTOARestLoginDTO")
+	@Named("loginResponseDTOARestResponseDTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "token", target = "token")
 	@Mapping(source = "expiresIn", target = "expiresIn")
-	RestLoginResponseDTO responseLoginDTOARestLoginDTO(UsuarioLoginResponseDTO dto);
+	RestLoginResponseDTO loginResponseDTOARestResponseDTO(UsuarioLoginResponseDTO dto);
 }

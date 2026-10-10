@@ -102,7 +102,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	}
 
 	@Override
-	public UsuarioLoginResponseDTO login(@Valid UsuarioLoginRequestDTO requestDTO) {
+	public UsuarioLoginResponseDTO login(UsuarioLoginRequestDTO requestDTO) {
 
 		// Paso 1: se comprueba que las credenciales sean válidas
 		// En caso de que NO lo sean, lanzaría una excepción aquí (ver ReservofiSecurityConfiguration)

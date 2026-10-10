@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RestAutenticacionRegistroDTO extends RestEntidadDTO {
+public class RestRegisterRequestDTO extends RestEntidadDTO {
 
 	@NotEmpty(message = "usuario.nombre.obligatorio")
 	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")
@@ -25,13 +25,12 @@ public class RestAutenticacionRegistroDTO extends RestEntidadDTO {
 	@Size(max = 100, message = "usuario.segundoApellido.tamanio.maximo")
 	private String segundoApellido;
 
+	@Size(max = 255, message = "usuario.contrasenia.tamanio.maximo")
+	private String contrasenia;
+
 	@NotEmpty(message = "usuario.correoCorporativo.obligatorio")
 	@Size(max = 100, message = "usuario.correoCorporativo.tamanio.maximo")
 	private String correoCorporativo;
-
-	@NotEmpty(message = "usuario.contrasenia.obligatorio")
-	@Size(max = 255, message = "usuario.contrasenia.tamanio.maximo")
-	private String contrasenia;
 
 	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;
