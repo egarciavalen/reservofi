@@ -4,6 +4,7 @@ import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class UsuarioController {
 
 	private final RestUsuarioService restUsuarioService;
