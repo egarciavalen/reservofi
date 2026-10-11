@@ -12,5 +12,8 @@ public interface GestionUsuarioService extends GestionEntidadService<UsuarioDTO>
 
 	UsuarioDTO findByCorreoCorporativo(String correoCorporativo);
 
+	UsuarioDTO register(@Valid UsuarioDTO dto);
+
 	UsuarioLoginResponseDTO login(@Valid UsuarioLoginRequestDTO requestDTO);
+
 }

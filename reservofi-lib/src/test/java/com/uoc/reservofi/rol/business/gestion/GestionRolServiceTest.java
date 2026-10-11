@@ -190,5 +190,15 @@ public class GestionRolServiceTest extends AbstractTest {
 		assertEquals("Empleado", rolDTO.getNombre());
 	}
 
+	@Test
+	void getIdByNombreTest() {
+		Long idRol = gestionRolService.getIdByNombre("Empleado");
+		assertEquals(2, idRol);
+	}
 
+	@Test
+	void getIdByNombreNotExistsTest() {
+		Long idRol = gestionRolService.getIdByNombre("No existe");
+		assertNull(idRol);
+	}
 }

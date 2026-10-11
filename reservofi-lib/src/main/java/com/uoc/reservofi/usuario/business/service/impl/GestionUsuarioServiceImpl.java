@@ -3,6 +3,7 @@ package com.uoc.reservofi.usuario.business.service.impl;
 import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.security.jwt.JwtService;
 import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
+import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioLoginResponseDTO;
@@ -24,6 +25,9 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 	private final BaseUsuarioService baseUsuarioService;
 	private final UsuarioMapper usuarioMapper;
+
+	// Servicio de gestión de rol
+	private final GestionRolService gestionRolService;
 
 	// Gestión de token JWT
 	private final AuthenticationManager authenticationManager;
@@ -102,6 +106,16 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	}
 
 	@Override
+	public UsuarioDTO register(UsuarioDTO dto) {
+		// El usuario registrado tendrá el rol de empleado por defecto
+		Long idEmpleado = this.gestionRolService.getIdByNombre("Empleado");
+		dto.setIdsRoles(List.of(idEmpleado));
+
+		// Se inserta la información y se devuelve el usuario
+		return this.insert(dto);
+	}
+
+	@Override
 	public UsuarioLoginResponseDTO login(UsuarioLoginRequestDTO requestDTO) {
 
 		// Paso 1: se comprueba que las credenciales sean válidas
@@ -122,6 +136,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		// Paso 4: se construye la respuesta de vuelta
 		UsuarioLoginResponseDTO responseDTO = new UsuarioLoginResponseDTO();
 		responseDTO.setToken(jwtToken);
+		responseDTO.setIdUsuario(entidad.getId());
 		responseDTO.setExpiresIn(jwtService.getExpirationTime());
 
 		return responseDTO;

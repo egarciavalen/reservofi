@@ -564,4 +564,28 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 
 		}
 	}
+
+	@Test
+	void registerTest() {
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		usuarioDTO.setNombre("UsuarioDTO prueba");
+		usuarioDTO.setPrimerApellido("Prueba primer apellido");
+		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
+		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
+		usuarioDTO.setContrasenia("pass12345");
+		usuarioDTO.setActivo(true);
+
+		UsuarioDTO registrado = gestionUsuarioService.register(usuarioDTO);
+		assertNotNull(registrado);
+		assertEquals("UsuarioDTO prueba", registrado.getNombre());
+		assertEquals("Prueba primer apellido", registrado.getPrimerApellido());
+		assertEquals("Prueba segundo apellido", registrado.getSegundoApellido());
+		assertEquals("prueba@gmail.com", registrado.getCorreoCorporativo());
+		assertNotEquals("pass12345", registrado.getContrasenia()); // NO debería haberse insertado en plano
+		assertEquals(true, registrado.getActivo());
+		assertNotNull(usuarioDTO.getIdsRoles());
+		assertEquals(1, usuarioDTO.getIdsRoles().size());
+		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+	}
+
 }

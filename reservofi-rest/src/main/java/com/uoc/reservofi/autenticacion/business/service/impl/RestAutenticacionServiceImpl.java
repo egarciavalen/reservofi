@@ -6,7 +6,9 @@ import com.uoc.reservofi.autenticacion.business.dto.RestRegisterRequestDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestRegisterResponseDTO;
 import com.uoc.reservofi.autenticacion.business.mapper.RestAutenticacionMapper;
 import com.uoc.reservofi.autenticacion.business.service.RestAutenticacionService;
-import com.uoc.reservofi.usuario.business.dto.*;
+import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioLoginResponseDTO;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class RestAutenticacionServiceImpl implements RestAutenticacionService {
 	@Override
 	public RestRegisterResponseDTO register(RestRegisterRequestDTO restDTO) {
 		UsuarioDTO dto = autenticacionMapper.registerRestRequestDTOARequestDTO(restDTO);
-		dto = gestionUsuarioService.insert(dto);
+		dto = gestionUsuarioService.register(dto);
 		return autenticacionMapper.registerResponseDTOARestResponseDTO(dto);
 	}
 

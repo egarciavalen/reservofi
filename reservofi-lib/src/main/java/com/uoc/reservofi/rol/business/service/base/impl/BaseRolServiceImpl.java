@@ -18,4 +18,9 @@ public class BaseRolServiceImpl extends AbstractBaseEntidadServiceImpl<Rol> impl
 	public BaseEntidadRepository<Rol> getRepository() {
 		return rolRepository;
 	}
+
+	@Override
+	public Long getIdByNombre(String nombre) {
+		return ((RolRepository) getRepository()).getIdByNombre(nombre);
+	}
 }

@@ -59,7 +59,6 @@ public class AutenticacionControllerTest {
 		restRegisterDTO.setCorreoCorporativo("prueba@gmail.com");
 		restRegisterDTO.setContrasenia("pass12345");
 		restRegisterDTO.setActivo(true);
-		restRegisterDTO.setIdsRoles(List.of(1L, 2L));
 
 		// DTO que se espera obtener al final
 		RestRegisterResponseDTO restReturnDTO = new RestRegisterResponseDTO();
@@ -69,7 +68,7 @@ public class AutenticacionControllerTest {
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO.setIdsRoles(List.of(1L));
 
 		// DTO con el que se invoca al servicio de gestión
 		UsuarioDTO registerDTO = new UsuarioDTO();
@@ -79,7 +78,7 @@ public class AutenticacionControllerTest {
 		registerDTO.setCorreoCorporativo("prueba@gmail.com");
 		registerDTO.setContrasenia("pass12345");
 		registerDTO.setActivo(true);
-		registerDTO.setIdsRoles(List.of(1L, 2L));
+		registerDTO.setIdsRoles(null);
 
 		// DTO que devuelve el servicio de gestión
 		UsuarioDTO mockReturnDTO = new UsuarioDTO();
@@ -90,17 +89,17 @@ public class AutenticacionControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
+		mockReturnDTO.setIdsRoles(List.of(1L));
 
 		// Mock del servicio de gestión
-		when(gestionUsuarioService.insert(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
+		when(gestionUsuarioService.register(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
 
 		// Llamada a realizar
 		mockMvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restRegisterDTO)))
 				.andExpect(status().isCreated()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
 		// Se verifica que se haya llamado al servicio de gestión 1 vez
-		verify(gestionUsuarioService).insert(usuarioCaptor.capture());
+		verify(gestionUsuarioService).register(usuarioCaptor.capture());
 
 		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
 		UsuarioDTO capturedDTO = usuarioCaptor.getValue();
@@ -125,6 +124,7 @@ public class AutenticacionControllerTest {
 		// DTO que se espera obtener al final
 		RestLoginResponseDTO restLoginResponseDTO = new RestLoginResponseDTO();
 		restLoginResponseDTO.setToken("token");
+		restLoginResponseDTO.setIdUsuario(1L);
 		restLoginResponseDTO.setExpiresIn(1000);
 
 		// DTO con el que se invoca al servicio de gestión
@@ -135,6 +135,7 @@ public class AutenticacionControllerTest {
 		// DTO que devuelve el servicio de gestión
 		UsuarioLoginResponseDTO mockResponseDTO = new UsuarioLoginResponseDTO();
 		mockResponseDTO.setToken("token");
+		mockResponseDTO.setIdUsuario(1L);
 		mockResponseDTO.setExpiresIn(1000);
 
 		// Mock del servicio de gestión

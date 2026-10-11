@@ -56,7 +56,7 @@ public class JwtConfiguration {
 
 		CorsConfiguration configuration = new CorsConfiguration();
 
-		// Puerto frontend
+		// Puerto frontend (si NO coincide, no se podrá conectar)
 		configuration.setAllowedOrigins(List.of("http://localhost:8000"));
 		// Opciones
 		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));

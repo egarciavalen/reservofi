@@ -5,8 +5,6 @@ import com.uoc.reservofi.autenticacion.business.dto.RestLoginResponseDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestRegisterRequestDTO;
 import com.uoc.reservofi.autenticacion.business.dto.RestRegisterResponseDTO;
 import com.uoc.reservofi.autenticacion.business.service.RestAutenticacionService;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +21,8 @@ public class AutenticacionController {
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
 	RestRegisterResponseDTO register(@RequestBody RestRegisterRequestDTO restDTO) {
-		return restAutenticacionService.register(restDTO);
+		RestRegisterResponseDTO r = restAutenticacionService.register(restDTO);
+		return r;
 	}
 
 	@PostMapping("/login")

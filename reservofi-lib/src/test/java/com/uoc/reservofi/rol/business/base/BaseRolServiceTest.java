@@ -290,4 +290,15 @@ public class BaseRolServiceTest extends AbstractTest {
 		assertNotNull(rol.getActualizacionFecha());
 	}
 
+	@Test
+	void getIdByNombreTest() {
+		Long idRol = baseRolService.getIdByNombre("Empleado");
+		assertEquals(2, idRol);
+	}
+
+	@Test
+	void getIdByNombreNotExistsTest() {
+		Long idRol = baseRolService.getIdByNombre("No existe");
+		assertNull(idRol);
+	}
 }

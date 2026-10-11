@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class RestLoginResponseDTO {
 	private String token;
+	private long idUsuario;
 	private long expiresIn;
 }

@@ -85,4 +85,8 @@ public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<Rol
 		return rolMapper.entidadADTOList(entidadList);
 	}
 
+	@Override
+	public Long getIdByNombre(String nombre) {
+		return baseRolService.getIdByNombre(nombre);
+	}
 }
