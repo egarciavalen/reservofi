@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service(RestReservaService.BEAN_NAME)
 @RequiredArgsConstructor
 public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestReservaDTO> implements RestReservaService {
@@ -40,5 +42,11 @@ public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestR
 	public RestReservaDTO findById(Long id) {
 		ReservaDTO dto = gestionReservaService.findById(id);
 		return restReservaMapper.DTOArestDTO(dto);
+	}
+
+	@Override
+	public List<RestReservaDTO> findAll() {
+		List<ReservaDTO> dtoList = gestionReservaService.findAll();
+		return restReservaMapper.DTOArestDTOList(dtoList);
 	}
 }

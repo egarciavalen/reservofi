@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -34,6 +36,16 @@ public class PuestoController {
 			throw new RestException("Entidad no encontrada");
 		}
 		return restPuestoDTO;
+	}
+
+	@GetMapping("/puesto")
+	@ResponseStatus(HttpStatus.OK)
+	List<RestPuestoDTO> findAll() {
+		List<RestPuestoDTO> restPuestoDTOList = restPuestoService.findAll();
+		if (restPuestoDTOList == null || restPuestoDTOList.isEmpty()) {
+			throw new RestException("Entidades no encontradas");
+		}
+		return restPuestoDTOList;
 	}
 
 	@DeleteMapping("/puesto/{id}")

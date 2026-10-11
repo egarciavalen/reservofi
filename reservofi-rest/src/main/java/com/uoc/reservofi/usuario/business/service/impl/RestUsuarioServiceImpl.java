@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service(RestUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
 public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestUsuarioConsultaDTO> implements RestUsuarioService {
@@ -34,5 +36,11 @@ public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestU
 	public RestUsuarioConsultaDTO findById(Long id) {
 		UsuarioDTO dto = gestionUsuarioService.findById(id);
 		return restUsuarioMapper.DTOArestDTO(dto);
+	}
+
+	@Override
+	public List<RestUsuarioConsultaDTO> findAll() {
+		List<UsuarioDTO> dtoList = gestionUsuarioService.findAll();
+		return restUsuarioMapper.DTOArestDTOList(dtoList);
 	}
 }

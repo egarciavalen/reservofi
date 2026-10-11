@@ -6,6 +6,8 @@ import com.uoc.reservofi.base.business.service.RestEntidadService;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Validated // Validaciones @Valid
 public abstract class AbstractRestEntidadServiceImpl<T extends RestEntidadDTO> implements RestEntidadService<T> {
 
@@ -28,6 +30,11 @@ public abstract class AbstractRestEntidadServiceImpl<T extends RestEntidadDTO> i
 
 	@Override
 	public T findById(Long id) {
+		throw new RestException("Operación no implementada");
+	}
+
+	@Override
+	public List<T> findAll() {
 		throw new RestException("Operación no implementada");
 	}
 

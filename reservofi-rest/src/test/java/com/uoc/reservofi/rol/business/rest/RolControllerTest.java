@@ -19,6 +19,9 @@ import org.springframework.test.json.JsonCompareMode;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -168,5 +171,44 @@ public class RolControllerTest {
 		// Con esto se verifica el funcionamiento del ControllerAdvice
 		mockMvc.perform(get("/api/rol/{id}", idTest)).
 				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
+	}
+
+	@Test
+	void findAllTest() throws Exception {
+
+		// Lista de DTOs que devuelve el servicio de gestión
+		RolDTO mockReturnDTO1 = new RolDTO();
+		mockReturnDTO1.setId(1L);
+		mockReturnDTO1.setNombre("Rol prueba");
+
+		RolDTO mockReturnDTO2 = new RolDTO();
+		mockReturnDTO2.setId(2L);
+		mockReturnDTO2.setNombre("Rol prueba 2");
+
+		List<RolDTO> mockReturnDTOList = new ArrayList<>();
+		mockReturnDTOList.add(mockReturnDTO1);
+		mockReturnDTOList.add(mockReturnDTO2);
+
+		// Lista de DTOs que se espera obtener al final
+		RestRolDTO restReturnDTO1 = new RestRolDTO();
+		restReturnDTO1.setId(1L);
+		restReturnDTO1.setNombre("Rol prueba");
+
+		RestRolDTO restReturnDTO2 = new RestRolDTO();
+		restReturnDTO2.setId(2L);
+		restReturnDTO2.setNombre("Rol prueba 2");
+
+		List<RestRolDTO> restReturnDTOList = new ArrayList<>();
+		restReturnDTOList.add(restReturnDTO1);
+		restReturnDTOList.add(restReturnDTO2);
+
+		// Mock del servicio de gestión
+		when(gestionRolService.findAll()).thenReturn(mockReturnDTOList);
+
+		mockMvc.perform(get("/api/rol")).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTOList), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionRolService).findAll();
 	}
 }

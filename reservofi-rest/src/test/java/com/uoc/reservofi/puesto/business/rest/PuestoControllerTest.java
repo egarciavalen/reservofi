@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -202,4 +204,56 @@ public class PuestoControllerTest {
 		mockMvc.perform(get("/api/puesto/{id}", idTest)).
 				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
 	}
+
+	@Test
+	void findAllTest() throws Exception {
+
+		// Lista de DTOs que devuelve el servicio de gestión
+		PuestoDTO mockReturnDTO1 = new PuestoDTO();
+		mockReturnDTO1.setId(1L);
+		mockReturnDTO1.setNombre("Puesto prueba");
+		mockReturnDTO1.setCoordenadaX(BigDecimal.valueOf(11.14));
+		mockReturnDTO1.setCoordenadaY(BigDecimal.valueOf(22.25));
+		mockReturnDTO1.setIdSala(1L);
+
+		PuestoDTO mockReturnDTO2 = new PuestoDTO();
+		mockReturnDTO2.setId(2L);
+		mockReturnDTO2.setNombre("Puesto prueba 2");
+		mockReturnDTO2.setCoordenadaX(BigDecimal.valueOf(22.35));
+		mockReturnDTO2.setCoordenadaY(BigDecimal.valueOf(33.36));
+		mockReturnDTO2.setIdSala(2L);
+
+		List<PuestoDTO> mockReturnDTOList = new ArrayList<>();
+		mockReturnDTOList.add(mockReturnDTO1);
+		mockReturnDTOList.add(mockReturnDTO2);
+
+		// Lista de DTOs que se espera obtener al final
+		RestPuestoDTO restReturnDTO1 = new RestPuestoDTO();
+		restReturnDTO1.setId(1L);
+		restReturnDTO1.setNombre("Puesto prueba");
+		restReturnDTO1.setCoordenadaX(BigDecimal.valueOf(11.14));
+		restReturnDTO1.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restReturnDTO1.setIdSala(1L);
+
+		RestPuestoDTO restReturnDTO2 = new RestPuestoDTO();
+		restReturnDTO2.setId(2L);
+		restReturnDTO2.setNombre("Puesto prueba 2");
+		restReturnDTO2.setCoordenadaX(BigDecimal.valueOf(22.35));
+		restReturnDTO2.setCoordenadaY(BigDecimal.valueOf(33.36));
+		restReturnDTO2.setIdSala(2L);
+
+		List<RestPuestoDTO> restReturnDTOList = new ArrayList<>();
+		restReturnDTOList.add(restReturnDTO1);
+		restReturnDTOList.add(restReturnDTO2);
+
+		// Mock del servicio de gestión
+		when(gestionPuestoService.findAll()).thenReturn(mockReturnDTOList);
+
+		mockMvc.perform(get("/api/puesto")).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTOList), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionPuestoService).findAll();
+	}
+
 }

@@ -2,10 +2,9 @@ package com.uoc.reservofi.puesto.business.mapper;
 
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring") // componentModel para inyección de dependencias
 public interface RestPuestoMapper {
@@ -27,4 +26,7 @@ public interface RestPuestoMapper {
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
 	@Mapping(source = "idSala", target = "idSala")
 	RestPuestoDTO DTOArestDTO(PuestoDTO dto);
+
+	@IterableMapping(qualifiedByName = "DTOArestDTO")
+	List<RestPuestoDTO> DTOArestDTOList(List<PuestoDTO> entidadList);
 }

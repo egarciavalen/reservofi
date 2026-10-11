@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -34,6 +36,16 @@ public class SalaController {
 			throw new RestException("Entidad no encontrada");
 		}
 		return restSalaDTO;
+	}
+
+	@GetMapping("/sala")
+	@ResponseStatus(HttpStatus.OK)
+	List<RestSalaDTO> findAll() {
+		List<RestSalaDTO> restSalaDTOList = restSalaService.findAll();
+		if (restSalaDTOList == null || restSalaDTOList.isEmpty()) {
+			throw new RestException("Entidades no encontradas");
+		}
+		return restSalaDTOList;
 	}
 
 	@DeleteMapping("/sala/{id}")

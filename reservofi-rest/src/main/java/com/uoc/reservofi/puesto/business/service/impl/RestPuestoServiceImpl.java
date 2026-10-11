@@ -1,14 +1,16 @@
 package com.uoc.reservofi.puesto.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
-import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
 import com.uoc.reservofi.puesto.business.mapper.RestPuestoMapper;
 import com.uoc.reservofi.puesto.business.service.GestionPuestoService;
 import com.uoc.reservofi.puesto.business.service.RestPuestoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service(RestPuestoService.BEAN_NAME)
 @RequiredArgsConstructor
@@ -40,5 +42,11 @@ public class RestPuestoServiceImpl extends AbstractRestEntidadServiceImpl<RestPu
 	public RestPuestoDTO findById(Long id) {
 		PuestoDTO dto = gestionPuestoService.findById(id);
 		return restPuestoMapper.DTOArestDTO(dto);
+	}
+
+	@Override
+	public List<RestPuestoDTO> findAll() {
+		List<PuestoDTO> dtoList = gestionPuestoService.findAll();
+		return restPuestoMapper.DTOArestDTOList(dtoList);
 	}
 }

@@ -3,10 +3,9 @@ package com.uoc.reservofi.usuario.business.mapper;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RestUsuarioMapper {
@@ -34,5 +33,7 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "idsRoles", target = "idsRoles")
 	RestUsuarioConsultaDTO DTOArestDTO(UsuarioDTO dto);
 
+	@IterableMapping(qualifiedByName = "DTOArestDTO")
+	List<RestUsuarioConsultaDTO> DTOArestDTOList(List<UsuarioDTO> entidadList);
 
 }

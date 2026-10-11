@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -34,6 +36,16 @@ public class RolController {
 			throw new RestException("Entidad no encontrada");
 		}
 		return restRolDTO;
+	}
+
+	@GetMapping("/rol")
+	@ResponseStatus(HttpStatus.OK)
+	List<RestRolDTO> findAll() {
+		List<RestRolDTO> restRolDTOList = restRolService.findAll();
+		if (restRolDTOList == null || restRolDTOList.isEmpty()) {
+			throw new RestException("Entidades no encontradas");
+		}
+		return restRolDTOList;
 	}
 
 	@DeleteMapping("/rol/{id}")

@@ -20,6 +20,7 @@ import org.springframework.test.json.JsonCompareMode;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -169,5 +170,66 @@ public class UsuarioControllerTest {
 		// Respuesta de un error interno
 		mockMvc.perform(get("/api/usuario/{id}", idTest)).
 				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
+	}
+
+	@Test
+	void findAllTest() throws Exception {
+
+		// Lista de DTOs que devuelve el servicio de gestión
+		UsuarioDTO mockReturnDTO1 = new UsuarioDTO();
+		mockReturnDTO1.setId(1L);
+		mockReturnDTO1.setNombre("Usuario prueba 1");
+		mockReturnDTO1.setPrimerApellido("Prueba primer apellido 1");
+		mockReturnDTO1.setSegundoApellido("Prueba segundo apellido 1");
+		mockReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
+		mockReturnDTO1.setContrasenia("pass12345_1");
+		mockReturnDTO1.setActivo(true);
+		mockReturnDTO1.setIdsRoles(List.of(1L));
+
+		UsuarioDTO mockReturnDTO2 = new UsuarioDTO();
+		mockReturnDTO2.setId(2L);
+		mockReturnDTO2.setNombre("Usuario prueba 2");
+		mockReturnDTO2.setPrimerApellido("Prueba primer apellido 2");
+		mockReturnDTO2.setSegundoApellido("Prueba segundo apellido 2");
+		mockReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
+		mockReturnDTO2.setContrasenia("pass12345_2");
+		mockReturnDTO2.setActivo(false);
+		mockReturnDTO2.setIdsRoles(List.of(2L));
+
+		List<UsuarioDTO> mockReturnDTOList = new ArrayList<>();
+		mockReturnDTOList.add(mockReturnDTO1);
+		mockReturnDTOList.add(mockReturnDTO2);
+
+		// Lista de DTOs que se espera obtener al final
+		RestUsuarioConsultaDTO restReturnDTO1 = new RestUsuarioConsultaDTO();
+		restReturnDTO1.setId(1L);
+		restReturnDTO1.setNombre("Usuario prueba 1");
+		restReturnDTO1.setPrimerApellido("Prueba primer apellido 1");
+		restReturnDTO1.setSegundoApellido("Prueba segundo apellido 1");
+		restReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
+		restReturnDTO1.setActivo(true);
+		restReturnDTO1.setIdsRoles(List.of(1L));
+
+		RestUsuarioConsultaDTO restReturnDTO2 = new RestUsuarioConsultaDTO();
+		restReturnDTO2.setId(2L);
+		restReturnDTO2.setNombre("Usuario prueba 2");
+		restReturnDTO2.setPrimerApellido("Prueba primer apellido 2");
+		restReturnDTO2.setSegundoApellido("Prueba segundo apellido 2");
+		restReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
+		restReturnDTO2.setActivo(false);
+		restReturnDTO2.setIdsRoles(List.of(2L));
+
+		List<RestUsuarioConsultaDTO> restReturnDTOList = new ArrayList<>();
+		restReturnDTOList.add(restReturnDTO1);
+		restReturnDTOList.add(restReturnDTO2);
+
+		// Mock del servicio de gestión
+		when(gestionUsuarioService.findAll()).thenReturn(mockReturnDTOList);
+
+		mockMvc.perform(get("/api/usuario")).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTOList), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionUsuarioService).findAll();
 	}
 }

@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -202,4 +204,56 @@ public class ReservaControllerTest {
 		mockMvc.perform(get("/api/reserva/{id}", idTest)).
 				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
 	}
+
+	@Test
+	void findAllTest() throws Exception {
+
+		// Lista de DTOs que devuelve el servicio de gestión
+		ReservaDTO mockReturnDTO1 = new ReservaDTO();
+		mockReturnDTO1.setId(1L);
+		mockReturnDTO1.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
+		mockReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
+		mockReturnDTO1.setIdPuesto(1L);
+		mockReturnDTO1.setIdUsuario(1L);
+
+		ReservaDTO mockReturnDTO2 = new ReservaDTO();
+		mockReturnDTO2.setId(2L);
+		mockReturnDTO2.setFechaInicio(LocalDateTime.of(2026, 10, 11, 0, 0));
+		mockReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
+		mockReturnDTO2.setIdPuesto(2L);
+		mockReturnDTO2.setIdUsuario(2L);
+
+		List<ReservaDTO> mockReturnDTOList = new ArrayList<>();
+		mockReturnDTOList.add(mockReturnDTO1);
+		mockReturnDTOList.add(mockReturnDTO2);
+
+		// Lista de DTOs que se espera obtener al final
+		RestReservaDTO restReturnDTO1 = new RestReservaDTO();
+		restReturnDTO1.setId(1L);
+		restReturnDTO1.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
+		restReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
+		restReturnDTO1.setIdPuesto(1L);
+		restReturnDTO1.setIdUsuario(1L);
+
+		RestReservaDTO restReturnDTO2 = new RestReservaDTO();
+		restReturnDTO2.setId(2L);
+		restReturnDTO2.setFechaInicio(LocalDateTime.of(2026, 10, 11, 0, 0));
+		restReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
+		restReturnDTO2.setIdPuesto(2L);
+		restReturnDTO2.setIdUsuario(2L);
+
+		List<RestReservaDTO> restReturnDTOList = new ArrayList<>();
+		restReturnDTOList.add(restReturnDTO1);
+		restReturnDTOList.add(restReturnDTO2);
+
+		// Mock del servicio de gestión
+		when(gestionReservaService.findAll()).thenReturn(mockReturnDTOList);
+
+		mockMvc.perform(get("/api/reserva")).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTOList), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionReservaService).findAll();
+	}
+
 }

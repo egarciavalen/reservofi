@@ -27,7 +27,4 @@ public interface RolMapper {
 	@IterableMapping(qualifiedByName = "entidadADTO")
 	List<RolDTO> entidadADTOList(List<Rol> entidadList);
 
-	@IterableMapping(qualifiedByName = "DTOAentidad")
-	List<Rol> DTOAEntidadList(List<RolDTO> dtoList);
-
 }

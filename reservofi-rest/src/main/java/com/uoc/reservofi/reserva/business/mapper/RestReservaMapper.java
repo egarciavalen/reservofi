@@ -2,10 +2,9 @@ package com.uoc.reservofi.reserva.business.mapper;
 
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.dto.RestReservaDTO;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RestReservaMapper {
@@ -27,4 +26,8 @@ public interface RestReservaMapper {
 	@Mapping(source = "idUsuario", target = "idUsuario")
 	@Mapping(source = "idPuesto", target = "idPuesto")
 	RestReservaDTO DTOArestDTO(ReservaDTO dto);
+
+	@IterableMapping(qualifiedByName = "DTOArestDTO")
+	List<RestReservaDTO> DTOArestDTOList(List<ReservaDTO> entidadList);
+
 }

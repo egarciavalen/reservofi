@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -33,6 +35,16 @@ public class UsuarioController {
 			throw new RestException("Entidad no encontrada");
 		}
 		return restUsuarioDTO;
+	}
+
+	@GetMapping("/usuario")
+	@ResponseStatus(HttpStatus.OK)
+	List<RestUsuarioConsultaDTO> findAll() {
+		List<RestUsuarioConsultaDTO> restUsuarioDTOList = restUsuarioService.findAll();
+		if (restUsuarioDTOList == null || restUsuarioDTOList.isEmpty()) {
+			throw new RestException("Entidades no encontradas");
+		}
+		return restUsuarioDTOList;
 	}
 
 	@DeleteMapping("/usuario/{id}")

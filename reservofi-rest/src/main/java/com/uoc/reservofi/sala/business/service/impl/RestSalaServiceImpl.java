@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service(RestSalaService.BEAN_NAME)
 @RequiredArgsConstructor
 public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSalaDTO> implements RestSalaService {
@@ -40,5 +42,11 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 	public RestSalaDTO findById(Long id) {
 		SalaDTO dto = gestionSalaService.findById(id);
 		return restSalaMapper.DTOArestDTO(dto);
+	}
+
+	@Override
+	public List<RestSalaDTO> findAll() {
+		List<SalaDTO> dtoList = gestionSalaService.findAll();
+		return restSalaMapper.DTOArestDTOList(dtoList);
 	}
 }

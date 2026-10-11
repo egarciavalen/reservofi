@@ -19,6 +19,9 @@ import org.springframework.test.json.JsonCompareMode;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -163,5 +166,44 @@ public class SalaControllerTest {
 		// Respuesta de un error interno
 		mockMvc.perform(get("/api/sala/{id}", idTest)).
 				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
+	}
+
+	@Test
+	void findAllTest() throws Exception {
+
+		// Lista de DTOs que devuelve el servicio de gestión
+		SalaDTO mockReturnDTO1 = new SalaDTO();
+		mockReturnDTO1.setId(1L);
+		mockReturnDTO1.setNombre("Sala prueba");
+
+		SalaDTO mockReturnDTO2 = new SalaDTO();
+		mockReturnDTO2.setId(2L);
+		mockReturnDTO2.setNombre("Sala prueba 2");
+
+		List<SalaDTO> mockReturnDTOList = new ArrayList<>();
+		mockReturnDTOList.add(mockReturnDTO1);
+		mockReturnDTOList.add(mockReturnDTO2);
+
+		// Lista de DTOs que se espera obtener al final
+		RestSalaDTO restReturnDTO1 = new RestSalaDTO();
+		restReturnDTO1.setId(1L);
+		restReturnDTO1.setNombre("Sala prueba");
+
+		RestSalaDTO restReturnDTO2 = new RestSalaDTO();
+		restReturnDTO2.setId(2L);
+		restReturnDTO2.setNombre("Sala prueba 2");
+
+		List<RestSalaDTO> restReturnDTOList = new ArrayList<>();
+		restReturnDTOList.add(restReturnDTO1);
+		restReturnDTOList.add(restReturnDTO2);
+
+		// Mock del servicio de gestión
+		when(gestionSalaService.findAll()).thenReturn(mockReturnDTOList);
+
+		mockMvc.perform(get("/api/sala")).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTOList), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionSalaService).findAll();
 	}
 }
