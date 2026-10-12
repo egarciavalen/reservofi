@@ -106,16 +106,17 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 				throw new GestionException("Los formatos que se admiten son png y jpeg");
 			}
 
-			String rutaDirectorio = "src/main/resources/static/images/";
+			// Primero hay que crear el directorio (si no existe), porque de lo contrario dará un AccessDeniedException
+			String rutaDirectorio = "reservofi-lib/src/main/resources/static/images/";
+			Path directorio = Path.of(rutaDirectorio);
+			if (!Files.exists(directorio)) {
+				Files.createDirectories(directorio);
+			}
+
+			// Una vez creado el directorio, se puede proceder a indicar el path del fichero
 			// Uso de UUID.randomUUID() para protegerse en caso de que se suban ficheros con nombres iguales
 			String rutaFichero = rutaDirectorio + UUID.randomUUID() + "_" + dto.getImagen().getOriginalFilename();
-
-			// Objeto Path obtenido de la ruta del fichero
 			Path fichero = Path.of(rutaFichero);
-			// Si NO existe la ruta del directorio, se crea
-			if (!Files.exists(fichero)) {
-				Files.createDirectories(fichero);
-			}
 
 			// Se escriben los bytes del fichero en la ruta destino
 			Files.write(fichero, dto.getImagen().getBytes());
