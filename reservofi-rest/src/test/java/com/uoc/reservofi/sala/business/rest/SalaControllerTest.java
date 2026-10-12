@@ -23,10 +23,11 @@ import tools.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,11 +44,11 @@ public class SalaControllerTest {
 	@MockitoBean
 	private GestionSalaService gestionSalaService;
 
-	// TODO: REVISAR PRUEBA CREATE TEST CON FILE
 	@Test
 	void createTest() throws Exception {
 
-		MockMultipartFile mockFile = new MockMultipartFile("mockFile", new byte[1]);
+		// IMPORTANTE que coincida el nombre con el parámetro de entrada del dto: "imagen"
+		MockMultipartFile mockFile = new MockMultipartFile("imagen", new byte[1]);
 
 		// DTO de entrada
 		RestSalaCreacionDTO restInsertDTO = new RestSalaCreacionDTO();
@@ -74,21 +75,22 @@ public class SalaControllerTest {
 		// Mock del servicio de gestión
 		when(gestionSalaService.createAndSaveImage(any(SalaDTO.class))).thenReturn(mockReturnDTO);
 
-		/**
-		 // Llamada a realizar
-		 mockMvc.perform(multipart("/api/sala").param("nombre", restInsertDTO.getNombre()).file(mockFile))
-		 .andExpect(status().isCreated()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
-		 // Se verifica que se haya llamado al servicio de gestión 1 vez
-		 verify(gestionSalaService).createAndSaveImage(salaCaptor.capture());
+		// Llamada a realizar
+		// Al incluir un fichero se usa multipart + param + file
+		mockMvc.perform(multipart("/api/sala").param("nombre", restInsertDTO.getNombre()).file(mockFile))
+				.andExpect(status().isCreated()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
-		 // Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
-		 SalaDTO capturedDTO = salaCaptor.getValue();
-		 assertEquals(insertDTO.getId(), capturedDTO.getId());
-		 assertEquals(insertDTO.getNombre(), capturedDTO.getNombre());
-		 assertEquals(insertDTO.getImagen(), capturedDTO.getImagen());
-		 assertNull(capturedDTO.getRutaImagen()); // NO se le pasa la ruta de la imagen desde el rest
-		 **/
+		// Se verifica que se haya llamado al servicio de gestión 1 vez
+		verify(gestionSalaService).createAndSaveImage(salaCaptor.capture());
+
+		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
+		SalaDTO capturedDTO = salaCaptor.getValue();
+		assertEquals(insertDTO.getId(), capturedDTO.getId());
+		assertEquals(insertDTO.getNombre(), capturedDTO.getNombre());
+		assertEquals(insertDTO.getImagen(), capturedDTO.getImagen());
+		assertNull(capturedDTO.getRutaImagen()); // NO se le pasa la ruta de la imagen desde el rest
+
 	}
 
 	@Test

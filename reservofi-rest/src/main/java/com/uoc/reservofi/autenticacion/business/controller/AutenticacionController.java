@@ -14,15 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AutenticacionController {
 
-	// TODO: HAY QUE REFACTORIZAR CON USO DE TOKEN JWT
-
 	private final RestAutenticacionService restAutenticacionService;
 
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
 	RestRegisterResponseDTO register(@RequestBody RestRegisterRequestDTO restDTO) {
-		RestRegisterResponseDTO r = restAutenticacionService.register(restDTO);
-		return r;
+		return restAutenticacionService.register(restDTO);
 	}
 
 	@PostMapping("/login")
