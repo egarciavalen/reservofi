@@ -1,10 +1,12 @@
 package com.uoc.reservofi.sala.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.sala.business.dto.RestSalaDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaCreacionDTO;
 import com.uoc.reservofi.sala.business.service.RestSalaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,22 +18,20 @@ public class SalaController {
 
 	private final RestSalaService restSalaService;
 
-	@PostMapping("/sala")
+	@PostMapping(path = "/sala", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	RestSalaDTO insert(@RequestBody RestSalaDTO restDTO) {
-		return restSalaService.insert(restDTO);
+		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
+	RestSalaConsultaDTO create(@ModelAttribute RestSalaCreacionDTO restDTO) {
+		return restSalaService.create(restDTO);
 	}
 
-	@PutMapping("/sala")
-	@ResponseStatus(HttpStatus.OK)
-	RestSalaDTO update(@RequestBody RestSalaDTO restDTO) {
-		return restSalaService.update(restDTO);
-	}
+	// TODO: se quita el update de momento hasta que se concrete la funcionalidad
+
 
 	@GetMapping("/sala/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestSalaDTO findById(@PathVariable Long id) {
-		RestSalaDTO restSalaDTO = restSalaService.findById(id);
+	RestSalaConsultaDTO findById(@PathVariable Long id) {
+		RestSalaConsultaDTO restSalaDTO = restSalaService.findById(id);
 		if (restSalaDTO == null) {
 			throw new RestException("Entidad no encontrada");
 		}
@@ -40,8 +40,8 @@ public class SalaController {
 
 	@GetMapping("/sala")
 	@ResponseStatus(HttpStatus.OK)
-	List<RestSalaDTO> findAll() {
-		List<RestSalaDTO> restSalaDTOList = restSalaService.findAll();
+	List<RestSalaConsultaDTO> findAll() {
+		List<RestSalaConsultaDTO> restSalaDTOList = restSalaService.findAll();
 		if (restSalaDTOList == null || restSalaDTOList.isEmpty()) {
 			throw new RestException("Entidades no encontradas");
 		}

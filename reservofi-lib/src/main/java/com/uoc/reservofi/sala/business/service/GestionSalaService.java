@@ -6,4 +6,7 @@ import com.uoc.reservofi.sala.business.dto.SalaDTO;
 public interface GestionSalaService extends GestionEntidadService<SalaDTO> {
 
 	String BEAN_NAME = "gestionSalaService";
+
+	// Consulta adicional para gestionar el guardado de la imagen
+	SalaDTO createAndSaveImage(SalaDTO dto);
 }

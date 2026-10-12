@@ -13,6 +13,7 @@ public interface SalaMapper {
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
+	@Mapping(source = "rutaImagen", target = "rutaImagen")
 	Sala DTOAentidad(SalaDTO dto);
 
 	@InheritConfiguration(name = "DTOAentidad")
@@ -22,6 +23,7 @@ public interface SalaMapper {
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
+	@Mapping(source = "rutaImagen", target = "rutaImagen")
 	SalaDTO entidadADTO(Sala entidad);
 
 	@IterableMapping(qualifiedByName = "entidadADTO")

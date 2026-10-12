@@ -11,7 +11,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 
 @Service(GestionSalaService.BEAN_NAME)
 @RequiredArgsConstructor
@@ -85,4 +89,45 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 		return salaMapper.entidadADTOList(entidadList);
 	}
 
+	@Override
+	public SalaDTO createAndSaveImage(SalaDTO dto) {
+		try {
+
+			// Validaciones previas
+			if (dto.getImagen().getOriginalFilename() == null) {
+				throw new GestionException("No se ha podido recuperar el nombre de la imagen");
+			}
+
+			if (dto.getImagen().getContentType() == null) {
+				throw new GestionException("No se ha podido recuperar información del tipo de la imagen");
+			}
+
+			if (!(dto.getImagen().getContentType().equals("image/png") || dto.getImagen().getContentType().equals("image/jpeg"))) {
+				throw new GestionException("Los formatos que se admiten son png y jpeg");
+			}
+
+			String rutaDirectorio = "src/main/resources/static/images/";
+			// Uso de UUID.randomUUID() para protegerse en caso de que se suban ficheros con nombres iguales
+			String rutaFichero = rutaDirectorio + UUID.randomUUID() + "_" + dto.getImagen().getOriginalFilename();
+
+			// Objeto Path obtenido de la ruta del fichero
+			Path fichero = Path.of(rutaFichero);
+			// Si NO existe la ruta del directorio, se crea
+			if (!Files.exists(fichero)) {
+				Files.createDirectories(fichero);
+			}
+
+			// Se escriben los bytes del fichero en la ruta destino
+			Files.write(fichero, dto.getImagen().getBytes());
+
+			// Asigna en el DTO la ruta de la imagen guardada
+			dto.setRutaImagen(rutaFichero);
+
+			// Finalmente, se inserta la sala a crear, guardando en base de datos la ruta relativa
+			return this.insert(dto);
+
+		} catch (IOException e) {
+			throw new GestionException("Ha ocurrido un error guardando la imagen en la base de datos: " + e);
+		}
+	}
 }

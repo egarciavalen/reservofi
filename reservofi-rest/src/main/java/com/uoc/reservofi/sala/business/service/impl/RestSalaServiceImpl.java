@@ -1,12 +1,12 @@
 package com.uoc.reservofi.sala.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
-import com.uoc.reservofi.sala.business.dto.RestSalaDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaCreacionDTO;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.RestSalaMapper;
 import com.uoc.reservofi.sala.business.service.GestionSalaService;
 import com.uoc.reservofi.sala.business.service.RestSalaService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +14,18 @@ import java.util.List;
 
 @Service(RestSalaService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSalaDTO> implements RestSalaService {
+public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSalaConsultaDTO> implements RestSalaService {
 
 	private final GestionSalaService gestionSalaService;
 	private final RestSalaMapper restSalaMapper;
 
-	@Override
-	public RestSalaDTO insert(@Valid RestSalaDTO restDTO) {
-		SalaDTO dto = restSalaMapper.restDTOADTO(restDTO);
-		dto = gestionSalaService.insert(dto);
-		return restSalaMapper.DTOArestDTO(dto);
-	}
+	// En principio se asume que NO se modificará la sala una vez creada
 
 	@Override
-	public RestSalaDTO update(@Valid RestSalaDTO restDTO) {
-		SalaDTO dto = restSalaMapper.restDTOADTO(restDTO);
-		dto = gestionSalaService.update(dto);
-		return restSalaMapper.DTOArestDTO(dto);
+	public RestSalaConsultaDTO create(RestSalaCreacionDTO restDTO) {
+		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
+		dto = gestionSalaService.createAndSaveImage(dto);
+		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
 
 	@Override
@@ -39,14 +34,15 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 	}
 
 	@Override
-	public RestSalaDTO findById(Long id) {
+	public RestSalaConsultaDTO findById(Long id) {
 		SalaDTO dto = gestionSalaService.findById(id);
-		return restSalaMapper.DTOArestDTO(dto);
+		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
 
 	@Override
-	public List<RestSalaDTO> findAll() {
+	public List<RestSalaConsultaDTO> findAll() {
 		List<SalaDTO> dtoList = gestionSalaService.findAll();
-		return restSalaMapper.DTOArestDTOList(dtoList);
+		return restSalaMapper.consultaDTOArestDTOList(dtoList);
 	}
+
 }
