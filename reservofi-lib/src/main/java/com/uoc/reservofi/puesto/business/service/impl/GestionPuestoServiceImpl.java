@@ -10,11 +10,13 @@ import com.uoc.reservofi.puesto.business.service.base.BasePuestoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service(GestionPuestoService.BEAN_NAME)
 @RequiredArgsConstructor
+@Transactional(rollbackFor = GestionException.class)
 public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<PuestoDTO> implements GestionPuestoService {
 
 	private final BasePuestoService basePuestoService;

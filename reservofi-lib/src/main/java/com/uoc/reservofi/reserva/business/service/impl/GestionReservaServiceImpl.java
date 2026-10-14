@@ -10,11 +10,13 @@ import com.uoc.reservofi.reserva.business.service.base.BaseReservaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service(GestionReservaService.BEAN_NAME)
 @RequiredArgsConstructor
+@Transactional(rollbackFor = GestionException.class)
 public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl<ReservaDTO> implements GestionReservaService {
 
 	private final BaseReservaService baseReservaService;

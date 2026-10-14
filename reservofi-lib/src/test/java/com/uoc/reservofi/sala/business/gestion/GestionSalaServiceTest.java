@@ -24,12 +24,14 @@ public class GestionSalaServiceTest extends AbstractTest {
 		SalaDTO salaDTO = new SalaDTO();
 		salaDTO.setNombre("SalaDTO prueba");
 		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
+		salaDTO.setNombreImagen("prueba.png");
 
 		SalaDTO insertado = gestionSalaService.insert(salaDTO);
 		assertNotNull(insertado);
 		assertNotNull(insertado.getId());
 		assertEquals("SalaDTO prueba", insertado.getNombre());
 		assertEquals("src/main/resources/static/images/prueba.png", insertado.getRutaImagen());
+		assertEquals("prueba.png", insertado.getNombreImagen());
 	}
 
 	@Test
@@ -37,6 +39,7 @@ public class GestionSalaServiceTest extends AbstractTest {
 		SalaDTO salaDTO = new SalaDTO();
 		salaDTO.setNombre("SalaDTO prueba");
 		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
+		salaDTO.setNombreImagen("prueba.png");
 
 		// Nombre nulo
 		salaDTO.setNombre(null);
@@ -80,6 +83,7 @@ public class GestionSalaServiceTest extends AbstractTest {
 		SalaDTO salaDTO = new SalaDTO();
 		salaDTO.setNombre("SalaDTO prueba");
 		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
+		salaDTO.setNombreImagen("prueba.png");
 
 		// Ruta imagen nula
 		salaDTO.setRutaImagen(null);
@@ -118,6 +122,49 @@ public class GestionSalaServiceTest extends AbstractTest {
 		}
 	}
 
+	@Test
+	void validateNombreImagenTest() {
+		SalaDTO salaDTO = new SalaDTO();
+		salaDTO.setNombre("SalaDTO prueba");
+		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
+		salaDTO.setNombreImagen("prueba.png");
+
+		// Ruta imagen nula
+		salaDTO.setNombreImagen(null);
+		try {
+			gestionSalaService.insert(salaDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre vacío
+		salaDTO.setNombreImagen("");
+		try {
+			gestionSalaService.insert(salaDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Nombre tamanio maximo alcanzado
+		salaDTO.setNombreImagen("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
+		try {
+			gestionSalaService.insert(salaDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
 
 	@Test
 	void updateTest() {
@@ -126,12 +173,14 @@ public class GestionSalaServiceTest extends AbstractTest {
 		salaDTO.setId(1L); // ID existente
 		salaDTO.setNombre("SalaDTO prueba");
 		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
+		salaDTO.setNombreImagen("prueba.png");
 
 		SalaDTO actualizado = gestionSalaService.update(salaDTO);
 		assertNotNull(actualizado);
 		assertEquals(1L, actualizado.getId());
 		assertEquals("SalaDTO prueba", actualizado.getNombre());
 		assertEquals("src/main/resources/static/images/prueba.png", actualizado.getRutaImagen());
+		assertEquals("prueba.png", actualizado.getNombreImagen());
 
 	}
 
@@ -164,6 +213,8 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals(1, salaDTO.getId());
 		assertEquals("Sala 1", salaDTO.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", salaDTO.getRutaImagen());
+		assertEquals("img1.png", salaDTO.getNombreImagen());
+
 	}
 
 	@Test
@@ -176,17 +227,19 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals(1, salaDTO1.getId());
 		assertEquals("Sala 1", salaDTO1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", salaDTO1.getRutaImagen());
+		assertEquals("img1.png", salaDTO1.getNombreImagen());
 
 		SalaDTO salaDTO2 = salasDTO.get(1);
 		assertEquals(2, salaDTO2.getId());
 		assertEquals("Sala 2", salaDTO2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", salaDTO2.getRutaImagen());
+		assertEquals("img2.png", salaDTO2.getNombreImagen());
 
 		SalaDTO salaDTO3 = salasDTO.get(2);
 		assertEquals(3, salaDTO3.getId());
 		assertEquals("Sala 3", salaDTO3.getNombre());
 		assertEquals("src/main/resources/static/images/img3.png", salaDTO3.getRutaImagen());
-
+		assertEquals("img3.png", salaDTO3.getNombreImagen());
 	}
 
 	@Test
@@ -203,12 +256,13 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals(1, salaDTO1.getId());
 		assertEquals("Sala 1", salaDTO1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", salaDTO1.getRutaImagen());
+		assertEquals("img1.png", salaDTO1.getNombreImagen());
 
 		SalaDTO salaDTO2 = salasDTO.get(1);
 		assertEquals(2, salaDTO2.getId());
 		assertEquals("Sala 2", salaDTO2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", salaDTO2.getRutaImagen());
-
+		assertEquals("img2.png", salaDTO2.getNombreImagen());
 	}
 
 	@Test
@@ -230,16 +284,19 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals(1, salaDTO1.getId());
 		assertEquals("Sala 1", salaDTO1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", salaDTO1.getRutaImagen());
+		assertEquals("img1.png", salaDTO1.getNombreImagen());
 
 		SalaDTO salaDTO2 = salasDTO.get(1);
 		assertEquals(2, salaDTO2.getId());
 		assertEquals("Sala 2", salaDTO2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", salaDTO2.getRutaImagen());
+		assertEquals("img2.png", salaDTO2.getNombreImagen());
 
 		SalaDTO salaDTO3 = salasDTO.get(2);
 		assertEquals(3, salaDTO3.getId());
 		assertEquals("Sala 3", salaDTO3.getNombre());
 		assertEquals("src/main/resources/static/images/img3.png", salaDTO3.getRutaImagen());
+		assertEquals("img3.png", salaDTO3.getNombreImagen());
 	}
 
 	@Test
@@ -252,6 +309,7 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals(2, salaDTO.getId());
 		assertEquals("Sala 2", salaDTO.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", salaDTO.getRutaImagen());
+		assertEquals("img2.png", salaDTO.getNombreImagen());
 	}
 
 

@@ -23,5 +23,6 @@ public class Sala extends BaseEntidad {
 	@Column(name = "ruta_imagen", nullable = false)
 	private String rutaImagen;
 
-
+	@Column(name = "nombre_imagen", nullable = false, length = 100)
+	private String nombreImagen;
 }

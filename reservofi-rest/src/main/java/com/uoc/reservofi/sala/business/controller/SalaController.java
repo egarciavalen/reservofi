@@ -2,7 +2,7 @@ package com.uoc.reservofi.sala.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
-import com.uoc.reservofi.sala.business.dto.RestSalaCreacionDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaGuardadoDTO;
 import com.uoc.reservofi.sala.business.service.RestSalaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,15 @@ public class SalaController {
 	@PostMapping(path = "/sala", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
-	RestSalaConsultaDTO create(@ModelAttribute RestSalaCreacionDTO restDTO) {
+	RestSalaConsultaDTO save(@ModelAttribute RestSalaGuardadoDTO restDTO) {
 		return restSalaService.create(restDTO);
+	}
+
+	@PostMapping(path = "/sala", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
+	RestSalaConsultaDTO update(@ModelAttribute RestSalaGuardadoDTO restDTO) {
+		return restSalaService.update(restDTO);
 	}
 
 	// TODO: se quita el update de momento hasta que se concrete la funcionalidad

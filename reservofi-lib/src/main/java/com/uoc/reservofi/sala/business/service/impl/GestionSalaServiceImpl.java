@@ -121,11 +121,16 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			// Se escriben los bytes del fichero en la ruta destino
 			Files.write(fichero, dto.getImagen().getBytes());
 
-			// Asigna en el DTO la ruta de la imagen guardada
+			// Asigna en el DTO la ruta de la imagen guardada y su nombre
 			dto.setRutaImagen(rutaFichero);
+			dto.setNombreImagen(dto.getImagen().getOriginalFilename());
 
-			// Finalmente, se inserta la sala a crear, guardando en base de datos la ruta relativa
-			return this.insert(dto);
+			if (dto.getId() != null) {
+				// Actualización
+				return this.update(dto);
+			} else {
+				return this.insert(dto);
+			}
 
 		} catch (IOException e) {
 			throw new GestionException("Ha ocurrido un error guardando la imagen en la base de datos: " + e);

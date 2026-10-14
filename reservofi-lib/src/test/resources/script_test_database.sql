@@ -35,9 +35,9 @@ insert into USUARIO_ROL(id_usuario, id_rol) values (1, 1);
 insert into USUARIO_ROL(id_usuario, id_rol) values (2, 2);
 
 -- SALA
-insert into SALA(nombre, ruta_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 1', 'src/main/resources/static/images/img1.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
-insert into SALA(nombre, ruta_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 2', 'src/main/resources/static/images/img2.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
-insert into SALA(nombre, ruta_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 3', 'src/main/resources/static/images/img3.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 1', 'src/main/resources/static/images/img1.png', 'img1.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 2', 'src/main/resources/static/images/img2.png', 'img2.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 3', 'src/main/resources/static/images/img3.png', 'img3.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 -- PUESTO
 insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)

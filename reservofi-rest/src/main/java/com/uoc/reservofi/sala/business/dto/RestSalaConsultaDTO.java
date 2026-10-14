@@ -10,4 +10,6 @@ public class RestSalaConsultaDTO extends RestEntidadDTO {
 
 	private String nombre;
 	private String rutaImagen;
+	private String nombreImagen;
+
 }

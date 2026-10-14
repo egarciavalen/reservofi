@@ -10,11 +10,13 @@ import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service(GestionRolService.BEAN_NAME)
 @RequiredArgsConstructor
+@Transactional(rollbackFor = GestionException.class)
 public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<RolDTO> implements GestionRolService {
 
 	private final BaseRolService baseRolService;

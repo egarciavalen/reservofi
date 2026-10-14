@@ -2,7 +2,7 @@ package com.uoc.reservofi.sala.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
 import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
-import com.uoc.reservofi.sala.business.dto.RestSalaCreacionDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaGuardadoDTO;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.RestSalaMapper;
 import com.uoc.reservofi.sala.business.service.GestionSalaService;
@@ -22,11 +22,19 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 	// En principio se asume que NO se modificará la sala una vez creada
 
 	@Override
-	public RestSalaConsultaDTO create(RestSalaCreacionDTO restDTO) {
+	public RestSalaConsultaDTO create(RestSalaGuardadoDTO restDTO) {
 		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
 		dto = gestionSalaService.createAndSaveImage(dto);
 		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
+
+	@Override
+	public RestSalaConsultaDTO update(RestSalaGuardadoDTO restDTO) {
+		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
+		dto = gestionSalaService.createAndSaveImage(dto);
+		return restSalaMapper.consultaDTOArestDTO(dto);
+	}
+
 
 	@Override
 	public void deleteById(Long id) {

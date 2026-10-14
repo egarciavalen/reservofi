@@ -7,6 +7,6 @@ public interface GestionSalaService extends GestionEntidadService<SalaDTO> {
 
 	String BEAN_NAME = "gestionSalaService";
 
-	// Consulta adicional para gestionar el guardado de la imagen
+	// Consultas adicionales para gestionar el guardado de la imagen
 	SalaDTO createAndSaveImage(SalaDTO dto);
 }

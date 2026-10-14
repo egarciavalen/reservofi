@@ -14,6 +14,7 @@ public interface SalaMapper {
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "rutaImagen", target = "rutaImagen")
+	@Mapping(source = "nombreImagen", target = "nombreImagen")
 	Sala DTOAentidad(SalaDTO dto);
 
 	@InheritConfiguration(name = "DTOAentidad")
@@ -24,6 +25,7 @@ public interface SalaMapper {
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "rutaImagen", target = "rutaImagen")
+	@Mapping(source = "nombreImagen", target = "nombreImagen")
 	SalaDTO entidadADTO(Sala entidad);
 
 	@IterableMapping(qualifiedByName = "entidadADTO")

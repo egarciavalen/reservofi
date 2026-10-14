@@ -3,7 +3,7 @@ package com.uoc.reservofi.sala.business.rest;
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.sala.business.controller.SalaController;
 import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
-import com.uoc.reservofi.sala.business.dto.RestSalaCreacionDTO;
+import com.uoc.reservofi.sala.business.dto.RestSalaGuardadoDTO;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.RestSalaMapperImpl;
 import com.uoc.reservofi.sala.business.service.GestionSalaService;
@@ -51,7 +51,7 @@ public class SalaControllerTest {
 		MockMultipartFile mockFile = new MockMultipartFile("imagen", new byte[1]);
 
 		// DTO de entrada
-		RestSalaCreacionDTO restInsertDTO = new RestSalaCreacionDTO();
+		RestSalaGuardadoDTO restInsertDTO = new RestSalaGuardadoDTO();
 		restInsertDTO.setNombre("Sala prueba");
 		restInsertDTO.setImagen(mockFile);
 

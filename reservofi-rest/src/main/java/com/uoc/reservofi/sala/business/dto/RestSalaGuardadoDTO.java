@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
-public class RestSalaCreacionDTO extends RestEntidadDTO {
+public class RestSalaGuardadoDTO extends RestEntidadDTO {
 
 	@NotEmpty(message = "sala.nombre.obligatorio")
 	@Size(max = 100, message = "sala.nombre.tamanio.maximo")
@@ -18,4 +18,7 @@ public class RestSalaCreacionDTO extends RestEntidadDTO {
 
 	@NotNull(message = "sala.imagen.obligatorio")
 	private MultipartFile imagen;
+
+	// Parámetro adicional por si hay que borrar la imagen previamente guardada
+	private String rutaImagen;
 }

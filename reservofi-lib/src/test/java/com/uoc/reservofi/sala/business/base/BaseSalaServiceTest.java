@@ -25,11 +25,13 @@ public class BaseSalaServiceTest extends AbstractTest {
 		Sala sala = new Sala();
 		sala.setNombre("Sala prueba");
 		sala.setRutaImagen("src/main/resources/static/images/prueba.png");
+		sala.setNombreImagen("prueba.png");
 
 		Sala insertado = baseSalaService.insert(sala);
 		assertNotNull(insertado);
 		assertEquals("Sala prueba", insertado.getNombre());
 		assertEquals("src/main/resources/static/images/prueba.png", insertado.getRutaImagen());
+		assertEquals("prueba.png", insertado.getNombreImagen());
 		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
 		assertEquals("adminTest", insertado.getActualizacionUsuario());
@@ -73,6 +75,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		sala.setId(1L);
 		sala.setNombre("Sala prueba");
 		sala.setRutaImagen("src/main/resources/static/images/img1.png");
+		sala.setNombreImagen("prueba.png");
 
 		// Para esta prueba, se va a suponer que se rellenó la información correctamente desde el servicio de gestión
 		sala.setCreacionUsuario("adminTest");
@@ -82,6 +85,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertNotNull(actualizado);
 		assertEquals("Sala prueba", actualizado.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", actualizado.getRutaImagen());
+		assertEquals("prueba.png", actualizado.getNombreImagen());
 		assertEquals("adminTest", actualizado.getCreacionUsuario());
 		assertNotNull(actualizado.getCreacionFecha());
 		assertEquals("adminTest", actualizado.getActualizacionUsuario());
@@ -176,6 +180,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(1, sala.getId());
 		assertEquals("Sala 1", sala.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", sala.getRutaImagen());
+		assertEquals("img1.png", sala.getNombreImagen());
 		assertEquals("admin", sala.getCreacionUsuario());
 		assertNotNull(sala.getCreacionFecha());
 		assertEquals("admin", sala.getActualizacionUsuario());
@@ -192,6 +197,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(1, sala1.getId());
 		assertEquals("Sala 1", sala1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", sala1.getRutaImagen());
+		assertEquals("img1.png", sala1.getNombreImagen());
 		assertEquals("admin", sala1.getCreacionUsuario());
 		assertNotNull(sala1.getCreacionFecha());
 		assertEquals("admin", sala1.getActualizacionUsuario());
@@ -201,6 +207,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(2, sala2.getId());
 		assertEquals("Sala 2", sala2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", sala2.getRutaImagen());
+		assertEquals("img2.png", sala2.getNombreImagen());
 		assertEquals("admin", sala2.getCreacionUsuario());
 		assertNotNull(sala2.getCreacionFecha());
 		assertEquals("admin_update", sala2.getActualizacionUsuario());
@@ -210,6 +217,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(3, sala3.getId());
 		assertEquals("Sala 3", sala3.getNombre());
 		assertEquals("src/main/resources/static/images/img3.png", sala3.getRutaImagen());
+		assertEquals("img3.png", sala3.getNombreImagen());
 		assertEquals("admin", sala3.getCreacionUsuario());
 		assertNotNull(sala3.getCreacionFecha());
 		assertEquals("admin", sala3.getActualizacionUsuario());
@@ -230,6 +238,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(1, sala1.getId());
 		assertEquals("Sala 1", sala1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", sala1.getRutaImagen());
+		assertEquals("img1.png", sala1.getNombreImagen());
 		assertEquals("admin", sala1.getCreacionUsuario());
 		assertNotNull(sala1.getCreacionFecha());
 		assertEquals("admin", sala1.getActualizacionUsuario());
@@ -239,6 +248,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(2, sala2.getId());
 		assertEquals("Sala 2", sala2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", sala2.getRutaImagen());
+		assertEquals("img2.png", sala2.getNombreImagen());
 		assertEquals("admin", sala2.getCreacionUsuario());
 		assertNotNull(sala2.getCreacionFecha());
 		assertEquals("admin_update", sala2.getActualizacionUsuario());
@@ -265,6 +275,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(1, sala1.getId());
 		assertEquals("Sala 1", sala1.getNombre());
 		assertEquals("src/main/resources/static/images/img1.png", sala1.getRutaImagen());
+		assertEquals("img1.png", sala1.getNombreImagen());
 		assertEquals("admin", sala1.getCreacionUsuario());
 		assertNotNull(sala1.getCreacionFecha());
 		assertEquals("admin", sala1.getActualizacionUsuario());
@@ -274,6 +285,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(2, sala2.getId());
 		assertEquals("Sala 2", sala2.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", sala2.getRutaImagen());
+		assertEquals("img2.png", sala2.getNombreImagen());
 		assertEquals("admin", sala2.getCreacionUsuario());
 		assertNotNull(sala2.getCreacionFecha());
 		assertEquals("admin_update", sala2.getActualizacionUsuario());
@@ -283,6 +295,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(3, sala3.getId());
 		assertEquals("Sala 3", sala3.getNombre());
 		assertEquals("src/main/resources/static/images/img3.png", sala3.getRutaImagen());
+		assertEquals("img3.png", sala3.getNombreImagen());
 		assertEquals("admin", sala3.getCreacionUsuario());
 		assertNotNull(sala3.getCreacionFecha());
 		assertEquals("admin", sala3.getActualizacionUsuario());
@@ -299,6 +312,7 @@ public class BaseSalaServiceTest extends AbstractTest {
 		assertEquals(2, sala.getId());
 		assertEquals("Sala 2", sala.getNombre());
 		assertEquals("src/main/resources/static/images/img2.png", sala.getRutaImagen());
+		assertEquals("img2.png", sala.getNombreImagen());
 		assertEquals("admin", sala.getCreacionUsuario());
 		assertNotNull(sala.getCreacionFecha());
 		assertEquals("admin_update", sala.getActualizacionUsuario());

@@ -16,11 +16,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service(GestionUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
+@Transactional(rollbackFor = GestionException.class)
 public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl<UsuarioDTO> implements GestionUsuarioService {
 
 	private final BaseUsuarioService baseUsuarioService;
