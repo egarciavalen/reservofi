@@ -29,9 +29,11 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 	}
 
 	@Override
-	public RestSalaConsultaDTO update(RestSalaGuardadoDTO restDTO) {
+	public RestSalaConsultaDTO update(RestSalaGuardadoDTO restDTO, Long idSala) {
+		// Se guarda el ID en el DTO para trasladarlo en el mapper
+		restDTO.setId(idSala);
 		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
-		dto = gestionSalaService.createAndSaveImage(dto);
+		dto = gestionSalaService.update(dto);
 		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
 

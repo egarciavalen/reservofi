@@ -25,14 +25,12 @@ public class SalaController {
 		return restSalaService.create(restDTO);
 	}
 
-	@PostMapping(path = "/sala", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PutMapping(path = "/sala/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
-	RestSalaConsultaDTO update(@ModelAttribute RestSalaGuardadoDTO restDTO) {
-		return restSalaService.update(restDTO);
+	RestSalaConsultaDTO update(@ModelAttribute RestSalaGuardadoDTO restDTO, @PathVariable Long id) {
+		return restSalaService.update(restDTO, id);
 	}
-
-	// TODO: se quita el update de momento hasta que se concrete la funcionalidad
 
 
 	@GetMapping("/sala/{id}")

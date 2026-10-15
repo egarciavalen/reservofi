@@ -18,7 +18,4 @@ public class RestSalaGuardadoDTO extends RestEntidadDTO {
 
 	@NotNull(message = "sala.imagen.obligatorio")
 	private MultipartFile imagen;
-
-	// Parámetro adicional por si hay que borrar la imagen previamente guardada
-	private String rutaImagen;
 }

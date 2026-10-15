@@ -13,6 +13,6 @@ public interface RestSalaService extends RestEntidadService<RestSalaConsultaDTO>
 
 	RestSalaConsultaDTO create(@Valid RestSalaGuardadoDTO restDTO);
 
-	RestSalaConsultaDTO update(@Valid RestSalaGuardadoDTO restDTO);
+	RestSalaConsultaDTO update(@Valid RestSalaGuardadoDTO restDTO, Long idSala);
 
 }

@@ -15,7 +15,6 @@ public interface RestSalaMapper {
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "imagen", target = "imagen")
-	@Mapping(source = "rutaImagen", target = "rutaImagen")
 	SalaDTO modificacionRestDTOADTO(RestSalaGuardadoDTO restDTO);
 
 	@Named("consultaDTOArestDTO")

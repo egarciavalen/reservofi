@@ -51,7 +51,26 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 	@Override
 	public void deleteById(Long id) {
+		this.borrarDatosRelacionados(id);
 		baseSalaService.deleteById(id);
+	}
+
+	private void borrarDatosRelacionados(Long id) {
+		try {
+			// Búsqueda de la sala
+			SalaDTO salaDTO = this.findById(id);
+
+			// Validaciones
+			if (salaDTO == null) {
+				throw new GestionException("Se está intentando borrar una sala no existente");
+			}
+			if (salaDTO.getRutaImagen() != null) {
+				Path ficheroAntiguo = Path.of(salaDTO.getRutaImagen());
+				Files.delete(ficheroAntiguo);
+			}
+		} catch (IOException e) {
+			throw new GestionException("Ha ocurrido un error interno al intentar borrar la imagen asociada a la sala");
+		}
 	}
 
 	@Override
@@ -91,8 +110,8 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 	@Override
 	public SalaDTO createAndSaveImage(SalaDTO dto) {
-		try {
 
+		try {
 			// Validaciones previas
 			if (dto.getImagen().getOriginalFilename() == null) {
 				throw new GestionException("No se ha podido recuperar el nombre de la imagen");
@@ -125,12 +144,7 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			dto.setRutaImagen(rutaFichero);
 			dto.setNombreImagen(dto.getImagen().getOriginalFilename());
 
-			if (dto.getId() != null) {
-				// Actualización
-				return this.update(dto);
-			} else {
-				return this.insert(dto);
-			}
+			return this.insert(dto);
 
 		} catch (IOException e) {
 			throw new GestionException("Ha ocurrido un error guardando la imagen en la base de datos: " + e);
