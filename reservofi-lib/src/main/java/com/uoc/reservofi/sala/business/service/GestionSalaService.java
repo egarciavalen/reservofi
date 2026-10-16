@@ -9,4 +9,7 @@ public interface GestionSalaService extends GestionEntidadService<SalaDTO> {
 
 	// Consultas adicionales para gestionar el guardado de la imagen
 	SalaDTO createAndSaveImage(SalaDTO dto);
+
+	// Para borrar también la imagen del disco
+	void deleteWithImage(Long id);
 }

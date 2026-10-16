@@ -312,5 +312,6 @@ public class GestionSalaServiceTest extends AbstractTest {
 		assertEquals("img2.png", salaDTO.getNombreImagen());
 	}
 
+	// TODO: PRUEBAS UNITARIAS PARA createWithImage/deleteWithImage
 
 }

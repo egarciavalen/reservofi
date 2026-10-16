@@ -125,7 +125,7 @@ public class SalaControllerTest {
 		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img.png");
 
 		// Mock del servicio de gestión
-		when(gestionSalaService.createAndSaveImage(any(SalaDTO.class))).thenReturn(mockReturnDTO);
+		when(gestionSalaService.update(any(SalaDTO.class))).thenReturn(mockReturnDTO);
 
 
 		// Llamada a realizar
@@ -134,7 +134,7 @@ public class SalaControllerTest {
 				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
 		// Se verifica que se haya llamado al servicio de gestión 1 vez
-		verify(gestionSalaService).createAndSaveImage(salaCaptor.capture());
+		verify(gestionSalaService).update(salaCaptor.capture());
 
 		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
 		SalaDTO capturedDTO = salaCaptor.getValue();
@@ -149,13 +149,13 @@ public class SalaControllerTest {
 		// Parámetro de entrada
 		Long idTest = 1L;
 
-		// El deleteById no va a devolver nada
-		doNothing().when(gestionSalaService).deleteById(idTest);
+		// El deleteWithImage no va a devolver nada
+		doNothing().when(gestionSalaService).deleteWithImage(idTest);
 
 		mockMvc.perform(delete("/api/sala/{id}", idTest))
 				.andExpect(status().isNoContent());
 
-		verify(gestionSalaService).deleteById(1L);
+		verify(gestionSalaService).deleteWithImage(1L);
 	}
 
 	@Test

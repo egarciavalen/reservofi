@@ -40,7 +40,8 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 
 	@Override
 	public void deleteById(Long id) {
-		gestionSalaService.deleteById(id);
+		// Interesa borrar también la imagen del disco para no acumular datos que no se usen
+		gestionSalaService.deleteWithImage(id);
 	}
 
 	@Override
