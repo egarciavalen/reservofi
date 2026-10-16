@@ -15,12 +15,8 @@ public class SalaDTO extends GestionEntidadDTO {
 	@Size(max = 100, message = "sala.nombre.tamanio.maximo")
 	private String nombre;
 
-	@NotEmpty(message = "sala.rutaImagen.obligatorio")
-	@Size(max = 255, message = "sala.rutaImagen.tamanio.maximo")
+	// Campos para la gestión de imágenes, si se actualiza el nombre NO son obligatorios
 	private String rutaImagen;
-
-	@NotEmpty(message = "sala.nombreImagen.obligatorio")
-	@Size(max = 100, message = "sala.nombreImagen.tamanio.maximo")
 	private String nombreImagen;
 
 	private MultipartFile imagen; // Gestión de la imagen del servicio rest

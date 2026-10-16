@@ -79,108 +79,18 @@ public class GestionSalaServiceTest extends AbstractTest {
 	}
 
 	@Test
-	void validateRutaImagenTest() {
-		SalaDTO salaDTO = new SalaDTO();
-		salaDTO.setNombre("SalaDTO prueba");
-		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
-		salaDTO.setNombreImagen("prueba.png");
-
-		// Ruta imagen nula
-		salaDTO.setRutaImagen(null);
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.rutaImagen: sala.rutaImagen.obligatorio", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-
-		// Nombre vacío
-		salaDTO.setRutaImagen("");
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.rutaImagen: sala.rutaImagen.obligatorio", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-
-		// Nombre tamanio maximo alcanzado
-		salaDTO.setRutaImagen("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890_abcde");
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.rutaImagen: sala.rutaImagen.tamanio.maximo", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-	}
-
-	@Test
-	void validateNombreImagenTest() {
-		SalaDTO salaDTO = new SalaDTO();
-		salaDTO.setNombre("SalaDTO prueba");
-		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
-		salaDTO.setNombreImagen("prueba.png");
-
-		// Ruta imagen nula
-		salaDTO.setNombreImagen(null);
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.obligatorio", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-
-		// Nombre vacío
-		salaDTO.setNombreImagen("");
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.obligatorio", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-
-		// Nombre tamanio maximo alcanzado
-		salaDTO.setNombreImagen("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890a");
-		try {
-			gestionSalaService.insert(salaDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.nombreImagen: sala.nombreImagen.tamanio.maximo", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-	}
-
-	@Test
 	void updateTest() {
 
 		SalaDTO salaDTO = new SalaDTO();
 		salaDTO.setId(1L); // ID existente
-		salaDTO.setNombre("SalaDTO prueba");
-		salaDTO.setRutaImagen("src/main/resources/static/images/prueba.png");
-		salaDTO.setNombreImagen("prueba.png");
+		salaDTO.setNombre("SalaDTO prueba"); // Solamente se cambia el nombre
 
 		SalaDTO actualizado = gestionSalaService.update(salaDTO);
 		assertNotNull(actualizado);
 		assertEquals(1L, actualizado.getId());
 		assertEquals("SalaDTO prueba", actualizado.getNombre());
-		assertEquals("src/main/resources/static/images/prueba.png", actualizado.getRutaImagen());
-		assertEquals("prueba.png", actualizado.getNombreImagen());
+		assertEquals("src/main/resources/static/images/img1.png", actualizado.getRutaImagen());
+		assertEquals("img1.png", actualizado.getNombreImagen());
 
 	}
 

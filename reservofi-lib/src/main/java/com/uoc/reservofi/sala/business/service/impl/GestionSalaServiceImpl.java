@@ -44,9 +44,10 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
-		Sala entidad = salaMapper.DTOAentidad(dto, entidadBD);
-		entidad = baseSalaService.update(entidad);
-		return salaMapper.entidadADTO(entidad);
+		// En el caso de una sala, solamente se actualizaría el campo nombre, manteniendo la imagen existente
+		entidadBD.setNombre(dto.getNombre());
+		entidadBD = baseSalaService.update(entidadBD);
+		return salaMapper.entidadADTO(entidadBD);
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			}
 
 			// Primero hay que crear el directorio (si no existe), porque de lo contrario dará un AccessDeniedException
-			String rutaDirectorio = "reservofi-lib/src/main/resources/static/images/";
+			String rutaDirectorio = "reservofi-lib/resources/images/";
 			Path directorio = Path.of(rutaDirectorio);
 			if (!Files.exists(directorio)) {
 				Files.createDirectories(directorio);
