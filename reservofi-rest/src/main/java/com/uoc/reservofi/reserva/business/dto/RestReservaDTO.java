@@ -1,6 +1,5 @@
 package com.uoc.reservofi.reserva.business.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.uoc.reservofi.base.business.dto.RestEntidadDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -18,12 +17,11 @@ public class RestReservaDTO extends RestEntidadDTO {
 	@NotNull(message = "reserva.puesto.obligatorio")
 	private Long idPuesto;
 
+	// Se espera una conversión de string (yyyy-MM-ddTHH:mm) a LocalDateTime
 	@NotNull(message = "reserva.fechaInicio.obligatorio")
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime fechaInicio;
 
 	@NotNull(message = "reserva.fechaFin.obligatorio")
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime fechaFin;
 
 }
