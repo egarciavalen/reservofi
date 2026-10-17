@@ -203,7 +203,7 @@ public class BaseReservaServiceTest extends AbstractTest {
 	void findAllTest() {
 		List<Reserva> reservas = baseReservaService.findAll();
 		assertNotNull(reservas);
-		assertEquals(2, reservas.size());
+		assertEquals(3, reservas.size());
 
 		Reserva reserva1 = reservas.getFirst();
 		assertNotNull(reserva1);
@@ -230,6 +230,20 @@ public class BaseReservaServiceTest extends AbstractTest {
 		assertEquals(2L, reserva2.getPuesto().getId());
 		assertNotNull(reserva2.getUsuario());
 		assertEquals(2L, reserva2.getUsuario().getId());
+
+		Reserva reserva3 = reservas.get(2);
+		assertNotNull(reserva3);
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reserva3.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reserva3.getFechaFin());
+		assertEquals("admin", reserva3.getCreacionUsuario());
+		assertNotNull(reserva3.getCreacionFecha());
+		assertEquals("admin" +
+				"", reserva3.getActualizacionUsuario());
+		assertNotNull(reserva3.getActualizacionFecha());
+		assertNotNull(reserva3.getPuesto());
+		assertEquals(2L, reserva3.getPuesto().getId());
+		assertNotNull(reserva2.getUsuario());
+		assertEquals(1L, reserva3.getUsuario().getId());
 	}
 
 	@Test
@@ -282,7 +296,7 @@ public class BaseReservaServiceTest extends AbstractTest {
 	void findByCreacionUsuarioTest() {
 		List<Reserva> reservas = baseReservaService.findByCreacionUsuario("admin");
 		assertNotNull(reservas);
-		assertEquals(2, reservas.size());
+		assertEquals(3, reservas.size());
 
 		Reserva reserva1 = reservas.getFirst();
 		assertNotNull(reserva1);
@@ -309,6 +323,19 @@ public class BaseReservaServiceTest extends AbstractTest {
 		assertEquals(2L, reserva2.getPuesto().getId());
 		assertNotNull(reserva2.getUsuario());
 		assertEquals(2L, reserva2.getUsuario().getId());
+
+		Reserva reserva3 = reservas.get(2);
+		assertNotNull(reserva3);
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reserva3.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reserva3.getFechaFin());
+		assertEquals("admin", reserva3.getCreacionUsuario());
+		assertNotNull(reserva3.getCreacionFecha());
+		assertEquals("admin", reserva3.getActualizacionUsuario());
+		assertNotNull(reserva3.getActualizacionFecha());
+		assertNotNull(reserva3.getPuesto());
+		assertEquals(2L, reserva3.getPuesto().getId());
+		assertNotNull(reserva2.getUsuario());
+		assertEquals(1L, reserva3.getUsuario().getId());
 	}
 
 	@Test
@@ -329,5 +356,38 @@ public class BaseReservaServiceTest extends AbstractTest {
 		assertEquals(2L, reserva.getPuesto().getId());
 		assertNotNull(reserva.getUsuario());
 		assertEquals(2L, reserva.getUsuario().getId());
+	}
+
+	@Test
+	void findByUsuarioIdTest() {
+		List<Reserva> reservas = baseReservaService.findByUsuarioId(1L);
+		assertNotNull(reservas);
+		assertEquals(2, reservas.size());
+
+		Reserva reserva1 = reservas.getFirst();
+		assertNotNull(reserva1);
+		assertEquals(LocalDateTime.of(2026, 10, 6, 0, 0), reserva1.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reserva1.getFechaFin());
+		assertEquals("admin", reserva1.getCreacionUsuario());
+		assertNotNull(reserva1.getCreacionFecha());
+		assertEquals("admin", reserva1.getActualizacionUsuario());
+		assertNotNull(reserva1.getActualizacionFecha());
+		assertNotNull(reserva1.getPuesto());
+		assertEquals(1L, reserva1.getPuesto().getId());
+		assertNotNull(reserva1.getUsuario());
+		assertEquals(1L, reserva1.getUsuario().getId());
+
+		Reserva reserva2 = reservas.get(1);
+		assertNotNull(reserva2);
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reserva2.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reserva2.getFechaFin());
+		assertEquals("admin", reserva2.getCreacionUsuario());
+		assertNotNull(reserva2.getCreacionFecha());
+		assertEquals("admin", reserva2.getActualizacionUsuario());
+		assertNotNull(reserva2.getActualizacionFecha());
+		assertNotNull(reserva2.getPuesto());
+		assertEquals(2L, reserva2.getPuesto().getId());
+		assertNotNull(reserva2.getUsuario());
+		assertEquals(1L, reserva2.getUsuario().getId());
 	}
 }

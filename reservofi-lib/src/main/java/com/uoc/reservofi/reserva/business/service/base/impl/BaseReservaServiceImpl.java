@@ -10,15 +10,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service(BaseReservaService.BEAN_NAME)
 @RequiredArgsConstructor
 @Transactional(rollbackFor = BaseException.class)
 public class BaseReservaServiceImpl extends AbstractBaseEntidadServiceImpl<Reserva> implements BaseReservaService {
 
-	private final ReservaRepository ReservaRepository;
+	private final ReservaRepository reservaRepository;
 
 	@Override
 	public BaseEntidadRepository<Reserva> getRepository() {
-		return ReservaRepository;
+		return reservaRepository;
+	}
+
+	@Override
+	public List<Reserva> findByUsuarioId(Long idUsuario) {
+		return ((ReservaRepository) this.getRepository()).findByUsuarioId(idUsuario);
 	}
 }

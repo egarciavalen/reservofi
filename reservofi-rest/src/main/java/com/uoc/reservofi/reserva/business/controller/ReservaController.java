@@ -48,6 +48,16 @@ public class ReservaController {
 		return restReservaDTOList;
 	}
 
+	@GetMapping("/reserva/usuario/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	List<RestReservaDTO> findByUsuarioId(@PathVariable Long id) {
+		List<RestReservaDTO> restReservaDTOList = restReservaService.findByUsuarioId(id);
+		if (restReservaDTOList == null || restReservaDTOList.isEmpty()) {
+			throw new RestException("Entidades no encontradas");
+		}
+		return restReservaDTOList;
+	}
+
 	@DeleteMapping("/reserva/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Long id) {

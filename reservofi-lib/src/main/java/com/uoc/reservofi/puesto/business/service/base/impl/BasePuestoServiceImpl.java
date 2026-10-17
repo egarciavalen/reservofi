@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = BaseException.class)
 public class BasePuestoServiceImpl extends AbstractBaseEntidadServiceImpl<Puesto> implements BasePuestoService {
 
-	private final PuestoRepository PuestoRepository;
+	private final PuestoRepository puestoRepository;
 
 	@Override
 	public BaseEntidadRepository<Puesto> getRepository() {
-		return PuestoRepository;
+		return puestoRepository;
 	}
 }

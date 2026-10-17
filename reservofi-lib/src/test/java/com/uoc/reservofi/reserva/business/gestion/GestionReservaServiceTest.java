@@ -162,7 +162,7 @@ public class GestionReservaServiceTest extends AbstractTest {
 	void findAllTest() {
 		List<ReservaDTO> reservasDTO = gestionReservaService.findAll();
 		assertNotNull(reservasDTO);
-		assertEquals(2, reservasDTO.size());
+		assertEquals(3, reservasDTO.size());
 
 		ReservaDTO reservaDTO1 = reservasDTO.getFirst();
 		assertNotNull(reservaDTO1);
@@ -179,6 +179,14 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(2L, reservaDTO2.getIdUsuario());
+
+		ReservaDTO reservaDTO3 = reservasDTO.get(2);
+		assertNotNull(reservaDTO3);
+		assertNotNull(reservaDTO3.getId());
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reservaDTO3.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO3.getFechaFin());
+		assertEquals(2L, reservaDTO3.getIdPuesto());
+		assertEquals(1L, reservaDTO3.getIdUsuario());
 	}
 
 	@Test
@@ -221,7 +229,7 @@ public class GestionReservaServiceTest extends AbstractTest {
 	void findByCreacionUsuarioTest() {
 		List<ReservaDTO> reservasDTO = gestionReservaService.findByCreacionUsuario("admin");
 		assertNotNull(reservasDTO);
-		assertEquals(2, reservasDTO.size());
+		assertEquals(3, reservasDTO.size());
 
 
 		ReservaDTO reservaDTO1 = reservasDTO.getFirst();
@@ -239,6 +247,14 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(2L, reservaDTO2.getIdUsuario());
+
+		ReservaDTO reservaDTO3 = reservasDTO.get(2);
+		assertNotNull(reservaDTO3);
+		assertNotNull(reservaDTO3.getId());
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reservaDTO3.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO3.getFechaFin());
+		assertEquals(2L, reservaDTO3.getIdPuesto());
+		assertEquals(1L, reservaDTO3.getIdUsuario());
 	}
 
 	@Test
@@ -254,5 +270,29 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO.getFechaFin());
 		assertEquals(2L, reservaDTO.getIdPuesto());
 		assertEquals(2L, reservaDTO.getIdUsuario());
+	}
+
+	@Test
+	void findByUsuarioIdTest() {
+		List<ReservaDTO> reservasDTO = gestionReservaService.findByUsuarioId(1L);
+		assertNotNull(reservasDTO);
+		assertEquals(2, reservasDTO.size());
+
+		ReservaDTO reservaDTO1 = reservasDTO.getFirst();
+		assertNotNull(reservaDTO1);
+		assertNotNull(reservaDTO1.getId());
+		assertEquals(LocalDateTime.of(2026, 10, 6, 0, 0), reservaDTO1.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO1.getFechaFin());
+		assertEquals(1L, reservaDTO1.getIdPuesto());
+		assertEquals(1L, reservaDTO1.getIdUsuario());
+
+		ReservaDTO reservaDTO2 = reservasDTO.get(1);
+		assertNotNull(reservaDTO2);
+		assertNotNull(reservaDTO2.getId());
+		assertEquals(LocalDateTime.of(2026, 10, 10, 0, 0), reservaDTO2.getFechaInicio());
+		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO2.getFechaFin());
+		assertEquals(2L, reservaDTO2.getIdPuesto());
+		assertEquals(1L, reservaDTO2.getIdUsuario());
+
 	}
 }

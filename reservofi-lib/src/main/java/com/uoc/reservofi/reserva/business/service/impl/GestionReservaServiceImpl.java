@@ -87,4 +87,9 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 		return reservaMapper.entidadADTOList(entidadList);
 	}
 
+	@Override
+	public List<ReservaDTO> findByUsuarioId(Long idUsuario) {
+		List<Reserva> entidadList = baseReservaService.findByUsuarioId(idUsuario);
+		return reservaMapper.entidadADTOList(entidadList);
+	}
 }

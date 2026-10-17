@@ -49,4 +49,10 @@ public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestR
 		List<ReservaDTO> dtoList = gestionReservaService.findAll();
 		return restReservaMapper.DTOArestDTOList(dtoList);
 	}
+
+	@Override
+	public List<RestReservaDTO> findByUsuarioId(Long idUsuario) {
+		List<ReservaDTO> dtoList = gestionReservaService.findByUsuarioId(idUsuario);
+		return restReservaMapper.DTOArestDTOList(dtoList);
+	}
 }
