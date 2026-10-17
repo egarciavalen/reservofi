@@ -28,4 +28,9 @@ public class BaseReservaServiceImpl extends AbstractBaseEntidadServiceImpl<Reser
 	public List<Reserva> findByUsuarioId(Long idUsuario) {
 		return ((ReservaRepository) this.getRepository()).findByUsuarioId(idUsuario);
 	}
+
+	@Override
+	public List<Reserva> findByPuestoId(Long idPuesto) {
+		return ((ReservaRepository) this.getRepository()).findByPuestoId(idPuesto);
+	}
 }

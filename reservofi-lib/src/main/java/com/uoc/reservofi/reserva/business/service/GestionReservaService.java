@@ -10,4 +10,6 @@ public interface GestionReservaService extends GestionEntidadService<ReservaDTO>
 	String BEAN_NAME = "gestionReservaService";
 
 	List<ReservaDTO> findByUsuarioId(Long idUsuario);
+
+	void deleteByPuestoId(Long idPuesto);
 }

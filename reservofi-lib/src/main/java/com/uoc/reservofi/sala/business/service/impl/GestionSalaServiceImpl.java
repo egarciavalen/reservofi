@@ -2,6 +2,7 @@ package com.uoc.reservofi.sala.business.service.impl;
 
 import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.busines.service.impl.AbstractGestionEntidadServiceImpl;
+import com.uoc.reservofi.puesto.business.service.GestionPuestoService;
 import com.uoc.reservofi.sala.business.dto.SalaDTO;
 import com.uoc.reservofi.sala.business.mapper.SalaMapper;
 import com.uoc.reservofi.sala.business.model.Sala;
@@ -23,6 +24,8 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 	private final BaseSalaService baseSalaService;
 	private final SalaMapper salaMapper;
+
+	private final GestionPuestoService gestionPuestoService;
 
 	@Override
 	public SalaDTO insert(@Valid SalaDTO dto) {
@@ -52,6 +55,10 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 	@Override
 	public void deleteById(Long id) {
+
+		// Previamente a borrar la sala, hay que borrar los puestos asociados (que a su vez borrarán las reservas)
+		this.gestionPuestoService.deleteBySalaId(id);
+
 		baseSalaService.deleteById(id);
 	}
 

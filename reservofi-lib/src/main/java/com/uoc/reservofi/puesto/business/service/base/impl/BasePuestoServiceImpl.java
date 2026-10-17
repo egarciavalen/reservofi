@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service(BasePuestoService.BEAN_NAME)
 @RequiredArgsConstructor
 @Transactional(rollbackFor = BaseException.class)
@@ -20,5 +22,10 @@ public class BasePuestoServiceImpl extends AbstractBaseEntidadServiceImpl<Puesto
 	@Override
 	public BaseEntidadRepository<Puesto> getRepository() {
 		return puestoRepository;
+	}
+
+	@Override
+	public List<Puesto> findBySalaId(Long idSala) {
+		return ((PuestoRepository) this.getRepository()).findBySalaId(idSala);
 	}
 }

@@ -7,6 +7,7 @@ import com.uoc.reservofi.puesto.business.mapper.PuestoMapper;
 import com.uoc.reservofi.puesto.business.model.Puesto;
 import com.uoc.reservofi.puesto.business.service.GestionPuestoService;
 import com.uoc.reservofi.puesto.business.service.base.BasePuestoService;
+import com.uoc.reservofi.reserva.business.service.GestionReservaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 
 	private final BasePuestoService basePuestoService;
 	private final PuestoMapper puestoMapper;
+
+	private final GestionReservaService gestionReservaService;
+
 
 	@Override
 	public PuestoDTO insert(@Valid PuestoDTO dto) {
@@ -49,6 +53,10 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 
 	@Override
 	public void deleteById(Long id) {
+
+		// Previamente a borrar el puesto, hay que borrar las reservas asociadas
+		this.gestionReservaService.deleteByPuestoId(id);
+
 		basePuestoService.deleteById(id);
 	}
 
@@ -87,4 +95,16 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 		return puestoMapper.entidadADTOList(entidadList);
 	}
 
+	@Override
+	public void deleteBySalaId(Long idSala) {
+		// Se hace de esta forma para facilitar la depuración en caso de ser necesario
+		// Si se quisiera ser más óptimo, bastaría con hacer una consulta deleteBySalaId directamente
+
+		List<Puesto> puestoList = basePuestoService.findBySalaId(idSala);
+
+		for (Puesto puesto : puestoList) {
+			// OJO -> se llama al servicio de gestión para poder eliminar las reservas asociadas
+			this.deleteById(puesto.id);
+		}
+	}
 }

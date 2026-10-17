@@ -10,4 +10,7 @@ public interface BaseReservaService extends BaseEntidadService<Reserva> {
 	String BEAN_NAME = "baseReservaService";
 
 	List<Reserva> findByUsuarioId(Long idUsuario);
+
+	List<Reserva> findByPuestoId(Long idPuesto);
+
 }

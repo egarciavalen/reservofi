@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface ReservaRepository extends BaseEntidadRepository<Reserva> {
 
-	List<Reserva> findByUsuarioId(@Param("id") Long id);
+	List<Reserva> findByUsuarioId(@Param("id") Long idUsuario);
+
+	List<Reserva> findByPuestoId(@Param("id") Long idPuesto);
 }

@@ -92,4 +92,17 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 		List<Reserva> entidadList = baseReservaService.findByUsuarioId(idUsuario);
 		return reservaMapper.entidadADTOList(entidadList);
 	}
+
+	@Override
+	public void deleteByPuestoId(Long idPuesto) {
+
+		// Se hace de esta forma para facilitar la depuración en caso de ser necesario
+		// Si se quisiera ser más óptimo, bastaría con hacer una consulta deleteByPuestoId directamente
+
+		List<Reserva> reservaList = baseReservaService.findByPuestoId(idPuesto);
+
+		for (Reserva reserva: reservaList) {
+			this.baseReservaService.deleteById(reserva.id);
+		}
+	}
 }

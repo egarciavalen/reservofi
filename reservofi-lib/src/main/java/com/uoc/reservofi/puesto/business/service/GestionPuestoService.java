@@ -6,4 +6,6 @@ import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
 public interface GestionPuestoService extends GestionEntidadService<PuestoDTO> {
 
 	String BEAN_NAME = "gestionPuestoService";
+
+	void deleteBySalaId(Long idSala);
 }

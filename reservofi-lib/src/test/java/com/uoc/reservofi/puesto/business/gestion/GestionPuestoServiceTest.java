@@ -284,14 +284,13 @@ public class GestionPuestoServiceTest extends AbstractTest {
 
 	@Test
 	void deleteByIdWithFKTest() {
-		// Registro asociado a la tabla RESERVA
+		// Registro asociado a la tabla RESERVA, se borraría la FK correspondiente
 		try {
 			gestionPuestoService.deleteById(1L);
-			fail("Se esperaba una excepción DataIntegrityViolationException");
 		} catch (DataIntegrityViolationException e) {
-			assertNotNull(e.getMessage());
+			fail("No se esperaba una excepción DataIntegrityViolationException");
 		} catch (Exception e) {
-			fail("Se esperaba una excepción DataIntegrityViolationException");
+			fail("Se esperaba una excepción genérica");
 		}
 	}
 
