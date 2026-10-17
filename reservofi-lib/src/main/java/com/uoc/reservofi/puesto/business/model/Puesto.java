@@ -27,6 +27,12 @@ public class Puesto extends BaseEntidad {
 	@Column(name = "coordenada_y", precision = 8, scale = 2, nullable = false)
 	private BigDecimal coordenadaY;
 
+	@Column(name = "ancho", precision = 8, scale = 2, nullable = false)
+	private BigDecimal ancho;
+
+	@Column(name = "alto", precision = 8, scale = 2, nullable = false)
+	private BigDecimal alto;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_sala", nullable = false, foreignKey = @ForeignKey(name = "fk_puesto_sala"))
 	private Sala sala;

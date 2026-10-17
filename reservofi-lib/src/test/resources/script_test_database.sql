@@ -40,14 +40,14 @@ insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_
 insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 3', 'src/main/resources/static/images/img3.png', 'img3.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 -- PUESTO
-insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Puesto 1', 55.55, 43.22, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into PUESTO(nombre, coordenada_x, coordenada_y, ancho, alto, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Puesto 1', 55.55, 43.22, 31.42, 11.64, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
-insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Puesto 2', 32.12, 87.93, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+insert into PUESTO(nombre, coordenada_x, coordenada_y, ancho, alto, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Puesto 2', 32.12, 87.93, 42.53, 22.75, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
 
-insert into PUESTO(nombre, coordenada_x, coordenada_y, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values ('Puesto 3', 78.98, 15.32, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+insert into PUESTO(nombre, coordenada_x, coordenada_y, ancho, alto, id_sala, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
+values ('Puesto 3', 78.98, 15.32, 53.64, 33.86, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 
 -- RESERVA

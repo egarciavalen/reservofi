@@ -16,6 +16,8 @@ public interface PuestoMapper {
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
+	@Mapping(source = "ancho", target = "ancho")
+	@Mapping(source = "alto", target = "alto")
 	Puesto DTOAentidad(PuestoDTO dto);
 
 	@InheritConfiguration(name = "DTOAentidad")
@@ -28,6 +30,8 @@ public interface PuestoMapper {
 	@Mapping(source = "sala.id", target = "idSala")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
+	@Mapping(source = "ancho", target = "ancho")
+	@Mapping(source = "alto", target = "alto")
 	PuestoDTO entidadADTO(Puesto entidad);
 
 	@IterableMapping(qualifiedByName = "entidadADTO")

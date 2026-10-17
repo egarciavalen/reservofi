@@ -29,4 +29,12 @@ public class RestPuestoDTO extends RestEntidadDTO {
 	@DecimalMax(value = "99999.99", message = "puesto.coordenadaY.tamanio.maximo")
 	private BigDecimal coordenadaY;
 
+	@NotNull(message = "puesto.ancho.obligatorio")
+	@DecimalMax(value = "99999.99", message = "puesto.ancho.tamanio.maximo")
+	private BigDecimal ancho;
+
+	@NotNull(message = "puesto.alto.obligatorio")
+	@DecimalMax(value = "99999.99", message = "puesto.alto.tamanio.maximo")
+	private BigDecimal alto;
+
 }

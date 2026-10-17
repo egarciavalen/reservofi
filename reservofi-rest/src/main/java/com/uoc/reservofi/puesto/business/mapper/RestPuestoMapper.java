@@ -15,6 +15,8 @@ public interface RestPuestoMapper {
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
+	@Mapping(source = "ancho", target = "ancho")
+	@Mapping(source = "alto", target = "alto")
 	@Mapping(source = "idSala", target = "idSala")
 	PuestoDTO restDTOADTO(RestPuestoDTO restDTO);
 
@@ -24,6 +26,8 @@ public interface RestPuestoMapper {
 	@Mapping(source = "nombre", target = "nombre")
 	@Mapping(source = "coordenadaX", target = "coordenadaX")
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
+	@Mapping(source = "ancho", target = "ancho")
+	@Mapping(source = "alto", target = "alto")
 	@Mapping(source = "idSala", target = "idSala")
 	RestPuestoDTO DTOArestDTO(PuestoDTO dto);
 

@@ -26,6 +26,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
 		puestoDTO.setIdSala(1L);
 
 		PuestoDTO insertado = gestionPuestoService.insert(puestoDTO);
@@ -34,6 +36,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("PuestoDTO prueba", insertado.getNombre());
 		assertEquals(BigDecimal.valueOf(11.14), insertado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(22.25), insertado.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(33.36), insertado.getAncho());
+		assertEquals(BigDecimal.valueOf(44.47), insertado.getAlto());
 		assertEquals(1L, insertado.getIdSala());
 	}
 
@@ -43,6 +47,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
 		puestoDTO.setIdSala(1L);
 
 		// Sala nula
@@ -64,6 +70,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
 		puestoDTO.setIdSala(1L);
 
 		// Nombre nulo
@@ -109,6 +117,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
 		puestoDTO.setIdSala(1L);
 
 		// Coordenada X nula
@@ -142,6 +152,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
 		puestoDTO.setIdSala(1L);
 
 		// Coordenada Y nula
@@ -169,6 +181,75 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		}
 	}
 
+	@Test
+	void validateAnchoTest() {
+		PuestoDTO puestoDTO = new PuestoDTO();
+		puestoDTO.setNombre("PuestoDTO prueba");
+		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
+		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
+		puestoDTO.setIdSala(1L);
+
+		// Ancho nulo
+		puestoDTO.setAncho(null);
+		try {
+			gestionPuestoService.insert(puestoDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.ancho: puesto.ancho.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Ancho tamanio maximo
+		puestoDTO.setAncho(BigDecimal.valueOf(1000000));
+		try {
+			gestionPuestoService.insert(puestoDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.ancho: puesto.ancho.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
+
+	@Test
+	void validateAltoTest() {
+		PuestoDTO puestoDTO = new PuestoDTO();
+		puestoDTO.setNombre("PuestoDTO prueba");
+		puestoDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
+		puestoDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puestoDTO.setAncho(BigDecimal.valueOf(33.36));
+		puestoDTO.setAlto(BigDecimal.valueOf(44.47));
+		puestoDTO.setIdSala(1L);
+
+		// Alto nulo
+		puestoDTO.setAlto(null);
+		try {
+			gestionPuestoService.insert(puestoDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.alto: puesto.alto.obligatorio", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+
+		// Alto tamanio maximo
+		puestoDTO.setAlto(BigDecimal.valueOf(1000000));
+		try {
+			gestionPuestoService.insert(puestoDTO);
+			fail("Se esperaba una ConstraintViolationException");
+		} catch (ConstraintViolationException e) {
+			assertEquals("insert.entidad.alto: puesto.alto.tamanio.maximo", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una ConstraintViolationException");
+		}
+	}
 
 	@Test
 	void updateTest() {
@@ -177,6 +258,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		puestoDTO.setNombre("PuestoDTO prueba");
 		puestoDTO.setCoordenadaX(BigDecimal.valueOf(55.55));
 		puestoDTO.setCoordenadaY(BigDecimal.valueOf(43.22));
+		puestoDTO.setAncho(BigDecimal.valueOf(31.42));
+		puestoDTO.setAlto(BigDecimal.valueOf(11.64));
 		puestoDTO.setIdSala(1L);
 
 		PuestoDTO actualizado = gestionPuestoService.update(puestoDTO);
@@ -185,6 +268,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("PuestoDTO prueba", actualizado.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), actualizado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), actualizado.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), actualizado.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), actualizado.getAlto());
 		assertEquals(1L, actualizado.getIdSala());
 	}
 
@@ -218,6 +303,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puestoDTO.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puestoDTO.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puestoDTO.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puestoDTO.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puestoDTO.getAlto());
 		assertEquals(1L, puestoDTO.getIdSala());
 	}
 
@@ -232,6 +319,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puestoDTO1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puestoDTO1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puestoDTO1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
@@ -239,6 +328,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puestoDTO2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puestoDTO2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puestoDTO2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
 
 		PuestoDTO puestoDTO3 = puestosDTO.get(2);
@@ -246,6 +337,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 3", puestoDTO3.getNombre());
 		assertEquals(BigDecimal.valueOf(78.98), puestoDTO3.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(15.32), puestoDTO3.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(53.64), puestoDTO3.getAncho());
+		assertEquals(BigDecimal.valueOf(33.86), puestoDTO3.getAlto());
 		assertEquals(1L, puestoDTO3.getIdSala());
 	}
 
@@ -264,6 +357,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puestoDTO1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puestoDTO1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puestoDTO1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
@@ -271,6 +366,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puestoDTO2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puestoDTO2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puestoDTO2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
 	}
 
@@ -294,6 +391,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puestoDTO1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puestoDTO1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puestoDTO1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
@@ -301,6 +400,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puestoDTO2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puestoDTO2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puestoDTO2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
 
 		PuestoDTO puestoDTO3 = puestosDTO.get(2);
@@ -308,6 +409,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 3", puestoDTO3.getNombre());
 		assertEquals(BigDecimal.valueOf(78.98), puestoDTO3.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(15.32), puestoDTO3.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(53.64), puestoDTO3.getAncho());
+		assertEquals(BigDecimal.valueOf(33.86), puestoDTO3.getAlto());
 		assertEquals(1L, puestoDTO3.getIdSala());
 	}
 
@@ -320,10 +423,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		PuestoDTO puestoDTO = puestosDTO.getFirst();
 		assertEquals(2, puestoDTO.getId());
 		assertEquals("Puesto 2", puestoDTO.getNombre());
-		assertEquals(BigDecimal.valueOf(32.12), puestoDTO.getCoordenadaX());
-		assertEquals(BigDecimal.valueOf(87.93), puestoDTO.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puestoDTO.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puestoDTO.getAlto());
 		assertEquals(2L, puestoDTO.getIdSala());
 	}
-
-
 }

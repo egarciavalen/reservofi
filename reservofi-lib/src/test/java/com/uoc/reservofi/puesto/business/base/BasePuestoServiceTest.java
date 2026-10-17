@@ -32,6 +32,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		puesto.setNombre("Puesto prueba");
 		puesto.setCoordenadaX(BigDecimal.valueOf(11.14));
 		puesto.setCoordenadaY(BigDecimal.valueOf(22.25));
+		puesto.setAncho(BigDecimal.valueOf(33.36));
+		puesto.setAlto(BigDecimal.valueOf(44.47));
 
 		Sala sala = baseSalaService.findById(1L);
 		puesto.setSala(sala);
@@ -41,6 +43,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto prueba", insertado.getNombre());
 		assertEquals(BigDecimal.valueOf(11.14), insertado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(22.25), insertado.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(33.36), insertado.getAncho());
+		assertEquals(BigDecimal.valueOf(44.47), insertado.getAlto());
 		assertEquals("adminTest", insertado.getCreacionUsuario());
 		assertNotNull(insertado.getCreacionFecha());
 		assertEquals("adminTest", insertado.getActualizacionUsuario());
@@ -90,6 +94,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		puesto.setCreacionFecha(LocalDateTime.now());
 		puesto.setCoordenadaX(BigDecimal.valueOf(55.55));
 		puesto.setCoordenadaY(BigDecimal.valueOf(43.22));
+		puesto.setAncho(BigDecimal.valueOf(31.42));
+		puesto.setAlto(BigDecimal.valueOf(11.64));
 
 		Sala sala = baseSalaService.findById(1L);
 		puesto.setSala(sala);
@@ -99,6 +105,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto prueba", actualizado.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), actualizado.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), actualizado.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), actualizado.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), actualizado.getAlto());
 		assertEquals("adminTest", actualizado.getCreacionUsuario());
 		assertNotNull(actualizado.getCreacionFecha());
 		assertEquals("adminTest", actualizado.getActualizacionUsuario());
@@ -196,6 +204,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puesto.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puesto.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puesto.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puesto.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puesto.getAlto());
 		assertEquals("admin", puesto.getCreacionUsuario());
 		assertNotNull(puesto.getCreacionFecha());
 		assertEquals("admin", puesto.getActualizacionUsuario());
@@ -216,6 +226,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puesto1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puesto1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puesto1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puesto1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puesto1.getAlto());
 		assertEquals("admin", puesto1.getCreacionUsuario());
 		assertNotNull(puesto1.getCreacionFecha());
 		assertEquals("admin", puesto1.getActualizacionUsuario());
@@ -228,6 +240,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puesto2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puesto2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puesto2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puesto2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puesto2.getAlto());
 		assertEquals("admin", puesto2.getCreacionUsuario());
 		assertNotNull(puesto2.getCreacionFecha());
 		assertEquals("admin_update", puesto2.getActualizacionUsuario());
@@ -241,6 +255,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 3", puesto3.getNombre());
 		assertEquals(BigDecimal.valueOf(78.98), puesto3.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(15.32), puesto3.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(53.64), puesto3.getAncho());
+		assertEquals(BigDecimal.valueOf(33.86), puesto3.getAlto());
 		assertEquals("admin", puesto3.getCreacionUsuario());
 		assertNotNull(puesto3.getCreacionFecha());
 		assertEquals("admin", puesto3.getActualizacionUsuario());
@@ -265,6 +281,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puesto1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puesto1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puesto1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puesto1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puesto1.getAlto());
 		assertEquals("admin", puesto1.getCreacionUsuario());
 		assertNotNull(puesto1.getCreacionFecha());
 		assertEquals("admin", puesto1.getActualizacionUsuario());
@@ -277,6 +295,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puesto2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puesto2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puesto2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puesto2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puesto2.getAlto());
 		assertEquals("admin", puesto2.getCreacionUsuario());
 		assertNotNull(puesto2.getCreacionFecha());
 		assertEquals("admin_update", puesto2.getActualizacionUsuario());
@@ -306,6 +326,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 1", puesto1.getNombre());
 		assertEquals(BigDecimal.valueOf(55.55), puesto1.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(43.22), puesto1.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(31.42), puesto1.getAncho());
+		assertEquals(BigDecimal.valueOf(11.64), puesto1.getAlto());
 		assertEquals("admin", puesto1.getCreacionUsuario());
 		assertNotNull(puesto1.getCreacionFecha());
 		assertEquals("admin", puesto1.getActualizacionUsuario());
@@ -318,6 +340,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puesto2.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puesto2.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puesto2.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puesto2.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puesto2.getAlto());
 		assertEquals("admin", puesto2.getCreacionUsuario());
 		assertNotNull(puesto2.getCreacionFecha());
 		assertEquals("admin_update", puesto2.getActualizacionUsuario());
@@ -331,6 +355,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 3", puesto3.getNombre());
 		assertEquals(BigDecimal.valueOf(78.98), puesto3.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(15.32), puesto3.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(53.64), puesto3.getAncho());
+		assertEquals(BigDecimal.valueOf(33.86), puesto3.getAlto());
 		assertEquals("admin", puesto3.getCreacionUsuario());
 		assertNotNull(puesto3.getCreacionFecha());
 		assertEquals("admin", puesto3.getActualizacionUsuario());
@@ -350,6 +376,8 @@ public class BasePuestoServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", puesto.getNombre());
 		assertEquals(BigDecimal.valueOf(32.12), puesto.getCoordenadaX());
 		assertEquals(BigDecimal.valueOf(87.93), puesto.getCoordenadaY());
+		assertEquals(BigDecimal.valueOf(42.53), puesto.getAncho());
+		assertEquals(BigDecimal.valueOf(22.75), puesto.getAlto());
 		assertEquals("admin", puesto.getCreacionUsuario());
 		assertNotNull(puesto.getCreacionFecha());
 		assertEquals("admin_update", puesto.getActualizacionUsuario());

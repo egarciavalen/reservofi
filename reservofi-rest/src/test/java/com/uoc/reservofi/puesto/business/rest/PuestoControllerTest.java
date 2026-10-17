@@ -50,6 +50,8 @@ public class PuestoControllerTest {
 		restInsertDTO.setNombre("Puesto prueba");
 		restInsertDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restInsertDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restInsertDTO.setAncho(BigDecimal.valueOf(33.36));
+		restInsertDTO.setAlto(BigDecimal.valueOf(44.47));
 		restInsertDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
@@ -58,6 +60,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
 
 		// DTO con el que se invoca al servicio de gestión
@@ -65,6 +69,8 @@ public class PuestoControllerTest {
 		insertDTO.setNombre("Puesto prueba");
 		insertDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		insertDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		insertDTO.setAncho(BigDecimal.valueOf(33.36));
+		insertDTO.setAlto(BigDecimal.valueOf(44.47));
 		insertDTO.setIdSala(1L);
 
 		// DTO que devuelve el servicio de gestión
@@ -73,6 +79,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setNombre("Puesto prueba");
 		mockReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		mockReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
 
 		// Mock del servicio de gestión
@@ -91,6 +99,8 @@ public class PuestoControllerTest {
 		assertEquals(insertDTO.getNombre(), capturedDTO.getNombre());
 		assertEquals(insertDTO.getCoordenadaX(), capturedDTO.getCoordenadaX());
 		assertEquals(insertDTO.getCoordenadaY(), capturedDTO.getCoordenadaY());
+		assertEquals(insertDTO.getAncho(), capturedDTO.getAncho());
+		assertEquals(insertDTO.getAlto(), capturedDTO.getAlto());
 		assertEquals(insertDTO.getIdSala(), capturedDTO.getIdSala());
 	}
 
@@ -102,6 +112,9 @@ public class PuestoControllerTest {
 		restUpdateDTO.setNombre("Puesto prueba");
 		restUpdateDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restUpdateDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restUpdateDTO.setAncho(BigDecimal.valueOf(33.36));
+		restUpdateDTO.setAlto(BigDecimal.valueOf(44.47));
+
 		restUpdateDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
@@ -110,6 +123,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
 
 		// DTO con el que se invoca al servicio de gestión
@@ -118,6 +133,8 @@ public class PuestoControllerTest {
 		updateDTO.setNombre("Puesto prueba");
 		updateDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		updateDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		updateDTO.setAncho(BigDecimal.valueOf(33.36));
+		updateDTO.setAlto(BigDecimal.valueOf(44.47));
 		updateDTO.setIdSala(1L);
 
 		// DTO que devuelve el servicio de gestión
@@ -126,6 +143,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setNombre("Puesto prueba");
 		mockReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		mockReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
 
 		// Mock del servicio de gestión
@@ -143,6 +162,8 @@ public class PuestoControllerTest {
 		assertEquals(updateDTO.getNombre(), capturedDTO.getNombre());
 		assertEquals(updateDTO.getCoordenadaX(), capturedDTO.getCoordenadaX());
 		assertEquals(updateDTO.getCoordenadaY(), capturedDTO.getCoordenadaY());
+		assertEquals(updateDTO.getAncho(), capturedDTO.getAncho());
+		assertEquals(updateDTO.getAlto(), capturedDTO.getAlto());
 		assertEquals(updateDTO.getIdSala(), capturedDTO.getIdSala());
 	}
 
@@ -171,6 +192,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setNombre("Puesto prueba");
 		mockReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		mockReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
@@ -179,6 +202,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restReturnDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
+		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
 
 		// Mock del servicio de gestión
@@ -186,7 +211,6 @@ public class PuestoControllerTest {
 
 		mockMvc.perform(get("/api/puesto/{id}", idTest)).
 				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
-
 
 		// Se verifica que se hayan llamado al servicio de gestión 1 vez
 		verify(gestionPuestoService).findById(idTest);
@@ -214,6 +238,8 @@ public class PuestoControllerTest {
 		mockReturnDTO1.setNombre("Puesto prueba");
 		mockReturnDTO1.setCoordenadaX(BigDecimal.valueOf(11.14));
 		mockReturnDTO1.setCoordenadaY(BigDecimal.valueOf(22.25));
+		mockReturnDTO1.setAncho(BigDecimal.valueOf(33.36));
+		mockReturnDTO1.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO1.setIdSala(1L);
 
 		PuestoDTO mockReturnDTO2 = new PuestoDTO();
@@ -221,6 +247,8 @@ public class PuestoControllerTest {
 		mockReturnDTO2.setNombre("Puesto prueba 2");
 		mockReturnDTO2.setCoordenadaX(BigDecimal.valueOf(22.35));
 		mockReturnDTO2.setCoordenadaY(BigDecimal.valueOf(33.36));
+		mockReturnDTO2.setAncho(BigDecimal.valueOf(55.58));
+		mockReturnDTO2.setAlto(BigDecimal.valueOf(66.69));
 		mockReturnDTO2.setIdSala(2L);
 
 		List<PuestoDTO> mockReturnDTOList = new ArrayList<>();
@@ -233,6 +261,8 @@ public class PuestoControllerTest {
 		restReturnDTO1.setNombre("Puesto prueba");
 		restReturnDTO1.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restReturnDTO1.setCoordenadaY(BigDecimal.valueOf(22.25));
+		restReturnDTO1.setAncho(BigDecimal.valueOf(33.36));
+		restReturnDTO1.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO1.setIdSala(1L);
 
 		RestPuestoDTO restReturnDTO2 = new RestPuestoDTO();
@@ -240,6 +270,8 @@ public class PuestoControllerTest {
 		restReturnDTO2.setNombre("Puesto prueba 2");
 		restReturnDTO2.setCoordenadaX(BigDecimal.valueOf(22.35));
 		restReturnDTO2.setCoordenadaY(BigDecimal.valueOf(33.36));
+		restReturnDTO2.setAncho(BigDecimal.valueOf(55.58));
+		restReturnDTO2.setAlto(BigDecimal.valueOf(66.69));
 		restReturnDTO2.setIdSala(2L);
 
 		List<RestPuestoDTO> restReturnDTOList = new ArrayList<>();
