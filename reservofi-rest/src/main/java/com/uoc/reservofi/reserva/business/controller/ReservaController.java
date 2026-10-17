@@ -18,7 +18,7 @@ public class ReservaController {
 
 	@PostMapping("/reserva")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestReservaDTO insert(@RequestBody RestReservaDTO restDTO) {
+	RestReservaDTO create(@RequestBody RestReservaDTO restDTO) {
 		return restReservaService.insert(restDTO);
 	}
 

@@ -18,7 +18,7 @@ public class RolController {
 
 	@PostMapping("/rol")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestRolDTO insert(@RequestBody RestRolDTO restDTO) {
+	RestRolDTO create(@RequestBody RestRolDTO restDTO) {
 		return restRolService.insert(restDTO);
 	}
 

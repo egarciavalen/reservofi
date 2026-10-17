@@ -21,7 +21,7 @@ public class SalaController {
 	@PostMapping(path = "/sala", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
-	RestSalaConsultaDTO save(@ModelAttribute RestSalaGuardadoDTO restDTO) {
+	RestSalaConsultaDTO create(@ModelAttribute RestSalaGuardadoDTO restDTO) {
 		return restSalaService.create(restDTO);
 	}
 

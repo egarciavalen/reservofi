@@ -18,7 +18,7 @@ public class PuestoController {
 
 	@PostMapping("/puesto")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestPuestoDTO insert(@RequestBody RestPuestoDTO restDTO) {
+	RestPuestoDTO create(@RequestBody RestPuestoDTO restDTO) {
 		return restPuestoService.insert(restDTO);
 	}
 
