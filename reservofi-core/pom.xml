@@ -34,4 +34,16 @@
         </dependency>
     </dependencies>
 
+
+    <!-- Configuración a la hora de compilar/empaquetar -->
+    <!-- Aquí se deja el plugin de spring boot para que el proyecto se pueda ejecutar -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
