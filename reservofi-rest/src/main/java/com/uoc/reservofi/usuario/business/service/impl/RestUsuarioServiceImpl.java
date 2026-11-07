@@ -21,8 +21,9 @@ public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestU
 	private final RestUsuarioMapper restUsuarioMapper;
 
 	@Override
-	public RestUsuarioConsultaDTO update(@Valid RestUsuarioModificacionDTO restDTO) {
+	public RestUsuarioConsultaDTO update(Long idUsuario, @Valid RestUsuarioModificacionDTO restDTO) {
 		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);
+		dto.setId(idUsuario);
 		dto = gestionUsuarioService.update(dto);
 		return restUsuarioMapper.DTOArestDTO(dto);
 	}

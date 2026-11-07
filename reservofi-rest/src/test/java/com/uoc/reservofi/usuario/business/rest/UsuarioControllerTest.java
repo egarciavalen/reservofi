@@ -45,16 +45,18 @@ public class UsuarioControllerTest {
 
 	@Test
 	void updateTest() throws Exception {
+
+		Long idUsuario = 1L;
+
 		// DTO de entrada
 		RestUsuarioModificacionDTO restUpdateDTO = new RestUsuarioModificacionDTO();
-		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Usuario prueba");
 		restUpdateDTO.setPrimerApellido("Prueba primer apellido");
 		restUpdateDTO.setSegundoApellido("Prueba segundo apellido");
 		restUpdateDTO.setCorreoCorporativo("prueba@gmail.com");
 		restUpdateDTO.setContrasenia("pass12345");
 		restUpdateDTO.setActivo(true);
-		restUpdateDTO.setIdsRoles(List.of(1L, 2L));
+
 
 		// DTO que se espera obtener al final
 		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
@@ -75,7 +77,6 @@ public class UsuarioControllerTest {
 		updateDTO.setCorreoCorporativo("prueba@gmail.com");
 		updateDTO.setContrasenia("pass12345");
 		updateDTO.setActivo(true);
-		updateDTO.setIdsRoles(List.of(1L, 2L));
 
 		// DTO que devuelve el servicio de gestión
 		UsuarioDTO mockReturnDTO = new UsuarioDTO();
@@ -91,7 +92,7 @@ public class UsuarioControllerTest {
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.update(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
 
-		mockMvc.perform(put("/api/usuario").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restUpdateDTO)))
+		mockMvc.perform(put("/api/usuario/" + idUsuario).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restUpdateDTO)))
 				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
 
 		// Se verifica que se haya llamado al servicio de gestión 1 vez
@@ -105,7 +106,8 @@ public class UsuarioControllerTest {
 		assertEquals(updateDTO.getSegundoApellido(), capturedDTO.getSegundoApellido());
 		assertEquals(updateDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
 		assertEquals(updateDTO.getContrasenia(), capturedDTO.getContrasenia());
-		assertEquals(updateDTO.getIdsRoles(), capturedDTO.getIdsRoles());
+		assertEquals(updateDTO.getActivo(), capturedDTO.getActivo());
+
 	}
 
 	@Test

@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class RestUsuarioModificacionDTO extends RestEntidadDTO {
@@ -34,6 +32,4 @@ public class RestUsuarioModificacionDTO extends RestEntidadDTO {
 
 	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;
-
-	private List<Long> idsRoles;
 }

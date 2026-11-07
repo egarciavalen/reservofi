@@ -21,10 +21,10 @@ public class UsuarioController {
 
 	// ¿Insert? -> Controlador de autenticación
 
-	@PutMapping("/usuario")
+	@PutMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestUsuarioConsultaDTO update(@RequestBody RestUsuarioModificacionDTO restDTO) {
-		return restUsuarioService.update(restDTO);
+	RestUsuarioConsultaDTO update(@PathVariable Long id, @RequestBody RestUsuarioModificacionDTO restDTO) {
+		return restUsuarioService.update(id, restDTO);
 	}
 
 	@GetMapping("/usuario/{id}")
