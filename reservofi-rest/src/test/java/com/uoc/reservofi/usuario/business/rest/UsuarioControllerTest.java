@@ -46,7 +46,7 @@ public class UsuarioControllerTest {
 	@Test
 	void updateTest() throws Exception {
 
-		Long idUsuario = 1L;
+		long idUsuario = 1L;
 
 		// DTO de entrada
 		RestUsuarioModificacionDTO restUpdateDTO = new RestUsuarioModificacionDTO();
