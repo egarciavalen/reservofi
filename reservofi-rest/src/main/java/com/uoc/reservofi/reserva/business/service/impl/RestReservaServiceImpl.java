@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service(RestReservaService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestReservaConsultaDTO> implements RestReservaService {
+public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestReservaConsultaDTO, RestReservaGuardadoDTO> implements RestReservaService {
 
 	private final GestionReservaService gestionReservaService;
 	private final RestReservaMapper restReservaMapper;
@@ -25,12 +25,6 @@ public class RestReservaServiceImpl extends AbstractRestEntidadServiceImpl<RestR
 		ReservaDTO dto = restReservaMapper.restDTOADTO(restDTO);
 		dto = gestionReservaService.insert(dto);
 		return restReservaMapper.DTOArestDTO(dto);
-	}
-
-	@Override
-	public RestReservaConsultaDTO update(RestReservaGuardadoDTO restDTO, Long idSala) {
-		// No tiene implementación por el momento
-		return null;
 	}
 
 	@Override

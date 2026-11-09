@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service(RestSalaService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSalaConsultaDTO> implements RestSalaService {
+public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSalaConsultaDTO, RestSalaGuardadoDTO> implements RestSalaService {
 
 	private final GestionSalaService gestionSalaService;
 	private final RestSalaMapper restSalaMapper;
@@ -22,21 +22,20 @@ public class RestSalaServiceImpl extends AbstractRestEntidadServiceImpl<RestSala
 	// En principio se asume que NO se modificará la sala una vez creada
 
 	@Override
-	public RestSalaConsultaDTO create(RestSalaGuardadoDTO restDTO) {
+	public RestSalaConsultaDTO insert(RestSalaGuardadoDTO restDTO) {
 		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
 		dto = gestionSalaService.createAndSaveImage(dto);
 		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
 
 	@Override
-	public RestSalaConsultaDTO update(RestSalaGuardadoDTO restDTO, Long idSala) {
+	public RestSalaConsultaDTO update(Long idSala, RestSalaGuardadoDTO restDTO) {
 		// Se guarda el ID en el DTO para trasladarlo en el mapper
 		restDTO.setId(idSala);
 		SalaDTO dto = restSalaMapper.modificacionRestDTOADTO(restDTO);
 		dto = gestionSalaService.update(dto);
 		return restSalaMapper.consultaDTOArestDTO(dto);
 	}
-
 
 	@Override
 	public void deleteById(Long id) {

@@ -1,6 +1,6 @@
 package com.uoc.reservofi.reserva.business.dto;
 
-import com.uoc.reservofi.base.business.dto.RestEntidadDTO;
+import com.uoc.reservofi.base.business.dto.RestEntidadGuardadoDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class RestReservaGuardadoDTO extends RestEntidadDTO {
+public class RestReservaGuardadoDTO extends RestEntidadGuardadoDTO {
 
 	@NotNull(message = "reserva.usuario.obligatorio")
 	private Long idUsuario;

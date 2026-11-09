@@ -1,6 +1,7 @@
 package com.uoc.reservofi.rol.business.mapper;
 
-import com.uoc.reservofi.rol.business.dto.RestRolDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import org.mapstruct.*;
 
@@ -13,15 +14,15 @@ public interface RestRolMapper {
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
-	RolDTO restDTOADTO(RestRolDTO restDTO);
+	RolDTO restDTOADTO(RestRolGuardadoDTO restDTO);
 
 	@Named("DTOArestDTO")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "nombre", target = "nombre")
-	RestRolDTO DTOArestDTO(RolDTO dto);
+	RestRolConsultaDTO DTOArestDTO(RolDTO dto);
 
 	@IterableMapping(qualifiedByName = "DTOArestDTO")
-	List<RestRolDTO> DTOArestDTOList(List<RolDTO> entidadList);
+	List<RestRolConsultaDTO> DTOArestDTOList(List<RolDTO> entidadList);
 
 }

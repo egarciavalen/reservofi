@@ -1,7 +1,8 @@
 package com.uoc.reservofi.rol.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
-import com.uoc.reservofi.rol.business.dto.RestRolDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.mapper.RestRolMapper;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
@@ -14,20 +15,20 @@ import java.util.List;
 
 @Service(RestRolService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestRolServiceImpl extends AbstractRestEntidadServiceImpl<RestRolDTO> implements RestRolService {
+public class RestRolServiceImpl extends AbstractRestEntidadServiceImpl<RestRolConsultaDTO, RestRolGuardadoDTO> implements RestRolService {
 
 	private final GestionRolService gestionRolService;
 	private final RestRolMapper restRolMapper;
 
 	@Override
-	public RestRolDTO insert(@Valid RestRolDTO restDTO) {
+	public RestRolConsultaDTO insert(@Valid RestRolGuardadoDTO restDTO) {
 		RolDTO dto = restRolMapper.restDTOADTO(restDTO);
 		dto = gestionRolService.insert(dto);
 		return restRolMapper.DTOArestDTO(dto);
 	}
 
 	@Override
-	public RestRolDTO update(@Valid RestRolDTO restDTO) {
+	public RestRolConsultaDTO update(@Valid RestRolGuardadoDTO restDTO) {
 		RolDTO dto = restRolMapper.restDTOADTO(restDTO);
 		dto = gestionRolService.update(dto);
 		return restRolMapper.DTOArestDTO(dto);
@@ -39,13 +40,13 @@ public class RestRolServiceImpl extends AbstractRestEntidadServiceImpl<RestRolDT
 	}
 
 	@Override
-	public RestRolDTO findById(Long id) {
+	public RestRolConsultaDTO findById(Long id) {
 		RolDTO dto = gestionRolService.findById(id);
 		return restRolMapper.DTOArestDTO(dto);
 	}
 
 	@Override
-	public List<RestRolDTO> findAll() {
+	public List<RestRolConsultaDTO> findAll() {
 		List<RolDTO> dtoList = gestionRolService.findAll();
 		return restRolMapper.DTOArestDTOList(dtoList);
 	}

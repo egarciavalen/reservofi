@@ -3,7 +3,8 @@ package com.uoc.reservofi.puesto.business.rest;
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.puesto.business.controller.PuestoController;
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
-import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoConsultaDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoGuardadoDTO;
 import com.uoc.reservofi.puesto.business.mapper.RestPuestoMapperImpl;
 import com.uoc.reservofi.puesto.business.service.GestionPuestoService;
 import com.uoc.reservofi.puesto.business.service.impl.RestPuestoServiceImpl;
@@ -46,7 +47,7 @@ public class PuestoControllerTest {
 	@Test
 	void insertTest() throws Exception {
 		// DTO de entrada
-		RestPuestoDTO restInsertDTO = new RestPuestoDTO();
+		RestPuestoGuardadoDTO restInsertDTO = new RestPuestoGuardadoDTO();
 		restInsertDTO.setNombre("Puesto prueba");
 		restInsertDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
 		restInsertDTO.setCoordenadaY(BigDecimal.valueOf(22.25));
@@ -55,7 +56,7 @@ public class PuestoControllerTest {
 		restInsertDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
-		RestPuestoDTO restReturnDTO = new RestPuestoDTO();
+		RestPuestoConsultaDTO restReturnDTO = new RestPuestoConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
@@ -107,7 +108,7 @@ public class PuestoControllerTest {
 	@Test
 	void updateTest() throws Exception {
 		// DTO de entrada
-		RestPuestoDTO restUpdateDTO = new RestPuestoDTO();
+		RestPuestoGuardadoDTO restUpdateDTO = new RestPuestoGuardadoDTO();
 		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Puesto prueba");
 		restUpdateDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
@@ -118,7 +119,7 @@ public class PuestoControllerTest {
 		restUpdateDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
-		RestPuestoDTO restReturnDTO = new RestPuestoDTO();
+		RestPuestoConsultaDTO restReturnDTO = new RestPuestoConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
@@ -197,7 +198,7 @@ public class PuestoControllerTest {
 		mockReturnDTO.setIdSala(1L);
 
 		// DTO que se espera obtener al final
-		RestPuestoDTO restReturnDTO = new RestPuestoDTO();
+		RestPuestoConsultaDTO restReturnDTO = new RestPuestoConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Puesto prueba");
 		restReturnDTO.setCoordenadaX(BigDecimal.valueOf(11.14));
@@ -256,7 +257,7 @@ public class PuestoControllerTest {
 		mockReturnDTOList.add(mockReturnDTO2);
 
 		// Lista de DTOs que se espera obtener al final
-		RestPuestoDTO restReturnDTO1 = new RestPuestoDTO();
+		RestPuestoConsultaDTO restReturnDTO1 = new RestPuestoConsultaDTO();
 		restReturnDTO1.setId(1L);
 		restReturnDTO1.setNombre("Puesto prueba");
 		restReturnDTO1.setCoordenadaX(BigDecimal.valueOf(11.14));
@@ -265,7 +266,7 @@ public class PuestoControllerTest {
 		restReturnDTO1.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO1.setIdSala(1L);
 
-		RestPuestoDTO restReturnDTO2 = new RestPuestoDTO();
+		RestPuestoConsultaDTO restReturnDTO2 = new RestPuestoConsultaDTO();
 		restReturnDTO2.setId(2L);
 		restReturnDTO2.setNombre("Puesto prueba 2");
 		restReturnDTO2.setCoordenadaX(BigDecimal.valueOf(22.35));
@@ -274,7 +275,7 @@ public class PuestoControllerTest {
 		restReturnDTO2.setAlto(BigDecimal.valueOf(66.69));
 		restReturnDTO2.setIdSala(2L);
 
-		List<RestPuestoDTO> restReturnDTOList = new ArrayList<>();
+		List<RestPuestoConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
 		restReturnDTOList.add(restReturnDTO2);
 

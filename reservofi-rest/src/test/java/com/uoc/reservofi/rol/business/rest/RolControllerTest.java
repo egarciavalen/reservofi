@@ -2,7 +2,8 @@ package com.uoc.reservofi.rol.business.rest;
 
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.rol.business.controller.RolController;
-import com.uoc.reservofi.rol.business.dto.RestRolDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.mapper.RestRolMapperImpl;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
@@ -47,11 +48,11 @@ public class RolControllerTest {
 	@Test
 	void insertTest() throws Exception {
 		// DTO de entrada
-		RestRolDTO restInsertDTO = new RestRolDTO();
+		RestRolGuardadoDTO restInsertDTO = new RestRolGuardadoDTO();
 		restInsertDTO.setNombre("Rol prueba");
 
 		// DTO que se espera obtener al final
-		RestRolDTO restReturnDTO = new RestRolDTO();
+		RestRolConsultaDTO restReturnDTO = new RestRolConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Rol prueba");
 
@@ -85,12 +86,12 @@ public class RolControllerTest {
 	@Test
 	void updateTest() throws Exception {
 		// DTO de entrada
-		RestRolDTO restUpdateDTO = new RestRolDTO();
+		RestRolGuardadoDTO restUpdateDTO = new RestRolGuardadoDTO();
 		restUpdateDTO.setId(1L);
 		restUpdateDTO.setNombre("Rol prueba");
 
 		// DTO que se espera obtener al final
-		RestRolDTO restReturnDTO = new RestRolDTO();
+		RestRolConsultaDTO restReturnDTO = new RestRolConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Rol prueba");
 
@@ -144,7 +145,7 @@ public class RolControllerTest {
 		mockReturnDTO.setNombre("Rol prueba");
 
 		// DTO que se espera obtener al final
-		RestRolDTO restReturnDTO = new RestRolDTO();
+		RestRolConsultaDTO restReturnDTO = new RestRolConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Rol prueba");
 
@@ -190,15 +191,15 @@ public class RolControllerTest {
 		mockReturnDTOList.add(mockReturnDTO2);
 
 		// Lista de DTOs que se espera obtener al final
-		RestRolDTO restReturnDTO1 = new RestRolDTO();
+		RestRolConsultaDTO restReturnDTO1 = new RestRolConsultaDTO();
 		restReturnDTO1.setId(1L);
 		restReturnDTO1.setNombre("Rol prueba");
 
-		RestRolDTO restReturnDTO2 = new RestRolDTO();
+		RestRolConsultaDTO restReturnDTO2 = new RestRolConsultaDTO();
 		restReturnDTO2.setId(2L);
 		restReturnDTO2.setNombre("Rol prueba 2");
 
-		List<RestRolDTO> restReturnDTOList = new ArrayList<>();
+		List<RestRolConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
 		restReturnDTOList.add(restReturnDTO2);
 

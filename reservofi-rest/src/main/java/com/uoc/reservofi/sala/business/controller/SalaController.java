@@ -22,14 +22,14 @@ public class SalaController {
 	@ResponseStatus(HttpStatus.CREATED)
 		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
 	RestSalaConsultaDTO create(@ModelAttribute RestSalaGuardadoDTO restDTO) {
-		return restSalaService.create(restDTO);
+		return restSalaService.insert(restDTO);
 	}
 
 	@PutMapping(path = "/sala/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 		// Uso de @ModelAttribute en vez de @RequestBody al no trabajar con JSON
 	RestSalaConsultaDTO update(@ModelAttribute RestSalaGuardadoDTO restDTO, @PathVariable Long id) {
-		return restSalaService.update(restDTO, id);
+		return restSalaService.update(id, restDTO);
 	}
 
 

@@ -2,7 +2,7 @@ package com.uoc.reservofi.usuario.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class UsuarioController {
 
 	@PutMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestUsuarioConsultaDTO update(@PathVariable Long id, @RequestBody RestUsuarioModificacionDTO restDTO) {
+	RestUsuarioConsultaDTO update(@PathVariable Long id, @RequestBody RestUsuarioGuardadoDTO restDTO) {
 		return restUsuarioService.update(id, restDTO);
 	}
 

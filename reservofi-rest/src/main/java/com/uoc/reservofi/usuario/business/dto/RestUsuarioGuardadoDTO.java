@@ -1,6 +1,6 @@
 package com.uoc.reservofi.usuario.business.dto;
 
-import com.uoc.reservofi.base.business.dto.RestEntidadDTO;
+import com.uoc.reservofi.base.business.dto.RestEntidadGuardadoDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RestUsuarioModificacionDTO extends RestEntidadDTO {
+public class RestUsuarioGuardadoDTO extends RestEntidadGuardadoDTO {
 
 	@NotEmpty(message = "usuario.nombre.obligatorio")
 	@Size(max = 100, message = "usuario.nombre.tamanio.maximo")

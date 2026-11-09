@@ -1,7 +1,7 @@
 package com.uoc.reservofi.usuario.business.mapper;
 
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import org.mapstruct.*;
 
@@ -18,7 +18,7 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
-	UsuarioDTO restDTOADTO(RestUsuarioModificacionDTO restDTO);
+	UsuarioDTO restDTOADTO(RestUsuarioGuardadoDTO restDTO);
 
 	@Named("DTOArestDTO")
 	@BeanMapping(ignoreByDefault = true)

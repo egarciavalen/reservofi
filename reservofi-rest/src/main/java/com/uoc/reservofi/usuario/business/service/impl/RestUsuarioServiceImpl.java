@@ -2,7 +2,7 @@ package com.uoc.reservofi.usuario.business.service.impl;
 
 import com.uoc.reservofi.base.business.service.impl.AbstractRestEntidadServiceImpl;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.RestUsuarioMapper;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
@@ -15,13 +15,13 @@ import java.util.List;
 
 @Service(RestUsuarioService.BEAN_NAME)
 @RequiredArgsConstructor
-public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestUsuarioConsultaDTO> implements RestUsuarioService {
+public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestUsuarioConsultaDTO, RestUsuarioGuardadoDTO> implements RestUsuarioService {
 
 	private final GestionUsuarioService gestionUsuarioService;
 	private final RestUsuarioMapper restUsuarioMapper;
 
 	@Override
-	public RestUsuarioConsultaDTO update(Long idUsuario, @Valid RestUsuarioModificacionDTO restDTO) {
+	public RestUsuarioConsultaDTO update(Long idUsuario, @Valid RestUsuarioGuardadoDTO restDTO) {
 		UsuarioDTO dto = restUsuarioMapper.restDTOADTO(restDTO);
 		dto.setId(idUsuario);
 		dto = gestionUsuarioService.update(dto);

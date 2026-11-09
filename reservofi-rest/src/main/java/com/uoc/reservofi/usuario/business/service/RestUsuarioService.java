@@ -2,14 +2,9 @@ package com.uoc.reservofi.usuario.business.service;
 
 import com.uoc.reservofi.base.business.service.RestEntidadService;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
-import jakarta.validation.Valid;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 
-public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsultaDTO> {
+public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsultaDTO, RestUsuarioGuardadoDTO> {
 
 	String BEAN_NAME = "restUsuarioService";
-
-	// Consulta propia al trabajar con diferentes DTOs
-
-	RestUsuarioConsultaDTO update(Long idUsuario, @Valid RestUsuarioModificacionDTO restDTO);
 }

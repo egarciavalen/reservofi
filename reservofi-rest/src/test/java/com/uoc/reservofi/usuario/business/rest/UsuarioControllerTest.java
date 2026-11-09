@@ -3,7 +3,7 @@ package com.uoc.reservofi.usuario.business.rest;
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.usuario.business.controller.UsuarioController;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioModificacionDTO;
+import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.mapper.RestUsuarioMapperImpl;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
@@ -49,14 +49,13 @@ public class UsuarioControllerTest {
 		long idUsuario = 1L;
 
 		// DTO de entrada
-		RestUsuarioModificacionDTO restUpdateDTO = new RestUsuarioModificacionDTO();
+		RestUsuarioGuardadoDTO restUpdateDTO = new RestUsuarioGuardadoDTO();
 		restUpdateDTO.setNombre("Usuario prueba");
 		restUpdateDTO.setPrimerApellido("Prueba primer apellido");
 		restUpdateDTO.setSegundoApellido("Prueba segundo apellido");
 		restUpdateDTO.setCorreoCorporativo("prueba@gmail.com");
 		restUpdateDTO.setContrasenia("pass12345");
 		restUpdateDTO.setActivo(true);
-
 
 		// DTO que se espera obtener al final
 		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();

@@ -1,7 +1,8 @@
 package com.uoc.reservofi.puesto.business.mapper;
 
 import com.uoc.reservofi.puesto.business.dto.PuestoDTO;
-import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoConsultaDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoGuardadoDTO;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface RestPuestoMapper {
 	@Mapping(source = "ancho", target = "ancho")
 	@Mapping(source = "alto", target = "alto")
 	@Mapping(source = "idSala", target = "idSala")
-	PuestoDTO restDTOADTO(RestPuestoDTO restDTO);
+	PuestoDTO restDTOADTO(RestPuestoGuardadoDTO restDTO);
 
 	@Named("DTOArestDTO")
 	@BeanMapping(ignoreByDefault = true)
@@ -29,8 +30,8 @@ public interface RestPuestoMapper {
 	@Mapping(source = "ancho", target = "ancho")
 	@Mapping(source = "alto", target = "alto")
 	@Mapping(source = "idSala", target = "idSala")
-	RestPuestoDTO DTOArestDTO(PuestoDTO dto);
+	RestPuestoConsultaDTO DTOArestDTO(PuestoDTO dto);
 
 	@IterableMapping(qualifiedByName = "DTOArestDTO")
-	List<RestPuestoDTO> DTOArestDTOList(List<PuestoDTO> entidadList);
+	List<RestPuestoConsultaDTO> DTOArestDTOList(List<PuestoDTO> entidadList);
 }

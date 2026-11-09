@@ -1,7 +1,8 @@
 package com.uoc.reservofi.puesto.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.puesto.business.dto.RestPuestoDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoConsultaDTO;
+import com.uoc.reservofi.puesto.business.dto.RestPuestoGuardadoDTO;
 import com.uoc.reservofi.puesto.business.service.RestPuestoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,20 +19,20 @@ public class PuestoController {
 
 	@PostMapping("/puesto")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestPuestoDTO create(@RequestBody RestPuestoDTO restDTO) {
+	RestPuestoConsultaDTO create(@RequestBody RestPuestoGuardadoDTO restDTO) {
 		return restPuestoService.insert(restDTO);
 	}
 
 	@PutMapping("/puesto")
 	@ResponseStatus(HttpStatus.OK)
-	RestPuestoDTO update(@RequestBody RestPuestoDTO restDTO) {
+	RestPuestoConsultaDTO update(@RequestBody RestPuestoGuardadoDTO restDTO) {
 		return restPuestoService.update(restDTO);
 	}
 
 	@GetMapping("/puesto/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestPuestoDTO findById(@PathVariable Long id) {
-		RestPuestoDTO restPuestoDTO = restPuestoService.findById(id);
+	RestPuestoConsultaDTO findById(@PathVariable Long id) {
+		RestPuestoConsultaDTO restPuestoDTO = restPuestoService.findById(id);
 		if (restPuestoDTO == null) {
 			throw new RestException("Entidad no encontrada");
 		}
@@ -40,8 +41,8 @@ public class PuestoController {
 
 	@GetMapping("/puesto")
 	@ResponseStatus(HttpStatus.OK)
-	List<RestPuestoDTO> findAll() {
-		List<RestPuestoDTO> restPuestoDTOList = restPuestoService.findAll();
+	List<RestPuestoConsultaDTO> findAll() {
+		List<RestPuestoConsultaDTO> restPuestoDTOList = restPuestoService.findAll();
 		if (restPuestoDTOList == null || restPuestoDTOList.isEmpty()) {
 			throw new RestException("Entidades no encontradas");
 		}

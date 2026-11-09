@@ -1,7 +1,8 @@
 package com.uoc.reservofi.rol.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.rol.business.dto.RestRolDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
+import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.service.RestRolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,20 +19,20 @@ public class RolController {
 
 	@PostMapping("/rol")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestRolDTO create(@RequestBody RestRolDTO restDTO) {
+	RestRolConsultaDTO create(@RequestBody RestRolGuardadoDTO restDTO) {
 		return restRolService.insert(restDTO);
 	}
 
 	@PutMapping("/rol")
 	@ResponseStatus(HttpStatus.OK)
-	RestRolDTO update(@RequestBody RestRolDTO restDTO) {
+	RestRolConsultaDTO update(@RequestBody RestRolGuardadoDTO restDTO) {
 		return restRolService.update(restDTO);
 	}
 
 	@GetMapping("/rol/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestRolDTO findById(@PathVariable Long id) {
-		RestRolDTO restRolDTO = restRolService.findById(id);
+	RestRolConsultaDTO findById(@PathVariable Long id) {
+		RestRolConsultaDTO restRolDTO = restRolService.findById(id);
 		if (restRolDTO == null) {
 			throw new RestException("Entidad no encontrada");
 		}
@@ -40,8 +41,8 @@ public class RolController {
 
 	@GetMapping("/rol")
 	@ResponseStatus(HttpStatus.OK)
-	List<RestRolDTO> findAll() {
-		List<RestRolDTO> restRolDTOList = restRolService.findAll();
+	List<RestRolConsultaDTO> findAll() {
+		List<RestRolConsultaDTO> restRolDTOList = restRolService.findAll();
 		if (restRolDTOList == null || restRolDTOList.isEmpty()) {
 			throw new RestException("Entidades no encontradas");
 		}
