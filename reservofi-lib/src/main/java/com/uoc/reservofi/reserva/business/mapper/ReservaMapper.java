@@ -27,6 +27,10 @@ public interface ReservaMapper {
 	@Mapping(source = "puesto.id", target = "idPuesto")
 	@Mapping(source = "fechaInicio", target = "fechaInicio")
 	@Mapping(source = "fechaFin", target = "fechaFin")
+	// Campos adicionales para la vista
+	@Mapping(source = "puesto.nombre", target = "nombrePuesto")
+	@Mapping(source = "puesto.sala.nombre", target = "nombreSala")
+	@Mapping(source = "puesto.sala.rutaImagen", target = "rutaImagen")
 	ReservaDTO entidadADTO(Reserva entidad);
 
 	@IterableMapping(qualifiedByName = "entidadADTO")

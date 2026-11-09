@@ -23,4 +23,9 @@ public class ReservaDTO extends GestionEntidadDTO {
 	@NotNull(message = "reserva.fechaFin.obligatorio")
 	private LocalDateTime fechaFin;
 
+	// Campos adicionales para la vista
+	private String nombreSala;
+	private String nombrePuesto;
+	private String rutaImagen;
+
 }

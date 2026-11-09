@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class RestReservaDTO extends RestEntidadDTO {
+public class RestReservaGuardadoDTO extends RestEntidadDTO {
 
 	@NotNull(message = "reserva.usuario.obligatorio")
 	private Long idUsuario;
@@ -23,5 +23,8 @@ public class RestReservaDTO extends RestEntidadDTO {
 
 	@NotNull(message = "reserva.fechaFin.obligatorio")
 	private LocalDateTime fechaFin;
+
+	// Campos adicionales para mostrar en la lista
+
 
 }

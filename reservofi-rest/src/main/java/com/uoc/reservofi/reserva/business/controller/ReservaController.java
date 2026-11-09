@@ -1,7 +1,8 @@
 package com.uoc.reservofi.reserva.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
-import com.uoc.reservofi.reserva.business.dto.RestReservaDTO;
+import com.uoc.reservofi.reserva.business.dto.RestReservaConsultaDTO;
+import com.uoc.reservofi.reserva.business.dto.RestReservaGuardadoDTO;
 import com.uoc.reservofi.reserva.business.service.RestReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,20 +19,14 @@ public class ReservaController {
 
 	@PostMapping("/reserva")
 	@ResponseStatus(HttpStatus.CREATED)
-	RestReservaDTO create(@RequestBody RestReservaDTO restDTO) {
+	RestReservaConsultaDTO create(@RequestBody RestReservaGuardadoDTO restDTO) {
 		return restReservaService.insert(restDTO);
-	}
-
-	@PutMapping("/reserva")
-	@ResponseStatus(HttpStatus.OK)
-	RestReservaDTO update(@RequestBody RestReservaDTO restDTO) {
-		return restReservaService.update(restDTO);
 	}
 
 	@GetMapping("/reserva/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	RestReservaDTO findById(@PathVariable Long id) {
-		RestReservaDTO restReservaDTO = restReservaService.findById(id);
+	RestReservaConsultaDTO findById(@PathVariable Long id) {
+		RestReservaConsultaDTO restReservaDTO = restReservaService.findById(id);
 		if (restReservaDTO == null) {
 			throw new RestException("Entidad no encontrada");
 		}
@@ -40,8 +35,8 @@ public class ReservaController {
 
 	@GetMapping("/reserva")
 	@ResponseStatus(HttpStatus.OK)
-	List<RestReservaDTO> findAll() {
-		List<RestReservaDTO> restReservaDTOList = restReservaService.findAll();
+	List<RestReservaConsultaDTO> findAll() {
+		List<RestReservaConsultaDTO> restReservaDTOList = restReservaService.findAll();
 		if (restReservaDTOList == null || restReservaDTOList.isEmpty()) {
 			throw new RestException("Entidades no encontradas");
 		}
@@ -50,8 +45,8 @@ public class ReservaController {
 
 	@GetMapping("/reserva/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	List<RestReservaDTO> findByUsuarioId(@PathVariable Long id) {
-		List<RestReservaDTO> restReservaDTOList = restReservaService.findByUsuarioId(id);
+	List<RestReservaConsultaDTO> findByUsuarioId(@PathVariable Long id) {
+		List<RestReservaConsultaDTO> restReservaDTOList = restReservaService.findByUsuarioId(id);
 		if (restReservaDTOList == null || restReservaDTOList.isEmpty()) {
 			throw new RestException("Entidades no encontradas");
 		}

@@ -3,7 +3,8 @@ package com.uoc.reservofi.reserva.business.rest;
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.reserva.business.controller.ReservaController;
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
-import com.uoc.reservofi.reserva.business.dto.RestReservaDTO;
+import com.uoc.reservofi.reserva.business.dto.RestReservaConsultaDTO;
+import com.uoc.reservofi.reserva.business.dto.RestReservaGuardadoDTO;
 import com.uoc.reservofi.reserva.business.mapper.RestReservaMapperImpl;
 import com.uoc.reservofi.reserva.business.service.GestionReservaService;
 import com.uoc.reservofi.reserva.business.service.impl.RestReservaServiceImpl;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,19 +48,22 @@ public class ReservaControllerTest {
 	@Test
 	void insertTest() throws Exception {
 		// DTO de entrada
-		RestReservaDTO restInsertDTO = new RestReservaDTO();
+		RestReservaGuardadoDTO restInsertDTO = new RestReservaGuardadoDTO();
 		restInsertDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
 		restInsertDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restInsertDTO.setIdPuesto(1L);
 		restInsertDTO.setIdUsuario(1L);
 
 		// DTO que se espera obtener al final
-		RestReservaDTO restReturnDTO = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO = new RestReservaConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
 		restReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO.setIdPuesto(1L);
 		restReturnDTO.setIdUsuario(1L);
+		restReturnDTO.setNombrePuesto("Puesto 1");
+		restReturnDTO.setNombreSala("Sala 1");
+		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// DTO con el que se invoca al servicio de gestión
 		ReservaDTO insertDTO = new ReservaDTO();
@@ -74,6 +79,9 @@ public class ReservaControllerTest {
 		mockReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO.setIdPuesto(1L);
 		mockReturnDTO.setIdUsuario(1L);
+		mockReturnDTO.setNombrePuesto("Puesto 1");
+		mockReturnDTO.setNombreSala("Sala 1");
+		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// Mock del servicio de gestión
 		when(gestionReservaService.insert(any(ReservaDTO.class))).thenReturn(mockReturnDTO);
@@ -92,58 +100,9 @@ public class ReservaControllerTest {
 		assertEquals(insertDTO.getFechaFin(), capturedDTO.getFechaFin());
 		assertEquals(insertDTO.getIdPuesto(), capturedDTO.getIdPuesto());
 		assertEquals(insertDTO.getIdUsuario(), capturedDTO.getIdUsuario());
-	}
-
-	@Test
-	void updateTest() throws Exception {
-		// DTO de entrada
-		RestReservaDTO restUpdateDTO = new RestReservaDTO();
-		restUpdateDTO.setId(1L);
-		restUpdateDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
-		restUpdateDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
-		restUpdateDTO.setIdPuesto(1L);
-		restUpdateDTO.setIdUsuario(1L);
-
-		// DTO que se espera obtener al final
-		RestReservaDTO restReturnDTO = new RestReservaDTO();
-		restReturnDTO.setId(1L);
-		restReturnDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
-		restReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
-		restReturnDTO.setIdPuesto(1L);
-		restReturnDTO.setIdUsuario(1L);
-
-		// DTO con el que se invoca al servicio de gestión
-		ReservaDTO updateDTO = new ReservaDTO();
-		updateDTO.setId(1L);
-		updateDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
-		updateDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
-		updateDTO.setIdPuesto(1L);
-		updateDTO.setIdUsuario(1L);
-
-		// DTO que devuelve el servicio de gestión
-		ReservaDTO mockReturnDTO = new ReservaDTO();
-		mockReturnDTO.setId(1L);
-		mockReturnDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
-		mockReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
-		mockReturnDTO.setIdPuesto(1L);
-		mockReturnDTO.setIdUsuario(1L);
-
-		// Mock del servicio de gestión
-		when(gestionReservaService.update(any(ReservaDTO.class))).thenReturn(mockReturnDTO);
-
-		mockMvc.perform(put("/api/reserva").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restUpdateDTO)))
-				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
-
-		// Se verifica que se haya llamado al servicio de gestión 1 vez
-		verify(gestionReservaService).update(reservaCaptor.capture());
-
-		// Se verifica que lo que se manda al servicio de gestión coincide con lo esperado
-		ReservaDTO capturedDTO = reservaCaptor.getValue();
-		assertEquals(updateDTO.getId(), capturedDTO.getId());
-		assertEquals(updateDTO.getFechaInicio(), capturedDTO.getFechaInicio());
-		assertEquals(updateDTO.getFechaFin(), capturedDTO.getFechaFin());
-		assertEquals(updateDTO.getIdPuesto(), capturedDTO.getIdPuesto());
-		assertEquals(updateDTO.getIdUsuario(), capturedDTO.getIdUsuario());
+		assertNull(capturedDTO.getNombrePuesto());
+		assertNull(capturedDTO.getNombreSala());
+		assertNull(capturedDTO.getRutaImagen());
 	}
 
 	@Test
@@ -172,14 +131,20 @@ public class ReservaControllerTest {
 		mockReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO.setIdPuesto(1L);
 		mockReturnDTO.setIdUsuario(1L);
+		mockReturnDTO.setNombrePuesto("Puesto 1");
+		mockReturnDTO.setNombreSala("Sala 1");
+		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// DTO que se espera obtener al final
-		RestReservaDTO restReturnDTO = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO = new RestReservaConsultaDTO();
 		restReturnDTO.setId(1L);
 		restReturnDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
 		restReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO.setIdPuesto(1L);
 		restReturnDTO.setIdUsuario(1L);
+		restReturnDTO.setNombrePuesto("Puesto 1");
+		restReturnDTO.setNombreSala("Sala 1");
+		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// Mock del servicio de gestión
 		when(gestionReservaService.findById(idTest)).thenReturn(mockReturnDTO);
@@ -215,6 +180,9 @@ public class ReservaControllerTest {
 		mockReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO1.setIdPuesto(1L);
 		mockReturnDTO1.setIdUsuario(1L);
+		mockReturnDTO1.setNombrePuesto("Puesto 1");
+		mockReturnDTO1.setNombreSala("Sala 1");
+		mockReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		ReservaDTO mockReturnDTO2 = new ReservaDTO();
 		mockReturnDTO2.setId(2L);
@@ -222,27 +190,36 @@ public class ReservaControllerTest {
 		mockReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		mockReturnDTO2.setIdPuesto(2L);
 		mockReturnDTO2.setIdUsuario(2L);
+		mockReturnDTO2.setNombrePuesto("Puesto 2");
+		mockReturnDTO2.setNombreSala("Sala 2");
+		mockReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
 		List<ReservaDTO> mockReturnDTOList = new ArrayList<>();
 		mockReturnDTOList.add(mockReturnDTO1);
 		mockReturnDTOList.add(mockReturnDTO2);
 
 		// Lista de DTOs que se espera obtener al final
-		RestReservaDTO restReturnDTO1 = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO1 = new RestReservaConsultaDTO();
 		restReturnDTO1.setId(1L);
 		restReturnDTO1.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
 		restReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO1.setIdPuesto(1L);
 		restReturnDTO1.setIdUsuario(1L);
+		restReturnDTO1.setNombrePuesto("Puesto 1");
+		restReturnDTO1.setNombreSala("Sala 1");
+		restReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
-		RestReservaDTO restReturnDTO2 = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO2 = new RestReservaConsultaDTO();
 		restReturnDTO2.setId(2L);
 		restReturnDTO2.setFechaInicio(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		restReturnDTO2.setIdPuesto(2L);
 		restReturnDTO2.setIdUsuario(2L);
+		restReturnDTO2.setNombrePuesto("Puesto 2");
+		restReturnDTO2.setNombreSala("Sala 2");
+		restReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
-		List<RestReservaDTO> restReturnDTOList = new ArrayList<>();
+		List<RestReservaConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
 		restReturnDTOList.add(restReturnDTO2);
 
@@ -268,6 +245,9 @@ public class ReservaControllerTest {
 		mockReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO1.setIdPuesto(1L);
 		mockReturnDTO1.setIdUsuario(idUsuario);
+		mockReturnDTO1.setNombrePuesto("Puesto 1");
+		mockReturnDTO1.setNombreSala("Sala 1");
+		mockReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		ReservaDTO mockReturnDTO2 = new ReservaDTO();
 		mockReturnDTO2.setId(2L);
@@ -275,27 +255,36 @@ public class ReservaControllerTest {
 		mockReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		mockReturnDTO2.setIdPuesto(2L);
 		mockReturnDTO2.setIdUsuario(idUsuario);
+		mockReturnDTO2.setNombrePuesto("Puesto 2");
+		mockReturnDTO2.setNombreSala("Sala 2");
+		mockReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
 		List<ReservaDTO> mockReturnDTOList = new ArrayList<>();
 		mockReturnDTOList.add(mockReturnDTO1);
 		mockReturnDTOList.add(mockReturnDTO2);
 
 		// Lista de DTOs que se espera obtener al final
-		RestReservaDTO restReturnDTO1 = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO1 = new RestReservaConsultaDTO();
 		restReturnDTO1.setId(1L);
 		restReturnDTO1.setFechaInicio(LocalDateTime.of(2026, 10, 10, 0, 0));
 		restReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO1.setIdPuesto(1L);
 		restReturnDTO1.setIdUsuario(idUsuario);
+		restReturnDTO1.setNombrePuesto("Puesto 1");
+		restReturnDTO1.setNombreSala("Sala 1");
+		restReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
-		RestReservaDTO restReturnDTO2 = new RestReservaDTO();
+		RestReservaConsultaDTO restReturnDTO2 = new RestReservaConsultaDTO();
 		restReturnDTO2.setId(2L);
 		restReturnDTO2.setFechaInicio(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		restReturnDTO2.setIdPuesto(2L);
 		restReturnDTO2.setIdUsuario(idUsuario);
+		restReturnDTO2.setNombrePuesto("Puesto 2");
+		restReturnDTO2.setNombreSala("Sala 2");
+		restReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
-		List<RestReservaDTO> restReturnDTOList = new ArrayList<>();
+		List<RestReservaConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
 		restReturnDTOList.add(restReturnDTO2);
 

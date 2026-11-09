@@ -34,6 +34,10 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), insertado.getFechaFin());
 		assertEquals(1L, insertado.getIdPuesto());
 		assertEquals(1L, insertado.getIdUsuario());
+		assertEquals("Puesto 1", insertado.getNombrePuesto());
+		assertEquals("Sala 1", insertado.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", insertado.getRutaImagen());
+
 	}
 
 	@Test
@@ -156,6 +160,10 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO.getFechaFin());
 		assertEquals(1L, reservaDTO.getIdPuesto());
 		assertEquals(1L, reservaDTO.getIdUsuario());
+		assertEquals("Puesto 1", reservaDTO.getNombrePuesto());
+		assertEquals("Sala 1", reservaDTO.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", reservaDTO.getRutaImagen());
+
 	}
 
 	@Test
@@ -171,6 +179,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO1.getFechaFin());
 		assertEquals(1L, reservaDTO1.getIdPuesto());
 		assertEquals(1L, reservaDTO1.getIdUsuario());
+		assertEquals("Puesto 1", reservaDTO1.getNombrePuesto());
+		assertEquals("Sala 1", reservaDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", reservaDTO1.getRutaImagen());
 
 		ReservaDTO reservaDTO2 = reservasDTO.get(1);
 		assertNotNull(reservaDTO2);
@@ -179,6 +190,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(2L, reservaDTO2.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO2.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO2.getRutaImagen());
 
 		ReservaDTO reservaDTO3 = reservasDTO.get(2);
 		assertNotNull(reservaDTO3);
@@ -187,6 +201,10 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO3.getFechaFin());
 		assertEquals(2L, reservaDTO3.getIdPuesto());
 		assertEquals(1L, reservaDTO3.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO3.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO3.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO3.getRutaImagen());
+
 	}
 
 	@Test
@@ -206,6 +224,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO1.getFechaFin());
 		assertEquals(1L, reservaDTO1.getIdPuesto());
 		assertEquals(1L, reservaDTO1.getIdUsuario());
+		assertEquals("Puesto 1", reservaDTO1.getNombrePuesto());
+		assertEquals("Sala 1", reservaDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", reservaDTO1.getRutaImagen());
 
 		ReservaDTO reservaDTO2 = reservasDTO.get(1);
 		assertNotNull(reservaDTO2);
@@ -214,6 +235,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(2L, reservaDTO2.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO2.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO2.getRutaImagen());
 	}
 
 	@Test
@@ -231,7 +255,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertNotNull(reservasDTO);
 		assertEquals(3, reservasDTO.size());
 
-
 		ReservaDTO reservaDTO1 = reservasDTO.getFirst();
 		assertNotNull(reservaDTO1);
 		assertNotNull(reservaDTO1.getId());
@@ -239,6 +262,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO1.getFechaFin());
 		assertEquals(1L, reservaDTO1.getIdPuesto());
 		assertEquals(1L, reservaDTO1.getIdUsuario());
+		assertEquals("Puesto 1", reservaDTO1.getNombrePuesto());
+		assertEquals("Sala 1", reservaDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", reservaDTO1.getRutaImagen());
 
 		ReservaDTO reservaDTO2 = reservasDTO.get(1);
 		assertNotNull(reservaDTO2);
@@ -247,6 +273,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(2L, reservaDTO2.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO2.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO2.getRutaImagen());
 
 		ReservaDTO reservaDTO3 = reservasDTO.get(2);
 		assertNotNull(reservaDTO3);
@@ -255,6 +284,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO3.getFechaFin());
 		assertEquals(2L, reservaDTO3.getIdPuesto());
 		assertEquals(1L, reservaDTO3.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO3.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO3.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO3.getRutaImagen());
 	}
 
 	@Test
@@ -270,6 +302,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 9, 0, 0), reservaDTO.getFechaFin());
 		assertEquals(2L, reservaDTO.getIdPuesto());
 		assertEquals(2L, reservaDTO.getIdUsuario());
+		assertEquals("Puesto 2", reservaDTO.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO.getRutaImagen());
 	}
 
 	@Test
@@ -285,6 +320,9 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 7, 0, 0), reservaDTO1.getFechaFin());
 		assertEquals(1L, reservaDTO1.getIdPuesto());
 		assertEquals(1L, reservaDTO1.getIdUsuario());
+		assertEquals("Puesto 1", reservaDTO1.getNombrePuesto());
+		assertEquals("Sala 1", reservaDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", reservaDTO1.getRutaImagen());
 
 		ReservaDTO reservaDTO2 = reservasDTO.get(1);
 		assertNotNull(reservaDTO2);
@@ -293,6 +331,8 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals(LocalDateTime.of(2026, 10, 11, 0, 0), reservaDTO2.getFechaFin());
 		assertEquals(2L, reservaDTO2.getIdPuesto());
 		assertEquals(1L, reservaDTO2.getIdUsuario());
-
+		assertEquals("Puesto 2", reservaDTO2.getNombrePuesto());
+		assertEquals("Sala 2", reservaDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", reservaDTO2.getRutaImagen());
 	}
 }
