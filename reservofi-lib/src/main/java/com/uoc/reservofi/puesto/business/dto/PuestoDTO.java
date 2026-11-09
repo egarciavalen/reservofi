@@ -37,4 +37,8 @@ public class PuestoDTO extends GestionEntidadDTO {
 	@DecimalMax(value = "99999.99", message = "puesto.alto.tamanio.maximo")
 	private BigDecimal alto;
 
+	// Campos para mostrar en el listado
+	private String nombreSala;
+	private String rutaImagen;
+
 }

@@ -39,6 +39,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(33.36), insertado.getAncho());
 		assertEquals(BigDecimal.valueOf(44.47), insertado.getAlto());
 		assertEquals(1L, insertado.getIdSala());
+		assertEquals("Sala 1", insertado.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", insertado.getRutaImagen());
 	}
 
 	@Test
@@ -271,6 +273,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(31.42), actualizado.getAncho());
 		assertEquals(BigDecimal.valueOf(11.64), actualizado.getAlto());
 		assertEquals(1L, actualizado.getIdSala());
+		assertEquals("Sala 1", actualizado.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", actualizado.getRutaImagen());
 	}
 
 	@Test
@@ -305,6 +309,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(31.42), puestoDTO.getAncho());
 		assertEquals(BigDecimal.valueOf(11.64), puestoDTO.getAlto());
 		assertEquals(1L, puestoDTO.getIdSala());
+		assertEquals("Sala 1", puestoDTO.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO.getRutaImagen());
 	}
 
 	@Test
@@ -321,6 +327,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
 		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
+		assertEquals("Sala 1", puestoDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO1.getRutaImagen());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
 		assertEquals(2, puestoDTO2.getId());
@@ -330,6 +338,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
 		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
+		assertEquals("Sala 2", puestoDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", puestoDTO2.getRutaImagen());
 
 		PuestoDTO puestoDTO3 = puestosDTO.get(2);
 		assertEquals(3, puestoDTO3.getId());
@@ -339,6 +349,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(53.64), puestoDTO3.getAncho());
 		assertEquals(BigDecimal.valueOf(33.86), puestoDTO3.getAlto());
 		assertEquals(1L, puestoDTO3.getIdSala());
+		assertEquals("Sala 1", puestoDTO3.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO3.getRutaImagen());
 	}
 
 	@Test
@@ -359,6 +371,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
 		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
+		assertEquals("Sala 1", puestoDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO1.getRutaImagen());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
 		assertEquals(2, puestoDTO2.getId());
@@ -368,6 +382,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
 		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
+		assertEquals("Sala 2", puestoDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", puestoDTO2.getRutaImagen());
 	}
 
 	@Test
@@ -393,6 +409,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(31.42), puestoDTO1.getAncho());
 		assertEquals(BigDecimal.valueOf(11.64), puestoDTO1.getAlto());
 		assertEquals(1L, puestoDTO1.getIdSala());
+		assertEquals("Sala 1", puestoDTO1.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO1.getRutaImagen());
 
 		PuestoDTO puestoDTO2 = puestosDTO.get(1);
 		assertEquals(2, puestoDTO2.getId());
@@ -402,6 +420,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(42.53), puestoDTO2.getAncho());
 		assertEquals(BigDecimal.valueOf(22.75), puestoDTO2.getAlto());
 		assertEquals(2L, puestoDTO2.getIdSala());
+		assertEquals("Sala 2", puestoDTO2.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", puestoDTO2.getRutaImagen());
 
 		PuestoDTO puestoDTO3 = puestosDTO.get(2);
 		assertEquals(3, puestoDTO3.getId());
@@ -411,6 +431,8 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(53.64), puestoDTO3.getAncho());
 		assertEquals(BigDecimal.valueOf(33.86), puestoDTO3.getAlto());
 		assertEquals(1L, puestoDTO3.getIdSala());
+		assertEquals("Sala 1", puestoDTO3.getNombreSala());
+		assertEquals("src/main/resources/static/images/img1.png", puestoDTO3.getRutaImagen());
 	}
 
 	@Test
@@ -425,5 +447,7 @@ public class GestionPuestoServiceTest extends AbstractTest {
 		assertEquals(BigDecimal.valueOf(42.53), puestoDTO.getAncho());
 		assertEquals(BigDecimal.valueOf(22.75), puestoDTO.getAlto());
 		assertEquals(2L, puestoDTO.getIdSala());
+		assertEquals("Sala 2", puestoDTO.getNombreSala());
+		assertEquals("src/main/resources/static/images/img2.png", puestoDTO.getRutaImagen());
 	}
 }

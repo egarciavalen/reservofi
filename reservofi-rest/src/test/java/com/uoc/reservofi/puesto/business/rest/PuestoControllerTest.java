@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -64,6 +65,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
+		restReturnDTO.setNombreSala("Sala 1");
+		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// DTO con el que se invoca al servicio de gestión
 		PuestoDTO insertDTO = new PuestoDTO();
@@ -83,6 +86,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
+		mockReturnDTO.setNombreSala("Sala 1");
+		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// Mock del servicio de gestión
 		when(gestionPuestoService.insert(any(PuestoDTO.class))).thenReturn(mockReturnDTO);
@@ -103,6 +108,8 @@ public class PuestoControllerTest {
 		assertEquals(insertDTO.getAncho(), capturedDTO.getAncho());
 		assertEquals(insertDTO.getAlto(), capturedDTO.getAlto());
 		assertEquals(insertDTO.getIdSala(), capturedDTO.getIdSala());
+		assertNull(capturedDTO.getNombreSala());
+		assertNull(capturedDTO.getRutaImagen());
 	}
 
 	@Test
@@ -127,6 +134,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
+		restReturnDTO.setNombreSala("Sala 1");
+		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// DTO con el que se invoca al servicio de gestión
 		PuestoDTO updateDTO = new PuestoDTO();
@@ -147,6 +156,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
+		mockReturnDTO.setNombreSala("Sala 1");
+		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// Mock del servicio de gestión
 		when(gestionPuestoService.update(any(PuestoDTO.class))).thenReturn(mockReturnDTO);
@@ -166,6 +177,8 @@ public class PuestoControllerTest {
 		assertEquals(updateDTO.getAncho(), capturedDTO.getAncho());
 		assertEquals(updateDTO.getAlto(), capturedDTO.getAlto());
 		assertEquals(updateDTO.getIdSala(), capturedDTO.getIdSala());
+		assertNull(capturedDTO.getNombreSala());
+		assertNull(capturedDTO.getRutaImagen());
 	}
 
 	@Test
@@ -196,6 +209,8 @@ public class PuestoControllerTest {
 		mockReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		mockReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO.setIdSala(1L);
+		mockReturnDTO.setNombreSala("Sala 1");
+		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// DTO que se espera obtener al final
 		RestPuestoConsultaDTO restReturnDTO = new RestPuestoConsultaDTO();
@@ -206,6 +221,8 @@ public class PuestoControllerTest {
 		restReturnDTO.setAncho(BigDecimal.valueOf(33.36));
 		restReturnDTO.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO.setIdSala(1L);
+		restReturnDTO.setNombreSala("Sala 1");
+		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		// Mock del servicio de gestión
 		when(gestionPuestoService.findById(idTest)).thenReturn(mockReturnDTO);
@@ -242,6 +259,8 @@ public class PuestoControllerTest {
 		mockReturnDTO1.setAncho(BigDecimal.valueOf(33.36));
 		mockReturnDTO1.setAlto(BigDecimal.valueOf(44.47));
 		mockReturnDTO1.setIdSala(1L);
+		mockReturnDTO1.setNombreSala("Sala 1");
+		mockReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		PuestoDTO mockReturnDTO2 = new PuestoDTO();
 		mockReturnDTO2.setId(2L);
@@ -251,6 +270,8 @@ public class PuestoControllerTest {
 		mockReturnDTO2.setAncho(BigDecimal.valueOf(55.58));
 		mockReturnDTO2.setAlto(BigDecimal.valueOf(66.69));
 		mockReturnDTO2.setIdSala(2L);
+		mockReturnDTO2.setNombreSala("Sala 2");
+		mockReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
 		List<PuestoDTO> mockReturnDTOList = new ArrayList<>();
 		mockReturnDTOList.add(mockReturnDTO1);
@@ -265,6 +286,8 @@ public class PuestoControllerTest {
 		restReturnDTO1.setAncho(BigDecimal.valueOf(33.36));
 		restReturnDTO1.setAlto(BigDecimal.valueOf(44.47));
 		restReturnDTO1.setIdSala(1L);
+		restReturnDTO1.setNombreSala("Sala 1");
+		restReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
 
 		RestPuestoConsultaDTO restReturnDTO2 = new RestPuestoConsultaDTO();
 		restReturnDTO2.setId(2L);
@@ -274,6 +297,8 @@ public class PuestoControllerTest {
 		restReturnDTO2.setAncho(BigDecimal.valueOf(55.58));
 		restReturnDTO2.setAlto(BigDecimal.valueOf(66.69));
 		restReturnDTO2.setIdSala(2L);
+		restReturnDTO2.setNombreSala("Sala 2");
+		restReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
 
 		List<RestPuestoConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);

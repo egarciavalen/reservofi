@@ -32,6 +32,8 @@ public interface PuestoMapper {
 	@Mapping(source = "coordenadaY", target = "coordenadaY")
 	@Mapping(source = "ancho", target = "ancho")
 	@Mapping(source = "alto", target = "alto")
+	@Mapping(source = "sala.nombre", target = "nombreSala")
+	@Mapping(source = "sala.rutaImagen", target = "rutaImagen")
 	PuestoDTO entidadADTO(Puesto entidad);
 
 	@IterableMapping(qualifiedByName = "entidadADTO")

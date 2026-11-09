@@ -30,6 +30,8 @@ public interface RestPuestoMapper {
 	@Mapping(source = "ancho", target = "ancho")
 	@Mapping(source = "alto", target = "alto")
 	@Mapping(source = "idSala", target = "idSala")
+	@Mapping(source = "nombreSala", target = "nombreSala")
+	@Mapping(source = "rutaImagen", target = "rutaImagen")
 	RestPuestoConsultaDTO DTOArestDTO(PuestoDTO dto);
 
 	@IterableMapping(qualifiedByName = "DTOArestDTO")

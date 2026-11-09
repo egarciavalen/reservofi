@@ -16,5 +16,7 @@ public class RestPuestoConsultaDTO extends RestEntidadConsultaDTO {
 	private BigDecimal coordenadaY;
 	private BigDecimal ancho;
 	private BigDecimal alto;
+	private String nombreSala;
+	private String rutaImagen;
 
 }
