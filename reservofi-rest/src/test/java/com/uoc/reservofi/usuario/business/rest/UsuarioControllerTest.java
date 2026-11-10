@@ -233,4 +233,40 @@ public class UsuarioControllerTest {
 		// Se verifica que se hayan llamado al servicio de gestión 1 vez
 		verify(gestionUsuarioService).findAll();
 	}
+
+	@Test
+	void toggleActivo() throws Exception {
+		// Parámetro de entrada
+		Long idTest = 1L;
+
+		// DTO que devuelve el servicio de gestión
+		UsuarioDTO mockReturnDTO = new UsuarioDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Usuario prueba");
+		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
+		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
+		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
+		mockReturnDTO.setContrasenia("pass12345");
+		mockReturnDTO.setActivo(false); // Se marcaría a FALSE en la base de datos
+		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
+
+		// DTO que se espera obtener al final
+		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
+		restReturnDTO.setId(1L);
+		restReturnDTO.setNombre("Usuario prueba");
+		restReturnDTO.setPrimerApellido("Prueba primer apellido");
+		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
+		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
+		restReturnDTO.setActivo(false);
+		restReturnDTO.setIdsRoles(List.of(1L, 2L));
+
+		// Mock del servicio de gestión
+		when(gestionUsuarioService.toggleActivo(idTest)).thenReturn(mockReturnDTO);
+
+		mockMvc.perform(post("/api/usuario/{id}/toggleActivo", idTest)).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionUsuarioService).toggleActivo(idTest);
+	}
 }

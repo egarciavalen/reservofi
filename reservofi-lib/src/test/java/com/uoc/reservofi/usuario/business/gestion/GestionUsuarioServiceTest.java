@@ -588,4 +588,21 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
 	}
 
+	@Test
+	void toggleActivo() {
+
+		UsuarioDTO usuarioDTO = gestionUsuarioService.findById(1L);
+		assertNotNull(usuarioDTO);
+		assertTrue(usuarioDTO.getActivo());
+
+		// Caso 1 -> TRUE a FALSE
+		usuarioDTO = gestionUsuarioService.toggleActivo(1L);
+		assertNotNull(usuarioDTO);
+		assertFalse(usuarioDTO.getActivo());
+
+		// Caso 2 -> FALSE a TRUE
+		usuarioDTO = gestionUsuarioService.toggleActivo(1L);
+		assertNotNull(usuarioDTO);
+		assertTrue(usuarioDTO.getActivo());
+	}
 }

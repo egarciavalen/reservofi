@@ -7,4 +7,7 @@ import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsultaDTO, RestUsuarioGuardadoDTO> {
 
 	String BEAN_NAME = "restUsuarioService";
+
+	RestUsuarioConsultaDTO toggleActivo(Long idUsuario);
+
 }

@@ -52,4 +52,11 @@ public class UsuarioController {
 	void deleteById(@PathVariable Long id) {
 		restUsuarioService.deleteById(id);
 	}
+
+	@PostMapping("/usuario/{id}/toggleActivo")
+	@ResponseStatus(HttpStatus.OK)
+	RestUsuarioConsultaDTO toggleActivo(@PathVariable Long id) {
+		return restUsuarioService.toggleActivo(id);
+	}
+
 }

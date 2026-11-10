@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository extends BaseEntidadRepository<Usuario> {
 
 	Usuario findByCorreoCorporativo(@Param("correoCorporativo") String correoCorporativo);
+
 }

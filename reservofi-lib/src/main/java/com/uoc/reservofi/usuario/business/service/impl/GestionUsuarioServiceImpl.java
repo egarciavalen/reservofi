@@ -143,4 +143,21 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		return responseDTO;
 	}
+
+	@Override
+	public UsuarioDTO toggleActivo(Long idUsuario) {
+
+		UsuarioDTO usuarioDTO = this.findById(idUsuario);
+
+		// Validación
+		if (usuarioDTO == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		// Se asigna el opuesto
+		usuarioDTO.setActivo(!usuarioDTO.getActivo());
+
+		// Devolver el DTO
+		return this.update(usuarioDTO);
+	}
 }
