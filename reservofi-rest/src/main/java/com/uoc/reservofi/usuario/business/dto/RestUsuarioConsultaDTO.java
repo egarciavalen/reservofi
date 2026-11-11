@@ -15,5 +15,5 @@ public class RestUsuarioConsultaDTO extends RestEntidadConsultaDTO {
 	private String segundoApellido;
 	private String correoCorporativo;
 	private Boolean activo;
-	private List<Long> idsRoles;
+	private List<RestUsuarioConsultaRolDTO> roles;
 }

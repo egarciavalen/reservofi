@@ -7,7 +7,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = RestUsuarioRolMapper.class)
 public interface RestUsuarioMapper {
 
 	@Named("restDTOADTO")
@@ -28,7 +28,7 @@ public interface RestUsuarioMapper {
 	@Mapping(source = "segundoApellido", target = "segundoApellido")
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "activo", target = "activo")
-	@Mapping(source = "idsRoles", target = "idsRoles")
+	@Mapping(source = "roles", target = "roles", qualifiedByName = "rolDTOArestRolDTOList")
 	RestUsuarioConsultaDTO DTOArestDTO(UsuarioDTO dto);
 
 	@IterableMapping(qualifiedByName = "DTOArestDTO")

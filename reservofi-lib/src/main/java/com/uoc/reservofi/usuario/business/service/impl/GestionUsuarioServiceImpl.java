@@ -7,6 +7,7 @@ import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioLoginResponseDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioRolDTO;
 import com.uoc.reservofi.usuario.business.mapper.UsuarioMapper;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
@@ -18,7 +19,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service(GestionUsuarioService.BEAN_NAME)
@@ -112,7 +112,12 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	public UsuarioDTO register(UsuarioDTO dto) {
 		// El usuario registrado tendrá el rol de empleado por defecto
 		Long idEmpleado = this.gestionRolService.getIdByNombre("Empleado");
-		dto.setIdsRoles(List.of(idEmpleado));
+
+		UsuarioRolDTO usuarioRolDTO = new UsuarioRolDTO();
+		usuarioRolDTO.setId(idEmpleado);
+		usuarioRolDTO.setNombre("Empleado");
+
+		dto.setRoles(List.of(usuarioRolDTO));
 
 		// Se inserta la información y se devuelve el usuario
 		return this.insert(dto);
@@ -174,22 +179,30 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		// Se busca el identificador que se corresponda al administrador
 		Long idAdmin = this.gestionRolService.getIdByNombre("Administrador");
-		List<Long> idsRolesUsuario = usuarioDTO.getIdsRoles();
 
-		if (idsRolesUsuario != null) {
-			if (idsRolesUsuario.contains(idAdmin)) {
-				// Si ya tiene el rol, lo elimina
-				idsRolesUsuario.remove(idAdmin);
-			} else {
-				// En caso contrario, lo incluye
-				idsRolesUsuario.add(idAdmin);
+		List<UsuarioRolDTO> rolesUsuario = usuarioDTO.getRoles();
+		boolean isAdminErased = false;
+
+		if (rolesUsuario != null) {
+
+			for (UsuarioRolDTO usuarioRolDTO : rolesUsuario) {
+				if (usuarioRolDTO.getId().equals(idAdmin)) {
+					// Si ya tiene el rol, lo elimina
+					rolesUsuario.remove(usuarioRolDTO);
+					isAdminErased = true;
+					break;
+				}
 			}
-		} else {
-			// Para prevenir posibles errores
-			idsRolesUsuario = new ArrayList<>();
-			idsRolesUsuario.add(idAdmin);
+			
+			if (!isAdminErased) {
+				UsuarioRolDTO usuarioRolDTO = new UsuarioRolDTO();
+				usuarioRolDTO.setId(idAdmin);
+				usuarioRolDTO.setNombre("Administrador");
+				rolesUsuario.add(usuarioRolDTO);
+			}
 		}
-		usuarioDTO.setIdsRoles(idsRolesUsuario);
+
+		usuarioDTO.setRoles(rolesUsuario);
 
 		// Devolver el DTO
 		return this.update(usuarioDTO);

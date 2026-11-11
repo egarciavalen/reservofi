@@ -3,6 +3,7 @@ package com.uoc.reservofi.usuario.business.mapper;
 import com.uoc.reservofi.rol.business.model.Rol;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.UsuarioRolDTO;
 import com.uoc.reservofi.usuario.business.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,15 +53,15 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 		usuarioRelacion.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
 
 		// Roles
-		Set<Rol> rolesUsuario;
-		if (dto.getIdsRoles() != null && !dto.getIdsRoles().isEmpty()) {
-			List<Rol> roles = baseRolService.findAllById(dto.getIdsRoles());
-			rolesUsuario = new HashSet<>(roles);
-		} else {
-			rolesUsuario = new HashSet<>();
+		Set<Rol> rolesUsuario = new HashSet<>();
+		if (dto.getRoles()!= null && !dto.getRoles().isEmpty()) {
+			for (UsuarioRolDTO usuarioRol :  dto.getRoles()) {
+				Rol rol = baseRolService.findById(usuarioRol.getId());
+				rolesUsuario.add(rol);
+			}
 		}
-		usuarioRelacion.setRoles(rolesUsuario);
 
+		usuarioRelacion.setRoles(rolesUsuario);
 		return usuarioRelacion;
 	}
 
@@ -70,11 +71,15 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 
 		// Roles
 		if (entidad.getRoles() != null && !entidad.getRoles().isEmpty()) {
-			List<Long> idsRoles = new ArrayList<>();
+
+			List<UsuarioRolDTO> roles = new ArrayList<>();
 			for (Rol rol : entidad.getRoles()) {
-				idsRoles.add(rol.getId());
+				UsuarioRolDTO rolDTO = new UsuarioRolDTO();
+				rolDTO.setId(rol.getId());
+				rolDTO.setNombre(rol.getNombre());
+				roles.add(rolDTO);
 			}
-			dto.setIdsRoles(idsRoles);
+			dto.setRoles(roles);
 		}
 		return dto;
 	}

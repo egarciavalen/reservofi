@@ -36,5 +36,5 @@ public class UsuarioDTO extends GestionEntidadDTO {
 	@NotNull(message = "usuario.activo.obligatorio")
 	private Boolean activo;
 
-	private List<Long> idsRoles;
+	private List<UsuarioRolDTO> roles;
 }

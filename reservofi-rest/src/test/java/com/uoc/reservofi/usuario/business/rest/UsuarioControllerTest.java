@@ -2,10 +2,9 @@ package com.uoc.reservofi.usuario.business.rest;
 
 import com.uoc.reservofi.base.business.controller.RestExceptionHandler;
 import com.uoc.reservofi.usuario.business.controller.UsuarioController;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
-import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
-import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
+import com.uoc.reservofi.usuario.business.dto.*;
 import com.uoc.reservofi.usuario.business.mapper.RestUsuarioMapperImpl;
+import com.uoc.reservofi.usuario.business.mapper.RestUsuarioRolMapperImpl;
 import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import com.uoc.reservofi.usuario.business.service.impl.RestUsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest()
-@ContextConfiguration(classes = {UsuarioController.class, RestUsuarioMapperImpl.class, RestUsuarioServiceImpl.class, RestExceptionHandler.class})
+@ContextConfiguration(classes = {UsuarioController.class, RestUsuarioMapperImpl.class, RestUsuarioRolMapperImpl.class, RestUsuarioServiceImpl.class, RestExceptionHandler.class})
 public class UsuarioControllerTest {
 
 	@Captor
@@ -45,6 +44,33 @@ public class UsuarioControllerTest {
 
 	@Test
 	void updateTest() throws Exception {
+
+		// Roles gestion DTO
+		List<UsuarioRolDTO> gestionRoles = new ArrayList<>();
+
+		UsuarioRolDTO gestionRol1 = new UsuarioRolDTO();
+		gestionRol1.setId(1L);
+		gestionRol1.setNombre("Empleado");
+
+		UsuarioRolDTO gestionRol2 = new UsuarioRolDTO();
+		gestionRol2.setId(2L);
+		gestionRol2.setNombre("Administrador");
+
+		gestionRoles.add(gestionRol1);
+		gestionRoles.add(gestionRol2);
+
+		// Roles rol DTO
+		List<RestUsuarioConsultaRolDTO> restRoles = new ArrayList<>();
+		RestUsuarioConsultaRolDTO restRol1 = new RestUsuarioConsultaRolDTO();
+		restRol1.setId(1L);
+		restRol1.setNombre("Empleado");
+
+		RestUsuarioConsultaRolDTO restRol2 = new RestUsuarioConsultaRolDTO();
+		restRol2.setId(2L);
+		restRol2.setNombre("Administrador");
+
+		restRoles.add(restRol1);
+		restRoles.add(restRol2);
 
 		long idUsuario = 1L;
 
@@ -65,7 +91,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO.setRoles(restRoles);
 
 		// DTO con el que se invoca al servicio de gestión
 		UsuarioDTO updateDTO = new UsuarioDTO();
@@ -86,7 +112,8 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
+
+		mockReturnDTO.setRoles(gestionRoles);
 
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.update(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
@@ -106,7 +133,6 @@ public class UsuarioControllerTest {
 		assertEquals(updateDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
 		assertEquals(updateDTO.getContrasenia(), capturedDTO.getContrasenia());
 		assertEquals(updateDTO.getActivo(), capturedDTO.getActivo());
-
 	}
 
 	@Test
@@ -125,6 +151,34 @@ public class UsuarioControllerTest {
 
 	@Test
 	void findByIdTest() throws Exception {
+
+		// Roles gestion DTO
+		List<UsuarioRolDTO> gestionRoles = new ArrayList<>();
+
+		UsuarioRolDTO gestionRol1 = new UsuarioRolDTO();
+		gestionRol1.setId(1L);
+		gestionRol1.setNombre("Empleado");
+
+		UsuarioRolDTO gestionRol2 = new UsuarioRolDTO();
+		gestionRol2.setId(2L);
+		gestionRol2.setNombre("Administrador");
+
+		gestionRoles.add(gestionRol1);
+		gestionRoles.add(gestionRol2);
+
+		// Roles rol DTO
+		List<RestUsuarioConsultaRolDTO> restRoles = new ArrayList<>();
+		RestUsuarioConsultaRolDTO restRol1 = new RestUsuarioConsultaRolDTO();
+		restRol1.setId(1L);
+		restRol1.setNombre("Empleado");
+
+		RestUsuarioConsultaRolDTO restRol2 = new RestUsuarioConsultaRolDTO();
+		restRol2.setId(2L);
+		restRol2.setNombre("Administrador");
+
+		restRoles.add(restRol1);
+		restRoles.add(restRol2);
+
 		// Parámetro de entrada
 		Long idTest = 1L;
 
@@ -137,7 +191,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
+		mockReturnDTO.setRoles(gestionRoles);
 
 		// DTO que se espera obtener al final
 		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
@@ -147,7 +201,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO.setRoles(restRoles);
 
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.findById(idTest)).thenReturn(mockReturnDTO);
@@ -176,6 +230,33 @@ public class UsuarioControllerTest {
 	@Test
 	void findAllTest() throws Exception {
 
+		// Roles gestion DTO
+		List<UsuarioRolDTO> gestionRoles = new ArrayList<>();
+
+		UsuarioRolDTO gestionRol1 = new UsuarioRolDTO();
+		gestionRol1.setId(1L);
+		gestionRol1.setNombre("Empleado");
+
+		UsuarioRolDTO gestionRol2 = new UsuarioRolDTO();
+		gestionRol2.setId(2L);
+		gestionRol2.setNombre("Administrador");
+
+		gestionRoles.add(gestionRol1);
+		gestionRoles.add(gestionRol2);
+
+		// Roles rol DTO
+		List<RestUsuarioConsultaRolDTO> restRoles = new ArrayList<>();
+		RestUsuarioConsultaRolDTO restRol1 = new RestUsuarioConsultaRolDTO();
+		restRol1.setId(1L);
+		restRol1.setNombre("Empleado");
+
+		RestUsuarioConsultaRolDTO restRol2 = new RestUsuarioConsultaRolDTO();
+		restRol2.setId(2L);
+		restRol2.setNombre("Administrador");
+
+		restRoles.add(restRol1);
+		restRoles.add(restRol2);
+
 		// Lista de DTOs que devuelve el servicio de gestión
 		UsuarioDTO mockReturnDTO1 = new UsuarioDTO();
 		mockReturnDTO1.setId(1L);
@@ -185,7 +266,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
 		mockReturnDTO1.setContrasenia("pass12345_1");
 		mockReturnDTO1.setActivo(true);
-		mockReturnDTO1.setIdsRoles(List.of(1L, 2L));
+		mockReturnDTO1.setRoles(gestionRoles);
 
 		UsuarioDTO mockReturnDTO2 = new UsuarioDTO();
 		mockReturnDTO2.setId(2L);
@@ -195,7 +276,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
 		mockReturnDTO2.setContrasenia("pass12345_2");
 		mockReturnDTO2.setActivo(false);
-		mockReturnDTO2.setIdsRoles(List.of(1L, 2L));
+		mockReturnDTO2.setRoles(gestionRoles);
 
 		List<UsuarioDTO> mockReturnDTOList = new ArrayList<>();
 		mockReturnDTOList.add(mockReturnDTO1);
@@ -209,7 +290,7 @@ public class UsuarioControllerTest {
 		restReturnDTO1.setSegundoApellido("Prueba segundo apellido 1");
 		restReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
 		restReturnDTO1.setActivo(true);
-		restReturnDTO1.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO1.setRoles(restRoles);
 
 		RestUsuarioConsultaDTO restReturnDTO2 = new RestUsuarioConsultaDTO();
 		restReturnDTO2.setId(2L);
@@ -218,7 +299,7 @@ public class UsuarioControllerTest {
 		restReturnDTO2.setSegundoApellido("Prueba segundo apellido 2");
 		restReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
 		restReturnDTO2.setActivo(false);
-		restReturnDTO2.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO2.setRoles(restRoles);
 
 		List<RestUsuarioConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
@@ -236,6 +317,34 @@ public class UsuarioControllerTest {
 
 	@Test
 	void toggleActivoTest() throws Exception {
+
+		// Roles gestion DTO
+		List<UsuarioRolDTO> gestionRoles = new ArrayList<>();
+
+		UsuarioRolDTO gestionRol1 = new UsuarioRolDTO();
+		gestionRol1.setId(1L);
+		gestionRol1.setNombre("Empleado");
+
+		UsuarioRolDTO gestionRol2 = new UsuarioRolDTO();
+		gestionRol2.setId(2L);
+		gestionRol2.setNombre("Administrador");
+
+		gestionRoles.add(gestionRol1);
+		gestionRoles.add(gestionRol2);
+
+		// Roles rol DTO
+		List<RestUsuarioConsultaRolDTO> restRoles = new ArrayList<>();
+		RestUsuarioConsultaRolDTO restRol1 = new RestUsuarioConsultaRolDTO();
+		restRol1.setId(1L);
+		restRol1.setNombre("Empleado");
+
+		RestUsuarioConsultaRolDTO restRol2 = new RestUsuarioConsultaRolDTO();
+		restRol2.setId(2L);
+		restRol2.setNombre("Administrador");
+
+		restRoles.add(restRol1);
+		restRoles.add(restRol2);
+
 		// Parámetro de entrada
 		Long idTest = 1L;
 
@@ -248,7 +357,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(false); // Se marcaría a FALSE en la base de datos
-		mockReturnDTO.setIdsRoles(List.of(1L, 2L));
+		mockReturnDTO.setRoles(gestionRoles);
 
 		// DTO que se espera obtener al final
 		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
@@ -258,7 +367,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(false);
-		restReturnDTO.setIdsRoles(List.of(1L, 2L));
+		restReturnDTO.setRoles(restRoles);
 
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.toggleActivo(idTest)).thenReturn(mockReturnDTO);
@@ -272,6 +381,24 @@ public class UsuarioControllerTest {
 
 	@Test
 	void toggleAdminTest() throws Exception {
+
+		// Roles gestion DTO
+		List<UsuarioRolDTO> gestionRoles = new ArrayList<>();
+
+		UsuarioRolDTO gestionRol1 = new UsuarioRolDTO();
+		gestionRol1.setId(1L);
+		gestionRol1.setNombre("Empleado");
+
+		gestionRoles.add(gestionRol1);
+
+		// Roles rol DTO
+		List<RestUsuarioConsultaRolDTO> restRoles = new ArrayList<>();
+		RestUsuarioConsultaRolDTO restRol1 = new RestUsuarioConsultaRolDTO();
+		restRol1.setId(1L);
+		restRol1.setNombre("Empleado");
+
+		restRoles.add(restRol1);
+
 		// Parámetro de entrada
 		Long idTest = 1L;
 
@@ -284,7 +411,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L)); // Se quitaría el permiso de administrador
+		mockReturnDTO.setRoles(gestionRoles); // Se quitaría el permiso de administrador
 
 		// DTO que se espera obtener al final
 		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
@@ -294,7 +421,7 @@ public class UsuarioControllerTest {
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L));
+		restReturnDTO.setRoles(restRoles);
 
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.toggleAdmin(idTest)).thenReturn(mockReturnDTO);

@@ -24,8 +24,6 @@ import org.springframework.test.json.JsonCompareMode;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -62,13 +60,11 @@ public class AutenticacionControllerTest {
 
 		// DTO que se espera obtener al final
 		RestRegisterResponseDTO restReturnDTO = new RestRegisterResponseDTO();
-		restReturnDTO.setId(1L);
 		restReturnDTO.setNombre("Usuario prueba");
 		restReturnDTO.setPrimerApellido("Prueba primer apellido");
 		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
 		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		restReturnDTO.setActivo(true);
-		restReturnDTO.setIdsRoles(List.of(1L));
 
 		// DTO con el que se invoca al servicio de gestión
 		UsuarioDTO registerDTO = new UsuarioDTO();
@@ -78,7 +74,6 @@ public class AutenticacionControllerTest {
 		registerDTO.setCorreoCorporativo("prueba@gmail.com");
 		registerDTO.setContrasenia("pass12345");
 		registerDTO.setActivo(true);
-		registerDTO.setIdsRoles(null);
 
 		// DTO que devuelve el servicio de gestión
 		UsuarioDTO mockReturnDTO = new UsuarioDTO();
@@ -89,7 +84,6 @@ public class AutenticacionControllerTest {
 		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
 		mockReturnDTO.setContrasenia("pass12345");
 		mockReturnDTO.setActivo(true);
-		mockReturnDTO.setIdsRoles(List.of(1L));
 
 		// Mock del servicio de gestión
 		when(gestionUsuarioService.register(any(UsuarioDTO.class))).thenReturn(mockReturnDTO);
@@ -109,7 +103,6 @@ public class AutenticacionControllerTest {
 		assertEquals(registerDTO.getSegundoApellido(), capturedDTO.getSegundoApellido());
 		assertEquals(registerDTO.getCorreoCorporativo(), capturedDTO.getCorreoCorporativo());
 		assertEquals(registerDTO.getContrasenia(), capturedDTO.getContrasenia());
-		assertEquals(registerDTO.getIdsRoles(), capturedDTO.getIdsRoles());
 	}
 
 	@Test
