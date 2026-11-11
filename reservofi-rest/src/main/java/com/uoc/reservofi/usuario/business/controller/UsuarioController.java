@@ -59,4 +59,9 @@ public class UsuarioController {
 		return restUsuarioService.toggleActivo(id);
 	}
 
+	@PostMapping("/usuario/{id}/toggleAdmin")
+	@ResponseStatus(HttpStatus.OK)
+	RestUsuarioConsultaDTO toggleAdmin(@PathVariable Long id) {
+		return restUsuarioService.toggleAdmin(id);
+	}
 }

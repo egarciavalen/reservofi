@@ -18,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service(GestionUsuarioService.BEAN_NAME)
@@ -156,6 +157,39 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		// Se asigna el opuesto
 		usuarioDTO.setActivo(!usuarioDTO.getActivo());
+
+		// Devolver el DTO
+		return this.update(usuarioDTO);
+	}
+
+	@Override
+	public UsuarioDTO toggleAdmin(Long idUsuario) {
+
+		UsuarioDTO usuarioDTO = this.findById(idUsuario);
+
+		// Validación
+		if (usuarioDTO == null) {
+			throw new GestionException("Se está intentando actualizar una entidad no existente");
+		}
+
+		// Se busca el identificador que se corresponda al administrador
+		Long idAdmin = this.gestionRolService.getIdByNombre("Administrador");
+		List<Long> idsRolesUsuario = usuarioDTO.getIdsRoles();
+
+		if (idsRolesUsuario != null) {
+			if (idsRolesUsuario.contains(idAdmin)) {
+				// Si ya tiene el rol, lo elimina
+				idsRolesUsuario.remove(idAdmin);
+			} else {
+				// En caso contrario, lo incluye
+				idsRolesUsuario.add(idAdmin);
+			}
+		} else {
+			// Para prevenir posibles errores
+			idsRolesUsuario = new ArrayList<>();
+			idsRolesUsuario.add(idAdmin);
+		}
+		usuarioDTO.setIdsRoles(idsRolesUsuario);
 
 		// Devolver el DTO
 		return this.update(usuarioDTO);

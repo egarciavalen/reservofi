@@ -16,8 +16,8 @@ ALTER TABLE rol ALTER COLUMN id RESTART WITH 1;
 -- Inserciones
 
 -- ROL
-insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Administrador', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Empleado', 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
+insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Administrador', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 insert into ROL(nombre, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Rol vacio', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
 
 -- USUARIO
@@ -32,7 +32,9 @@ values ('Extra', 'Extra primer apellido', 'Extra segundo apellido', 'extra@gmail
 
 -- USUARIO ROL
 insert into USUARIO_ROL(id_usuario, id_rol) values (1, 1);
-insert into USUARIO_ROL(id_usuario, id_rol) values (2, 2);
+insert into USUARIO_ROL(id_usuario, id_rol) values (1, 2);
+insert into USUARIO_ROL(id_usuario, id_rol) values (2, 1);
+insert into USUARIO_ROL(id_usuario, id_rol) values (3, 1);
 
 -- SALA
 insert into SALA(nombre, ruta_imagen, nombre_imagen, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha) values ('Sala 1', 'src/main/resources/static/images/img1.png', 'img1.png', 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');

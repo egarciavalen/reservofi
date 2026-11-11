@@ -10,4 +10,6 @@ public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsul
 
 	RestUsuarioConsultaDTO toggleActivo(Long idUsuario);
 
+	RestUsuarioConsultaDTO toggleAdmin(Long idUsuario);
+
 }

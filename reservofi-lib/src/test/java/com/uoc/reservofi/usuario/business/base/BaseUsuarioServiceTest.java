@@ -298,11 +298,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("admin", usuario.getActualizacionUsuario());
 		assertNotNull(usuario.getActualizacionFecha());
 		assertNotNull(usuario.getRoles());
-		assertEquals(1, usuario.getRoles().size());
-
-		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol);
-		assertEquals(1L, rol.getId());
+		assertEquals(2, usuario.getRoles().size());
 	}
 
 	@Test
@@ -324,11 +320,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
-		assertEquals(1, usuario1.getRoles().size());
-
-		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol1);
-		assertEquals(1L, rol1.getId());
+		assertEquals(2, usuario1.getRoles().size());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -344,9 +336,9 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario2.getActualizacionFecha());
 		assertEquals(1, usuario2.getRoles().size());
 
-		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol2);
-		assertEquals(2L, rol2.getId());
+		Rol rol = usuario2.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol);
+		assertEquals(1L, rol.getId());
 
 		Usuario usuario3 = usuarios.get(2);
 		assertNotNull(usuario3);
@@ -360,7 +352,11 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario3.getCreacionFecha());
 		assertEquals("admin", usuario3.getActualizacionUsuario());
 		assertNotNull(usuario3.getActualizacionFecha());
-		assertEquals(0, usuario3.getRoles().size());
+		assertEquals(1, usuario3.getRoles().size());
+
+		Rol rol2 = usuario3.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol2);
+		assertEquals(1L, rol2.getId());
 	}
 
 	@Test
@@ -386,11 +382,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
-		assertEquals(1, usuario1.getRoles().size());
-
-		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol1);
-		assertEquals(1L, rol1.getId());
+		assertEquals(2, usuario1.getRoles().size());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -405,10 +397,6 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertEquals("admin_update", usuario2.getActualizacionUsuario());
 		assertNotNull(usuario2.getActualizacionFecha());
 		assertEquals(1, usuario2.getRoles().size());
-
-		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol2);
-		assertEquals(2L, rol2.getId());
 	}
 
 	@Test
@@ -439,11 +427,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario1.getCreacionFecha());
 		assertEquals("admin", usuario1.getActualizacionUsuario());
 		assertNotNull(usuario1.getActualizacionFecha());
-		assertEquals(1, usuario1.getRoles().size());
-
-		Rol rol1 = usuario1.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol1);
-		assertEquals(1L, rol1.getId());
+		assertEquals(2, usuario1.getRoles().size());
 
 		Usuario usuario2 = usuarios.get(1);
 		assertNotNull(usuario2);
@@ -459,9 +443,9 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario2.getActualizacionFecha());
 		assertEquals(1, usuario2.getRoles().size());
 
-		Rol rol2 = usuario2.getRoles().stream().findFirst().orElse(null);
-		assertNotNull(rol2);
-		assertEquals(2L, rol2.getId());
+		Rol rol = usuario2.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol);
+		assertEquals(1L, rol.getId());
 
 		Usuario usuario3 = usuarios.get(2);
 		assertNotNull(usuario3);
@@ -475,7 +459,11 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 		assertNotNull(usuario3.getCreacionFecha());
 		assertEquals("admin", usuario3.getActualizacionUsuario());
 		assertNotNull(usuario3.getActualizacionFecha());
-		assertEquals(0, usuario3.getRoles().size());
+		assertEquals(1, usuario3.getRoles().size());
+
+		Rol rol2 = usuario3.getRoles().stream().findFirst().orElse(null);
+		assertNotNull(rol2);
+		assertEquals(1L, rol2.getId());
 	}
 
 	@Test
@@ -502,7 +490,7 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 
 		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
 		assertNotNull(rol);
-		assertEquals(2L, rol.getId());
+		assertEquals(1L, rol.getId());
 	}
 
 	@Test
@@ -526,6 +514,6 @@ public class BaseUsuarioServiceTest extends AbstractTest {
 
 		Rol rol = usuario.getRoles().stream().findFirst().orElse(null);
 		assertNotNull(rol);
-		assertEquals(2L, rol.getId());
+		assertEquals(1L, rol.getId());
 	}
 }

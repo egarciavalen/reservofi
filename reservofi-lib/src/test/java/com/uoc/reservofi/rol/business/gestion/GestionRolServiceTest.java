@@ -110,7 +110,7 @@ public class GestionRolServiceTest extends AbstractTest {
 		RolDTO rolDTO = gestionRolService.findById(1L);
 		assertNotNull(rolDTO);
 		assertEquals(1, rolDTO.getId());
-		assertEquals("Administrador", rolDTO.getNombre());
+		assertEquals("Empleado", rolDTO.getNombre());
 	}
 
 	@Test
@@ -121,11 +121,11 @@ public class GestionRolServiceTest extends AbstractTest {
 
 		RolDTO rolDTO1 = rolesDTO.getFirst();
 		assertEquals(1, rolDTO1.getId());
-		assertEquals("Administrador", rolDTO1.getNombre());
+		assertEquals("Empleado", rolDTO1.getNombre());
 
 		RolDTO rolDTO2 = rolesDTO.get(1);
 		assertEquals(2, rolDTO2.getId());
-		assertEquals("Empleado", rolDTO2.getNombre());
+		assertEquals("Administrador", rolDTO2.getNombre());
 
 		RolDTO rolDTO3 = rolesDTO.get(2);
 		assertEquals(3, rolDTO3.getId());
@@ -144,11 +144,11 @@ public class GestionRolServiceTest extends AbstractTest {
 
 		RolDTO rolDTO1 = rolesDTO.getFirst();
 		assertEquals(1, rolDTO1.getId());
-		assertEquals("Administrador", rolDTO1.getNombre());
+		assertEquals("Empleado", rolDTO1.getNombre());
 
 		RolDTO rolDTO2 = rolesDTO.get(1);
 		assertEquals(2, rolDTO2.getId());
-		assertEquals("Empleado", rolDTO2.getNombre());
+		assertEquals("Administrador", rolDTO2.getNombre());
 	}
 
 	@Test
@@ -168,11 +168,11 @@ public class GestionRolServiceTest extends AbstractTest {
 
 		RolDTO rolDTO1 = rolesDTO.getFirst();
 		assertEquals(1, rolDTO1.getId());
-		assertEquals("Administrador", rolDTO1.getNombre());
+		assertEquals("Empleado", rolDTO1.getNombre());
 
 		RolDTO rolDTO2 = rolesDTO.get(1);
 		assertEquals(2, rolDTO2.getId());
-		assertEquals("Empleado", rolDTO2.getNombre());
+		assertEquals("Administrador", rolDTO2.getNombre());
 
 		RolDTO rolDTO3 = rolesDTO.get(2);
 		assertEquals(3, rolDTO3.getId());
@@ -186,14 +186,14 @@ public class GestionRolServiceTest extends AbstractTest {
 		assertEquals(1, rolesDTO.size());
 
 		RolDTO rolDTO = rolesDTO.getFirst();
-		assertEquals(2, rolDTO.getId());
+		assertEquals(1, rolDTO.getId());
 		assertEquals("Empleado", rolDTO.getNombre());
 	}
 
 	@Test
 	void getIdByNombreTest() {
 		Long idRol = gestionRolService.getIdByNombre("Empleado");
-		assertEquals(2, idRol);
+		assertEquals(1, idRol);
 	}
 
 	@Test

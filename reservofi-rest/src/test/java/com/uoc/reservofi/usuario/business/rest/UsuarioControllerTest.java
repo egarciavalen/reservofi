@@ -185,7 +185,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
 		mockReturnDTO1.setContrasenia("pass12345_1");
 		mockReturnDTO1.setActivo(true);
-		mockReturnDTO1.setIdsRoles(List.of(1L));
+		mockReturnDTO1.setIdsRoles(List.of(1L, 2L));
 
 		UsuarioDTO mockReturnDTO2 = new UsuarioDTO();
 		mockReturnDTO2.setId(2L);
@@ -195,7 +195,7 @@ public class UsuarioControllerTest {
 		mockReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
 		mockReturnDTO2.setContrasenia("pass12345_2");
 		mockReturnDTO2.setActivo(false);
-		mockReturnDTO2.setIdsRoles(List.of(2L));
+		mockReturnDTO2.setIdsRoles(List.of(1L, 2L));
 
 		List<UsuarioDTO> mockReturnDTOList = new ArrayList<>();
 		mockReturnDTOList.add(mockReturnDTO1);
@@ -209,7 +209,7 @@ public class UsuarioControllerTest {
 		restReturnDTO1.setSegundoApellido("Prueba segundo apellido 1");
 		restReturnDTO1.setCorreoCorporativo("prueba@gmail1.com");
 		restReturnDTO1.setActivo(true);
-		restReturnDTO1.setIdsRoles(List.of(1L));
+		restReturnDTO1.setIdsRoles(List.of(1L, 2L));
 
 		RestUsuarioConsultaDTO restReturnDTO2 = new RestUsuarioConsultaDTO();
 		restReturnDTO2.setId(2L);
@@ -218,7 +218,7 @@ public class UsuarioControllerTest {
 		restReturnDTO2.setSegundoApellido("Prueba segundo apellido 2");
 		restReturnDTO2.setCorreoCorporativo("prueba@gmail2.com");
 		restReturnDTO2.setActivo(false);
-		restReturnDTO2.setIdsRoles(List.of(2L));
+		restReturnDTO2.setIdsRoles(List.of(1L, 2L));
 
 		List<RestUsuarioConsultaDTO> restReturnDTOList = new ArrayList<>();
 		restReturnDTOList.add(restReturnDTO1);
@@ -235,7 +235,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	void toggleActivo() throws Exception {
+	void toggleActivoTest() throws Exception {
 		// Parámetro de entrada
 		Long idTest = 1L;
 
@@ -268,5 +268,41 @@ public class UsuarioControllerTest {
 
 		// Se verifica que se hayan llamado al servicio de gestión 1 vez
 		verify(gestionUsuarioService).toggleActivo(idTest);
+	}
+
+	@Test
+	void toggleAdminTest() throws Exception {
+		// Parámetro de entrada
+		Long idTest = 1L;
+
+		// DTO que devuelve el servicio de gestión
+		UsuarioDTO mockReturnDTO = new UsuarioDTO();
+		mockReturnDTO.setId(1L);
+		mockReturnDTO.setNombre("Usuario prueba");
+		mockReturnDTO.setPrimerApellido("Prueba primer apellido");
+		mockReturnDTO.setSegundoApellido("Prueba segundo apellido");
+		mockReturnDTO.setCorreoCorporativo("prueba@gmail.com");
+		mockReturnDTO.setContrasenia("pass12345");
+		mockReturnDTO.setActivo(true);
+		mockReturnDTO.setIdsRoles(List.of(1L)); // Se quitaría el permiso de administrador
+
+		// DTO que se espera obtener al final
+		RestUsuarioConsultaDTO restReturnDTO = new RestUsuarioConsultaDTO();
+		restReturnDTO.setId(1L);
+		restReturnDTO.setNombre("Usuario prueba");
+		restReturnDTO.setPrimerApellido("Prueba primer apellido");
+		restReturnDTO.setSegundoApellido("Prueba segundo apellido");
+		restReturnDTO.setCorreoCorporativo("prueba@gmail.com");
+		restReturnDTO.setActivo(true);
+		restReturnDTO.setIdsRoles(List.of(1L));
+
+		// Mock del servicio de gestión
+		when(gestionUsuarioService.toggleAdmin(idTest)).thenReturn(mockReturnDTO);
+
+		mockMvc.perform(post("/api/usuario/{id}/toggleAdmin", idTest)).
+				andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(restReturnDTO), JsonCompareMode.STRICT));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionUsuarioService).toggleAdmin(idTest);
 	}
 }

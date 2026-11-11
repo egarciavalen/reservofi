@@ -307,7 +307,6 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, actualizado.getActivo());
 		assertNotNull(actualizado.getIdsRoles());
 		assertEquals(1, actualizado.getIdsRoles().size());
-		assertEquals(1L, actualizado.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -326,6 +325,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 
 		// Inclusión de roles en la aplicación
 		List<Long> idsRoles = new ArrayList<>();
+		idsRoles.add(1L);
 		idsRoles.add(2L); // OJO: se sobreescriben los roles existentes
 		usuarioDTO.setIdsRoles(idsRoles);
 
@@ -338,8 +338,10 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertNotEquals("pass123", actualizado.getContrasenia());
 		assertEquals(true, actualizado.getActivo());
 		assertNotNull(actualizado.getIdsRoles());
-		assertEquals(1, actualizado.getIdsRoles().size());
-		assertEquals(2L, actualizado.getIdsRoles().getFirst());
+		assertEquals(2, actualizado.getIdsRoles().size());
+		assertTrue(actualizado.getIdsRoles().contains(1L));
+		assertTrue(actualizado.getIdsRoles().contains(2L));
+
 	}
 
 	@Test
@@ -377,8 +379,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO.getContrasenia());
 		assertEquals(true, usuarioDTO.getActivo());
 		assertNotNull(usuarioDTO.getIdsRoles());
-		assertEquals(1, usuarioDTO.getIdsRoles().size());
-		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
+		assertEquals(2, usuarioDTO.getIdsRoles().size());
 	}
 
 	@Test
@@ -397,8 +398,9 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO1.getContrasenia());
 		assertEquals(true, usuarioDTO1.getActivo());
 		assertNotNull(usuarioDTO1.getIdsRoles());
-		assertEquals(1, usuarioDTO1.getIdsRoles().size());
-		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
+		assertEquals(2, usuarioDTO1.getIdsRoles().size());
+		assertTrue(usuarioDTO1.getIdsRoles().contains(1L));
+		assertTrue(usuarioDTO1.getIdsRoles().contains(2L));
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -410,7 +412,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, usuarioDTO2.getActivo());
 		assertNotNull(usuarioDTO2.getIdsRoles());
 		assertEquals(1, usuarioDTO2.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO2.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO3 = usuariosDTO.get(2);
 		assertNotNull(usuarioDTO3);
@@ -420,7 +422,9 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("extra@gmail.com", usuarioDTO3.getCorreoCorporativo());
 		assertEquals("$2a$10$572WYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO3.getContrasenia());
 		assertEquals(true, usuarioDTO3.getActivo());
-		assertNull(usuarioDTO3.getIdsRoles());
+		assertEquals(1, usuarioDTO3.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO3.getIdsRoles().getFirst());
+
 
 	}
 
@@ -444,8 +448,9 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO1.getContrasenia());
 		assertEquals(true, usuarioDTO1.getActivo());
 		assertNotNull(usuarioDTO1.getIdsRoles());
-		assertEquals(1, usuarioDTO1.getIdsRoles().size());
-		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
+		assertEquals(2, usuarioDTO1.getIdsRoles().size());
+		assertTrue(usuarioDTO1.getIdsRoles().contains(1L));
+		assertTrue(usuarioDTO1.getIdsRoles().contains(2L));
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -457,7 +462,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, usuarioDTO2.getActivo());
 		assertNotNull(usuarioDTO2.getIdsRoles());
 		assertEquals(1, usuarioDTO2.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO2.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -485,8 +490,9 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("$2a$10$31NgYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO1.getContrasenia());
 		assertEquals(true, usuarioDTO1.getActivo());
 		assertNotNull(usuarioDTO1.getIdsRoles());
-		assertEquals(1, usuarioDTO1.getIdsRoles().size());
-		assertEquals(1L, usuarioDTO1.getIdsRoles().getFirst());
+		assertEquals(2, usuarioDTO1.getIdsRoles().size());
+		assertTrue(usuarioDTO1.getIdsRoles().contains(1L));
+		assertTrue(usuarioDTO1.getIdsRoles().contains(2L));
 
 		UsuarioDTO usuarioDTO2 = usuariosDTO.get(1);
 		assertNotNull(usuarioDTO2);
@@ -498,7 +504,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, usuarioDTO2.getActivo());
 		assertNotNull(usuarioDTO2.getIdsRoles());
 		assertEquals(1, usuarioDTO2.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO2.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO2.getIdsRoles().getFirst());
 
 		UsuarioDTO usuarioDTO3 = usuariosDTO.get(2);
 		assertNotNull(usuarioDTO3);
@@ -508,7 +514,9 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals("extra@gmail.com", usuarioDTO3.getCorreoCorporativo());
 		assertEquals("$2a$10$572WYxiuSX0FZpgvFcfAgOpRKMAZzvR67QzzAn0ArpGiOV477TyDD", usuarioDTO3.getContrasenia());
 		assertEquals(true, usuarioDTO3.getActivo());
-		assertNull(usuarioDTO3.getIdsRoles());
+		assertEquals(1, usuarioDTO3.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO3.getIdsRoles().getFirst());
+
 	}
 
 	@Test
@@ -528,7 +536,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, usuarioDTO.getActivo());
 		assertNotNull(usuarioDTO.getIdsRoles());
 		assertEquals(1, usuarioDTO.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -545,7 +553,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, usuarioDTO.getActivo());
 		assertNotNull(usuarioDTO.getIdsRoles());
 		assertEquals(1, usuarioDTO.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
 	}
 
 	@Test
@@ -585,12 +593,11 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		assertEquals(true, registrado.getActivo());
 		assertNotNull(usuarioDTO.getIdsRoles());
 		assertEquals(1, usuarioDTO.getIdsRoles().size());
-		assertEquals(2L, usuarioDTO.getIdsRoles().getFirst());
+		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
 	}
 
 	@Test
 	void toggleActivo() {
-
 		UsuarioDTO usuarioDTO = gestionUsuarioService.findById(1L);
 		assertNotNull(usuarioDTO);
 		assertTrue(usuarioDTO.getActivo());
@@ -604,5 +611,28 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		usuarioDTO = gestionUsuarioService.toggleActivo(1L);
 		assertNotNull(usuarioDTO);
 		assertTrue(usuarioDTO.getActivo());
+	}
+
+	@Test
+	void toggleAdmin() {
+		UsuarioDTO usuarioDTO = gestionUsuarioService.findById(1L);
+		assertNotNull(usuarioDTO);
+		assertEquals(2, usuarioDTO.getIdsRoles().size());
+		assertTrue(usuarioDTO.getIdsRoles().contains(1L));
+		assertTrue(usuarioDTO.getIdsRoles().contains(2L));
+
+
+		// Caso 1 -> se quita admin
+		usuarioDTO = gestionUsuarioService.toggleAdmin(1L);
+		assertNotNull(usuarioDTO);
+		assertEquals(1, usuarioDTO.getIdsRoles().size());
+		assertEquals(1L, usuarioDTO.getIdsRoles().getFirst());
+
+		// Caso 2 -> se vuelve a poner ADMIN
+		usuarioDTO = gestionUsuarioService.toggleAdmin(1L);
+		assertNotNull(usuarioDTO);
+		assertEquals(2, usuarioDTO.getIdsRoles().size());
+		assertTrue(usuarioDTO.getIdsRoles().contains(1L));
+		assertTrue(usuarioDTO.getIdsRoles().contains(2L));
 	}
 }
