@@ -55,7 +55,6 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		if (entidadBD == null) {
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
-
 		Usuario entidad = usuarioMapper.DTOAentidad(dto, entidadBD);
 
 		entidad = baseUsuarioService.update(entidad);
@@ -153,58 +152,32 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	@Override
 	public UsuarioDTO toggleActivo(Long idUsuario) {
 
-		UsuarioDTO usuarioDTO = this.findById(idUsuario);
-
+		Usuario usuario = baseUsuarioService.findById(idUsuario);
 		// Validación
-		if (usuarioDTO == null) {
+		if (usuario == null) {
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
 		// Se asigna el opuesto
-		usuarioDTO.setActivo(!usuarioDTO.getActivo());
+		usuario.setActivo(!usuario.getActivo());
+
+		usuario = this.baseUsuarioService.update(usuario);
 
 		// Devolver el DTO
-		return this.update(usuarioDTO);
+		return this.usuarioMapper.entidadADTO(usuario);
 	}
 
 	@Override
 	public UsuarioDTO toggleAdmin(Long idUsuario) {
 
-		UsuarioDTO usuarioDTO = this.findById(idUsuario);
+		Usuario usuario = baseUsuarioService.findById(idUsuario);
 
 		// Validación
-		if (usuarioDTO == null) {
+		if (usuario == null) {
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
-		// Se busca el identificador que se corresponda al administrador
-		Long idAdmin = this.gestionRolService.getIdByNombre("Administrador");
-
-		List<UsuarioRolDTO> rolesUsuario = usuarioDTO.getRoles();
-		boolean isAdminErased = false;
-
-		if (rolesUsuario != null) {
-
-			for (UsuarioRolDTO usuarioRolDTO : rolesUsuario) {
-				if (usuarioRolDTO.getId().equals(idAdmin)) {
-					// Si ya tiene el rol, lo elimina
-					rolesUsuario.remove(usuarioRolDTO);
-					isAdminErased = true;
-					break;
-				}
-			}
-			
-			if (!isAdminErased) {
-				UsuarioRolDTO usuarioRolDTO = new UsuarioRolDTO();
-				usuarioRolDTO.setId(idAdmin);
-				usuarioRolDTO.setNombre("Administrador");
-				rolesUsuario.add(usuarioRolDTO);
-			}
-		}
-
-		usuarioDTO.setRoles(rolesUsuario);
-
-		// Devolver el DTO
-		return this.update(usuarioDTO);
+		// TODO: REESCRIBIR ESTE MÉTODO PARA EVITAR SOBREESCRIBIR LA CONTRASEÑA
+		return null;
 	}
 }

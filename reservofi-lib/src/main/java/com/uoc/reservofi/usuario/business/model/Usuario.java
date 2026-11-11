@@ -71,4 +71,10 @@ public class Usuario extends BaseEntidad implements UserDetails {
 	public String getUsername() {
 		return correoCorporativo;
 	}
+
+	@Override
+	public boolean isEnabled() {
+		// El usuario está autenticado si tiene el campo activo
+		return this.activo;
+	}
 }
