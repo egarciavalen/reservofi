@@ -48,9 +48,12 @@ public abstract class UsuarioMapperDecorator implements UsuarioMapper {
 			usuarioRelacion = mapper.DTOAentidad(dto, entidad);
 		}
 
-		// Hash de la contrasenia
-		// Esto es esencial, puesto que a) no hay que guardar contrasenias en plano y b) si no se hace, la autenticación fallará
-		usuarioRelacion.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
+		// Únicamente si llega una contraseña desde el DTO
+		if (dto.getContrasenia() != null) {
+			// Hash de la contrasenia
+			// Esto es esencial, puesto que a) no hay que guardar contrasenias en plano y b) si no se hace, la autenticación fallará
+			usuarioRelacion.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
+		}
 
 		// Roles
 		Set<Rol> rolesUsuario = new HashSet<>();

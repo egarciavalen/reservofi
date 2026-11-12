@@ -153,6 +153,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	public UsuarioDTO toggleActivo(Long idUsuario) {
 
 		Usuario usuario = baseUsuarioService.findById(idUsuario);
+
 		// Validación
 		if (usuario == null) {
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
@@ -170,14 +171,43 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	@Override
 	public UsuarioDTO toggleAdmin(Long idUsuario) {
 
-		Usuario usuario = baseUsuarioService.findById(idUsuario);
+		UsuarioDTO usuarioDTO = this.findById(idUsuario);
 
 		// Validación
-		if (usuario == null) {
+		if (usuarioDTO == null) {
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
-		// TODO: REESCRIBIR ESTE MÉTODO PARA EVITAR SOBREESCRIBIR LA CONTRASEÑA
-		return null;
+		// Se busca el identificador que se corresponda al administrador
+		Long idAdmin = this.gestionRolService.getIdByNombre("Administrador");
+
+		List<UsuarioRolDTO> rolesUsuario = usuarioDTO.getRoles();
+		boolean isAdminErased = false;
+
+		if (rolesUsuario != null) {
+
+			for (UsuarioRolDTO usuarioRolDTO : rolesUsuario) {
+				if (usuarioRolDTO.getId().equals(idAdmin)) {
+					// Si ya tiene el rol, lo elimina
+					rolesUsuario.remove(usuarioRolDTO);
+					isAdminErased = true;
+					break;
+				}
+			}
+
+			if (!isAdminErased) {
+				UsuarioRolDTO usuarioRolDTO = new UsuarioRolDTO();
+				usuarioRolDTO.setId(idAdmin);
+				usuarioRolDTO.setNombre("Administrador");
+				rolesUsuario.add(usuarioRolDTO);
+			}
+		}
+
+		usuarioDTO.setRoles(rolesUsuario);
+
+		// Devolver el DTO
+		usuarioDTO.setContrasenia(null); // Para que no reescriba la contraseña
+		return this.update(usuarioDTO);
 	}
+
 }

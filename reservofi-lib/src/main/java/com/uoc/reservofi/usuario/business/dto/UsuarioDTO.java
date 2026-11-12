@@ -29,8 +29,8 @@ public class UsuarioDTO extends GestionEntidadDTO {
 	@Size(max = 100, message = "usuario.correoCorporativo.tamanio.maximo")
 	private String correoCorporativo;
 
-	@NotEmpty(message = "usuario.contrasenia.obligatorio")
-	@Size(max = 255, message = "usuario.contrasenia.tamanio.maximo")
+	// Para las actualizaciones la contraseña se hace opcional
+	// Si no, se vuelve a sobreescribir el hash y se pierde información
 	private String contrasenia;
 
 	@NotNull(message = "usuario.activo.obligatorio")

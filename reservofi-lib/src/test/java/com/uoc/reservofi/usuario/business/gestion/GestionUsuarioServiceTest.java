@@ -232,41 +232,6 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 	}
 
 	@Test
-	void validateContraseniaTest() {
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setNombre("UsuarioDTO prueba");
-		usuarioDTO.setPrimerApellido("Prueba primer apellido");
-		usuarioDTO.setSegundoApellido("Prueba segundo apellido");
-		usuarioDTO.setCorreoCorporativo("prueba@gmail.com");
-		usuarioDTO.setContrasenia("pass12345");
-		usuarioDTO.setActivo(true);
-
-		// Contrasenia hash nulo
-		usuarioDTO.setContrasenia(null);
-		try {
-			gestionUsuarioService.insert(usuarioDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.contrasenia: usuario.contrasenia.obligatorio", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-
-		// Contrasenia hash tamanio maximo alcanzado
-		usuarioDTO.setContrasenia("1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456");
-		try {
-			gestionUsuarioService.insert(usuarioDTO);
-			fail("Se esperaba una ConstraintViolationException");
-		} catch (ConstraintViolationException e) {
-			assertEquals("insert.entidad.contrasenia: usuario.contrasenia.tamanio.maximo", e.getMessage());
-
-		} catch (Exception e) {
-			fail("Se esperaba una ConstraintViolationException");
-		}
-	}
-
-	@Test
 	void validateActivoTest() {
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
 		usuarioDTO.setNombre("UsuarioDTO prueba");

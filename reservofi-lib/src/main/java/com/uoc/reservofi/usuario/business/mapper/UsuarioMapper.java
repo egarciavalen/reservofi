@@ -17,7 +17,6 @@ public interface UsuarioMapper {
 	@Mapping(source = "primerApellido", target = "primerApellido")
 	@Mapping(source = "segundoApellido", target = "segundoApellido")
 	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
-	@Mapping(source = "contrasenia", target = "contrasenia")
 	@Mapping(source = "activo", target = "activo")
 	Usuario DTOAentidad(UsuarioDTO dto);
 
