@@ -26,6 +26,7 @@
         <module>reservofi-core</module>
         <module>reservofi-rest</module>
         <module>reservofi-lib</module>
+        <module>reservofi-scripts-ddl</module>
     </modules>
     <scm>
         <connection/>
@@ -80,7 +81,6 @@
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
