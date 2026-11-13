@@ -7,6 +7,7 @@ import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,12 +22,14 @@ public class UsuarioController {
 
 	// ¿Insert? -> Controlador de autenticación
 
+	@PreAuthorize("hasAuthority('Empleado')")
 	@PutMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO update(@PathVariable Long id, @RequestBody RestUsuarioGuardadoDTO restDTO) {
 		return restUsuarioService.update(id, restDTO);
 	}
 
+	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO findById(@PathVariable Long id) {
@@ -37,6 +40,7 @@ public class UsuarioController {
 		return restUsuarioDTO;
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@GetMapping("/usuario")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestUsuarioConsultaDTO> findAll() {
@@ -47,18 +51,21 @@ public class UsuarioController {
 		return restUsuarioDTOList;
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Long id) {
 		restUsuarioService.deleteById(id);
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/usuario/{id}/toggleActivo")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO toggleActivo(@PathVariable Long id) {
 		return restUsuarioService.toggleActivo(id);
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/usuario/{id}/toggleAdmin")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO toggleAdmin(@PathVariable Long id) {

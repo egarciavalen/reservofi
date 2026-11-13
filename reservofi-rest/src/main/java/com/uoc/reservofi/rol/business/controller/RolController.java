@@ -6,6 +6,7 @@ import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.service.RestRolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,18 +18,21 @@ public class RolController {
 
 	private final RestRolService restRolService;
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping("/rol")
 	@ResponseStatus(HttpStatus.CREATED)
 	RestRolConsultaDTO create(@RequestBody RestRolGuardadoDTO restDTO) {
 		return restRolService.insert(restDTO);
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping("/rol")
 	@ResponseStatus(HttpStatus.OK)
 	RestRolConsultaDTO update(@RequestBody RestRolGuardadoDTO restDTO) {
 		return restRolService.update(restDTO);
 	}
 
+	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/rol/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestRolConsultaDTO findById(@PathVariable Long id) {
@@ -39,6 +43,7 @@ public class RolController {
 		return restRolDTO;
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@GetMapping("/rol")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestRolConsultaDTO> findAll() {
@@ -49,6 +54,7 @@ public class RolController {
 		return restRolDTOList;
 	}
 
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping("/rol/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Long id) {

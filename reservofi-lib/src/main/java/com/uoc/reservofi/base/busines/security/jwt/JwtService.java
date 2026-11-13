@@ -1,5 +1,6 @@
 package com.uoc.reservofi.base.busines.security.jwt;
 
+import com.uoc.reservofi.usuario.business.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -30,11 +31,12 @@ public class JwtService {
 		return extractClaim(token, Claims::getSubject);
 	}
 
-	public String generateToken(UserDetails userDetails) {
+	public String generateToken(Usuario usuario) {
 		// Generación del token con las credenciales y la clave secreta
 		return Jwts
 				.builder()
-				.subject(userDetails.getUsername())
+				.subject(usuario.getUsername())
+				.claim("role", usuario.getRoles().toString())
 				.issuedAt(new Date(System.currentTimeMillis()))
 				.expiration(new Date(System.currentTimeMillis() + getExpirationTime()))
 				.signWith(getSecretKey())
