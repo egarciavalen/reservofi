@@ -72,6 +72,11 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 	@Override
 	public PuestoDTO findById(Long id) {
 		Puesto entidad = basePuestoService.findById(id);
+
+		if (entidad == null) {
+			return null;
+		}
+
 		return puestoMapper.entidadADTO(entidad);
 	}
 

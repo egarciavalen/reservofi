@@ -432,4 +432,24 @@ public class UsuarioControllerTest {
 		// Se verifica que se hayan llamado al servicio de gestión 1 vez
 		verify(gestionUsuarioService).toggleAdmin(idTest);
 	}
+
+	@Test
+	void checkAdminTest() throws Exception {
+
+		// Parámetro de entrada
+		Long idTest = 1L;
+
+		// Respuesta obtenida
+		boolean isAdmin = true;
+
+		// Mock del servicio de gestión
+		when(gestionUsuarioService.checkAdmin(idTest)).thenReturn(isAdmin);
+
+		// Se devuelve un valor boolean -> content().string(...)
+		mockMvc.perform(get("/api/usuario/{id}/checkAdmin", idTest)).
+				andExpect(status().isOk()).andExpect(content().string(objectMapper.writeValueAsString(isAdmin)));
+
+		// Se verifica que se hayan llamado al servicio de gestión 1 vez
+		verify(gestionUsuarioService).checkAdmin(idTest);
+	}
 }

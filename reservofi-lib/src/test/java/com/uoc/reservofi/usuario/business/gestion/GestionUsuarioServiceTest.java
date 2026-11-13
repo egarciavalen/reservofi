@@ -1,5 +1,6 @@
 package com.uoc.reservofi.usuario.business.gestion;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.usuario.business.dto.UsuarioDTO;
 import com.uoc.reservofi.usuario.business.dto.UsuarioLoginRequestDTO;
@@ -580,7 +581,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 	}
 
 	@Test
-	void toggleActivo() {
+	void toggleActivoTest() {
 		UsuarioDTO usuarioDTO = gestionUsuarioService.findById(1L);
 		assertNotNull(usuarioDTO);
 		assertTrue(usuarioDTO.getActivo());
@@ -597,7 +598,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 	}
 
 	@Test
-	void toggleAdmin() {
+	void toggleAdminTest() {
 		UsuarioDTO usuarioDTO = gestionUsuarioService.findById(1L);
 		assertNotNull(usuarioDTO);
 		assertEquals(2, usuarioDTO.getRoles().size());
@@ -613,5 +614,25 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		usuarioDTO = gestionUsuarioService.toggleAdmin(1L);
 		assertNotNull(usuarioDTO);
 		assertEquals(2, usuarioDTO.getRoles().size());
+	}
+
+	@Test
+	void checkAdminNotExistsTest() {
+		try {
+			gestionUsuarioService.checkAdmin(999L);
+		} catch (GestionException e) {
+			assertEquals("Se está intentando determinar el rol de una entidad no existente", e.getMessage());
+
+		} catch (Exception e) {
+			fail("Se esperaba una GestionException");
+		}
+	}
+
+	@Test
+	void checkAdminTest() {
+		// Es un usuario administrador
+		assertTrue(gestionUsuarioService.checkAdmin(1L));
+		// No es un usuario administrador
+		assertFalse(gestionUsuarioService.checkAdmin(2L));
 	}
 }

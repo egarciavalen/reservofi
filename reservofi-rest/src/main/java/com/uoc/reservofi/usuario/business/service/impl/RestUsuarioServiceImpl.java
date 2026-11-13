@@ -56,4 +56,9 @@ public class RestUsuarioServiceImpl extends AbstractRestEntidadServiceImpl<RestU
 		UsuarioDTO dto = gestionUsuarioService.toggleAdmin(idUsuario);
 		return restUsuarioMapper.DTOArestDTO(dto);
 	}
+
+	@Override
+	public boolean checkAdmin(Long idUsuario) {
+		return gestionUsuarioService.checkAdmin(idUsuario);
+	}
 }

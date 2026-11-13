@@ -72,6 +72,11 @@ public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<Rol
 	@Override
 	public RolDTO findById(Long id) {
 		Rol entidad = baseRolService.findById(id);
+
+		if (entidad == null) {
+			return null;
+		}
+
 		return rolMapper.entidadADTO(entidad);
 	}
 

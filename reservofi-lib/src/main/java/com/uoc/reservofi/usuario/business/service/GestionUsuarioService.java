@@ -19,4 +19,6 @@ public interface GestionUsuarioService extends GestionEntidadService<UsuarioDTO>
 	UsuarioDTO toggleActivo(Long idUsuario);
 
 	UsuarioDTO toggleAdmin(Long idUsuario);
+
+	boolean checkAdmin(Long idUsuario);
 }

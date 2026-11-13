@@ -66,6 +66,11 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 	@Override
 	public ReservaDTO findById(Long id) {
 		Reserva entidad = baseReservaService.findById(id);
+
+		if (entidad == null) {
+			return null;
+		}
+
 		return reservaMapper.entidadADTO(entidad);
 	}
 

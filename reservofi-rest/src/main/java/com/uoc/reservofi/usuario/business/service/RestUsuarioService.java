@@ -12,4 +12,5 @@ public interface RestUsuarioService extends RestEntidadService<RestUsuarioConsul
 
 	RestUsuarioConsultaDTO toggleAdmin(Long idUsuario);
 
+	boolean checkAdmin(Long idUsuario);
 }

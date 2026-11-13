@@ -71,4 +71,13 @@ public class UsuarioController {
 	RestUsuarioConsultaDTO toggleAdmin(@PathVariable Long id) {
 		return restUsuarioService.toggleAdmin(id);
 	}
+
+
+	@PreAuthorize("hasAuthority('Empleado')")
+	@GetMapping("/usuario/{id}/checkAdmin")
+	@ResponseStatus(HttpStatus.OK)
+	boolean checkAdmin(@PathVariable Long id) {
+		boolean a = restUsuarioService.checkAdmin(id);
+		return a;
+	}
 }

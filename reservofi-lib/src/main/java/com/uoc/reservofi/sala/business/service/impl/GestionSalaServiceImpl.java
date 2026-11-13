@@ -76,6 +76,11 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 	@Override
 	public SalaDTO findById(Long id) {
 		Sala entidad = baseSalaService.findById(id);
+
+		if (entidad == null) {
+			return null;
+		}
+
 		return salaMapper.entidadADTO(entidad);
 	}
 

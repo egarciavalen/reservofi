@@ -81,6 +81,11 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	@Override
 	public UsuarioDTO findById(Long id) {
 		Usuario entidad = baseUsuarioService.findById(id);
+
+		if (entidad == null) {
+			return null;
+		}
+
 		return usuarioMapper.entidadADTO(entidad);
 	}
 
@@ -195,7 +200,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		if (rolesUsuario != null) {
 
 			for (UsuarioRolDTO usuarioRolDTO : rolesUsuario) {
-				if (usuarioRolDTO.getId().equals(idAdmin)) {
+				if (usuarioRolDTO.getNombre().equals("Administrador")) {
 					// Si ya tiene el rol, lo elimina
 					rolesUsuario.remove(usuarioRolDTO);
 					isAdminErased = true;
@@ -216,6 +221,28 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		// Devolver el DTO
 		usuarioDTO.setContrasenia(null); // Para que no reescriba la contraseña
 		return this.update(usuarioDTO);
+	}
+
+	@Override
+	public boolean checkAdmin(Long idUsuario) {
+		UsuarioDTO usuarioDTO = this.findById(idUsuario);
+
+		// Validación
+		if (usuarioDTO == null) {
+			LOGGER.error("Se está intentando determinar el rol de una entidad no existente. Identificador del usuario: {}", idUsuario);
+			throw new GestionException("Se está intentando determinar el rol de una entidad no existente");
+		}
+
+		List<UsuarioRolDTO> rolesUsuario = usuarioDTO.getRoles();
+
+		if (rolesUsuario != null && !rolesUsuario.isEmpty()) {
+			for (UsuarioRolDTO usuarioRolDTO : rolesUsuario) {
+				if (usuarioRolDTO.getNombre().equals("Administrador")) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
