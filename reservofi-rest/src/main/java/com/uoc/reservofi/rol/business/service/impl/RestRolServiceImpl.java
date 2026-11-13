@@ -7,7 +7,6 @@ import com.uoc.reservofi.rol.business.dto.RolDTO;
 import com.uoc.reservofi.rol.business.mapper.RestRolMapper;
 import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.rol.business.service.RestRolService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,25 +18,6 @@ public class RestRolServiceImpl extends AbstractRestEntidadServiceImpl<RestRolCo
 
 	private final GestionRolService gestionRolService;
 	private final RestRolMapper restRolMapper;
-
-	@Override
-	public RestRolConsultaDTO insert(@Valid RestRolGuardadoDTO restDTO) {
-		RolDTO dto = restRolMapper.restDTOADTO(restDTO);
-		dto = gestionRolService.insert(dto);
-		return restRolMapper.DTOArestDTO(dto);
-	}
-
-	@Override
-	public RestRolConsultaDTO update(@Valid RestRolGuardadoDTO restDTO) {
-		RolDTO dto = restRolMapper.restDTOADTO(restDTO);
-		dto = gestionRolService.update(dto);
-		return restRolMapper.DTOArestDTO(dto);
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		gestionRolService.deleteById(id);
-	}
 
 	@Override
 	public RestRolConsultaDTO findById(Long id) {

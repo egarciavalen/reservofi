@@ -25,13 +25,6 @@ public class PuestoController {
 		return restPuestoService.insert(restDTO);
 	}
 
-	@PreAuthorize("hasAuthority('Administrador')")
-	@PutMapping("/puesto")
-	@ResponseStatus(HttpStatus.OK)
-	RestPuestoConsultaDTO update(@RequestBody RestPuestoGuardadoDTO restDTO) {
-		return restPuestoService.update(restDTO);
-	}
-
 	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/puesto/{id}")
 	@ResponseStatus(HttpStatus.OK)

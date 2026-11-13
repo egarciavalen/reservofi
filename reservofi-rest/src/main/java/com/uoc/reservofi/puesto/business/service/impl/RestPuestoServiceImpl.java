@@ -28,13 +28,6 @@ public class RestPuestoServiceImpl extends AbstractRestEntidadServiceImpl<RestPu
 	}
 
 	@Override
-	public RestPuestoConsultaDTO update(@Valid RestPuestoGuardadoDTO restDTO) {
-		PuestoDTO dto = restPuestoMapper.restDTOADTO(restDTO);
-		dto = gestionPuestoService.update(dto);
-		return restPuestoMapper.DTOArestDTO(dto);
-	}
-
-	@Override
 	public void deleteById(Long id) {
 		gestionPuestoService.deleteById(id);
 	}

@@ -35,7 +35,6 @@ public class SalaController {
 		return restSalaService.update(id, restDTO);
 	}
 
-
 	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/sala/{id}")
 	@ResponseStatus(HttpStatus.OK)

@@ -2,7 +2,6 @@ package com.uoc.reservofi.rol.business.controller;
 
 import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
-import com.uoc.reservofi.rol.business.dto.RestRolGuardadoDTO;
 import com.uoc.reservofi.rol.business.service.RestRolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,20 +16,6 @@ import java.util.List;
 public class RolController {
 
 	private final RestRolService restRolService;
-
-	@PreAuthorize("hasAuthority('Administrador')")
-	@PostMapping("/rol")
-	@ResponseStatus(HttpStatus.CREATED)
-	RestRolConsultaDTO create(@RequestBody RestRolGuardadoDTO restDTO) {
-		return restRolService.insert(restDTO);
-	}
-
-	@PreAuthorize("hasAuthority('Administrador')")
-	@PutMapping("/rol")
-	@ResponseStatus(HttpStatus.OK)
-	RestRolConsultaDTO update(@RequestBody RestRolGuardadoDTO restDTO) {
-		return restRolService.update(restDTO);
-	}
 
 	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/rol/{id}")
@@ -52,12 +37,5 @@ public class RolController {
 			throw new RestException("Entidades no encontradas");
 		}
 		return restRolDTOList;
-	}
-
-	@PreAuthorize("hasAuthority('Administrador')")
-	@DeleteMapping("/rol/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void deleteById(@PathVariable Long id) {
-		restRolService.deleteById(id);
 	}
 }
