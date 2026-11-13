@@ -25,6 +25,7 @@ import java.util.UUID;
 public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<SalaDTO> implements GestionSalaService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GestionSalaServiceImpl.class);
+
 	private final BaseSalaService baseSalaService;
 	private final SalaMapper salaMapper;
 	private final GestionPuestoService gestionPuestoService;
@@ -40,12 +41,14 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 	public SalaDTO update(@Valid SalaDTO dto) {
 
 		if (dto.getId() == null) {
+			LOGGER.error("Ha ocurrido un error al actualizar la sala en el sistema. Nombre de la sala: {}", dto.getNombre());
 			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
 		}
 
 		Sala entidadBD = baseSalaService.findById(dto.getId());
 
 		if (entidadBD == null) {
+			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador de la sala: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
@@ -60,7 +63,6 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 		// Previamente a borrar la sala, hay que borrar los puestos asociados (que a su vez borrarán las reservas)
 		this.gestionPuestoService.deleteBySalaId(id);
-
 		baseSalaService.deleteById(id);
 	}
 
@@ -106,14 +108,17 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 		try {
 			// Validaciones previas
 			if (dto.getImagen().getOriginalFilename() == null) {
+				LOGGER.error("No se ha podido recuperar el nombre de la imagen. Nombre de la sala: {}", dto.getNombre());
 				throw new GestionException("No se ha podido recuperar el nombre de la imagen");
 			}
 
 			if (dto.getImagen().getContentType() == null) {
+				LOGGER.error("No se ha podido recuperar información del tipo de la imagen. Nombre de la sala: {}", dto.getNombre());
 				throw new GestionException("No se ha podido recuperar información del tipo de la imagen");
 			}
 
 			if (!(dto.getImagen().getContentType().equals("image/png") || dto.getImagen().getContentType().equals("image/jpeg"))) {
+				LOGGER.error("Se ha puesto un formato de imágen no válido; los admitidos son png y jpeg. Nombre de la sala: {}", dto.getNombre());
 				throw new GestionException("Los formatos que se admiten son png y jpeg");
 			}
 
@@ -139,6 +144,7 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			return this.insert(dto);
 
 		} catch (IOException e) {
+			LOGGER.error("Ha ocurrido un error guardando la imagen en la base de datos. Nombre de la sala: {}", dto.getNombre());
 			throw new GestionException("Ha ocurrido un error guardando la imagen en la base de datos: " + e);
 		}
 	}
@@ -159,15 +165,13 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			}
 		} catch (IOException e) {
 			// Es posible que hubiese un error interno de algún tipo y en un primer intento se borrara la imagen, pero no el recurso
-			// Se registra en el log para trazabilidad
+			// Se registra en el log para trazabilidad pero se continúa con la ejecución
 			LOGGER.error("Ha ocurrido un error interno al intentar borrar la imagen asociada a la sala. Es posible que ya se haya borrado del sistema. ID de la sala: {}", id);
 		}
 
 		// Todo OK -> procedemos a borrar la sala
 		this.deleteById(id);
-
 		LOGGER.debug("Se ha borrado correctamente la sala con identificador: {}", id);
-
 	}
 
 }

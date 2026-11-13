@@ -23,6 +23,7 @@ import java.util.List;
 public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<PuestoDTO> implements GestionPuestoService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GestionPuestoServiceImpl.class);
+
 	private final BasePuestoService basePuestoService;
 	private final PuestoMapper puestoMapper;
 	private final GestionReservaService gestionReservaService;
@@ -38,12 +39,14 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 	public PuestoDTO update(@Valid PuestoDTO dto) {
 
 		if (dto.getId() == null) {
+			LOGGER.error("Ha ocurrido un error al actualizar el puesto en el sistema. Nombre del puesto: {}", dto.getNombre());
 			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
 		}
 
 		Puesto entidadBD = basePuestoService.findById(dto.getId());
 
 		if (entidadBD == null) {
+			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del puesto: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
@@ -57,7 +60,6 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 
 		// Previamente a borrar el puesto, hay que borrar las reservas asociadas
 		this.gestionReservaService.deleteByPuestoId(id);
-
 		basePuestoService.deleteById(id);
 	}
 

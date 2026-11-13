@@ -14,6 +14,8 @@ import com.uoc.reservofi.usuario.business.service.GestionUsuarioService;
 import com.uoc.reservofi.usuario.business.service.base.BaseUsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = GestionException.class)
 public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl<UsuarioDTO> implements GestionUsuarioService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(GestionUsuarioServiceImpl.class);
 
 	private final BaseUsuarioService baseUsuarioService;
 	private final UsuarioMapper usuarioMapper;
@@ -47,12 +51,14 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 	public UsuarioDTO update(@Valid UsuarioDTO dto) {
 
 		if (dto.getId() == null) {
+			LOGGER.error("Ha ocurrido un error al actualizar el usuario en el sistema. Nombre del usuario: {}", dto.getNombre());
 			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
 		}
 
 		Usuario entidadBD = baseUsuarioService.findById(dto.getId());
 
 		if (entidadBD == null) {
+			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del usuario: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 		Usuario entidad = usuarioMapper.DTOAentidad(dto, entidadBD);
@@ -156,6 +162,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		// Validación
 		if (usuario == null) {
+			LOGGER.error("Se está intentando actualizar el campo activo de una entidad no existente. Identificador del usuario: {}", idUsuario);
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
@@ -175,6 +182,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		// Validación
 		if (usuarioDTO == null) {
+			LOGGER.error("Se está intentando actualizar el rol de administrador de una entidad no existente. Identificador del usuario: {}", idUsuario);
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 

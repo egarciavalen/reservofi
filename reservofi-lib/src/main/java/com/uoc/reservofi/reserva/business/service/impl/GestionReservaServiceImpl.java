@@ -36,12 +36,14 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 	public ReservaDTO update(@Valid ReservaDTO dto) {
 
 		if (dto.getId() == null) {
+			LOGGER.error("Ha ocurrido un error al actualizar la reserva en el sistema. Identificador del usuario asociado: {}", dto.getIdUsuario());
 			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
 		}
 
 		Reserva entidadBD = baseReservaService.findById(dto.getId());
 
 		if (entidadBD == null) {
+			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador de la reserva: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 

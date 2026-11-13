@@ -9,6 +9,8 @@ import com.uoc.reservofi.rol.business.service.GestionRolService;
 import com.uoc.reservofi.rol.business.service.base.BaseRolService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @Transactional(rollbackFor = GestionException.class)
 public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<RolDTO> implements GestionRolService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GestionRolServiceImpl.class);
 	private final BaseRolService baseRolService;
 	private final RolMapper rolMapper;
 
@@ -33,12 +36,14 @@ public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<Rol
 	public RolDTO update(@Valid RolDTO dto) {
 
 		if (dto.getId() == null) {
+			LOGGER.error("Ha ocurrido un error al actualizar el rol en el sistema. Nombre del rol: {}", dto.getNombre());
 			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
 		}
 
 		Rol entidadBD = baseRolService.findById(dto.getId());
 
 		if (entidadBD == null) {
+			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del rol: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
 
