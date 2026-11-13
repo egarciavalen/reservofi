@@ -58,7 +58,7 @@ public class ReservaController {
 		return restReservaDTOList;
 	}
 
-	@PreAuthorize("hasAuthority('Administrador')")
+	@PreAuthorize("hasAuthority('Empleado')")
 	@DeleteMapping("/reserva/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deleteById(@PathVariable Long id) {

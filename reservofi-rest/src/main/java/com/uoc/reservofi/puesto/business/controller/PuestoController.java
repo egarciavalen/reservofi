@@ -36,7 +36,7 @@ public class PuestoController {
 		return restPuestoDTO;
 	}
 
-	@PreAuthorize("hasAuthority('Administrador')")
+	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/puesto")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestPuestoConsultaDTO> findAll() {
