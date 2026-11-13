@@ -102,7 +102,7 @@ create table reserva (
 	actualizacion_fecha timestamp null,
 	constraint pk_reserva primary key (id),
 	constraint fk_reserva_usuario foreign key(id_usuario) references usuario(id),
-	constraint fk_reserva_puesto foreign key(id_puesto) references usuario(id)
+	constraint fk_reserva_puesto foreign key(id_puesto) references puesto(id)
 
 );
 create index idx_reserva_fecha_inicio on reserva(fecha_inicio);
