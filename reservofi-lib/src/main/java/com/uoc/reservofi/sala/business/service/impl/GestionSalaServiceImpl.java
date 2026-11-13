@@ -10,6 +10,8 @@ import com.uoc.reservofi.sala.business.service.GestionSalaService;
 import com.uoc.reservofi.sala.business.service.base.BaseSalaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,9 +24,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<SalaDTO> implements GestionSalaService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GestionSalaServiceImpl.class);
 	private final BaseSalaService baseSalaService;
 	private final SalaMapper salaMapper;
-
 	private final GestionPuestoService gestionPuestoService;
 
 	@Override
@@ -156,11 +158,16 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 				Files.delete(ficheroAntiguo);
 			}
 		} catch (IOException e) {
-			throw new GestionException("Ha ocurrido un error interno al intentar borrar la imagen asociada a la sala");
+			// Es posible que hubiese un error interno de algún tipo y en un primer intento se borrara la imagen, pero no el recurso
+			// Se registra en el log para trazabilidad
+			LOGGER.error("Ha ocurrido un error interno al intentar borrar la imagen asociada a la sala. Es posible que ya se haya borrado del sistema. ID de la sala: {}", id);
 		}
 
 		// Todo OK -> procedemos a borrar la sala
 		this.deleteById(id);
+
+		LOGGER.debug("Se ha borrado correctamente la sala con identificador: {}", id);
+
 	}
 
 }

@@ -10,6 +10,8 @@ import com.uoc.reservofi.puesto.business.service.base.BasePuestoService;
 import com.uoc.reservofi.reserva.business.service.GestionReservaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +22,10 @@ import java.util.List;
 @Transactional(rollbackFor = GestionException.class)
 public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<PuestoDTO> implements GestionPuestoService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GestionPuestoServiceImpl.class);
 	private final BasePuestoService basePuestoService;
 	private final PuestoMapper puestoMapper;
-
 	private final GestionReservaService gestionReservaService;
-
 
 	@Override
 	public PuestoDTO insert(@Valid PuestoDTO dto) {
@@ -102,9 +103,14 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 
 		List<Puesto> puestoList = basePuestoService.findBySalaId(idSala);
 
-		for (Puesto puesto : puestoList) {
-			// OJO -> se llama al servicio de gestión para poder eliminar las reservas asociadas
-			this.deleteById(puesto.id);
+		if (puestoList != null && !puestoList.isEmpty()) {
+			for (Puesto puesto : puestoList) {
+				// OJO -> se llama al servicio de gestión para poder eliminar las reservas asociadas
+				this.deleteById(puesto.id);
+			}
+			LOGGER.debug("Se han borrado correctamente los puestos para la sala con identificador: {}", idSala);
+		} else {
+			LOGGER.debug("No se han encontrado puestos para borrar para la sala con identificador: {}", idSala);
 		}
 	}
 }

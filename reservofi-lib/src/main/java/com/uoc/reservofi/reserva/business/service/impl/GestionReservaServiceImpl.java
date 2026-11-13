@@ -9,6 +9,8 @@ import com.uoc.reservofi.reserva.business.service.GestionReservaService;
 import com.uoc.reservofi.reserva.business.service.base.BaseReservaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @Transactional(rollbackFor = GestionException.class)
 public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl<ReservaDTO> implements GestionReservaService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GestionReservaServiceImpl.class);
 	private final BaseReservaService baseReservaService;
 	private final ReservaMapper reservaMapper;
 
@@ -101,8 +104,13 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		List<Reserva> reservaList = baseReservaService.findByPuestoId(idPuesto);
 
-		for (Reserva reserva: reservaList) {
-			this.baseReservaService.deleteById(reserva.id);
+		if (reservaList != null && !reservaList.isEmpty()) {
+			for (Reserva reserva : reservaList) {
+				this.baseReservaService.deleteById(reserva.id);
+			}
+			LOGGER.debug("Se han borrado correctamente las reservas para el puesto con identificador: {}", idPuesto);
+		} else {
+			LOGGER.debug("No se han encontrado reservas para borrar para el puesto con identificador: {}", idPuesto);
 		}
 	}
 }
