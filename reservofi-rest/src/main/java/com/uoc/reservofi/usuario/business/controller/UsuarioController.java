@@ -1,6 +1,5 @@
 package com.uoc.reservofi.usuario.business.controller;
 
-import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
@@ -10,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,11 +33,7 @@ public class UsuarioController {
 	@GetMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO findById(@PathVariable Long id) {
-		RestUsuarioConsultaDTO restUsuarioDTO = restUsuarioService.findById(id);
-		if (restUsuarioDTO == null) {
-			throw new RestException("Entidad no encontrada");
-		}
-		return restUsuarioDTO;
+		return restUsuarioService.findById(id);
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")
@@ -45,8 +41,8 @@ public class UsuarioController {
 	@ResponseStatus(HttpStatus.OK)
 	List<RestUsuarioConsultaDTO> findAll() {
 		List<RestUsuarioConsultaDTO> restUsuarioDTOList = restUsuarioService.findAll();
-		if (restUsuarioDTOList == null || restUsuarioDTOList.isEmpty()) {
-			throw new RestException("Entidades no encontradas");
+		if (restUsuarioDTOList == null) {
+			return new ArrayList<>();
 		}
 		return restUsuarioDTOList;
 	}
@@ -77,7 +73,6 @@ public class UsuarioController {
 	@GetMapping("/usuario/{id}/checkAdmin")
 	@ResponseStatus(HttpStatus.OK)
 	boolean checkAdmin(@PathVariable Long id) {
-		boolean a = restUsuarioService.checkAdmin(id);
-		return a;
+		return restUsuarioService.checkAdmin(id);
 	}
 }

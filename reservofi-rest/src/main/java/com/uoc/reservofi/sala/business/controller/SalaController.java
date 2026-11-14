@@ -1,6 +1,5 @@
 package com.uoc.reservofi.sala.business.controller;
 
-import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
 import com.uoc.reservofi.sala.business.dto.RestSalaGuardadoDTO;
 import com.uoc.reservofi.sala.business.service.RestSalaService;
@@ -39,22 +38,14 @@ public class SalaController {
 	@GetMapping("/sala/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestSalaConsultaDTO findById(@PathVariable Long id) {
-		RestSalaConsultaDTO restSalaDTO = restSalaService.findById(id);
-		if (restSalaDTO == null) {
-			throw new RestException("Entidad no encontrada");
-		}
-		return restSalaDTO;
+		return restSalaService.findById(id);
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/sala")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestSalaConsultaDTO> findAll() {
-		List<RestSalaConsultaDTO> restSalaDTOList = restSalaService.findAll();
-		if (restSalaDTOList == null || restSalaDTOList.isEmpty()) {
-			throw new RestException("Entidades no encontradas");
-		}
-		return restSalaDTOList;
+		return restSalaService.findAll();
 	}
 
 	@PreAuthorize("hasAuthority('Administrador')")

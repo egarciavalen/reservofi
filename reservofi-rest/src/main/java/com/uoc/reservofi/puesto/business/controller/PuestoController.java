@@ -1,6 +1,5 @@
 package com.uoc.reservofi.puesto.business.controller;
 
-import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoConsultaDTO;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoGuardadoDTO;
 import com.uoc.reservofi.puesto.business.service.RestPuestoService;
@@ -29,22 +28,14 @@ public class PuestoController {
 	@GetMapping("/puesto/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestPuestoConsultaDTO findById(@PathVariable Long id) {
-		RestPuestoConsultaDTO restPuestoDTO = restPuestoService.findById(id);
-		if (restPuestoDTO == null) {
-			throw new RestException("Entidad no encontrada");
-		}
-		return restPuestoDTO;
+		return restPuestoService.findById(id);
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/puesto")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestPuestoConsultaDTO> findAll() {
-		List<RestPuestoConsultaDTO> restPuestoDTOList = restPuestoService.findAll();
-		if (restPuestoDTOList == null || restPuestoDTOList.isEmpty()) {
-			throw new RestException("Entidades no encontradas");
-		}
-		return restPuestoDTOList;
+		return restPuestoService.findAll();
 	}
 
 	@PreAuthorize("hasAuthority('Administrador')")
