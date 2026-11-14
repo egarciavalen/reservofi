@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 
 @Service(GestionReservaService.BEAN_NAME)
 @RequiredArgsConstructor
@@ -27,6 +29,9 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 
 	@Override
 	public ReservaDTO insert(@Valid ReservaDTO dto) {
+
+		// Validaciones previas a reservar la entidad
+		validateReserva(dto);
 		Reserva entidad = reservaMapper.DTOAentidad(dto);
 		entidad = baseReservaService.insert(entidad);
 		return reservaMapper.entidadADTO(entidad);
@@ -46,6 +51,9 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador de la reserva: {}", dto.getId());
 			throw new GestionException("Se está intentando actualizar una entidad no existente");
 		}
+
+		// Validaciones previas a reservar la entidad
+		validateReserva(dto);
 
 		Reserva entidad = reservaMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseReservaService.update(entidad);
@@ -120,4 +128,46 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 			LOGGER.debug("No se han encontrado reservas para borrar para el puesto con identificador: {}", idPuesto);
 		}
 	}
+
+
+	private void validateReserva(@Valid ReservaDTO dto) {
+
+		// La fecha de fin no puede ser anterior a la fecha de inicio
+		if (dto.getFechaInicio().isAfter(dto.getFechaFin())) {
+			throw new GestionException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+		}
+
+		// No se puede hacer una reserva con una diferencia superior a 7 días
+		double milisegundosInicio = dto.getFechaInicio().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+		double milisegundosFin = dto.getFechaFin().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+		// 7 días son 604800000 milisegundos
+		if (milisegundosInicio - milisegundosFin > 604800000) {
+			throw new GestionException("No se pueden hacer reservas superiores a 7 días.");
+		}
+
+		// Listado de reservas para hacer validaciones
+		List<ReservaDTO> reservaUsuarioDTOList = this.findByUsuarioId(dto.getIdUsuario());
+		List<ReservaDTO> reservaDTOList = this.findAll();
+
+		// No se puede reservar el mismo día y a la misma hora para un mismo usuario
+		for (ReservaDTO reservaUsuario : reservaUsuarioDTOList) {
+			if (dto.getFechaInicio().isAfter(reservaUsuario.getFechaInicio()) && dto.getFechaInicio().isBefore(reservaUsuario.getFechaFin())
+					|| dto.getFechaFin().isAfter(reservaUsuario.getFechaInicio()) && dto.getFechaFin().isBefore(reservaUsuario.getFechaFin())) {
+				throw new GestionException("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.");
+			}
+		}
+
+		// Dos usuarios no pueden tener reservado el mismo sitio a la misma hora en el mismo sitio
+		for (ReservaDTO reservaTotal : reservaDTOList) {
+			if (dto.getFechaInicio().isAfter(reservaTotal.getFechaInicio()) && dto.getFechaInicio().isBefore(reservaTotal.getFechaFin())
+					|| dto.getFechaFin().isAfter(reservaTotal.getFechaInicio()) && dto.getFechaFin().isBefore(reservaTotal.getFechaFin())) {
+				// Comprobación adicional: tiene que ser en el mismo puesto
+				if (Objects.equals(dto.getIdPuesto(), reservaTotal.getIdPuesto())) {
+					throw new GestionException("La reserva que se quiere hacer coincide con otra reserva hecha por el usuario.");
+				}
+			}
+		}
+	}
+
 }

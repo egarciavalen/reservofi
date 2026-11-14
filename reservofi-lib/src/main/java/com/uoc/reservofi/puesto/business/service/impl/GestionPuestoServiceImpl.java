@@ -40,14 +40,14 @@ public class GestionPuestoServiceImpl extends AbstractGestionEntidadServiceImpl<
 
 		if (dto.getId() == null) {
 			LOGGER.error("Ha ocurrido un error al actualizar el puesto en el sistema. Nombre del puesto: {}", dto.getNombre());
-			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Puesto entidadBD = basePuestoService.findById(dto.getId());
 
 		if (entidadBD == null) {
 			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del puesto: {}", dto.getId());
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Puesto entidad = puestoMapper.DTOAentidad(dto, entidadBD);

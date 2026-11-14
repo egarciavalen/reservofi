@@ -42,14 +42,14 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 		if (dto.getId() == null) {
 			LOGGER.error("Ha ocurrido un error al actualizar la sala en el sistema. Nombre de la sala: {}", dto.getNombre());
-			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Sala entidadBD = baseSalaService.findById(dto.getId());
 
 		if (entidadBD == null) {
 			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador de la sala: {}", dto.getId());
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		// En el caso de una sala, solamente se actualizaría el campo nombre, manteniendo la imagen existente
@@ -114,17 +114,17 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 			// Validaciones previas
 			if (dto.getImagen().getOriginalFilename() == null) {
 				LOGGER.error("No se ha podido recuperar el nombre de la imagen. Nombre de la sala: {}", dto.getNombre());
-				throw new GestionException("No se ha podido recuperar el nombre de la imagen");
+				throw new GestionException("No se ha podido recuperar el nombre de la imagen. Por favor, vuelva a intentarlo o contacte con el administrador.");
 			}
 
 			if (dto.getImagen().getContentType() == null) {
 				LOGGER.error("No se ha podido recuperar información del tipo de la imagen. Nombre de la sala: {}", dto.getNombre());
-				throw new GestionException("No se ha podido recuperar información del tipo de la imagen");
+				throw new GestionException("No se ha podido recuperar información del tipo de la imagenPor favor, vuelva a intentarlo o contacte con el administrador.");
 			}
 
 			if (!(dto.getImagen().getContentType().equals("image/png") || dto.getImagen().getContentType().equals("image/jpeg"))) {
 				LOGGER.error("Se ha puesto un formato de imágen no válido; los admitidos son png y jpeg. Nombre de la sala: {}", dto.getNombre());
-				throw new GestionException("Los formatos que se admiten son png y jpeg");
+				throw new GestionException("Los formatos de imagen admitidos son png y jpeg. Por favor, vuelva a intentarlo.");
 			}
 
 			// Primero hay que crear el directorio (si no existe), porque de lo contrario dará un AccessDeniedException
@@ -150,7 +150,7 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 		} catch (IOException e) {
 			LOGGER.error("Ha ocurrido un error guardando la imagen en la base de datos. Nombre de la sala: {}", dto.getNombre());
-			throw new GestionException("Ha ocurrido un error guardando la imagen en la base de datos: " + e);
+			throw new GestionException("Ha ocurrido un error interno guardando la imagen en la base de datos. Por favor, vuelva a intentarlo o contacte con el administrador.");
 		}
 	}
 
@@ -162,7 +162,7 @@ public class GestionSalaServiceImpl extends AbstractGestionEntidadServiceImpl<Sa
 
 			// Validaciones
 			if (salaDTO == null) {
-				throw new GestionException("Se está intentando borrar una sala no existente");
+				throw new GestionException("No se ha podido borrar la sala. Por favor, revise si la petición es correcta; en caso afirmativo contacte con el administrador.");
 			}
 			if (salaDTO.getRutaImagen() != null) {
 				Path ficheroAntiguo = Path.of(salaDTO.getRutaImagen());

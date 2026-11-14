@@ -1,5 +1,6 @@
 package com.uoc.reservofi.base.business.controller;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.business.exception.RestException;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
@@ -15,10 +16,10 @@ public class RestExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<String> globalException(Exception e) {
-		logger.error(e.getMessage()); // Depuración
-		return new ResponseEntity<>("Ha sucedido un error interno no identificado procesando la petición", HttpStatus.INTERNAL_SERVER_ERROR);
+
+	@ExceptionHandler(GestionException.class)
+	public ResponseEntity<String> gestionExceiption(GestionException e) {
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.UNPROCESSABLE_CONTENT);
 	}
 
 	@ExceptionHandler(RestException.class)
@@ -35,4 +36,11 @@ public class RestExceptionHandler {
 	public ResponseEntity<String> usernameNotFoundException(RestException e) {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
 	}
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> globalException(Exception e) {
+		logger.error(e.getMessage()); // Depuración
+		return new ResponseEntity<>("Ha sucedido un error interno no identificado procesando la petición. Por favor, vuelva a intentarlo o contacte con el administrador.", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

@@ -52,14 +52,14 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 
 		if (dto.getId() == null) {
 			LOGGER.error("Ha ocurrido un error al actualizar el usuario en el sistema. Nombre del usuario: {}", dto.getNombre());
-			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Usuario entidadBD = baseUsuarioService.findById(dto.getId());
 
 		if (entidadBD == null) {
 			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del usuario: {}", dto.getId());
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 		Usuario entidad = usuarioMapper.DTOAentidad(dto, entidadBD);
 
@@ -168,7 +168,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		// Validación
 		if (usuario == null) {
 			LOGGER.error("Se está intentando actualizar el campo activo de una entidad no existente. Identificador del usuario: {}", idUsuario);
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		// Se asigna el opuesto
@@ -188,7 +188,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		// Validación
 		if (usuarioDTO == null) {
 			LOGGER.error("Se está intentando actualizar el rol de administrador de una entidad no existente. Identificador del usuario: {}", idUsuario);
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		// Se busca el identificador que se corresponda al administrador
@@ -230,7 +230,7 @@ public class GestionUsuarioServiceImpl extends AbstractGestionEntidadServiceImpl
 		// Validación
 		if (usuarioDTO == null) {
 			LOGGER.error("Se está intentando determinar el rol de una entidad no existente. Identificador del usuario: {}", idUsuario);
-			throw new GestionException("Se está intentando determinar el rol de una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		List<UsuarioRolDTO> rolesUsuario = usuarioDTO.getRoles();

@@ -37,14 +37,14 @@ public class GestionRolServiceImpl extends AbstractGestionEntidadServiceImpl<Rol
 
 		if (dto.getId() == null) {
 			LOGGER.error("Ha ocurrido un error al actualizar el rol en el sistema. Nombre del rol: {}", dto.getNombre());
-			throw new GestionException("La entidad que se quiere actualizar ha de tener el campo identificador");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Rol entidadBD = baseRolService.findById(dto.getId());
 
 		if (entidadBD == null) {
 			LOGGER.error("Se está intentando actualizar una entidad no existente. Identificador del rol: {}", dto.getId());
-			throw new GestionException("Se está intentando actualizar una entidad no existente");
+			throw new GestionException("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.");
 		}
 
 		Rol entidad = rolMapper.DTOAentidad(dto, entidadBD);

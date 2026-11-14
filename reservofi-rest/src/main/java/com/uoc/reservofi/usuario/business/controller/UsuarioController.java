@@ -40,7 +40,7 @@ public class UsuarioController {
 		return restUsuarioDTO;
 	}
 
-	@PreAuthorize("hasAuthority('Administrador')")
+	@PreAuthorize("hasAuthority('Empleado')")
 	@GetMapping("/usuario")
 	@ResponseStatus(HttpStatus.OK)
 	List<RestUsuarioConsultaDTO> findAll() {
