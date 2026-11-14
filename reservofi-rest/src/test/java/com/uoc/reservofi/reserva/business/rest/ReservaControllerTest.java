@@ -61,6 +61,7 @@ public class ReservaControllerTest {
 		restReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO.setIdPuesto(1L);
 		restReturnDTO.setIdUsuario(1L);
+		restReturnDTO.setCorreoCorporativo("admin@gmail.com");
 		restReturnDTO.setNombrePuesto("Puesto 1");
 		restReturnDTO.setNombreSala("Sala 1");
 		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -79,6 +80,7 @@ public class ReservaControllerTest {
 		mockReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO.setIdPuesto(1L);
 		mockReturnDTO.setIdUsuario(1L);
+		mockReturnDTO.setCorreoCorporativo("admin@gmail.com");
 		mockReturnDTO.setNombrePuesto("Puesto 1");
 		mockReturnDTO.setNombreSala("Sala 1");
 		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -100,6 +102,7 @@ public class ReservaControllerTest {
 		assertEquals(insertDTO.getFechaFin(), capturedDTO.getFechaFin());
 		assertEquals(insertDTO.getIdPuesto(), capturedDTO.getIdPuesto());
 		assertEquals(insertDTO.getIdUsuario(), capturedDTO.getIdUsuario());
+		assertNull(capturedDTO.getCorreoCorporativo());
 		assertNull(capturedDTO.getNombrePuesto());
 		assertNull(capturedDTO.getNombreSala());
 		assertNull(capturedDTO.getRutaImagen());
@@ -131,6 +134,7 @@ public class ReservaControllerTest {
 		mockReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO.setIdPuesto(1L);
 		mockReturnDTO.setIdUsuario(1L);
+		mockReturnDTO.setCorreoCorporativo("admin@gmail.com");
 		mockReturnDTO.setNombrePuesto("Puesto 1");
 		mockReturnDTO.setNombreSala("Sala 1");
 		mockReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -142,6 +146,7 @@ public class ReservaControllerTest {
 		restReturnDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO.setIdPuesto(1L);
 		restReturnDTO.setIdUsuario(1L);
+		restReturnDTO.setCorreoCorporativo("admin@gmail.com");
 		restReturnDTO.setNombrePuesto("Puesto 1");
 		restReturnDTO.setNombreSala("Sala 1");
 		restReturnDTO.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -180,6 +185,7 @@ public class ReservaControllerTest {
 		mockReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO1.setIdPuesto(1L);
 		mockReturnDTO1.setIdUsuario(1L);
+		mockReturnDTO1.setCorreoCorporativo("admin@gmail.com");
 		mockReturnDTO1.setNombrePuesto("Puesto 1");
 		mockReturnDTO1.setNombreSala("Sala 1");
 		mockReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -190,6 +196,7 @@ public class ReservaControllerTest {
 		mockReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		mockReturnDTO2.setIdPuesto(2L);
 		mockReturnDTO2.setIdUsuario(2L);
+		mockReturnDTO2.setCorreoCorporativo("empleado@gmail.com");
 		mockReturnDTO2.setNombrePuesto("Puesto 2");
 		mockReturnDTO2.setNombreSala("Sala 2");
 		mockReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
@@ -205,6 +212,7 @@ public class ReservaControllerTest {
 		restReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO1.setIdPuesto(1L);
 		restReturnDTO1.setIdUsuario(1L);
+		restReturnDTO1.setCorreoCorporativo("admin@gmail.com");
 		restReturnDTO1.setNombrePuesto("Puesto 1");
 		restReturnDTO1.setNombreSala("Sala 1");
 		restReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -215,6 +223,7 @@ public class ReservaControllerTest {
 		restReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		restReturnDTO2.setIdPuesto(2L);
 		restReturnDTO2.setIdUsuario(2L);
+		restReturnDTO2.setCorreoCorporativo("empleado@gmail.com");
 		restReturnDTO2.setNombrePuesto("Puesto 2");
 		restReturnDTO2.setNombreSala("Sala 2");
 		restReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
@@ -245,6 +254,7 @@ public class ReservaControllerTest {
 		mockReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		mockReturnDTO1.setIdPuesto(1L);
 		mockReturnDTO1.setIdUsuario(idUsuario);
+		mockReturnDTO1.setCorreoCorporativo("admin@gmail.com");
 		mockReturnDTO1.setNombrePuesto("Puesto 1");
 		mockReturnDTO1.setNombreSala("Sala 1");
 		mockReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -255,6 +265,7 @@ public class ReservaControllerTest {
 		mockReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		mockReturnDTO2.setIdPuesto(2L);
 		mockReturnDTO2.setIdUsuario(idUsuario);
+		mockReturnDTO2.setCorreoCorporativo("admin@gmail.com");
 		mockReturnDTO2.setNombrePuesto("Puesto 2");
 		mockReturnDTO2.setNombreSala("Sala 2");
 		mockReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");
@@ -270,6 +281,7 @@ public class ReservaControllerTest {
 		restReturnDTO1.setFechaFin(LocalDateTime.of(2026, 10, 11, 0, 0));
 		restReturnDTO1.setIdPuesto(1L);
 		restReturnDTO1.setIdUsuario(idUsuario);
+		restReturnDTO1.setCorreoCorporativo("admin@gmail.com");
 		restReturnDTO1.setNombrePuesto("Puesto 1");
 		restReturnDTO1.setNombreSala("Sala 1");
 		restReturnDTO1.setRutaImagen("src/main/resources/static/images/img1.png");
@@ -280,6 +292,7 @@ public class ReservaControllerTest {
 		restReturnDTO2.setFechaFin(LocalDateTime.of(2026, 10, 12, 0, 0));
 		restReturnDTO2.setIdPuesto(2L);
 		restReturnDTO2.setIdUsuario(idUsuario);
+		restReturnDTO2.setCorreoCorporativo("admin@gmail.com");
 		restReturnDTO2.setNombrePuesto("Puesto 2");
 		restReturnDTO2.setNombreSala("Sala 2");
 		restReturnDTO2.setRutaImagen("src/main/resources/static/images/img2.png");

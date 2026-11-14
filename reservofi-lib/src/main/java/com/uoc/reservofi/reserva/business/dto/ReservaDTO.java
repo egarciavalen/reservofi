@@ -24,6 +24,7 @@ public class ReservaDTO extends GestionEntidadDTO {
 	private LocalDateTime fechaFin;
 
 	// Campos adicionales para la vista
+	private String correoCorporativo;
 	private String nombreSala;
 	private String nombrePuesto;
 	private String rutaImagen;

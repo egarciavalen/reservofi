@@ -25,6 +25,7 @@ public interface RestReservaMapper {
 	@Mapping(source = "fechaInicio", target = "fechaInicio")
 	@Mapping(source = "fechaFin", target = "fechaFin")
 	@Mapping(source = "idUsuario", target = "idUsuario")
+	@Mapping(source = "correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "idPuesto", target = "idPuesto")
 	@Mapping(source = "nombreSala", target = "nombreSala")
 	@Mapping(source = "nombrePuesto", target = "nombrePuesto")

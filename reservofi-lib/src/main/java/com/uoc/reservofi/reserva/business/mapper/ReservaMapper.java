@@ -28,6 +28,7 @@ public interface ReservaMapper {
 	@Mapping(source = "fechaInicio", target = "fechaInicio")
 	@Mapping(source = "fechaFin", target = "fechaFin")
 	// Campos adicionales para la vista
+	@Mapping(source = "usuario.correoCorporativo", target = "correoCorporativo")
 	@Mapping(source = "puesto.nombre", target = "nombrePuesto")
 	@Mapping(source = "puesto.sala.nombre", target = "nombreSala")
 	@Mapping(source = "puesto.sala.rutaImagen", target = "rutaImagen")

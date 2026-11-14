@@ -12,6 +12,7 @@ public class RestReservaConsultaDTO extends RestEntidadConsultaDTO {
 
 	private Long idUsuario;
 	private Long idPuesto;
+	private String correoCorporativo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
 	private String nombrePuesto;
