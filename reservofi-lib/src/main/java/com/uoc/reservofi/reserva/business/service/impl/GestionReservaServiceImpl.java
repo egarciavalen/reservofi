@@ -31,7 +31,7 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 	public ReservaDTO insert(@Valid ReservaDTO dto) {
 
 		// Validaciones previas a reservar la entidad
-		validateReserva(dto);
+		validarReserva(dto);
 		Reserva entidad = reservaMapper.DTOAentidad(dto);
 		entidad = baseReservaService.insert(entidad);
 		return reservaMapper.entidadADTO(entidad);
@@ -53,7 +53,7 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 		}
 
 		// Validaciones previas a reservar la entidad
-		validateReserva(dto);
+		validarReserva(dto);
 
 		Reserva entidad = reservaMapper.DTOAentidad(dto, entidadBD);
 		entidad = baseReservaService.update(entidad);
@@ -130,7 +130,7 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 	}
 
 
-	private void validateReserva(@Valid ReservaDTO dto) {
+	public void validarReserva(@Valid ReservaDTO dto) throws GestionException {
 
 		// La fecha de fin no puede ser anterior a la fecha de inicio
 		if (dto.getFechaInicio().isAfter(dto.getFechaFin())) {
@@ -141,8 +141,10 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 		double milisegundosInicio = dto.getFechaInicio().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 		double milisegundosFin = dto.getFechaFin().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
+		double total = milisegundosFin - milisegundosInicio;
+
 		// 7 días son 604800000 milisegundos
-		if (milisegundosInicio - milisegundosFin > 604800000) {
+		if ((milisegundosFin - milisegundosInicio) >= 604800000) {
 			throw new GestionException("No se pueden hacer reservas superiores a 7 días.");
 		}
 

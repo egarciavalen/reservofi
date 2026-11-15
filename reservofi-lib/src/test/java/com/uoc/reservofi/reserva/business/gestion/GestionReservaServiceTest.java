@@ -1,5 +1,6 @@
 package com.uoc.reservofi.reserva.business.gestion;
 
+import com.uoc.reservofi.base.busines.exception.GestionException;
 import com.uoc.reservofi.base.business.AbstractTest;
 import com.uoc.reservofi.reserva.business.dto.ReservaDTO;
 import com.uoc.reservofi.reserva.business.service.GestionReservaService;
@@ -334,5 +335,147 @@ public class GestionReservaServiceTest extends AbstractTest {
 		assertEquals("Puesto 2", reservaDTO2.getNombrePuesto());
 		assertEquals("Sala 2", reservaDTO2.getNombreSala());
 		assertEquals("src/main/resources/static/images/img2.png", reservaDTO2.getRutaImagen());
+	}
+
+	/* VALIDACIONES ASOCIADAS A LAS RESERVAS */
+
+	@Test
+	void validarReservaTest() {
+
+		// Caso de una reserva que NO entra en conflicto con las demás
+
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 10, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+		reservaDTO.setIdPuesto(1L);
+		reservaDTO.setIdUsuario(1L);
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+		} catch (GestionException e) {
+			fail("No se esperaba una excepción GestionException");
+		}
+	}
+
+	@Test
+	void validarReservaFechaInicioPosteriorTest() {
+
+		// Caso de una reserva en la que la fecha de inicio supera a la fecha de fin
+		// Se hacen varias pruebas para verificar todos los escenarios
+
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setIdPuesto(1L);
+		reservaDTO.setIdUsuario(1L);
+
+		// Escenario 1: diferentes años
+		reservaDTO.setFechaInicio(LocalDateTime.of(2027, 11, 11, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La fecha de fin no puede ser anterior a la fecha de inicio.", e.getMessage());
+		}
+
+		// Escenario 2: diferentes meses
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 12, 11, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La fecha de fin no puede ser anterior a la fecha de inicio.", e.getMessage());
+		}
+
+		// Escenario 3: diferentes días
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 12, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La fecha de fin no puede ser anterior a la fecha de inicio.", e.getMessage());
+		}
+
+		// Escenario 4: diferentes horas
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 1, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La fecha de fin no puede ser anterior a la fecha de inicio.", e.getMessage());
+		}
+
+		// Escenario 5: diferentes minutos
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 1));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La fecha de fin no puede ser anterior a la fecha de inicio.", e.getMessage());
+		}
+	}
+
+	@Test
+	void validarReservaPlazoSemanalTest() {
+
+
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setIdPuesto(1L);
+		reservaDTO.setIdUsuario(1L);
+
+		// Se establece entre la fecha de inicio y la de fin una diferencia semanal menor de 7 días
+
+		// Escenario 1: diferencia semanal por año
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2027, 11, 11, 0, 0));
+
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("No se pueden hacer reservas superiores a 7 días.", e.getMessage());
+		}
+
+		// Escenario 2: diferencia semanal por mes
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 12, 11, 0, 0));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("No se pueden hacer reservas superiores a 7 días.", e.getMessage());
+		}
+
+		// Escenario 3: diferencia semanal por días, horas y minutos
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 10, 32));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 18, 10, 32));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("No se pueden hacer reservas superiores a 7 días.", e.getMessage());
+		}
+
+		// Escenario 4: se comprueba por 1 segundo que no salte la validación a los 7 días
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 10, 32));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 18, 10, 31));
+
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+		} catch (GestionException e) {
+			fail("No se esperaba una excepción GestionException");
+		}
 	}
 }
