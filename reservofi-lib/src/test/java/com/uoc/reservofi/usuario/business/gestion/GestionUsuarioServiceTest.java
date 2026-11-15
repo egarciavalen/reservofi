@@ -621,7 +621,7 @@ public class GestionUsuarioServiceTest extends AbstractTest {
 		try {
 			gestionUsuarioService.checkAdmin(999L);
 		} catch (GestionException e) {
-			assertEquals("Se está intentando determinar el rol de una entidad no existente", e.getMessage());
+			assertEquals("No se ha podido procesar la actualización del elemento. Por favor, contacte con el administrador.", e.getMessage());
 
 		} catch (Exception e) {
 			fail("Se esperaba una GestionException");

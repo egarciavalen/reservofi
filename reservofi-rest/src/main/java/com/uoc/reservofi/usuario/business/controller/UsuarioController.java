@@ -1,5 +1,6 @@
 package com.uoc.reservofi.usuario.business.controller;
 
+import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioConsultaDTO;
 import com.uoc.reservofi.usuario.business.dto.RestUsuarioGuardadoDTO;
 import com.uoc.reservofi.usuario.business.service.RestUsuarioService;
@@ -33,7 +34,11 @@ public class UsuarioController {
 	@GetMapping("/usuario/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestUsuarioConsultaDTO findById(@PathVariable Long id) {
-		return restUsuarioService.findById(id);
+		RestUsuarioConsultaDTO usuarioConsultaDTO = restUsuarioService.findById(id);
+		if (usuarioConsultaDTO == null) {
+			throw new RestException("No se ha podido recuperar la entidad");
+		}
+		return usuarioConsultaDTO;
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")

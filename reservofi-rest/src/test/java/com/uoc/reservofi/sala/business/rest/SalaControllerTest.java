@@ -194,7 +194,7 @@ public class SalaControllerTest {
 
 		// Respuesta de un error interno
 		mockMvc.perform(get("/api/sala/{id}", idTest)).
-				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
+				andExpect(status().isUnprocessableContent()).andExpect(content().string("No se ha podido recuperar la entidad. Por favor, si desea realizar la operación póngase en contacto con el administrador."));
 	}
 
 	@Test

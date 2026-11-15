@@ -79,7 +79,7 @@ public class RolControllerTest {
 		// Respuesta de un error interno
 		// Con esto se verifica el funcionamiento del ControllerAdvice
 		mockMvc.perform(get("/api/rol/{id}", idTest)).
-				andExpect(status().isInternalServerError()).andExpect(content().string("Entidad no encontrada"));
+				andExpect(status().isUnprocessableContent()).andExpect(content().string("No se ha podido recuperar la entidad. Por favor, si desea realizar la operación póngase en contacto con el administrador."));
 	}
 
 	@Test

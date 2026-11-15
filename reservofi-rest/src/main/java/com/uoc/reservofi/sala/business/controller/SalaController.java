@@ -1,5 +1,6 @@
 package com.uoc.reservofi.sala.business.controller;
 
+import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.sala.business.dto.RestSalaConsultaDTO;
 import com.uoc.reservofi.sala.business.dto.RestSalaGuardadoDTO;
 import com.uoc.reservofi.sala.business.service.RestSalaService;
@@ -38,7 +39,11 @@ public class SalaController {
 	@GetMapping("/sala/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestSalaConsultaDTO findById(@PathVariable Long id) {
-		return restSalaService.findById(id);
+		RestSalaConsultaDTO salaConsultaDTO = restSalaService.findById(id);
+		if (salaConsultaDTO == null) {
+			throw new RestException("No se ha podido recuperar la entidad");
+		}
+		return salaConsultaDTO;
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")

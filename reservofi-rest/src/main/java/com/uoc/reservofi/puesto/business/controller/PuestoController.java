@@ -1,5 +1,6 @@
 package com.uoc.reservofi.puesto.business.controller;
 
+import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoConsultaDTO;
 import com.uoc.reservofi.puesto.business.dto.RestPuestoGuardadoDTO;
 import com.uoc.reservofi.puesto.business.service.RestPuestoService;
@@ -28,7 +29,11 @@ public class PuestoController {
 	@GetMapping("/puesto/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestPuestoConsultaDTO findById(@PathVariable Long id) {
-		return restPuestoService.findById(id);
+		RestPuestoConsultaDTO puestoConsultaDTO = restPuestoService.findById(id);
+		if (puestoConsultaDTO == null) {
+			throw new RestException("No se ha podido recuperar la entidad");
+		}
+		return puestoConsultaDTO;
 	}
 
 	@PreAuthorize("hasAuthority('Empleado')")

@@ -54,10 +54,10 @@ values ('Puesto 3', 78.98, 15.32, 53.64, 33.86, 1, 'admin', timestamp '2026-10-0
 
 -- RESERVA
 insert into RESERVA(fecha_inicio, fecha_fin, id_usuario, id_puesto, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values (timestamp '2026-10-06 00:00:00', timestamp '2026-10-07 00:00:00', 1, 1, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-05 00:00:00');
+values (timestamp '2026-10-06 00:00:00', timestamp '2026-10-07 00:00:00', 1, 1, 'admin', timestamp '2026-10-05 10:30:00', 'admin', timestamp '2026-10-06 22:30:00');
 
 insert into RESERVA(fecha_inicio, fecha_fin, id_usuario, id_puesto, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
 values (timestamp '2026-10-08 00:00:00', timestamp '2026-10-09 00:00:00', 2, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin_update', timestamp '2026-10-06 00:00:00');
 
 insert into RESERVA(fecha_inicio, fecha_fin, id_usuario, id_puesto, creacion_usuario, creacion_fecha, actualizacion_usuario, actualizacion_fecha)
-values (timestamp '2026-10-10 00:00:00', timestamp '2026-10-11 00:00:00', 1, 2, 'admin', timestamp '2026-10-05 00:00:00', 'admin', timestamp '2026-10-07 00:00:00');
+values (timestamp '2026-10-10 00:00:00', timestamp '2026-10-11 00:00:00', 1, 2, 'admin', timestamp '2026-10-08 00:00:00', 'admin', timestamp '2026-10-09 00:00:00');

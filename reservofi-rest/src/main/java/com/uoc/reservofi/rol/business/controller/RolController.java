@@ -1,5 +1,6 @@
 package com.uoc.reservofi.rol.business.controller;
 
+import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.rol.business.dto.RestRolConsultaDTO;
 import com.uoc.reservofi.rol.business.service.RestRolService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,11 @@ public class RolController {
 	@GetMapping("/rol/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestRolConsultaDTO findById(@PathVariable Long id) {
-		return restRolService.findById(id);
+		RestRolConsultaDTO rolConsultaDTO = restRolService.findById(id);
+		if (rolConsultaDTO == null) {
+			throw new RestException("No se ha podido recuperar la entidad");
+		}
+		return rolConsultaDTO;
 	}
 
 	@PreAuthorize("hasAuthority('Administrador')")

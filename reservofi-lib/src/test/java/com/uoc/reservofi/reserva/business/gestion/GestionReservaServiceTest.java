@@ -370,8 +370,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 1: diferentes años
 		reservaDTO.setFechaInicio(LocalDateTime.of(2027, 11, 11, 0, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
-
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -382,7 +380,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 2: diferentes meses
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 12, 11, 0, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -393,7 +390,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 3: diferentes días
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 12, 0, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -404,7 +400,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 4: diferentes horas
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 1, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -415,7 +410,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 5: diferentes minutos
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 1));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 11, 0, 0));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -437,8 +431,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 1: diferencia semanal por año
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2027, 11, 11, 0, 0));
-
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -449,7 +441,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 2: diferencia semanal por mes
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 0, 0));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 12, 11, 0, 0));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -460,7 +451,6 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 3: diferencia semanal por días, horas y minutos
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 10, 32));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 18, 10, 32));
-
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 			fail("Se esperaba una excepción GestionException");
@@ -471,7 +461,148 @@ public class GestionReservaServiceTest extends AbstractTest {
 		// Escenario 4: se comprueba por 1 segundo que no salte la validación a los 7 días
 		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 11, 11, 10, 32));
 		reservaDTO.setFechaFin(LocalDateTime.of(2026, 11, 18, 10, 31));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+		} catch (GestionException e) {
+			fail("No se esperaba una excepción GestionException");
+		}
+	}
 
+	@Test
+	void validarReservaRangoMismoUsuarioTest() {
+
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setIdPuesto(1L);
+		reservaDTO.setIdUsuario(1L);
+
+		// Si se establece una reserva que entra en conflicto para un mismo puesto en un mismo usuario, salta la validación
+		// Esto debería saltar INDEPENDIENTEMENTE de si es el mismo puesto o no; puesto que la persona no puede estar en dos sitios a la vez
+
+		// Escenario 1: está en el rango de la fecha y la abarca por completo (para un mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 6, 10, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 6, 20, 0));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+		// Escenario 2: está en el rango de la fecha, cubriendo la fecha de inicio (para un mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 6, 22, 29));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 7, 0, 0));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+		// Escenario 3: está en el rango de la fecha, cubriendo la fecha de fin (para un mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 4, 0, 0));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 6, 10, 31));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+		// Escenario 4: se pone una fecha que entra en conflicto con una reserva en otro puesto (tanto la fecha de inicio como de fin están en rango)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 10, 35));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 10, 15, 31));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+		// Escenario 5: se pone una fecha que entra en conflicto con una reserva en otro puesto (la fecha de inicio está en rango)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 10, 10, 35));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 11, 15, 31));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+		// Escenario 6: se pone una fecha que entra en conflicto con una reserva en otro puesto (la fecha de fin está en rango)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 9, 10, 35));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 10, 15, 31));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.", e.getMessage());
+		}
+
+	}
+
+	@Test
+	void validarReservaRangoDistintoUsuarioTest() {
+
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setIdPuesto(2L); // OJO -> aquí se produce un cambio de puesto
+		reservaDTO.setIdUsuario(1L);
+
+		// En el caso de que se compare con otros usuarios, únicamente saltará la validación si se trata DEL MISMO PUESTO
+
+		// Escenario 1: está en el rango de la fecha y la abarca por completo (para el mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 8, 10, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 8, 20, 45));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva hecha por otro usuario.", e.getMessage());
+		}
+
+		// Escenario 2: está en el rango de la fecha, cubriendo la fecha de inicio (para el mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 8, 0, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 9, 20, 45));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva hecha por otro usuario.", e.getMessage());
+		}
+
+		// Escenario 3: está en el rango de la fecha, cubriendo la fecha de fin (para el mismo puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 4, 10, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 8, 20, 45));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+			fail("Se esperaba una excepción GestionException");
+		} catch (GestionException e) {
+			assertEquals("La reserva que se quiere hacer coincide con otra reserva hecha por otro usuario.", e.getMessage());
+		}
+
+		// Se repiten a continuación los mismos escenarios pero cambiando el puesto; NO debería saltar validaciones
+		reservaDTO.setIdPuesto(1L); // OJO -> aquí se produce un cambio de puesto
+
+		// Escenario 4: está en el rango de la fecha y la abarca por completo (para DISTINTO puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 8, 10, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 8, 20, 45));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+		} catch (GestionException e) {
+			fail("No se esperaba una excepción GestionException");
+		}
+
+		// Escenario 5: está en el rango de la fecha, cubriendo la fecha de inicio (para DISTINTO puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 8, 10, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 9, 20, 45));
+		try {
+			gestionReservaService.validarReserva(reservaDTO);
+		} catch (GestionException e) {
+			fail("No se esperaba una excepción GestionException");
+		}
+
+		// Escenario 6: está en el rango de la fecha, cubriendo la fecha de fin (para DISTINTO puesto)
+		reservaDTO.setFechaInicio(LocalDateTime.of(2026, 10, 4, 10, 30));
+		reservaDTO.setFechaFin(LocalDateTime.of(2026, 10, 8, 20, 45));
 		try {
 			gestionReservaService.validarReserva(reservaDTO);
 		} catch (GestionException e) {

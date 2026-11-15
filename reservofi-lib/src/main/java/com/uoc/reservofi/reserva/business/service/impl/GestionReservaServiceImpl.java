@@ -155,7 +155,8 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 		// No se puede reservar el mismo día y a la misma hora para un mismo usuario
 		for (ReservaDTO reservaUsuario : reservaUsuarioDTOList) {
 			if (dto.getFechaInicio().isAfter(reservaUsuario.getFechaInicio()) && dto.getFechaInicio().isBefore(reservaUsuario.getFechaFin())
-					|| dto.getFechaFin().isAfter(reservaUsuario.getFechaInicio()) && dto.getFechaFin().isBefore(reservaUsuario.getFechaFin())) {
+					|| dto.getFechaFin().isAfter(reservaUsuario.getFechaInicio()) && dto.getFechaFin().isBefore(reservaUsuario.getFechaFin())
+			) {
 				throw new GestionException("La reserva que se quiere hacer coincide con otra reserva propia en el sistema.");
 			}
 		}
@@ -166,7 +167,7 @@ public class GestionReservaServiceImpl extends AbstractGestionEntidadServiceImpl
 					|| dto.getFechaFin().isAfter(reservaTotal.getFechaInicio()) && dto.getFechaFin().isBefore(reservaTotal.getFechaFin())) {
 				// Comprobación adicional: tiene que ser en el mismo puesto
 				if (Objects.equals(dto.getIdPuesto(), reservaTotal.getIdPuesto())) {
-					throw new GestionException("La reserva que se quiere hacer coincide con otra reserva hecha por el usuario.");
+					throw new GestionException("La reserva que se quiere hacer coincide con otra reserva hecha por otro usuario.");
 				}
 			}
 		}

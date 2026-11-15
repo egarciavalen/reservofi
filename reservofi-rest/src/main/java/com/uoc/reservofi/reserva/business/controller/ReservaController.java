@@ -1,5 +1,6 @@
 package com.uoc.reservofi.reserva.business.controller;
 
+import com.uoc.reservofi.base.business.exception.RestException;
 import com.uoc.reservofi.reserva.business.dto.RestReservaConsultaDTO;
 import com.uoc.reservofi.reserva.business.dto.RestReservaGuardadoDTO;
 import com.uoc.reservofi.reserva.business.service.RestReservaService;
@@ -28,7 +29,11 @@ public class ReservaController {
 	@GetMapping("/reserva/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	RestReservaConsultaDTO findById(@PathVariable Long id) {
-		return restReservaService.findById(id);
+		RestReservaConsultaDTO reservaConsultaDTO = restReservaService.findById(id);
+		if (reservaConsultaDTO == null) {
+			throw new RestException("No se ha podido recuperar la entidad");
+		}
+		return reservaConsultaDTO;
 	}
 
 	@PreAuthorize("hasAuthority('Administrador')")
